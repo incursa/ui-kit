@@ -55,17 +55,6 @@
     "pack:tarball": "npm pack",
     "package": "npm run build && npm run pack:tarball"
   },
-  "dependencies": {
-    "chokidar": "^4.0.3",
-    "detect-libc": "^2.1.2",
-    "immutable": "^5.1.5",
-    "is-extglob": "^2.1.1",
-    "is-glob": "^4.0.3",
-    "node-addon-api": "^7.1.1",
-    "picomatch": "^4.0.3",
-    "readdirp": "^4.1.2",
-    "source-map-js": "^1.2.1"
-  },
   "devDependencies": {
     "bootstrap": "^5.3.3",
     "sass": "^1.93.2"
