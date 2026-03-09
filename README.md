@@ -56,6 +56,8 @@ Licensed under Apache 2.0.
   Three-column detail example with action rail.
 - `native-patterns.html`
   Native-first details/menu/dialog example.
+- `overlay-workflows.html`
+  Modal and offcanvas workflow example with validation and assignment flows.
 - `reference.html`
   Copy/paste catalog for the standard controls and markup patterns.
 - `states.html`
@@ -116,7 +118,7 @@ If you just want the look in another app:
 3. Load the CSS after your reset or base stylesheet.
 4. Load the optional JS near the end of the page.
 5. Use the `inc-*` classes shown in `reference.html` for direct copy/paste control markup.
-6. Check `states.html`, `forms-and-validation.html`, and `data-grid-advanced.html` for the workflow-heavy patterns that do not read well as isolated snippets.
+6. Check `states.html`, `forms-and-validation.html`, `data-grid-advanced.html`, and `overlay-workflows.html` for the workflow-heavy patterns that do not read well as isolated snippets.
 7. Use `demo.html`, `work-queue.html`, `record-detail.html`, and `native-patterns.html` for fuller page composition.
 
 ## Use it as a package
@@ -198,9 +200,25 @@ This repository is set up for:
 
 - CI on pushes and pull requests via `.github/workflows/ci.yml`
 - GitHub Pages showcase deployment from `main` via `.github/workflows/pages.yml`
-- npm Trusted Publishing on GitHub Release publication via `.github/workflows/npm-publish.yml`
+- npm Trusted Publishing on `v*` tag pushes via `.github/workflows/npm-publish.yml`
 - Public release hygiene through `LICENSE`, `CHANGELOG.md`, `CONTRIBUTING.md`, and `RELEASING.md`
 - Brand assets in `assets/brand/` so README and future docs do not depend on external image hosting
+
+## Release flow
+
+For normal releases:
+
+1. Merge the source changes you want on `main`.
+2. Run the release helper from PowerShell:
+
+```powershell
+.\release.ps1 -ReleaseType patch -Changelog @"
+- Summarize the release here.
+- Add more markdown if needed.
+"@
+```
+
+Use `minor` or `major` when needed. The script verifies the repo state, bumps the version, runs the package validation step, updates `CHANGELOG.md`, creates the release commit and tag, and pushes them. Pushing the tag publishes the package to npm automatically.
 
 ## Use it as source
 
@@ -221,11 +239,3 @@ $inc-font-family-sans: "Aptos", "Segoe UI", sans-serif;
 
 @import "./src/inc-design-language";
 ```
-
-## Suggested next extensions
-
-- Add a spacing/visibility utility layer if you want the package to stand more independently from Bootstrap utilities.
-- Split tables into clearer grid families if products start diverging:
-  base, compact review grid, analytics grid, and spreadsheet-like grid.
-- Add modal/offcanvas examples that use the same drawer and validation primitives shown in the new pages.
-- Replace the `@extend`-heavy wrappers with mixins or direct declarations if you want less Bootstrap coupling over time.

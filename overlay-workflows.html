@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incursa Design Language Showcase - Overlay Workflows</title>
+    <link rel="stylesheet" href="./dist/inc-design-language.css">
+    <link rel="stylesheet" href="./showcase.css">
+</head>
+<body>
+    <div class="inc-app-shell">
+        <header class="inc-app-shell__header">
+            <nav class="inc-navbar inc-navbar--app inc-navbar--dark inc-navbar--expand-lg">
+                <div class="container-fluid">
+                    <a class="inc-navbar__brand" href="./index.html">Incursa</a>
+                    <div class="inc-navbar__collapse">
+                        <div class="inc-navbar__nav">
+                            <a class="nav-link" href="./demo.html">Dashboard</a>
+                            <a class="nav-link" href="./reference.html">Reference</a>
+                            <a class="nav-link" href="./forms-and-validation.html">Forms</a>
+                            <a class="nav-link" href="./data-grid-advanced.html">Data Grid</a>
+                            <a class="nav-link active" href="./overlay-workflows.html">Overlays</a>
+                        </div>
+                        <div class="inc-navbar__utilities">
+                            <div class="inc-user-menu">
+                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#overlay-user-menu" aria-haspopup="true" aria-expanded="false">
+                                    <span class="inc-user-menu__avatar">SM</span>
+                                    <span class="inc-user-menu__meta">
+                                        <span class="inc-user-menu__name">Sam McAravey</span>
+                                        <span class="inc-user-menu__detail">Administrator</span>
+                                    </span>
+                                </button>
+                                <div id="overlay-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
+                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
+                                    <a class="inc-dropdown__item" href="#">Profile</a>
+                                    <a class="inc-dropdown__item" href="#">Preferences</a>
+                                    <div class="inc-dropdown__divider"></div>
+                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="inc-nav-triad">
+                <div class="inc-nav-triad__container">
+                    <div class="inc-nav-triad__back">
+                        <a class="inc-nav-triad__btn" href="./reference.html">Reference Catalog</a>
+                    </div>
+                    <div class="inc-nav-triad__breadcrumb">
+                        <ol class="inc-breadcrumb">
+                            <li class="inc-breadcrumb__item"><a href="./index.html">Showcase</a></li>
+                            <li class="inc-breadcrumb__item active"><span>Overlay Workflows</span></li>
+                        </ol>
+                    </div>
+                    <div class="inc-nav-triad__origin">
+                        <a class="inc-nav-triad__btn inc-nav-triad__btn--subtle" href="./data-grid-advanced.html">Compare With Drawer Grid</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="inc-app-shell__body">
+            <div class="inc-app-shell__main">
+                <main class="inc-app-shell__content">
+                    <div class="inc-section-container demo-stack">
+                        <section class="inc-page-header">
+                            <div class="inc-page-header__title">
+                                <p class="demo-eyebrow">Overlay Workflows</p>
+                                <h1 class="inc-heading inc-heading--h1">Modal and offcanvas examples for operator review flows</h1>
+                                <p class="inc-text inc-text--regular inc-text--muted">These overlays reuse the same validation, status, and detail primitives as the other workflow pages so they feel like part of the product instead of a separate component library.</p>
+                            </div>
+                            <div class="inc-page-header__actions">
+                                <button class="inc-btn inc-btn--primary" type="button" data-inc-toggle="modal" data-inc-target="#approval-modal">Open approval modal</button>
+                                <button class="inc-btn inc-btn--outline-secondary" type="button" data-inc-toggle="offcanvas" data-inc-target="#assignment-drawer">Open assignment drawer</button>
+                            </div>
+                        </section>
+
+                        <nav class="demo-page-switcher" aria-label="Showcase pages">
+                            <a class="inc-btn inc-btn--secondary" href="./index.html">Showcase Home</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./reference.html">Reference</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./forms-and-validation.html">Forms</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./data-grid-advanced.html">Data Grid</a>
+                            <a class="inc-btn inc-btn--primary" href="./overlay-workflows.html">Overlays</a>
+                        </nav>
+
+                        <section class="demo-layout-grid demo-layout-grid--2">
+                            <article class="inc-card">
+                                <div class="inc-card__header">
+                                    <h2 class="inc-card__title">When to use a modal</h2>
+                                </div>
+                                <div class="inc-card__body inc-u-stack-sm">
+                                    <p class="inc-text inc-text--regular">Use a modal when the user must acknowledge risk, confirm intent, or fix a small amount of blocking information before continuing.</p>
+                                    <div class="inc-alert inc-alert--warning">The approval modal below includes a blocking validation summary and an explicit escalation note.</div>
+                                    <div class="demo-chip-row">
+                                        <span class="inc-badge inc-badge--warning inc-badge--pill">Short task</span>
+                                        <span class="inc-badge inc-badge--info inc-badge--pill">High consequence</span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="inc-card">
+                                <div class="inc-card__header">
+                                    <h2 class="inc-card__title">When to use offcanvas</h2>
+                                </div>
+                                <div class="inc-card__body inc-u-stack-sm">
+                                    <p class="inc-text inc-text--regular">Use an offcanvas panel when the operator needs to keep surrounding context in view while editing, assigning, or previewing supporting detail.</p>
+                                    <div class="inc-toast-card">
+                                        <div class="inc-toast-card__icon">i</div>
+                                        <div>
+                                            <h3 class="inc-toast-card__title">Keep the grid visible</h3>
+                                            <p class="inc-toast-card__text">Assignment, quick edit, and note-taking generally fit the offcanvas path better than a modal.</p>
+                                        </div>
+                                    </div>
+                                    <div class="demo-chip-row">
+                                        <span class="inc-badge inc-badge--success inc-badge--pill">Context retained</span>
+                                        <span class="inc-badge inc-badge--info inc-badge--pill">Multi-step work</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <div>
+                                    <h2 class="inc-card__title">Launchable examples</h2>
+                                    <p class="inc-text inc-text--small inc-text--muted">Both buttons below are wired through the package helper in <code>dist/inc-design-language.js</code>.</p>
+                                </div>
+                            </div>
+                            <div class="inc-card__body inc-u-stack-md">
+                                <div class="demo-chip-row">
+                                    <button class="inc-btn inc-btn--primary" type="button" data-inc-toggle="modal" data-inc-target="#approval-modal">Approve exception</button>
+                                    <button class="inc-btn inc-btn--secondary" type="button" data-inc-toggle="offcanvas" data-inc-target="#assignment-drawer">Assign owner</button>
+                                </div>
+                                <div class="inc-key-value-grid">
+                                    <div class="inc-key-value inc-key-value--card">
+                                        <span class="inc-key-value__label">Record</span>
+                                        <span class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</span>
+                                    </div>
+                                    <div class="inc-key-value inc-key-value--card">
+                                        <span class="inc-key-value__label">Current owner</span>
+                                        <span class="inc-key-value__value">AP Team</span>
+                                    </div>
+                                    <div class="inc-key-value inc-key-value--card">
+                                        <span class="inc-key-value__label">Blocking issue</span>
+                                        <span class="inc-key-value__value">Missing W-9</span>
+                                    </div>
+                                    <div class="inc-key-value inc-key-value--card">
+                                        <span class="inc-key-value__label">Requested amount</span>
+                                        <span class="inc-key-value__value inc-key-value__value--data">$18,240.22</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </main>
+                <footer class="inc-app-shell__footer inc-footer-bar">
+                    <div class="inc-footer-bar__menu">
+                        <a href="./index.html">Showcase Home</a>
+                        <a href="./reference.html">Reference</a>
+                        <a href="./forms-and-validation.html">Forms</a>
+                        <a href="./data-grid-advanced.html">Data Grid</a>
+                    </div>
+                    <div class="inc-footer-bar__meta">Overlay patterns for approvals, assignments, and secondary review work.</div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <div id="approval-modal" class="inc-modal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="approval-modal-title">
+        <div class="inc-modal__backdrop">
+            <div class="inc-modal__dialog inc-modal__dialog--lg">
+                <div class="inc-modal__content">
+                    <div class="inc-modal__header">
+                        <div>
+                            <h2 id="approval-modal-title" class="inc-modal__title">Approve exception</h2>
+                            <p class="inc-text inc-text--small inc-text--muted">Confirm the exception owner and capture the approval rationale before export continues.</p>
+                        </div>
+                        <button class="inc-modal__close" type="button" aria-label="Close dialog" data-inc-dismiss="modal">×</button>
+                    </div>
+                    <div class="inc-modal__body inc-u-stack-md">
+                        <div class="inc-form__error-summary">
+                            <h3 class="inc-form__error-summary-title">There are 2 issues to resolve first</h3>
+                            <ul class="inc-form__error-summary-list">
+                                <li>Approval rationale must be entered.</li>
+                                <li>An escalation owner must be selected.</li>
+                            </ul>
+                        </div>
+
+                        <div class="inc-permission-banner">
+                            <div class="inc-permission-banner__icon">!</div>
+                            <div>
+                                <h3 class="inc-permission-banner__title">Finance Manager sign-off required</h3>
+                                <p class="inc-permission-banner__text">Use the modal when the user is about to take a high-consequence action that should pause the surrounding workflow.</p>
+                            </div>
+                        </div>
+
+                        <div class="demo-layout-grid demo-layout-grid--2">
+                            <div class="inc-form__group">
+                                <label class="inc-form__label inc-form__label--required" for="approval-owner">Escalation owner</label>
+                                <select id="approval-owner" class="inc-form__select is-invalid">
+                                    <option selected>Select an owner</option>
+                                    <option>Finance Manager</option>
+                                    <option>Controller</option>
+                                </select>
+                                <p class="inc-form__feedback inc-form__feedback--error">Select who will own the exception after approval.</p>
+                            </div>
+                            <div class="inc-form__group">
+                                <label class="inc-form__label" for="approval-export-batch">Export batch</label>
+                                <input id="approval-export-batch" class="inc-form__control" type="text" value="March Closeout 2">
+                            </div>
+                        </div>
+
+                        <div class="inc-form__group">
+                            <label class="inc-form__label inc-form__label--required" for="approval-rationale">Approval rationale</label>
+                            <textarea id="approval-rationale" class="inc-form__control is-invalid" rows="4" placeholder="Explain why the exception can move forward."></textarea>
+                            <p class="inc-form__feedback inc-form__feedback--error">A short explanation is required for audit history.</p>
+                        </div>
+                    </div>
+                    <div class="inc-modal__footer">
+                        <button class="inc-btn inc-btn--outline-secondary" type="button" data-inc-dismiss="modal">Cancel</button>
+                        <button class="inc-btn inc-btn--primary" type="button">Approve Exception</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inc-offcanvas-backdrop" data-inc-backdrop-for="assignment-drawer" hidden></div>
+    <aside id="assignment-drawer" class="inc-offcanvas inc-offcanvas-end" aria-hidden="true" aria-labelledby="assignment-drawer-title">
+        <div class="inc-offcanvas-header">
+            <div class="inc-u-stack-xs">
+                <h2 id="assignment-drawer-title" class="inc-offcanvas-title">Assign review owner</h2>
+                <p class="inc-text inc-text--small inc-text--muted">Offcanvas keeps the surrounding queue visible while the operator routes work.</p>
+            </div>
+            <button class="inc-modal__close" type="button" aria-label="Close panel" data-inc-dismiss="offcanvas">×</button>
+        </div>
+        <div class="inc-offcanvas-body inc-u-stack-md">
+            <div class="inc-key-value-grid">
+                <div class="inc-key-value">
+                    <span class="inc-key-value__label">Record</span>
+                    <span class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</span>
+                </div>
+                <div class="inc-key-value">
+                    <span class="inc-key-value__label">Current owner</span>
+                    <span class="inc-key-value__value">AP Team</span>
+                </div>
+                <div class="inc-key-value">
+                    <span class="inc-key-value__label">State</span>
+                    <span class="inc-key-value__value">Needs Review</span>
+                </div>
+                <div class="inc-key-value">
+                    <span class="inc-key-value__label">Requested amount</span>
+                    <span class="inc-key-value__value inc-key-value__value--data">$18,240.22</span>
+                </div>
+            </div>
+
+            <div class="inc-filter-bar">
+                <div class="inc-filter-bar__main">
+                    <div class="inc-filter-bar__field inc-filter-bar__field--grow">
+                        <label class="inc-form__label" for="assignment-search">Search owner</label>
+                        <input id="assignment-search" class="inc-form__control inc-form__control--sm" type="text" value="legal">
+                    </div>
+                    <div class="inc-filter-bar__field">
+                        <label class="inc-form__label" for="assignment-team">Queue</label>
+                        <select id="assignment-team" class="inc-form__select inc-form__select--sm">
+                            <option>AP Team</option>
+                            <option selected>Legal Review</option>
+                            <option>Compliance</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="inc-filter-bar__chips">
+                    <span class="inc-filter-chip inc-filter-chip--accent">Priority: Exception <button class="inc-filter-chip__remove" type="button" aria-label="Remove filter">×</button></span>
+                    <span class="inc-filter-chip">SLA: 24 hours <button class="inc-filter-chip__remove" type="button" aria-label="Remove filter">×</button></span>
+                </div>
+            </div>
+
+            <div class="inc-form__group">
+                <label class="inc-form__label" for="assignment-note">Routing note</label>
+                <textarea id="assignment-note" class="inc-form__control" rows="4">Assign to Legal Review so they can validate the incoming W-9 and insurance certificate before export.</textarea>
+            </div>
+
+            <div class="inc-toast-card">
+                <div class="inc-toast-card__icon">i</div>
+                <div>
+                    <h3 class="inc-toast-card__title">Why offcanvas works here</h3>
+                    <p class="inc-toast-card__text">This task needs context, but it should not block the whole screen the way an approval modal does.</p>
+                </div>
+            </div>
+
+            <div class="demo-chip-row">
+                <button class="inc-btn inc-btn--outline-secondary" type="button" data-inc-dismiss="offcanvas">Cancel</button>
+                <button class="inc-btn inc-btn--secondary" type="button">Save Draft</button>
+                <button class="inc-btn inc-btn--primary" type="button">Assign Owner</button>
+            </div>
+        </div>
+    </aside>
+
+    <script src="./dist/inc-design-language.js"></script>
+</body>
+</html>

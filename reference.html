@@ -19,6 +19,7 @@
                             <a class="nav-link" href="./work-queue.html">Work Queue</a>
                             <a class="nav-link" href="./record-detail.html">Record Detail</a>
                             <a class="nav-link" href="./native-patterns.html">Native</a>
+                            <a class="nav-link" href="./overlay-workflows.html">Overlays</a>
                             <a class="nav-link" href="./states.html">States</a>
                             <a class="nav-link" href="./forms-and-validation.html">Forms</a>
                             <a class="nav-link" href="./data-grid-advanced.html">Data Grid</a>
@@ -77,6 +78,7 @@
                                 <a class="inc-btn inc-btn--secondary" href="./states.html">States</a>
                                 <a class="inc-btn inc-btn--secondary" href="./forms-and-validation.html">Forms</a>
                                 <a class="inc-btn inc-btn--secondary" href="./data-grid-advanced.html">Data Grid</a>
+                                <a class="inc-btn inc-btn--secondary" href="./overlay-workflows.html">Overlays</a>
                                 <a class="inc-btn inc-btn--secondary" href="./native-patterns.html">Native</a>
                                 <a class="inc-btn inc-btn--primary" href="./demo.html">Layouts</a>
                             </div>
@@ -88,6 +90,7 @@
                             <a class="inc-btn inc-btn--outline-secondary" href="./work-queue.html">Work Queue</a>
                             <a class="inc-btn inc-btn--outline-secondary" href="./record-detail.html">Record Detail</a>
                             <a class="inc-btn inc-btn--outline-secondary" href="./native-patterns.html">Native</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./overlay-workflows.html">Overlays</a>
                             <a class="inc-btn inc-btn--outline-secondary" href="./states.html">States</a>
                             <a class="inc-btn inc-btn--outline-secondary" href="./forms-and-validation.html">Forms</a>
                             <a class="inc-btn inc-btn--outline-secondary" href="./data-grid-advanced.html">Data Grid</a>
@@ -562,6 +565,162 @@
 
                         <section class="inc-card">
                             <div class="inc-card__header">
+                                <h2 class="inc-card__title">Spacing And Visibility Utilities</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview inc-u-stack-md">
+                                    <div class="inc-card inc-u-p-md">
+                                        <div class="inc-u-stack-sm">
+                                            <span class="inc-badge inc-badge--info inc-badge--pill">inc-u-stack-sm</span>
+                                            <p class="inc-text inc-text--regular">Use the utility layer when you need a light spacing or visibility adjustment without pulling in Bootstrap utility classes.</p>
+                                            <div class="demo-chip-row inc-u-gap-sm">
+                                                <button class="inc-btn inc-btn--secondary inc-btn--sm" type="button">Secondary</button>
+                                                <button class="inc-btn inc-btn--primary inc-btn--sm" type="button">Primary</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="inc-alert inc-alert--info inc-u-hidden-mobile">This alert uses <code>inc-u-hidden-mobile</code> and disappears on smaller screens.</div>
+                                    <p class="inc-text inc-text--small">Common helpers now include stack spacing, gap, padding, hidden/mobile-hidden/desktop-hidden, and visually hidden text.</p>
+                                </div>
+<pre class="demo-code"><code>&lt;div class="inc-u-stack-sm"&gt;
+    &lt;span class="inc-badge inc-badge--info inc-badge--pill"&gt;inc-u-stack-sm&lt;/span&gt;
+    &lt;p class="inc-text inc-text--regular"&gt;Light spacing without Bootstrap utilities.&lt;/p&gt;
+    &lt;div class="demo-chip-row inc-u-gap-sm"&gt;
+        &lt;button class="inc-btn inc-btn--secondary inc-btn--sm" type="button"&gt;Secondary&lt;/button&gt;
+        &lt;button class="inc-btn inc-btn--primary inc-btn--sm" type="button"&gt;Primary&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="inc-alert inc-alert--info inc-u-hidden-mobile"&gt;Hidden on smaller screens.&lt;/div&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Table Families</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview inc-u-stack-md">
+                                    <div class="demo-layout-grid demo-layout-grid--3">
+                                        <article class="inc-card">
+                                            <div class="inc-card__header">
+                                                <h3 class="inc-card__title">Review Grid</h3>
+                                            </div>
+                                            <div class="inc-card__body inc-u-p-0">
+                                                <div class="inc-table-responsive">
+                                                    <table class="inc-table inc-table--review-grid inc-table--sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="inc-table__header">Record</th>
+                                                                <th class="inc-table__header">State</th>
+                                                                <th class="inc-table__header inc-table__header--right">Amount</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="inc-table__cell inc-table__cell--data">AP-142</td>
+                                                                <td class="inc-table__cell">Needs Review</td>
+                                                                <td class="inc-table__cell inc-table__cell--numeric">$18,240</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="inc-table__cell inc-table__cell--data">AP-148</td>
+                                                                <td class="inc-table__cell">Expiring Docs</td>
+                                                                <td class="inc-table__cell inc-table__cell--numeric">$7,882</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </article>
+
+                                        <article class="inc-card">
+                                            <div class="inc-card__header">
+                                                <h3 class="inc-card__title">Analytics Grid</h3>
+                                            </div>
+                                            <div class="inc-card__body inc-u-p-0">
+                                                <div class="inc-table-responsive">
+                                                    <table class="inc-table inc-table--analytics-grid inc-table--sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="inc-table__header">Week</th>
+                                                                <th class="inc-table__header inc-table__header--right">Approved</th>
+                                                                <th class="inc-table__header inc-table__header--right">Variance</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="inc-table__cell">W10</td>
+                                                                <td class="inc-table__cell inc-table__cell--numeric">428</td>
+                                                                <td class="inc-table__cell inc-table__cell--numeric">+6.2%</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="inc-table__cell">W11</td>
+                                                                <td class="inc-table__cell inc-table__cell--numeric">447</td>
+                                                                <td class="inc-table__cell inc-table__cell--numeric">+4.4%</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </article>
+
+                                        <article class="inc-card">
+                                            <div class="inc-card__header">
+                                                <h3 class="inc-card__title">Spreadsheet Grid</h3>
+                                            </div>
+                                            <div class="inc-card__body inc-u-p-0">
+                                                <div class="inc-table-responsive">
+                                                    <table class="inc-table inc-table--spreadsheet-grid inc-table--sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="inc-table__header">Line</th>
+                                                                <th class="inc-table__header">Code</th>
+                                                                <th class="inc-table__header inc-table__header--right">Hours</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="inc-table__cell">001</td>
+                                                                <td class="inc-table__cell">FRM-042</td>
+                                                                <td class="inc-table__cell inc-table__cell--numeric">12.50</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="inc-table__cell">002</td>
+                                                                <td class="inc-table__cell">FRM-043</td>
+                                                                <td class="inc-table__cell inc-table__cell--numeric">8.25</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+<pre class="demo-code"><code>&lt;table class="inc-table inc-table--review-grid inc-table--sm"&gt;...&lt;/table&gt;
+&lt;table class="inc-table inc-table--analytics-grid inc-table--sm"&gt;...&lt;/table&gt;
+&lt;table class="inc-table inc-table--spreadsheet-grid inc-table--sm"&gt;...&lt;/table&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Overlay Workflows</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview inc-u-stack-md">
+                                    <div class="inc-alert inc-alert--info">Modal and offcanvas patterns now have a dedicated showcase page with validation, drawer content, and helper-driven open/close behavior.</div>
+                                    <div class="demo-chip-row">
+                                        <a class="inc-btn inc-btn--primary" href="./overlay-workflows.html">Open Overlay Showcase</a>
+                                        <a class="inc-btn inc-btn--outline-secondary" href="./data-grid-advanced.html">Compare With Drawer Grid</a>
+                                    </div>
+                                </div>
+<pre class="demo-code"><code>&lt;button class="inc-btn inc-btn--primary" type="button" data-inc-toggle="modal" data-inc-target="#approval-modal"&gt;Open modal&lt;/button&gt;
+&lt;button class="inc-btn inc-btn--outline-secondary" type="button" data-inc-toggle="offcanvas" data-inc-target="#assignment-drawer"&gt;Open offcanvas&lt;/button&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
                                 <h2 class="inc-card__title">Operational States And Feedback</h2>
                             </div>
                             <div class="inc-card__body demo-reference-grid">
@@ -687,6 +846,7 @@
                         <a href="./states.html">States</a>
                         <a href="./forms-and-validation.html">Forms</a>
                         <a href="./data-grid-advanced.html">Data Grid</a>
+                        <a href="./overlay-workflows.html">Overlays</a>
                         <a href="./native-patterns.html">Native</a>
                     </div>
                     <div class="inc-footer-bar__meta">Reference page for copy/paste HTML patterns.</div>

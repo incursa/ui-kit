@@ -290,6 +290,90 @@
 }
 
 // -----------------------------------------------------------------------------
+// Utility layer
+// -----------------------------------------------------------------------------
+
+.inc-u-stack-xs > * + * {
+    margin-top: 0.25rem !important;
+}
+
+.inc-u-stack-sm > * + * {
+    margin-top: 0.5rem !important;
+}
+
+.inc-u-stack-md > * + * {
+    margin-top: 1rem !important;
+}
+
+.inc-u-stack-lg > * + * {
+    margin-top: 1.5rem !important;
+}
+
+.inc-u-gap-xs {
+    gap: 0.25rem !important;
+}
+
+.inc-u-gap-sm {
+    gap: 0.5rem !important;
+}
+
+.inc-u-gap-md {
+    gap: 1rem !important;
+}
+
+.inc-u-gap-lg {
+    gap: 1.5rem !important;
+}
+
+.inc-u-p-0 {
+    padding: 0 !important;
+}
+
+.inc-u-p-xs {
+    padding: 0.25rem !important;
+}
+
+.inc-u-p-sm {
+    padding: 0.5rem !important;
+}
+
+.inc-u-p-md {
+    padding: 1rem !important;
+}
+
+.inc-u-p-lg {
+    padding: 1.5rem !important;
+}
+
+.inc-u-px-md {
+    padding-inline: 1rem !important;
+}
+
+.inc-u-py-md {
+    padding-block: 1rem !important;
+}
+
+.inc-u-hidden {
+    display: none !important;
+}
+
+.inc-u-hidden-mobile {
+    @include media-breakpoint-down(md) {
+        display: none !important;
+    }
+}
+
+.inc-u-hidden-desktop {
+    @include media-breakpoint-up(lg) {
+        display: none !important;
+    }
+}
+
+.inc-u-visually-hidden {
+    @include visually-hidden();
+}
+
+// -----------------------------------------------------------------------------
 // Buttons, badges, alerts, and form primitives
 // -----------------------------------------------------------------------------
 
@@ -3002,6 +3086,81 @@ dialog.inc-native-dialog {
         }
     }
 
+    &--review-grid {
+        thead th {
+            font-size: 0.75rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        tbody td,
+        tbody th {
+            padding-block: 0.625rem;
+            font-size: 0.8125rem;
+            line-height: 1.45;
+        }
+
+        tbody tr:hover > * {
+            background: rgba($primary, 0.035);
+        }
+    }
+
+    &--analytics-grid {
+        border-color: rgba($inc-border-subtle, 0.95);
+        box-shadow: 0 1rem 2rem rgba($inc-surface-strong, 0.05);
+
+        thead th {
+            background-color: $inc-surface-secondary;
+            color: $inc-text-primary;
+            border-color: $inc-border-subtle;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        tbody tr:nth-child(even) > * {
+            background: rgba($primary, 0.02);
+        }
+
+        .inc-table__cell--numeric,
+        .inc-table__cell--numeric-small,
+        .inc-table__header--right {
+            color: $inc-surface-strong;
+            font-weight: 600;
+        }
+    }
+
+    &--spreadsheet-grid {
+        border-color: rgba($inc-border-subtle, 1);
+        border-radius: $inc-radius-md;
+        box-shadow: inset 0 0 0 1px rgba($inc-border-subtle, 0.35);
+
+        thead th {
+            background-color: #eef2f7;
+            color: $inc-text-primary;
+            border-color: $inc-border-subtle;
+            font-size: 0.75rem;
+            letter-spacing: 0.04em;
+        }
+
+        thead th,
+        tbody td,
+        tbody th {
+            padding: 0.5rem 0.625rem;
+        }
+
+        tbody td,
+        tbody th {
+            font-family: $font-family-monospace;
+            font-size: 0.8125rem;
+            line-height: 1.4;
+        }
+
+        tbody tr:hover > * {
+            background: rgba($primary, 0.04);
+        }
+    }
+
     &__header {
         &--primary,
         th.inc-table__header--primary {
@@ -3393,6 +3552,19 @@ dialog.inc-native-dialog {
     align-items: center;
     justify-content: center;
     pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+
+    &[hidden] {
+        display: none !important;
+    }
+
+    &.is-open {
+        pointer-events: auto;
+        opacity: 1;
+        visibility: visible;
+    }
 
     &[style*="display: flex"],
     &[style*="display:flex"] {
@@ -3520,35 +3692,111 @@ body.inc-modal-open {
 }
 
 .inc-offcanvas {
-    @extend .offcanvas;
+    position: fixed;
+    z-index: $inc-z-index-modal;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    background: $inc-surface-primary;
+    color: $body-color;
+    visibility: hidden;
+    box-shadow: 0 1.25rem 2.5rem rgba($inc-surface-strong, 0.18);
+    transition: transform 0.25s ease, visibility 0.25s ease;
+
+    &.is-open {
+        visibility: visible;
+    }
+}
+
+.inc-offcanvas-start,
+.inc-offcanvas-end {
+    top: 0;
+    bottom: 0;
+    width: min(34rem, 92vw);
 }
 
 .inc-offcanvas-start {
-    @extend .offcanvas-start;
+    left: 0;
+    transform: translateX(-100%);
+
+    &.is-open {
+        transform: translateX(0);
+    }
 }
 
 .inc-offcanvas-end {
-    @extend .offcanvas-end;
+    right: 0;
+    transform: translateX(100%);
+
+    &.is-open {
+        transform: translateX(0);
+    }
+}
+
+.inc-offcanvas-top,
+.inc-offcanvas-bottom {
+    left: 0;
+    right: 0;
+    height: min(24rem, 85vh);
 }
 
 .inc-offcanvas-top {
-    @extend .offcanvas-top;
+    top: 0;
+    transform: translateY(-100%);
+
+    &.is-open {
+        transform: translateY(0);
+    }
 }
 
 .inc-offcanvas-bottom {
-    @extend .offcanvas-bottom;
+    bottom: 0;
+    transform: translateY(100%);
+
+    &.is-open {
+        transform: translateY(0);
+    }
+}
+
+.inc-offcanvas-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: $inc-z-index-modal-backdrop;
+    background: rgba(15, 20, 34, 0.46);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+
+    &.is-open {
+        opacity: 1;
+        pointer-events: auto;
+    }
 }
 
 .inc-offcanvas-header {
-    @extend .offcanvas-header;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid $inc-border-subtle;
 }
 
 .inc-offcanvas-title {
-    @extend .offcanvas-title;
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.2;
 }
 
 .inc-offcanvas-body {
-    @extend .offcanvas-body;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    overflow-y: auto;
+}
+
+body.inc-offcanvas-open {
+    overflow: hidden;
 }
 
 // -----------------------------------------------------------------------------

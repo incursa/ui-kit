@@ -1,30 +1,57 @@
 # Releasing
 
-## GitHub repository release
+## Day-two release flow
 
-1. Update `package.json` version.
-2. Update `CHANGELOG.md`.
-3. In npm, configure a Trusted Publisher for this package and repository:
-   `@incursa/ui-kit` -> `incursa/ui-kit` -> `.github/workflows/npm-publish.yml`.
-4. Confirm the package is scoped/public in npm and that the repository matches the GitHub repo exactly.
-5. Run:
+The intended release path is now tag-driven:
 
-```bash
-npm install
-npm run build
-npm pack
+1. Land the source changes you want to release on `main`.
+2. From a clean working tree, run the release helper with the release type and changelog markdown:
+
+```powershell
+.\release.ps1 -ReleaseType patch -Changelog @"
+- Summarize the release here.
+- Add as many markdown bullets or paragraphs as you want.
+"@
 ```
 
-6. Commit the updated source and `dist/` output.
-7. Create a Git tag matching the version, for example `v0.2.1`.
-8. Push the branch and tag to GitHub.
-9. Create a GitHub Release from the tag.
-10. The `Publish to npm` workflow in `.github/workflows/npm-publish.yml` will publish `@incursa/ui-kit` automatically when the release is published via npm Trusted Publishing.
-11. Attach the generated `.tgz` file if you want a direct installable artifact on the release page.
+Use `minor` or `major` instead of `patch` when needed.
+
+3. The script will:
+
+- verify you are on `main`
+- verify the working tree is clean
+- bump `package.json` and `package-lock.json`
+- run package validation through the npm version flow
+- prepend the new section to `CHANGELOG.md`
+- commit the release
+- create the matching Git tag
+- push `main` and the new tag to `origin`
+
+4. If you want it to stop before pushing, use `-NoPush`:
+
+```powershell
+.\release.ps1 -ReleaseType patch -Changelog @"
+- Release notes go here.
+"@ -NoPush
+```
+
+What the underlying npm scripts do:
+
+- `npm version <type>` bumps `package.json` and `package-lock.json`
+- runs `preversion`, which builds the package and verifies it with `npm pack --dry-run`
+- the PowerShell helper then commits and tags the release as `v0.2.2`
+
+5. Pushing the `v*` tag triggers `.github/workflows/npm-publish.yml`, which publishes `@incursa/ui-kit` to npm via Trusted Publishing.
+
+## When to use patch, minor, or major
+
+- `patch`: fixes, polish, non-breaking CSS/JS changes
+- `minor`: new backward-compatible components, tokens, utilities, or patterns
+- `major`: breaking class, markup, token, or package-surface changes
 
 ## npm publish
 
-The preferred path is GitHub Release -> GitHub Actions -> npm Trusted Publishing.
+The preferred path is Git tag -> GitHub Actions -> npm Trusted Publishing.
 
 If you need to publish manually, only do this once the repository URL, npm package name, and package visibility are correct.
 
