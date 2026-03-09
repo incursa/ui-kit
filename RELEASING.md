@@ -43,6 +43,8 @@ What the underlying npm scripts do:
 
 5. Pushing the `v*` tag triggers `.github/workflows/npm-publish.yml`, which publishes `@incursa/ui-kit` to npm via Trusted Publishing.
 
+If the publish job fails and you need to retry, rerun the original tag-triggered workflow run in GitHub Actions. Do not use a separate manual dispatch for publishing.
+
 ## When to use patch, minor, or major
 
 - `patch`: fixes, polish, non-breaking CSS/JS changes

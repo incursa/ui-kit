@@ -218,7 +218,7 @@ For normal releases:
 "@
 ```
 
-Use `minor` or `major` when needed. The script verifies the repo state, bumps the version, runs the package validation step, updates `CHANGELOG.md`, creates the release commit and tag, and pushes them. Pushing the tag publishes the package to npm automatically.
+Use `minor` or `major` when needed. The script verifies the repo state, bumps the version, runs the package validation step, updates `CHANGELOG.md`, creates the release commit and tag, and pushes them. Pushing the tag publishes the package to npm automatically. If you need to retry a failed publish, rerun the original tag-triggered workflow run rather than dispatching a separate manual publish.
 
 ## Use it as source
 
