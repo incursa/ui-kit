@@ -22,22 +22,21 @@
                             <a class="nav-link" href="./reference.html">Reference</a>
                         </div>
                         <div class="inc-navbar__utilities">
-                            <div class="inc-user-menu">
-                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#detail-user-menu" aria-haspopup="true" aria-expanded="false">
+                            <details class="inc-native-menu inc-native-menu--navbar">
+                                <summary class="inc-native-menu__summary">
                                     <span class="inc-user-menu__avatar">SM</span>
                                     <span class="inc-user-menu__meta">
                                         <span class="inc-user-menu__name">Sam McAravey</span>
                                         <span class="inc-user-menu__detail">Administrator</span>
                                     </span>
-                                </button>
-                                <div id="detail-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
-                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
-                                    <a class="inc-dropdown__item" href="#">Profile</a>
-                                    <a class="inc-dropdown__item" href="#">Preferences</a>
-                                    <div class="inc-dropdown__divider"></div>
-                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </summary>
+                                <div class="inc-native-menu__panel">
+                                    <div class="inc-native-menu__header">Signed in as Sam McAravey</div>
+                                    <a class="inc-native-menu__item" href="#">Profile</a>
+                                    <a class="inc-native-menu__item" href="#">Preferences</a>
+                                    <a class="inc-native-menu__item" href="#">Sign out</a>
                                 </div>
-                            </div>
+                            </details>
                         </div>
                     </div>
                 </div>

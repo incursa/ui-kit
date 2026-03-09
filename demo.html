@@ -22,22 +22,21 @@
                             <a class="nav-link" href="./reference.html">Reference</a>
                         </div>
                         <div class="inc-navbar__utilities">
-                            <div class="inc-user-menu">
-                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#dashboard-user-menu" aria-haspopup="true" aria-expanded="false">
+                            <details class="inc-native-menu inc-native-menu--navbar">
+                                <summary class="inc-native-menu__summary">
                                     <span class="inc-user-menu__avatar">SM</span>
                                     <span class="inc-user-menu__meta">
                                         <span class="inc-user-menu__name">Sam McAravey</span>
                                         <span class="inc-user-menu__detail">Administrator</span>
                                     </span>
-                                </button>
-                                <div id="dashboard-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
-                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
-                                    <a class="inc-dropdown__item" href="#">Profile</a>
-                                    <a class="inc-dropdown__item" href="#">Preferences</a>
-                                    <div class="inc-dropdown__divider"></div>
-                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </summary>
+                                <div class="inc-native-menu__panel">
+                                    <div class="inc-native-menu__header">Signed in as Sam McAravey</div>
+                                    <a class="inc-native-menu__item" href="#">Profile</a>
+                                    <a class="inc-native-menu__item" href="#">Preferences</a>
+                                    <a class="inc-native-menu__item" href="#">Sign out</a>
                                 </div>
-                            </div>
+                            </details>
                         </div>
                     </div>
                 </div>
@@ -211,9 +210,9 @@
 
                         <section class="inc-tabs-folder">
                             <ul class="inc-tabs-nav" role="tablist">
-                                <li><a class="inc-tab active" href="#dashboard-tab-overview" data-inc-toggle="tab" role="tab" aria-controls="dashboard-tab-overview">Overview</a></li>
-                                <li><a class="inc-tab" href="#dashboard-tab-aging" data-inc-toggle="tab" role="tab" aria-controls="dashboard-tab-aging">Aging</a></li>
-                                <li><a class="inc-tab" href="#dashboard-tab-documents" data-inc-toggle="tab" role="tab" aria-controls="dashboard-tab-documents">Documents</a></li>
+                                <li><button id="dashboard-tab-overview-trigger" class="inc-tab active" type="button" data-inc-toggle="tab" data-inc-target="#dashboard-tab-overview" aria-controls="dashboard-tab-overview">Overview</button></li>
+                                <li><button id="dashboard-tab-aging-trigger" class="inc-tab" type="button" data-inc-toggle="tab" data-inc-target="#dashboard-tab-aging" aria-controls="dashboard-tab-aging">Aging</button></li>
+                                <li><button id="dashboard-tab-documents-trigger" class="inc-tab" type="button" data-inc-toggle="tab" data-inc-target="#dashboard-tab-documents" aria-controls="dashboard-tab-documents">Documents</button></li>
                             </ul>
                             <div class="inc-tab-content">
                                 <div class="inc-tab-pane active" id="dashboard-tab-overview" role="tabpanel">

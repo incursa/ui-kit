@@ -19,10 +19,10 @@ Licensed under Apache 2.0.
 - Compact action buttons and inline forms that work well inside grids and table rows.
 - Card, section-shell, summary-block, vertical-list, and layout primitives used across admin screens.
 - Status-oriented badges and alerts with soft backgrounds and stronger foreground/border cues.
-- Validation states, error summaries, filter chips, and dense toolbar patterns for search-heavy screens.
-- Operational states such as empty, no-results, loading, error, permission, lock, toast, and activity timeline surfaces.
+- Validation states, error summaries, fieldset/legend groups, filter chips, and dense toolbar patterns for search-heavy screens.
+- Operational states such as empty, no-results, loading, error, permission, lock, toast, live-region, and activity timeline surfaces.
 - Bulk-action, sticky-header, and row-state table patterns for operator-facing grids.
-- File/document dropzones, file rows, read-only key-value grids, and drawer-style side panels.
+- File/document dropzones, file rows, read-only description-list grids, progress/meter surfaces, and drawer-style side panels.
 - A small overlay/navigation layer for tabs, pagination, dropdown actions, modals, and offcanvas panels.
 - Opinionated app-shell pieces for navbar/topbar, breadcrumb/nav-triad, sticky footer, user menu, and common two/three-column page layouts.
 
@@ -96,7 +96,7 @@ The BEM/modifier structure stays consistent across the package, for example `inc
 - Shell aware: the package now includes app-shell, breadcrumb, nav-triad, navbar, footer-bar, and user-menu primitives so page layout is part of the language, not an afterthought.
 - Layout aware: sidebar menus, inline form fields, and multi-column page examples are included so common admin-page composition is demonstrated directly.
 - Workflow aware: validation, filter bars, bulk action bars, audit timelines, and file-review surfaces are part of the package now because those patterns recur constantly in B2B products.
-- Native capable: the package now also includes styled `<details>` disclosures, a native summary-based menu, and a `<dialog>` surface so you can choose browser primitives when they fit better than helper-managed components.
+- Native capable: the package now also includes styled `<details>` disclosures, a native summary-based menu, and `<dialog>` surfaces for both centered modals and drawer-style side sheets so you can choose browser primitives when they fit better than helper-managed components.
 
 ## CSS-only vs JS-assisted
 
@@ -106,7 +106,7 @@ The BEM/modifier structure stays consistent across the package, for example `inc
 - This package now includes an optional dependency-free helper at `dist/inc-design-language.js` for:
   user-menu dropdowns, tab switching, and collapse/accordion toggles.
 - This package also includes native-styled patterns for:
-  `details.inc-disclosure`, `details.inc-native-menu`, and `dialog.inc-native-dialog`.
+  `details.inc-disclosure`, `details.inc-native-menu`, `dialog.inc-native-dialog`, and `dialog.inc-native-dialog--drawer`.
 - If you prefer native HTML behavior where possible, use browser primitives like `<details>` and `<dialog>` for product-specific implementations. The helper exists for places where the design language is intentionally Bootstrap-like and needs matching interaction behavior.
 
 ## Use it quickly

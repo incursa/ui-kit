@@ -196,8 +196,11 @@
                                         </div>
                                         <div class="inc-card__body inc-stack inc-stack--gap-sm">
                                             <p class="inc-text inc-text--regular">The dialog below uses the browser backdrop, focus handling, and close semantics. The only JS here is the call to <code>showModal()</code> on the launcher button.</p>
-                                            <p class="demo-note">If you use <code>&lt;form method="dialog"&gt;</code> for the footer controls, closing stays fully native too.</p>
-                                            <button class="inc-btn inc-btn--primary" type="button" data-inc-native-dialog-open="native-review-dialog">Launch Review Dialog</button>
+                                            <p class="demo-note">If you use <code>&lt;form method="dialog"&gt;</code> for the footer controls, closing stays fully native too. The same primitive also works for side sheets when you anchor the dialog to the viewport edge.</p>
+                                            <div class="demo-chip-row">
+                                                <button class="inc-btn inc-btn--primary" type="button" data-inc-native-dialog-open="native-review-dialog">Launch Review Dialog</button>
+                                                <button class="inc-btn inc-btn--outline-secondary" type="button" data-inc-native-dialog-open="native-review-drawer">Launch Review Drawer</button>
+                                            </div>
                                         </div>
                                     </article>
                                 </div>
@@ -242,25 +245,59 @@
         </div>
     </dialog>
 
+    <dialog id="native-review-drawer" class="inc-native-dialog inc-native-dialog--drawer">
+        <div class="inc-native-dialog__surface">
+            <div class="inc-native-dialog__header">
+                <div>
+                    <h2 class="inc-native-dialog__title">Review Drawer</h2>
+                    <p class="inc-text inc-text--small inc-text--muted">This uses the same native dialog element, but styled as a right-side sheet.</p>
+                </div>
+                <form method="dialog">
+                    <button class="inc-native-dialog__close" type="submit" aria-label="Close drawer">×</button>
+                </form>
+            </div>
+            <div class="inc-native-dialog__body inc-u-stack-md">
+                <div class="inc-key-value-grid">
+                    <dl class="inc-key-value inc-key-value--card">
+                        <dt class="inc-key-value__label">Record</dt>
+                        <dd class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</dd>
+                    </dl>
+                    <dl class="inc-key-value inc-key-value--card">
+                        <dt class="inc-key-value__label">Status</dt>
+                        <dd class="inc-key-value__value">Needs Review</dd>
+                    </dl>
+                </div>
+                <div class="inc-form__group">
+                    <label class="inc-form__label" for="native-drawer-note">Assignment note</label>
+                    <textarea id="native-drawer-note" class="inc-form__control" rows="4">Assign to Legal Review so the W-9 and certificate of insurance can be verified.</textarea>
+                </div>
+            </div>
+            <form method="dialog" class="inc-native-dialog__footer">
+                <button class="inc-btn inc-btn--outline-secondary" type="submit" value="cancel">Cancel</button>
+                <button class="inc-btn inc-btn--primary" type="submit" value="assign">Assign owner</button>
+            </form>
+        </div>
+    </dialog>
+
     <script>
         (() => {
-            const dialog = document.getElementById("native-review-dialog");
-            if (!dialog) {
-                return;
-            }
-
             document.querySelectorAll("[data-inc-native-dialog-open]").forEach((button) => {
                 button.addEventListener("click", () => {
-                    if (!dialog.open) {
+                    const dialogId = button.getAttribute("data-inc-native-dialog-open");
+                    const dialog = dialogId ? document.getElementById(dialogId) : null;
+
+                    if (dialog && !dialog.open) {
                         dialog.showModal();
                     }
                 });
             });
 
-            dialog.addEventListener("click", (event) => {
-                if (event.target === dialog) {
-                    dialog.close("dismiss");
-                }
+            document.querySelectorAll("dialog.inc-native-dialog").forEach((dialog) => {
+                dialog.addEventListener("click", (event) => {
+                    if (event.target === dialog) {
+                        dialog.close("dismiss");
+                    }
+                });
             });
         })();
     </script>

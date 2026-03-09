@@ -12551,6 +12551,33 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
 .inc-form__select--expand {
   flex: 1 1 auto !important;
 }
+.inc-form__fieldset {
+  margin: 0;
+  padding: 1rem 1rem 0.875rem;
+  border: 1px solid #dbdcdc;
+  border-radius: 0.5rem;
+  background: linear-gradient(180deg, rgba(246, 246, 246, 0.72), #ffffff 3rem);
+}
+.inc-form__legend {
+  float: none;
+  width: auto;
+  margin: 0;
+  padding: 0 0.375rem;
+  color: #121316;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.inc-form__choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.inc-form__choices--inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+}
 .inc-form__field {
   display: flex;
   align-items: center;
@@ -13599,6 +13626,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   align-items: center;
   gap: 0.5rem;
   padding: 1rem;
+  font: inherit;
   color: #525355;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
@@ -13606,6 +13634,8 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   height: 2.5rem;
   text-decoration: none;
   border: 1px solid #dbdcdc;
+  cursor: pointer;
+  appearance: none;
 }
 .inc-tabs-folder .inc-tabs-nav > li > .inc-tab .inc-tab-icon {
   color: #3748a4;
@@ -13654,9 +13684,14 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   align-items: center;
   gap: 0.5rem;
   padding: 1rem 0.25rem;
+  font: inherit;
   color: #656668;
+  background: none;
+  border: 0;
   text-decoration: none;
   border-bottom: 2px solid transparent;
+  cursor: pointer;
+  appearance: none;
 }
 .inc-tabs-line .inc-tabs-nav > li > .inc-tab .inc-tab-icon {
   color: #3748a4;
@@ -13926,12 +13961,32 @@ dialog.inc-native-dialog::backdrop {
   backdrop-filter: blur(0.125rem);
 }
 
+dialog.inc-native-dialog.inc-native-dialog--drawer {
+  width: min(100vw, 34rem);
+  max-width: 34rem;
+  height: 100dvh;
+  max-height: none;
+  margin: 0 0 0 auto;
+}
+dialog.inc-native-dialog.inc-native-dialog--drawer::backdrop {
+  background: rgba(18, 19, 22, 0.42);
+  backdrop-filter: none;
+}
+
 .inc-native-dialog__surface {
   border: 1px solid #dbdcdc;
   border-radius: 0.25rem;
   background-color: #ffffff;
   box-shadow: 0 8px 32px 0 rgba(172, 172, 172, 0.16);
   overflow: hidden;
+}
+
+dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__surface {
+  height: 100%;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 0;
 }
 
 .inc-native-dialog__header {
@@ -13952,6 +14007,11 @@ dialog.inc-native-dialog::backdrop {
 
 .inc-native-dialog__body {
   padding: 1.25rem;
+}
+
+dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
+  flex: 1 1 auto;
+  overflow-y: auto;
 }
 
 .inc-native-dialog__footer {
@@ -13978,6 +14038,74 @@ dialog.inc-native-dialog::backdrop {
 .inc-native-dialog__close:hover, .inc-native-dialog__close:focus-visible {
   background-color: rgba(196, 196, 197, 0.35);
   color: #121316;
+}
+
+.inc-live-region {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.inc-progress,
+.inc-meter {
+  width: 100%;
+  height: 0.75rem;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  background: #f1f1f1;
+  vertical-align: middle;
+  appearance: none;
+  --inc-track-color: #f1f1f1;
+  --inc-fill-color: #4459c6;
+}
+
+.inc-progress--sm {
+  height: 0.5rem;
+}
+.inc-progress--success {
+  --inc-fill-color: #009743;
+}
+.inc-progress--warning {
+  --inc-fill-color: #c88a00;
+}
+.inc-progress--danger {
+  --inc-fill-color: #d11a2a;
+}
+.inc-progress::-webkit-progress-bar {
+  background: var(--inc-track-color);
+  border-radius: inherit;
+}
+.inc-progress::-webkit-progress-value {
+  background: var(--inc-fill-color);
+  border-radius: inherit;
+}
+.inc-progress::-moz-progress-bar {
+  background: var(--inc-fill-color);
+  border-radius: inherit;
+}
+
+.inc-meter--success {
+  --inc-fill-color: #009743;
+}
+.inc-meter--warning {
+  --inc-fill-color: #c88a00;
+}
+.inc-meter--danger {
+  --inc-fill-color: #d11a2a;
+}
+.inc-meter::-webkit-meter-bar {
+  background: var(--inc-track-color);
+  border: 0;
+  border-radius: inherit;
+}
+.inc-meter::-webkit-meter-optimum-value, .inc-meter::-webkit-meter-suboptimum-value, .inc-meter::-webkit-meter-even-less-good-value {
+  background: var(--inc-fill-color);
+  border-radius: inherit;
+}
+.inc-meter::-moz-meter-bar {
+  background: var(--inc-fill-color);
+  border-radius: inherit;
 }
 
 .inc-alert-container {
@@ -14893,6 +15021,7 @@ body.inc-offcanvas-open {
   flex-direction: column;
   gap: 0.25rem;
   min-width: 0;
+  margin: 0;
 }
 .inc-key-value--card {
   padding: 0.875rem 1rem;
@@ -14901,6 +15030,7 @@ body.inc-offcanvas-open {
   background: #ffffff;
 }
 .inc-key-value__label {
+  margin: 0;
   color: var(--bs-secondary-color);
   font-size: 0.75rem;
   font-weight: 600;
@@ -14908,6 +15038,7 @@ body.inc-offcanvas-open {
   text-transform: uppercase;
 }
 .inc-key-value__value {
+  margin: 0;
   color: #121316;
   font-size: 0.875rem;
   font-weight: 500;

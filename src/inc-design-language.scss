@@ -712,6 +712,37 @@
         @extend .form-floating;
     }
 
+    &__fieldset {
+        margin: 0;
+        padding: 1rem 1rem 0.875rem;
+        border: 1px solid $inc-border-subtle;
+        border-radius: $inc-radius-md;
+        background: linear-gradient(180deg, rgba($inc-surface-secondary, 0.72), $inc-surface-primary 3rem);
+    }
+
+    &__legend {
+        float: none;
+        width: auto;
+        margin: 0;
+        padding: 0 0.375rem;
+        color: $body-color;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        line-height: 1.4;
+    }
+
+    &__choices {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        &--inline {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0.75rem 1rem;
+        }
+    }
+
     &__field {
         display: flex;
         align-items: center;
@@ -2171,6 +2202,7 @@
             align-items: center;
             gap: 0.5rem;
             padding: 1rem;
+            font: inherit;
             color: $inc-ink-600;
             border-top-left-radius: $inc-radius-panel;
             border-top-right-radius: $inc-radius-panel;
@@ -2178,6 +2210,8 @@
             height: 2.5rem;
             text-decoration: none;
             border: 1px solid $inc-border-subtle;
+            cursor: pointer;
+            appearance: none;
 
             .inc-tab-icon {
                 color: $inc-brand-800;
@@ -2234,9 +2268,14 @@
             align-items: center;
             gap: 0.5rem;
             padding: 1rem 0.25rem;
+            font: inherit;
             color: $inc-text-secondary;
+            background: none;
+            border: 0;
             text-decoration: none;
             border-bottom: 2px solid transparent;
+            cursor: pointer;
+            appearance: none;
 
             .inc-tab-icon {
                 color: $inc-brand-800;
@@ -2584,12 +2623,33 @@ dialog.inc-native-dialog {
     }
 }
 
+dialog.inc-native-dialog.inc-native-dialog--drawer {
+    width: min(100vw, 34rem);
+    max-width: 34rem;
+    height: 100dvh;
+    max-height: none;
+    margin: 0 0 0 auto;
+
+    &::backdrop {
+        background: rgba($inc-ink-900, 0.42);
+        backdrop-filter: none;
+    }
+}
+
 .inc-native-dialog__surface {
     border: 1px solid $inc-border-subtle;
     border-radius: $inc-radius-panel;
     background-color: $inc-surface-primary;
     box-shadow: $inc-shadow-lg;
     overflow: hidden;
+}
+
+dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__surface {
+    height: 100%;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    border-right: 0;
 }
 
 .inc-native-dialog__header {
@@ -2610,6 +2670,11 @@ dialog.inc-native-dialog {
 
 .inc-native-dialog__body {
     padding: 1.25rem;
+}
+
+dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
+    flex: 1 1 auto;
+    overflow-y: auto;
 }
 
 .inc-native-dialog__footer {
@@ -2689,6 +2754,91 @@ dialog.inc-native-dialog {
         &--dark {
             @extend .list-group-item-dark;
         }
+    }
+}
+
+.inc-live-region {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.inc-progress,
+.inc-meter {
+    width: 100%;
+    height: 0.75rem;
+    overflow: hidden;
+    border: 0;
+    border-radius: 999px;
+    background: $inc-surface-muted;
+    vertical-align: middle;
+    appearance: none;
+    --inc-track-color: #{$inc-surface-muted};
+    --inc-fill-color: #{$primary};
+}
+
+.inc-progress {
+    &--sm {
+        height: 0.5rem;
+    }
+
+    &--success {
+        --inc-fill-color: #{$success};
+    }
+
+    &--warning {
+        --inc-fill-color: #{$warning};
+    }
+
+    &--danger {
+        --inc-fill-color: #{$danger};
+    }
+
+    &::-webkit-progress-bar {
+        background: var(--inc-track-color);
+        border-radius: inherit;
+    }
+
+    &::-webkit-progress-value {
+        background: var(--inc-fill-color);
+        border-radius: inherit;
+    }
+
+    &::-moz-progress-bar {
+        background: var(--inc-fill-color);
+        border-radius: inherit;
+    }
+}
+
+.inc-meter {
+    &--success {
+        --inc-fill-color: #{$success};
+    }
+
+    &--warning {
+        --inc-fill-color: #{$warning};
+    }
+
+    &--danger {
+        --inc-fill-color: #{$danger};
+    }
+
+    &::-webkit-meter-bar {
+        background: var(--inc-track-color);
+        border: 0;
+        border-radius: inherit;
+    }
+
+    &::-webkit-meter-optimum-value,
+    &::-webkit-meter-suboptimum-value,
+    &::-webkit-meter-even-less-good-value {
+        background: var(--inc-fill-color);
+        border-radius: inherit;
+    }
+
+    &::-moz-meter-bar {
+        background: var(--inc-fill-color);
+        border-radius: inherit;
     }
 }
 
@@ -4106,6 +4256,7 @@ body.inc-offcanvas-open {
     flex-direction: column;
     gap: 0.25rem;
     min-width: 0;
+    margin: 0;
 
     &--card {
         padding: 0.875rem 1rem;
@@ -4115,6 +4266,7 @@ body.inc-offcanvas-open {
     }
 
     &__label {
+        margin: 0;
         color: $text-muted;
         font-size: 0.75rem;
         font-weight: 600;
@@ -4123,6 +4275,7 @@ body.inc-offcanvas-open {
     }
 
     &__value {
+        margin: 0;
         color: $body-color;
         font-size: 0.875rem;
         font-weight: 500;

@@ -22,22 +22,21 @@
                             <a class="nav-link" href="./data-grid-advanced.html">Data Grid</a>
                         </div>
                         <div class="inc-navbar__utilities">
-                            <div class="inc-user-menu">
-                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#forms-user-menu" aria-haspopup="true" aria-expanded="false">
+                            <details class="inc-native-menu inc-native-menu--navbar">
+                                <summary class="inc-native-menu__summary">
                                     <span class="inc-user-menu__avatar">SM</span>
                                     <span class="inc-user-menu__meta">
                                         <span class="inc-user-menu__name">Sam McAravey</span>
                                         <span class="inc-user-menu__detail">Administrator</span>
                                     </span>
-                                </button>
-                                <div id="forms-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
-                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
-                                    <a class="inc-dropdown__item" href="#">Profile</a>
-                                    <a class="inc-dropdown__item" href="#">Preferences</a>
-                                    <div class="inc-dropdown__divider"></div>
-                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </summary>
+                                <div class="inc-native-menu__panel">
+                                    <div class="inc-native-menu__header">Signed in as Sam McAravey</div>
+                                    <a class="inc-native-menu__item" href="#">Profile</a>
+                                    <a class="inc-native-menu__item" href="#">Preferences</a>
+                                    <a class="inc-native-menu__item" href="#">Sign out</a>
                                 </div>
-                            </div>
+                            </details>
                         </div>
                     </div>
                 </div>
@@ -131,16 +130,19 @@
                                     </div>
                                 </div>
 
-                                <div class="demo-layout-grid demo-layout-grid--2">
-                                    <div class="inc-form__check">
-                                        <input class="inc-form__check__input" type="checkbox" id="form-related" checked>
-                                        <label class="inc-form__check__label" for="form-related">Include related contract documents</label>
+                                <fieldset class="inc-form__fieldset">
+                                    <legend class="inc-form__legend">Approval options</legend>
+                                    <div class="inc-form__choices inc-form__choices--inline">
+                                        <div class="inc-form__check">
+                                            <input class="inc-form__check__input" type="checkbox" id="form-related" checked>
+                                            <label class="inc-form__check__label" for="form-related">Include related contract documents</label>
+                                        </div>
+                                        <div class="inc-form__check inc-form__switch">
+                                            <input class="inc-form__check__input" type="checkbox" id="form-notifications" checked>
+                                            <label class="inc-form__check__label" for="form-notifications">Send notifications after approval</label>
+                                        </div>
                                     </div>
-                                    <div class="inc-form__check inc-form__switch">
-                                        <input class="inc-form__check__input" type="checkbox" id="form-notifications" checked>
-                                        <label class="inc-form__check__label" for="form-notifications">Send notifications after approval</label>
-                                    </div>
-                                </div>
+                                </fieldset>
                             </div>
                         </section>
 
@@ -202,22 +204,22 @@
                                 </div>
                                 <div class="inc-card__body">
                                     <div class="inc-key-value-grid">
-                                        <div class="inc-key-value inc-key-value--card">
-                                            <span class="inc-key-value__label">Project</span>
-                                            <span class="inc-key-value__value inc-key-value__value--strong">North Campus Expansion</span>
-                                        </div>
-                                        <div class="inc-key-value inc-key-value--card">
-                                            <span class="inc-key-value__label">Record Id</span>
-                                            <span class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</span>
-                                        </div>
-                                        <div class="inc-key-value inc-key-value--card">
-                                            <span class="inc-key-value__label">Current Request</span>
-                                            <span class="inc-key-value__value inc-key-value__value--data">$18,240.22</span>
-                                        </div>
-                                        <div class="inc-key-value inc-key-value--card">
-                                            <span class="inc-key-value__label">Status</span>
-                                            <span class="inc-key-value__value">Needs Review</span>
-                                        </div>
+                                        <dl class="inc-key-value inc-key-value--card">
+                                            <dt class="inc-key-value__label">Project</dt>
+                                            <dd class="inc-key-value__value inc-key-value__value--strong">North Campus Expansion</dd>
+                                        </dl>
+                                        <dl class="inc-key-value inc-key-value--card">
+                                            <dt class="inc-key-value__label">Record Id</dt>
+                                            <dd class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</dd>
+                                        </dl>
+                                        <dl class="inc-key-value inc-key-value--card">
+                                            <dt class="inc-key-value__label">Current Request</dt>
+                                            <dd class="inc-key-value__value inc-key-value__value--data">$18,240.22</dd>
+                                        </dl>
+                                        <dl class="inc-key-value inc-key-value--card">
+                                            <dt class="inc-key-value__label">Status</dt>
+                                            <dd class="inc-key-value__value">Needs Review</dd>
+                                        </dl>
                                     </div>
                                 </div>
                             </article>

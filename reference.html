@@ -26,22 +26,21 @@
                             <a class="nav-link active" href="./reference.html">Reference</a>
                         </div>
                         <div class="inc-navbar__utilities">
-                            <div class="inc-user-menu">
-                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#reference-user-menu" aria-haspopup="true" aria-expanded="false">
+                            <details class="inc-native-menu inc-native-menu--navbar">
+                                <summary class="inc-native-menu__summary">
                                     <span class="inc-user-menu__avatar">SM</span>
                                     <span class="inc-user-menu__meta">
                                         <span class="inc-user-menu__name">Sam McAravey</span>
                                         <span class="inc-user-menu__detail">Administrator</span>
                                     </span>
-                                </button>
-                                <div id="reference-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
-                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
-                                    <a class="inc-dropdown__item" href="#">Profile</a>
-                                    <a class="inc-dropdown__item" href="#">Preferences</a>
-                                    <div class="inc-dropdown__divider"></div>
-                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </summary>
+                                <div class="inc-native-menu__panel">
+                                    <div class="inc-native-menu__header">Signed in as Sam McAravey</div>
+                                    <a class="inc-native-menu__item" href="#">Profile</a>
+                                    <a class="inc-native-menu__item" href="#">Preferences</a>
+                                    <a class="inc-native-menu__item" href="#">Sign out</a>
                                 </div>
-                            </div>
+                            </details>
                         </div>
                     </div>
                 </div>
@@ -184,22 +183,37 @@
                                         <label class="inc-form__label" for="ref-notes">Textarea</label>
                                         <textarea id="ref-notes" class="inc-form__control" rows="3">Operator notes go here.</textarea>
                                     </div>
+                                    <div class="demo-layout-grid demo-layout-grid--2">
+                                        <div>
+                                            <label class="inc-form__label" for="ref-start-date">Start date</label>
+                                            <input id="ref-start-date" class="inc-form__control" type="date" value="2026-03-09">
+                                        </div>
+                                        <div>
+                                            <label class="inc-form__label" for="ref-attachment">Attachment</label>
+                                            <input id="ref-attachment" class="inc-form__control" type="file">
+                                        </div>
+                                    </div>
                                     <div class="inc-input-group">
                                         <span class="inc-input-group__text">$</span>
                                         <input class="inc-form__control" type="text" value="18240.22">
                                     </div>
-                                    <div class="inc-form__check">
-                                        <input class="inc-form__check__input" type="checkbox" id="ref-check" checked>
-                                        <label class="inc-form__check__label" for="ref-check">Include related documents</label>
-                                    </div>
-                                    <div class="inc-form__check inc-form__switch">
-                                        <input class="inc-form__check__input" type="checkbox" id="ref-switch" checked>
-                                        <label class="inc-form__check__label" for="ref-switch">Send notifications</label>
-                                    </div>
+                                    <fieldset class="inc-form__fieldset">
+                                        <legend class="inc-form__legend">Workflow options</legend>
+                                        <div class="inc-form__choices">
+                                            <div class="inc-form__check">
+                                                <input class="inc-form__check__input" type="checkbox" id="ref-check" checked>
+                                                <label class="inc-form__check__label" for="ref-check">Include related documents</label>
+                                            </div>
+                                            <div class="inc-form__check inc-form__switch">
+                                                <input class="inc-form__check__input" type="checkbox" id="ref-switch" checked>
+                                                <label class="inc-form__check__label" for="ref-switch">Send notifications</label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                     <form class="inc-form inc-form--inline inc-form--wrap inc-form--gap-md" action="#">
                                         <div class="inc-form__field inc-form__field--grow">
                                             <label class="inc-form__label" for="ref-search">Search</label>
-                                            <input id="ref-search" class="inc-form__control inc-form__control--sm" type="text" value="AP-2026-00142">
+                                            <input id="ref-search" class="inc-form__control inc-form__control--sm" type="search" value="AP-2026-00142">
                                         </div>
                                         <div class="inc-form__field">
                                             <label class="inc-form__label" for="ref-owner">Owner</label>
@@ -223,20 +237,24 @@
 &lt;label class="inc-form__label" for="ref-notes"&gt;Textarea&lt;/label&gt;
 &lt;textarea id="ref-notes" class="inc-form__control" rows="3"&gt;&lt;/textarea&gt;
 
+&lt;label class="inc-form__label" for="ref-start-date"&gt;Start date&lt;/label&gt;
+&lt;input id="ref-start-date" class="inc-form__control" type="date"&gt;
+
+&lt;label class="inc-form__label" for="ref-attachment"&gt;Attachment&lt;/label&gt;
+&lt;input id="ref-attachment" class="inc-form__control" type="file"&gt;
+
 &lt;div class="inc-input-group"&gt;
     &lt;span class="inc-input-group__text"&gt;$&lt;/span&gt;
     &lt;input class="inc-form__control" type="text"&gt;
 &lt;/div&gt;
 
-&lt;div class="inc-form__check"&gt;
-    &lt;input class="inc-form__check__input" type="checkbox" id="ref-check"&gt;
-    &lt;label class="inc-form__check__label" for="ref-check"&gt;Include related documents&lt;/label&gt;
-&lt;/div&gt;
-
-&lt;div class="inc-form__check inc-form__switch"&gt;
-    &lt;input class="inc-form__check__input" type="checkbox" id="ref-switch"&gt;
-    &lt;label class="inc-form__check__label" for="ref-switch"&gt;Send notifications&lt;/label&gt;
-&lt;/div&gt;</code></pre>
+&lt;fieldset class="inc-form__fieldset"&gt;
+    &lt;legend class="inc-form__legend"&gt;Workflow options&lt;/legend&gt;
+    &lt;div class="inc-form__choices"&gt;
+        &lt;div class="inc-form__check"&gt;...&lt;/div&gt;
+        &lt;div class="inc-form__check inc-form__switch"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
                             </div>
                         </section>
 
@@ -309,8 +327,8 @@
                                 <div class="demo-preview demo-stack">
                                     <section class="inc-tabs-folder">
                                         <ul class="inc-tabs-nav" role="tablist">
-                                            <li><a class="inc-tab active" href="#ref-folder-overview" data-inc-toggle="tab" role="tab">Overview</a></li>
-                                            <li><a class="inc-tab" href="#ref-folder-aging" data-inc-toggle="tab" role="tab">Aging</a></li>
+                                            <li><button id="ref-folder-overview-trigger" class="inc-tab active" type="button" data-inc-toggle="tab" data-inc-target="#ref-folder-overview" aria-controls="ref-folder-overview">Overview</button></li>
+                                            <li><button id="ref-folder-aging-trigger" class="inc-tab" type="button" data-inc-toggle="tab" data-inc-target="#ref-folder-aging" aria-controls="ref-folder-aging">Aging</button></li>
                                         </ul>
                                         <div class="inc-tab-content">
                                             <div class="inc-tab-pane active" id="ref-folder-overview" role="tabpanel">
@@ -323,8 +341,8 @@
                                     </section>
                                     <section class="inc-tabs-line">
                                         <ul class="inc-tabs-nav" role="tablist">
-                                            <li><a class="inc-tab active" href="#ref-line-one" data-inc-toggle="tab" role="tab">Needs Review</a></li>
-                                            <li><a class="inc-tab" href="#ref-line-two" data-inc-toggle="tab" role="tab">Ready</a></li>
+                                            <li><button id="ref-line-one-trigger" class="inc-tab active" type="button" data-inc-toggle="tab" data-inc-target="#ref-line-one" aria-controls="ref-line-one">Needs Review</button></li>
+                                            <li><button id="ref-line-two-trigger" class="inc-tab" type="button" data-inc-toggle="tab" data-inc-target="#ref-line-two" aria-controls="ref-line-two">Ready</button></li>
                                         </ul>
                                     </section>
                                     <div class="inc-tab-content">
@@ -338,8 +356,8 @@
                                 </div>
 <pre class="demo-code"><code>&lt;section class="inc-tabs-folder"&gt;
     &lt;ul class="inc-tabs-nav" role="tablist"&gt;
-        &lt;li&gt;&lt;a class="inc-tab active" href="#ref-folder-overview" data-inc-toggle="tab" role="tab"&gt;Overview&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a class="inc-tab" href="#ref-folder-aging" data-inc-toggle="tab" role="tab"&gt;Aging&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;button class="inc-tab active" type="button" data-inc-toggle="tab" data-inc-target="#ref-folder-overview"&gt;Overview&lt;/button&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;button class="inc-tab" type="button" data-inc-toggle="tab" data-inc-target="#ref-folder-aging"&gt;Aging&lt;/button&gt;&lt;/li&gt;
     &lt;/ul&gt;
     &lt;div class="inc-tab-content"&gt;
         &lt;div class="inc-tab-pane active" id="ref-folder-overview" role="tabpanel"&gt;...&lt;/div&gt;
@@ -349,8 +367,8 @@
 
 &lt;section class="inc-tabs-line"&gt;
     &lt;ul class="inc-tabs-nav" role="tablist"&gt;
-        &lt;li&gt;&lt;a class="inc-tab active" href="#ref-line-one" data-inc-toggle="tab" role="tab"&gt;Needs Review&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a class="inc-tab" href="#ref-line-two" data-inc-toggle="tab" role="tab"&gt;Ready&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;button class="inc-tab active" type="button" data-inc-toggle="tab" data-inc-target="#ref-line-one"&gt;Needs Review&lt;/button&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;button class="inc-tab" type="button" data-inc-toggle="tab" data-inc-target="#ref-line-two"&gt;Ready&lt;/button&gt;&lt;/li&gt;
     &lt;/ul&gt;
 &lt;/section&gt;</code></pre>
                             </div>
@@ -461,7 +479,20 @@
                                             <a class="inc-native-menu__item" href="#">Save filter preset</a>
                                         </div>
                                     </details>
-                                    <button class="inc-btn inc-btn--primary" type="button" data-inc-native-dialog-open="reference-native-dialog">Launch Native Dialog</button>
+                                    <div class="demo-layout-grid demo-layout-grid--2">
+                                        <div class="inc-u-stack-xs">
+                                            <label class="inc-form__label" for="ref-progress">Import completion</label>
+                                            <progress id="ref-progress" class="inc-progress inc-progress--success" max="100" value="72">72%</progress>
+                                        </div>
+                                        <div class="inc-u-stack-xs">
+                                            <label class="inc-form__label" for="ref-meter">Data quality</label>
+                                            <meter id="ref-meter" class="inc-meter inc-meter--warning" min="0" max="100" low="65" high="90" optimum="100" value="74">74%</meter>
+                                        </div>
+                                    </div>
+                                    <div class="demo-chip-row">
+                                        <button class="inc-btn inc-btn--primary" type="button" data-inc-native-dialog-open="reference-native-dialog">Launch Native Dialog</button>
+                                        <button class="inc-btn inc-btn--outline-secondary" type="button" data-inc-native-dialog-open="reference-drawer-dialog">Launch Native Drawer</button>
+                                    </div>
                                 </div>
 <pre class="demo-code"><code>&lt;details class="inc-disclosure" open&gt;
     &lt;summary class="inc-disclosure__summary"&gt;
@@ -483,7 +514,10 @@
         &lt;/span&gt;
     &lt;/summary&gt;
     &lt;div class="inc-native-menu__panel"&gt;...&lt;/div&gt;
-&lt;/details&gt;</code></pre>
+&lt;/details&gt;
+
+&lt;progress class="inc-progress inc-progress--success" max="100" value="72"&gt;72%&lt;/progress&gt;
+&lt;meter class="inc-meter inc-meter--warning" min="0" max="100" low="65" high="90" optimum="100" value="74"&gt;74%&lt;/meter&gt;</code></pre>
                             </div>
                         </section>
 
@@ -783,14 +817,14 @@
                             <div class="inc-card__body demo-reference-grid">
                                 <div class="demo-preview demo-stack">
                                     <div class="inc-key-value-grid">
-                                        <div class="inc-key-value inc-key-value--card">
-                                            <span class="inc-key-value__label">Record Id</span>
-                                            <span class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</span>
-                                        </div>
-                                        <div class="inc-key-value inc-key-value--card">
-                                            <span class="inc-key-value__label">Current request</span>
-                                            <span class="inc-key-value__value inc-key-value__value--data">$18,240.22</span>
-                                        </div>
+                                        <dl class="inc-key-value inc-key-value--card">
+                                            <dt class="inc-key-value__label">Record Id</dt>
+                                            <dd class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</dd>
+                                        </dl>
+                                        <dl class="inc-key-value inc-key-value--card">
+                                            <dt class="inc-key-value__label">Current request</dt>
+                                            <dd class="inc-key-value__value inc-key-value__value--data">$18,240.22</dd>
+                                        </dl>
                                     </div>
                                     <div class="inc-timeline">
                                         <div class="inc-timeline__item">
@@ -826,7 +860,10 @@
                                     </div>
                                 </div>
 <pre class="demo-code"><code>&lt;div class="inc-key-value-grid"&gt;
-    &lt;div class="inc-key-value inc-key-value--card"&gt;...&lt;/div&gt;
+    &lt;dl class="inc-key-value inc-key-value--card"&gt;
+        &lt;dt class="inc-key-value__label"&gt;Record Id&lt;/dt&gt;
+        &lt;dd class="inc-key-value__value inc-key-value__value--data"&gt;AP-2026-00142&lt;/dd&gt;
+    &lt;/dl&gt;
 &lt;/div&gt;
 
 &lt;div class="inc-timeline"&gt;
@@ -876,26 +913,60 @@
         </div>
     </dialog>
 
+    <dialog id="reference-drawer-dialog" class="inc-native-dialog inc-native-dialog--drawer">
+        <div class="inc-native-dialog__surface">
+            <div class="inc-native-dialog__header">
+                <div>
+                    <h2 class="inc-native-dialog__title">Reference Drawer</h2>
+                    <p class="inc-text inc-text--small inc-text--muted">Native side sheet example for assignment and note-taking flows.</p>
+                </div>
+                <form method="dialog">
+                    <button class="inc-native-dialog__close" type="submit" aria-label="Close drawer">×</button>
+                </form>
+            </div>
+            <div class="inc-native-dialog__body inc-u-stack-md">
+                <div class="inc-key-value-grid">
+                    <dl class="inc-key-value inc-key-value--card">
+                        <dt class="inc-key-value__label">Record</dt>
+                        <dd class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</dd>
+                    </dl>
+                    <dl class="inc-key-value inc-key-value--card">
+                        <dt class="inc-key-value__label">Current owner</dt>
+                        <dd class="inc-key-value__value">AP Team</dd>
+                    </dl>
+                </div>
+                <div class="inc-form__group">
+                    <label class="inc-form__label" for="reference-drawer-note">Routing note</label>
+                    <textarea id="reference-drawer-note" class="inc-form__control" rows="4">Route to Legal Review so the W-9 can be validated before export.</textarea>
+                </div>
+            </div>
+            <form method="dialog" class="inc-native-dialog__footer">
+                <button class="inc-btn inc-btn--outline-secondary" type="submit">Cancel</button>
+                <button class="inc-btn inc-btn--primary" type="submit">Assign</button>
+            </form>
+        </div>
+    </dialog>
+
     <script src="./dist/inc-design-language.js"></script>
     <script>
         (() => {
-            const dialog = document.getElementById("reference-native-dialog");
-            if (!dialog) {
-                return;
-            }
-
             document.querySelectorAll("[data-inc-native-dialog-open]").forEach((button) => {
                 button.addEventListener("click", () => {
-                    if (!dialog.open) {
+                    const dialogId = button.getAttribute("data-inc-native-dialog-open");
+                    const dialog = dialogId ? document.getElementById(dialogId) : null;
+
+                    if (dialog && !dialog.open) {
                         dialog.showModal();
                     }
                 });
             });
 
-            dialog.addEventListener("click", (event) => {
-                if (event.target === dialog) {
-                    dialog.close("dismiss");
-                }
+            document.querySelectorAll("dialog.inc-native-dialog").forEach((dialog) => {
+                dialog.addEventListener("click", (event) => {
+                    if (event.target === dialog) {
+                        dialog.close("dismiss");
+                    }
+                });
             });
         })();
     </script>

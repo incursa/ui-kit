@@ -22,22 +22,21 @@
                             <a class="nav-link" href="./data-grid-advanced.html">Data Grid</a>
                         </div>
                         <div class="inc-navbar__utilities">
-                            <div class="inc-user-menu">
-                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#states-user-menu" aria-haspopup="true" aria-expanded="false">
+                            <details class="inc-native-menu inc-native-menu--navbar">
+                                <summary class="inc-native-menu__summary">
                                     <span class="inc-user-menu__avatar">SM</span>
                                     <span class="inc-user-menu__meta">
                                         <span class="inc-user-menu__name">Sam McAravey</span>
                                         <span class="inc-user-menu__detail">Administrator</span>
                                     </span>
-                                </button>
-                                <div id="states-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
-                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
-                                    <a class="inc-dropdown__item" href="#">Profile</a>
-                                    <a class="inc-dropdown__item" href="#">Preferences</a>
-                                    <div class="inc-dropdown__divider"></div>
-                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </summary>
+                                <div class="inc-native-menu__panel">
+                                    <div class="inc-native-menu__header">Signed in as Sam McAravey</div>
+                                    <a class="inc-native-menu__item" href="#">Profile</a>
+                                    <a class="inc-native-menu__item" href="#">Preferences</a>
+                                    <a class="inc-native-menu__item" href="#">Sign out</a>
                                 </div>
-                            </div>
+                            </details>
                         </div>
                     </div>
                 </div>
@@ -116,7 +115,7 @@
                         </section>
 
                         <section class="demo-layout-grid demo-layout-grid--2">
-                            <article class="inc-state-panel inc-state-panel--loading">
+                            <article class="inc-state-panel inc-state-panel--loading" role="status" aria-live="polite" aria-busy="true">
                                 <div class="inc-state-panel__head">
                                     <div class="inc-state-panel__icon">...</div>
                                     <div>
@@ -140,7 +139,7 @@
                                 </div>
                             </article>
 
-                            <article class="inc-state-panel inc-state-panel--error">
+                            <article class="inc-state-panel inc-state-panel--error" role="alert" aria-live="assertive">
                                 <div class="inc-state-panel__head">
                                     <div class="inc-state-panel__icon">!</div>
                                     <div>
@@ -148,7 +147,7 @@
                                         <p class="inc-state-panel__body">Use this when the workflow broke and the user needs an obvious next step, not a generic alert buried inside the page.</p>
                                     </div>
                                 </div>
-                                <div class="inc-alert inc-alert--danger">The ERP endpoint returned a validation error for 4 selected records.</div>
+                                <div class="inc-alert inc-alert--danger" role="alert">The ERP endpoint returned a validation error for 4 selected records.</div>
                                 <div class="inc-state-panel__actions">
                                     <a class="inc-btn inc-btn--secondary" href="#">Download Error Log</a>
                                     <a class="inc-btn inc-btn--primary" href="#">Retry Export</a>
@@ -189,21 +188,23 @@
                                     <h2 class="inc-card__title">Toasts and Side Feedback</h2>
                                 </div>
                                 <div class="inc-card__body">
-                                    <div class="inc-toast-stack">
-                                        <div class="inc-toast-card">
+                                    <div class="inc-live-region" aria-live="polite" aria-atomic="true">
+                                        <div class="inc-toast-stack">
+                                        <div class="inc-toast-card" role="status">
                                             <div class="inc-toast-card__icon">i</div>
                                             <div>
                                                 <h3 class="inc-toast-card__title">View saved</h3>
                                                 <p class="inc-toast-card__text">The shared queue filter is now available to the AP Team.</p>
                                             </div>
                                         </div>
-                                        <div class="inc-toast-card">
+                                        <div class="inc-toast-card" role="status">
                                             <div class="inc-toast-card__icon">!</div>
                                             <div>
                                                 <h3 class="inc-toast-card__title">Background import still running</h3>
                                                 <p class="inc-toast-card__text">Use ephemeral notifications for asynchronous work that succeeded, failed, or is still in motion.</p>
                                             </div>
                                         </div>
+                                    </div>
                                     </div>
                                 </div>
                             </article>

@@ -22,22 +22,21 @@
                             <a class="nav-link active" href="./overlay-workflows.html">Overlays</a>
                         </div>
                         <div class="inc-navbar__utilities">
-                            <div class="inc-user-menu">
-                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#overlay-user-menu" aria-haspopup="true" aria-expanded="false">
+                            <details class="inc-native-menu inc-native-menu--navbar">
+                                <summary class="inc-native-menu__summary">
                                     <span class="inc-user-menu__avatar">SM</span>
                                     <span class="inc-user-menu__meta">
                                         <span class="inc-user-menu__name">Sam McAravey</span>
                                         <span class="inc-user-menu__detail">Administrator</span>
                                     </span>
-                                </button>
-                                <div id="overlay-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
-                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
-                                    <a class="inc-dropdown__item" href="#">Profile</a>
-                                    <a class="inc-dropdown__item" href="#">Preferences</a>
-                                    <div class="inc-dropdown__divider"></div>
-                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </summary>
+                                <div class="inc-native-menu__panel">
+                                    <div class="inc-native-menu__header">Signed in as Sam McAravey</div>
+                                    <a class="inc-native-menu__item" href="#">Profile</a>
+                                    <a class="inc-native-menu__item" href="#">Preferences</a>
+                                    <a class="inc-native-menu__item" href="#">Sign out</a>
                                 </div>
-                            </div>
+                            </details>
                         </div>
                     </div>
                 </div>
@@ -132,22 +131,22 @@
                                     <button class="inc-btn inc-btn--secondary" type="button" data-inc-toggle="offcanvas" data-inc-target="#assignment-drawer">Assign owner</button>
                                 </div>
                                 <div class="inc-key-value-grid">
-                                    <div class="inc-key-value inc-key-value--card">
-                                        <span class="inc-key-value__label">Record</span>
-                                        <span class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</span>
-                                    </div>
-                                    <div class="inc-key-value inc-key-value--card">
-                                        <span class="inc-key-value__label">Current owner</span>
-                                        <span class="inc-key-value__value">AP Team</span>
-                                    </div>
-                                    <div class="inc-key-value inc-key-value--card">
-                                        <span class="inc-key-value__label">Blocking issue</span>
-                                        <span class="inc-key-value__value">Missing W-9</span>
-                                    </div>
-                                    <div class="inc-key-value inc-key-value--card">
-                                        <span class="inc-key-value__label">Requested amount</span>
-                                        <span class="inc-key-value__value inc-key-value__value--data">$18,240.22</span>
-                                    </div>
+                                    <dl class="inc-key-value inc-key-value--card">
+                                        <dt class="inc-key-value__label">Record</dt>
+                                        <dd class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</dd>
+                                    </dl>
+                                    <dl class="inc-key-value inc-key-value--card">
+                                        <dt class="inc-key-value__label">Current owner</dt>
+                                        <dd class="inc-key-value__value">AP Team</dd>
+                                    </dl>
+                                    <dl class="inc-key-value inc-key-value--card">
+                                        <dt class="inc-key-value__label">Blocking issue</dt>
+                                        <dd class="inc-key-value__value">Missing W-9</dd>
+                                    </dl>
+                                    <dl class="inc-key-value inc-key-value--card">
+                                        <dt class="inc-key-value__label">Requested amount</dt>
+                                        <dd class="inc-key-value__value inc-key-value__value--data">$18,240.22</dd>
+                                    </dl>
                                 </div>
                             </div>
                         </section>
@@ -236,22 +235,22 @@
         </div>
         <div class="inc-offcanvas-body inc-u-stack-md">
             <div class="inc-key-value-grid">
-                <div class="inc-key-value">
-                    <span class="inc-key-value__label">Record</span>
-                    <span class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</span>
-                </div>
-                <div class="inc-key-value">
-                    <span class="inc-key-value__label">Current owner</span>
-                    <span class="inc-key-value__value">AP Team</span>
-                </div>
-                <div class="inc-key-value">
-                    <span class="inc-key-value__label">State</span>
-                    <span class="inc-key-value__value">Needs Review</span>
-                </div>
-                <div class="inc-key-value">
-                    <span class="inc-key-value__label">Requested amount</span>
-                    <span class="inc-key-value__value inc-key-value__value--data">$18,240.22</span>
-                </div>
+                <dl class="inc-key-value">
+                    <dt class="inc-key-value__label">Record</dt>
+                    <dd class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</dd>
+                </dl>
+                <dl class="inc-key-value">
+                    <dt class="inc-key-value__label">Current owner</dt>
+                    <dd class="inc-key-value__value">AP Team</dd>
+                </dl>
+                <dl class="inc-key-value">
+                    <dt class="inc-key-value__label">State</dt>
+                    <dd class="inc-key-value__value">Needs Review</dd>
+                </dl>
+                <dl class="inc-key-value">
+                    <dt class="inc-key-value__label">Requested amount</dt>
+                    <dd class="inc-key-value__value inc-key-value__value--data">$18,240.22</dd>
+                </dl>
             </div>
 
             <div class="inc-filter-bar">
