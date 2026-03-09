@@ -146,8 +146,8 @@ Invoke-Step "Checking repository state" {
         throw "Release script only runs from 'main'. Current branch: '$branch'."
     }
 
-    $dirtyEntries = Get-DirtyEntries
-    if ($dirtyEntries.Count -gt 0) {
+    $dirtyEntries = @(Get-DirtyEntries)
+    if ($dirtyEntries.Length -gt 0) {
         throw "Working tree is not clean. Commit or stash changes first.`n$($dirtyEntries -join [Environment]::NewLine)"
     }
 }
