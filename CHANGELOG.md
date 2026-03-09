@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+- Added a guided PowerShell release helper and switched npm publishing to a tag-driven workflow.
+- Added spacing and visibility utility classes to reduce Bootstrap utility dependence.
+- Added named table families for review, analytics, and spreadsheet-style grids.
+- Added modal and offcanvas overlay workflow examples plus helper JS support.
+
 ## 0.2.1
 
 - Renamed the package identity to `@incursa/ui-kit` for publication.
