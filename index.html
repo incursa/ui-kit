@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incursa Design Language Showcase</title>
+    <link rel="stylesheet" href="./dist/inc-design-language.css">
+    <link rel="stylesheet" href="./showcase.css">
+</head>
+<body>
+    <div class="inc-app-shell">
+        <header class="inc-app-shell__header">
+            <nav class="inc-navbar inc-navbar--app inc-navbar--dark inc-navbar--expand-lg">
+                <div class="container-fluid">
+                    <a class="inc-navbar__brand" href="./index.html">Incursa</a>
+                    <div class="inc-navbar__collapse">
+                        <div class="inc-navbar__nav">
+                            <a class="nav-link active" href="./index.html">Showcase</a>
+                            <a class="nav-link" href="./demo.html">Dashboard</a>
+                            <a class="nav-link" href="./work-queue.html">Work Queue</a>
+                            <a class="nav-link" href="./record-detail.html">Record Detail</a>
+                            <a class="nav-link" href="./native-patterns.html">Native</a>
+                            <a class="nav-link" href="./states.html">States</a>
+                            <a class="nav-link" href="./forms-and-validation.html">Forms</a>
+                            <a class="nav-link" href="./data-grid-advanced.html">Data Grid</a>
+                            <a class="nav-link" href="./reference.html">Reference</a>
+                        </div>
+                        <div class="inc-navbar__utilities">
+                            <div class="inc-user-menu">
+                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#showcase-user-menu" aria-haspopup="true" aria-expanded="false">
+                                    <span class="inc-user-menu__avatar">SM</span>
+                                    <span class="inc-user-menu__meta">
+                                        <span class="inc-user-menu__name">Sam McAravey</span>
+                                        <span class="inc-user-menu__detail">Administrator</span>
+                                    </span>
+                                </button>
+                                <div id="showcase-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
+                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
+                                    <a class="inc-dropdown__item" href="#">Profile</a>
+                                    <a class="inc-dropdown__item" href="#">Preferences</a>
+                                    <div class="inc-dropdown__divider"></div>
+                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="inc-nav-triad">
+                <div class="inc-nav-triad__container">
+                    <div class="inc-nav-triad__back">
+                        <a class="inc-nav-triad__btn" href="./demo.html">Open Dashboard Demo</a>
+                    </div>
+                    <div class="inc-nav-triad__breadcrumb">
+                        <ol class="inc-breadcrumb">
+                            <li class="inc-breadcrumb__item active"><span>Incursa Design Language Showcase</span></li>
+                        </ol>
+                    </div>
+                    <div class="inc-nav-triad__origin">
+                        <a class="inc-nav-triad__btn inc-nav-triad__btn--subtle" href="./native-patterns.html">Jump To Native Example</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="inc-app-shell__body">
+            <div class="inc-app-shell__main">
+                <main class="inc-app-shell__content">
+                    <div class="inc-section-container demo-stack">
+                        <section class="inc-page-header">
+                            <div class="inc-page-header__title">
+                                <p class="demo-eyebrow">Showcase Hub</p>
+                                <h1 class="inc-heading inc-heading--h1">Opinionated Bootstrap for data-heavy applications</h1>
+                                <p class="inc-text inc-text--regular inc-text--muted">This package now shows the shell, menus, breadcrumbs, filter toolbars, cards, tabs, tables, list patterns, side rails, and sticky footer in a few realistic page shapes.</p>
+                            </div>
+                            <div class="inc-page-header__actions">
+                                <a class="inc-btn inc-btn--secondary" href="./demo.html">Dashboard</a>
+                                <a class="inc-btn inc-btn--secondary" href="./work-queue.html">Work Queue</a>
+                                <a class="inc-btn inc-btn--secondary" href="./record-detail.html">Record Detail</a>
+                                <a class="inc-btn inc-btn--secondary" href="./native-patterns.html">Native Patterns</a>
+                                <a class="inc-btn inc-btn--secondary" href="./states.html">States</a>
+                                <a class="inc-btn inc-btn--secondary" href="./forms-and-validation.html">Forms</a>
+                                <a class="inc-btn inc-btn--secondary" href="./data-grid-advanced.html">Data Grid</a>
+                                <a class="inc-btn inc-btn--primary" href="./reference.html">Reference</a>
+                            </div>
+                        </section>
+
+                        <section class="inc-grid inc-grid--cols-2 inc-grid--gap-lg">
+                            <article class="inc-card">
+                                <div class="inc-card__header">
+                                    <h2 class="inc-card__title">What To Review</h2>
+                                </div>
+                                <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                    <div class="demo-chip-row">
+                                        <span class="demo-flag">Tighter radius system</span>
+                                        <span class="demo-flag">Sidebar menu pattern</span>
+                                        <span class="demo-flag">Inline field wrappers</span>
+                                        <span class="demo-flag">Three-column detail rail</span>
+                                        <span class="demo-flag">Validation and bulk grid patterns</span>
+                                    </div>
+                                    <p class="inc-text inc-text--regular">The demos are meant to show reusable screen composition, not just isolated components. The page chrome is part of the language now.</p>
+                                    <div class="demo-muted-panel">
+                                        <p class="inc-text inc-text--small inc-text--muted">Recommended flow:</p>
+                                        <p class="inc-text inc-text--regular">Start with the dashboard for the high-level visual tone, check the work queue for table and filter density, then use the record detail page for column layout, action rails, and secondary navigation.</p>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="inc-card">
+                                <div class="inc-card__header">
+                                    <h2 class="inc-card__title">Included Page Types</h2>
+                                </div>
+                                <div class="inc-card__body">
+                                    <div class="inc-list-group">
+                                        <a class="inc-list-group__item inc-list-group__item--action" href="./demo.html">Dashboard with summary blocks, alerts, tabs, and lists</a>
+                                        <a class="inc-list-group__item inc-list-group__item--action" href="./work-queue.html">Sidebar work queue with table filters and pagination</a>
+                                        <a class="inc-list-group__item inc-list-group__item--action" href="./record-detail.html">Three-column record detail with accordion and action rail</a>
+                                        <a class="inc-list-group__item inc-list-group__item--action" href="./native-patterns.html">Native-first details, menu, and dialog patterns</a>
+                                        <a class="inc-list-group__item inc-list-group__item--action" href="./states.html">Operational states for empty, no-results, loading, error, permission, and file workflows</a>
+                                        <a class="inc-list-group__item inc-list-group__item--action" href="./forms-and-validation.html">Validation, dense filter bars, and read-only/edit form patterns</a>
+                                        <a class="inc-list-group__item inc-list-group__item--action" href="./data-grid-advanced.html">Bulk-action data grid with sticky headers, row states, and a side drawer</a>
+                                        <a class="inc-list-group__item inc-list-group__item--action" href="./reference.html">Reference catalog with copyable control markup</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+
+                        <section class="demo-grid-auto">
+                            <a class="demo-link-card" href="./demo.html">
+                                <article class="inc-card">
+                                    <div class="inc-card__header">
+                                        <h2 class="inc-card__title">Dashboard</h2>
+                                    </div>
+                                    <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                        <p class="inc-text inc-text--regular">Shows the broadest component mix: KPI blocks, a filter toolbar, alert/empty states, folder tabs, a table, and the tuned vertical list.</p>
+                                        <p class="demo-note">Useful for checking overall tone, density, and surface rhythm.</p>
+                                    </div>
+                                </article>
+                            </a>
+
+                            <a class="demo-link-card" href="./work-queue.html">
+                                <article class="inc-card">
+                                    <div class="inc-card__header">
+                                        <h2 class="inc-card__title">Work Queue</h2>
+                                    </div>
+                                    <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                        <p class="inc-text inc-text--regular">Demonstrates the sidebar shell, menu sections, line tabs, compact filters, dense tables, and pagination in a realistic operations screen.</p>
+                                        <p class="demo-note">Useful for evaluating table-heavy apps and operator workflow pages.</p>
+                                    </div>
+                                </article>
+                            </a>
+
+                            <a class="demo-link-card" href="./record-detail.html">
+                                <article class="inc-card">
+                                    <div class="inc-card__header">
+                                        <h2 class="inc-card__title">Record Detail</h2>
+                                    </div>
+                                    <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                        <p class="inc-text inc-text--regular">Shows a three-column detail pattern with secondary navigation, an accordion section stack, right-rail actions, and a comfy activity feed.</p>
+                                        <p class="demo-note">Useful for entity detail screens, case review flows, and configuration pages.</p>
+                                    </div>
+                                </article>
+                            </a>
+
+                            <a class="demo-link-card" href="./native-patterns.html">
+                                <article class="inc-card">
+                                    <div class="inc-card__header">
+                                        <h2 class="inc-card__title">Native Patterns</h2>
+                                    </div>
+                                    <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                        <p class="inc-text inc-text--regular">Shows `<details>` disclosures, a native summary-based menu, and a styled `<dialog>` so you can compare the browser-element approach against the helper path.</p>
+                                        <p class="demo-note">Useful when you want less JS and stronger native semantics.</p>
+                                    </div>
+                                </article>
+                            </a>
+
+                            <a class="demo-link-card" href="./reference.html">
+                                <article class="inc-card">
+                                    <div class="inc-card__header">
+                                        <h2 class="inc-card__title">Reference</h2>
+                                    </div>
+                                    <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                        <p class="inc-text inc-text--regular">Shows the standard control markup directly under a rendered preview so you can copy and adapt buttons, fields, alerts, tabs, tables, and native primitives.</p>
+                                        <p class="demo-note">Useful as the practical starter page when building a new screen.</p>
+                                    </div>
+                                </article>
+                            </a>
+
+                            <a class="demo-link-card" href="./states.html">
+                                <article class="inc-card">
+                                    <div class="inc-card__header">
+                                        <h2 class="inc-card__title">States</h2>
+                                    </div>
+                                    <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                        <p class="inc-text inc-text--regular">Covers empty vs no-results, loading, error, permission, toasts, activity timelines, and file/document treatment.</p>
+                                        <p class="demo-note">Useful for the non-happy-path work that B2B products hit every day.</p>
+                                    </div>
+                                </article>
+                            </a>
+
+                            <a class="demo-link-card" href="./forms-and-validation.html">
+                                <article class="inc-card">
+                                    <div class="inc-card__header">
+                                        <h2 class="inc-card__title">Forms</h2>
+                                    </div>
+                                    <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                        <p class="inc-text inc-text--regular">Shows validation, error summaries, required labels, dense filter bars, chips, and read-only/edit detail surfaces.</p>
+                                        <p class="demo-note">Useful for settings screens, import forms, and operator review workflows.</p>
+                                    </div>
+                                </article>
+                            </a>
+
+                            <a class="demo-link-card" href="./data-grid-advanced.html">
+                                <article class="inc-card">
+                                    <div class="inc-card__header">
+                                        <h2 class="inc-card__title">Advanced Data Grid</h2>
+                                    </div>
+                                    <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                        <p class="inc-text inc-text--regular">Shows bulk action bars, sticky headers, selected and exception row states, busy buttons, and a side drawer that preserves grid context.</p>
+                                        <p class="demo-note">Useful for operations pages where the grid is the product.</p>
+                                    </div>
+                                </article>
+                            </a>
+                        </section>
+                    </div>
+                </main>
+                <footer class="inc-app-shell__footer inc-footer-bar">
+                    <div class="inc-footer-bar__menu">
+                        <a href="./demo.html">Dashboard</a>
+                        <a href="./work-queue.html">Work Queue</a>
+                        <a href="./record-detail.html">Record Detail</a>
+                        <a href="./native-patterns.html">Native</a>
+                        <a href="./states.html">States</a>
+                        <a href="./forms-and-validation.html">Forms</a>
+                        <a href="./data-grid-advanced.html">Data Grid</a>
+                        <a href="./reference.html">Reference</a>
+                    </div>
+                    <div class="inc-footer-bar__meta">Static showcase for the extracted Incursa design language.</div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="./dist/inc-design-language.js"></script>
+</body>
+</html>

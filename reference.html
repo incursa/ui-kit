@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incursa Design Language Showcase - Reference</title>
+    <link rel="stylesheet" href="./dist/inc-design-language.css">
+    <link rel="stylesheet" href="./showcase.css">
+</head>
+<body>
+    <div class="inc-app-shell">
+        <header class="inc-app-shell__header">
+            <nav class="inc-navbar inc-navbar--app inc-navbar--dark inc-navbar--expand-lg">
+                <div class="container-fluid">
+                    <a class="inc-navbar__brand" href="./index.html">Incursa</a>
+                    <div class="inc-navbar__collapse">
+                        <div class="inc-navbar__nav">
+                            <a class="nav-link" href="./demo.html">Dashboard</a>
+                            <a class="nav-link" href="./work-queue.html">Work Queue</a>
+                            <a class="nav-link" href="./record-detail.html">Record Detail</a>
+                            <a class="nav-link" href="./native-patterns.html">Native</a>
+                            <a class="nav-link" href="./states.html">States</a>
+                            <a class="nav-link" href="./forms-and-validation.html">Forms</a>
+                            <a class="nav-link" href="./data-grid-advanced.html">Data Grid</a>
+                            <a class="nav-link active" href="./reference.html">Reference</a>
+                        </div>
+                        <div class="inc-navbar__utilities">
+                            <div class="inc-user-menu">
+                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#reference-user-menu" aria-haspopup="true" aria-expanded="false">
+                                    <span class="inc-user-menu__avatar">SM</span>
+                                    <span class="inc-user-menu__meta">
+                                        <span class="inc-user-menu__name">Sam McAravey</span>
+                                        <span class="inc-user-menu__detail">Administrator</span>
+                                    </span>
+                                </button>
+                                <div id="reference-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
+                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
+                                    <a class="inc-dropdown__item" href="#">Profile</a>
+                                    <a class="inc-dropdown__item" href="#">Preferences</a>
+                                    <div class="inc-dropdown__divider"></div>
+                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="inc-nav-triad">
+                <div class="inc-nav-triad__container">
+                    <div class="inc-nav-triad__back">
+                        <a class="inc-nav-triad__btn" href="./index.html">Showcase Home</a>
+                    </div>
+                    <div class="inc-nav-triad__breadcrumb">
+                        <ol class="inc-breadcrumb">
+                            <li class="inc-breadcrumb__item"><a href="./index.html">Showcase</a></li>
+                            <li class="inc-breadcrumb__item active"><span>Reference</span></li>
+                        </ol>
+                    </div>
+                    <div class="inc-nav-triad__origin">
+                        <a class="inc-nav-triad__btn inc-nav-triad__btn--subtle" href="./native-patterns.html">Native Patterns</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="inc-app-shell__body">
+            <div class="inc-app-shell__main">
+                <main class="inc-app-shell__content">
+                    <div class="inc-section-container demo-stack">
+                        <section class="inc-page-header">
+                            <div class="inc-page-header__title">
+                                <p class="demo-eyebrow">Reference Catalog</p>
+                                <h1 class="inc-heading inc-heading--h1">Rendered controls with copyable HTML</h1>
+                                <p class="inc-text inc-text--regular inc-text--muted">This page is the practical copy/paste surface. Each section shows the rendered result first, then the HTML markup directly below it.</p>
+                            </div>
+                            <div class="inc-page-header__actions">
+                                <a class="inc-btn inc-btn--outline-secondary" href="./index.html">Overview</a>
+                                <a class="inc-btn inc-btn--secondary" href="./states.html">States</a>
+                                <a class="inc-btn inc-btn--secondary" href="./forms-and-validation.html">Forms</a>
+                                <a class="inc-btn inc-btn--secondary" href="./data-grid-advanced.html">Data Grid</a>
+                                <a class="inc-btn inc-btn--secondary" href="./native-patterns.html">Native</a>
+                                <a class="inc-btn inc-btn--primary" href="./demo.html">Layouts</a>
+                            </div>
+                        </section>
+
+                        <nav class="demo-page-switcher" aria-label="Showcase pages">
+                            <a class="inc-btn inc-btn--secondary" href="./index.html">Showcase Home</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./demo.html">Dashboard</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./work-queue.html">Work Queue</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./record-detail.html">Record Detail</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./native-patterns.html">Native</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./states.html">States</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./forms-and-validation.html">Forms</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./data-grid-advanced.html">Data Grid</a>
+                            <a class="inc-btn inc-btn--primary" href="./reference.html">Reference</a>
+                        </nav>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Buttons</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <div class="demo-chip-row">
+                                        <button class="inc-btn inc-btn--primary" type="button">Primary</button>
+                                        <button class="inc-btn inc-btn--secondary" type="button">Secondary</button>
+                                        <button class="inc-btn inc-btn--outline-secondary" type="button">Outline</button>
+                                        <button class="inc-btn inc-btn--danger" type="button">Danger</button>
+                                        <button class="inc-btn inc-btn--warning" type="button">Warning</button>
+                                        <button class="inc-btn inc-btn--info" type="button">Info</button>
+                                    </div>
+                                    <div class="demo-chip-row">
+                                        <button class="inc-btn inc-btn--primary inc-btn--sm" type="button">Small</button>
+                                        <button class="inc-btn inc-btn--secondary inc-btn--micro" type="button">Micro</button>
+                                        <div class="inc-button-group inc-button-group--sm">
+                                            <button class="inc-btn inc-btn--secondary" type="button">Left</button>
+                                            <button class="inc-btn inc-btn--primary" type="button">Right</button>
+                                        </div>
+                                    </div>
+                                </div>
+<pre class="demo-code"><code>&lt;button class="inc-btn inc-btn--primary" type="button"&gt;Primary&lt;/button&gt;
+&lt;button class="inc-btn inc-btn--secondary" type="button"&gt;Secondary&lt;/button&gt;
+&lt;button class="inc-btn inc-btn--outline-secondary" type="button"&gt;Outline&lt;/button&gt;
+&lt;button class="inc-btn inc-btn--danger" type="button"&gt;Danger&lt;/button&gt;
+
+&lt;button class="inc-btn inc-btn--primary inc-btn--sm" type="button"&gt;Small&lt;/button&gt;
+&lt;button class="inc-btn inc-btn--secondary inc-btn--micro" type="button"&gt;Micro&lt;/button&gt;
+
+&lt;div class="inc-button-group inc-button-group--sm"&gt;
+    &lt;button class="inc-btn inc-btn--secondary" type="button"&gt;Left&lt;/button&gt;
+    &lt;button class="inc-btn inc-btn--primary" type="button"&gt;Right&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Badges And Alerts</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <div class="demo-chip-row">
+                                        <span class="inc-badge inc-badge--success inc-badge--pill">Approved</span>
+                                        <span class="inc-badge inc-badge--warning inc-badge--pill">Pending</span>
+                                        <span class="inc-badge inc-badge--danger inc-badge--pill">Rejected</span>
+                                        <span class="inc-badge inc-badge--info inc-badge--pill">Imported</span>
+                                    </div>
+                                    <div class="inc-alert inc-alert--info">Information alert text.</div>
+                                    <div class="inc-alert inc-alert--warning">Warning alert text.</div>
+                                    <div class="inc-alert inc-alert--danger">Danger alert text.</div>
+                                </div>
+<pre class="demo-code"><code>&lt;span class="inc-badge inc-badge--success inc-badge--pill"&gt;Approved&lt;/span&gt;
+&lt;span class="inc-badge inc-badge--warning inc-badge--pill"&gt;Pending&lt;/span&gt;
+&lt;span class="inc-badge inc-badge--danger inc-badge--pill"&gt;Rejected&lt;/span&gt;
+&lt;span class="inc-badge inc-badge--info inc-badge--pill"&gt;Imported&lt;/span&gt;
+
+&lt;div class="inc-alert inc-alert--info"&gt;Information alert text.&lt;/div&gt;
+&lt;div class="inc-alert inc-alert--warning"&gt;Warning alert text.&lt;/div&gt;
+&lt;div class="inc-alert inc-alert--danger"&gt;Danger alert text.&lt;/div&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Form Fields</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <div>
+                                        <label class="inc-form__label" for="ref-name">Text input</label>
+                                        <input id="ref-name" class="inc-form__control" type="text" value="North Campus Expansion">
+                                    </div>
+                                    <div>
+                                        <label class="inc-form__label" for="ref-status">Select</label>
+                                        <select id="ref-status" class="inc-form__select">
+                                            <option>Draft</option>
+                                            <option selected>In Progress</option>
+                                            <option>Approved</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="inc-form__label" for="ref-notes">Textarea</label>
+                                        <textarea id="ref-notes" class="inc-form__control" rows="3">Operator notes go here.</textarea>
+                                    </div>
+                                    <div class="inc-input-group">
+                                        <span class="inc-input-group__text">$</span>
+                                        <input class="inc-form__control" type="text" value="18240.22">
+                                    </div>
+                                    <div class="inc-form__check">
+                                        <input class="inc-form__check__input" type="checkbox" id="ref-check" checked>
+                                        <label class="inc-form__check__label" for="ref-check">Include related documents</label>
+                                    </div>
+                                    <div class="inc-form__check inc-form__switch">
+                                        <input class="inc-form__check__input" type="checkbox" id="ref-switch" checked>
+                                        <label class="inc-form__check__label" for="ref-switch">Send notifications</label>
+                                    </div>
+                                    <form class="inc-form inc-form--inline inc-form--wrap inc-form--gap-md" action="#">
+                                        <div class="inc-form__field inc-form__field--grow">
+                                            <label class="inc-form__label" for="ref-search">Search</label>
+                                            <input id="ref-search" class="inc-form__control inc-form__control--sm" type="text" value="AP-2026-00142">
+                                        </div>
+                                        <div class="inc-form__field">
+                                            <label class="inc-form__label" for="ref-owner">Owner</label>
+                                            <select id="ref-owner" class="inc-form__select inc-form__select--sm">
+                                                <option selected>AP Team</option>
+                                                <option>Legal Review</option>
+                                            </select>
+                                        </div>
+                                        <button class="inc-btn inc-btn--primary inc-btn--sm" type="submit">Apply</button>
+                                    </form>
+                                </div>
+<pre class="demo-code"><code>&lt;label class="inc-form__label" for="ref-name"&gt;Text input&lt;/label&gt;
+&lt;input id="ref-name" class="inc-form__control" type="text"&gt;
+
+&lt;label class="inc-form__label" for="ref-status"&gt;Select&lt;/label&gt;
+&lt;select id="ref-status" class="inc-form__select"&gt;
+    &lt;option&gt;Draft&lt;/option&gt;
+    &lt;option selected&gt;In Progress&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;label class="inc-form__label" for="ref-notes"&gt;Textarea&lt;/label&gt;
+&lt;textarea id="ref-notes" class="inc-form__control" rows="3"&gt;&lt;/textarea&gt;
+
+&lt;div class="inc-input-group"&gt;
+    &lt;span class="inc-input-group__text"&gt;$&lt;/span&gt;
+    &lt;input class="inc-form__control" type="text"&gt;
+&lt;/div&gt;
+
+&lt;div class="inc-form__check"&gt;
+    &lt;input class="inc-form__check__input" type="checkbox" id="ref-check"&gt;
+    &lt;label class="inc-form__check__label" for="ref-check"&gt;Include related documents&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;div class="inc-form__check inc-form__switch"&gt;
+    &lt;input class="inc-form__check__input" type="checkbox" id="ref-switch"&gt;
+    &lt;label class="inc-form__check__label" for="ref-switch"&gt;Send notifications&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Cards, Metrics, And Empty States</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <section class="inc-summary-overview inc-summary-overview--3-col">
+                                        <article class="inc-summary-block">
+                                            <div class="inc-summary-block__header">Total Revenue</div>
+                                            <div class="inc-summary-block__body inc-summary-block__body--left">
+                                                <div class="inc-summary-block__value inc-summary-block__value--large">$247,832</div>
+                                            </div>
+                                        </article>
+                                        <article class="inc-summary-block">
+                                            <div class="inc-summary-block__header">Active Projects</div>
+                                            <div class="inc-summary-block__body inc-summary-block__body--status-count">
+                                                <div class="inc-summary-block__status inc-summary-block__status--horizontal">
+                                                    <div class="inc-summary-block__status-count">12</div>
+                                                    <span class="inc-summary-block__status-badge inc-summary-block__status-badge--approved">In Progress</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <article class="inc-summary-block">
+                                            <div class="inc-summary-block__header">Exceptions</div>
+                                            <div class="inc-summary-block__body inc-summary-block__body--left">
+                                                <div class="inc-summary-block__value inc-summary-block__value--medium">4</div>
+                                            </div>
+                                        </article>
+                                    </section>
+                                    <div class="inc-empty-state">
+                                        <div class="inc-empty-state__content">
+                                            <div class="inc-empty-state__icon">+</div>
+                                            <h3 class="inc-heading inc-heading--h3">No saved views</h3>
+                                            <p class="inc-text inc-text--regular inc-text--muted">Create a named filter set so your operators can reuse it across screens.</p>
+                                            <div class="inc-empty-state__actions">
+                                                <button class="inc-btn inc-btn--secondary" type="button">Dismiss</button>
+                                                <button class="inc-btn inc-btn--primary" type="button">Create View</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+<pre class="demo-code"><code>&lt;section class="inc-summary-overview inc-summary-overview--3-col"&gt;
+    &lt;article class="inc-summary-block"&gt;...&lt;/article&gt;
+    &lt;article class="inc-summary-block"&gt;...&lt;/article&gt;
+    &lt;article class="inc-summary-block"&gt;...&lt;/article&gt;
+&lt;/section&gt;
+
+&lt;div class="inc-empty-state"&gt;
+    &lt;div class="inc-empty-state__content"&gt;
+        &lt;div class="inc-empty-state__icon"&gt;+&lt;/div&gt;
+        &lt;h3 class="inc-heading inc-heading--h3"&gt;No saved views&lt;/h3&gt;
+        &lt;p class="inc-text inc-text--regular inc-text--muted"&gt;Create a named filter set...&lt;/p&gt;
+        &lt;div class="inc-empty-state__actions"&gt;
+            &lt;button class="inc-btn inc-btn--secondary" type="button"&gt;Dismiss&lt;/button&gt;
+            &lt;button class="inc-btn inc-btn--primary" type="button"&gt;Create View&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Tabs</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <section class="inc-tabs-folder">
+                                        <ul class="inc-tabs-nav" role="tablist">
+                                            <li><a class="inc-tab active" href="#ref-folder-overview" data-inc-toggle="tab" role="tab">Overview</a></li>
+                                            <li><a class="inc-tab" href="#ref-folder-aging" data-inc-toggle="tab" role="tab">Aging</a></li>
+                                        </ul>
+                                        <div class="inc-tab-content">
+                                            <div class="inc-tab-pane active" id="ref-folder-overview" role="tabpanel">
+                                                <p class="inc-text inc-text--regular">Folder tab content.</p>
+                                            </div>
+                                            <div class="inc-tab-pane" id="ref-folder-aging" role="tabpanel">
+                                                <p class="inc-text inc-text--regular">Second folder tab content.</p>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section class="inc-tabs-line">
+                                        <ul class="inc-tabs-nav" role="tablist">
+                                            <li><a class="inc-tab active" href="#ref-line-one" data-inc-toggle="tab" role="tab">Needs Review</a></li>
+                                            <li><a class="inc-tab" href="#ref-line-two" data-inc-toggle="tab" role="tab">Ready</a></li>
+                                        </ul>
+                                    </section>
+                                    <div class="inc-tab-content">
+                                        <div class="inc-tab-pane active" id="ref-line-one" role="tabpanel">
+                                            <p class="inc-text inc-text--regular">Line tab content.</p>
+                                        </div>
+                                        <div class="inc-tab-pane" id="ref-line-two" role="tabpanel">
+                                            <p class="inc-text inc-text--regular">Second line tab content.</p>
+                                        </div>
+                                    </div>
+                                </div>
+<pre class="demo-code"><code>&lt;section class="inc-tabs-folder"&gt;
+    &lt;ul class="inc-tabs-nav" role="tablist"&gt;
+        &lt;li&gt;&lt;a class="inc-tab active" href="#ref-folder-overview" data-inc-toggle="tab" role="tab"&gt;Overview&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="inc-tab" href="#ref-folder-aging" data-inc-toggle="tab" role="tab"&gt;Aging&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div class="inc-tab-content"&gt;
+        &lt;div class="inc-tab-pane active" id="ref-folder-overview" role="tabpanel"&gt;...&lt;/div&gt;
+        &lt;div class="inc-tab-pane" id="ref-folder-aging" role="tabpanel"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section class="inc-tabs-line"&gt;
+    &lt;ul class="inc-tabs-nav" role="tablist"&gt;
+        &lt;li&gt;&lt;a class="inc-tab active" href="#ref-line-one" data-inc-toggle="tab" role="tab"&gt;Needs Review&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="inc-tab" href="#ref-line-two" data-inc-toggle="tab" role="tab"&gt;Ready&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/section&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Tables And Lists</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <div class="inc-table-responsive">
+                                        <table class="inc-table inc-table--sm inc-table--data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="inc-table__header">Project</th>
+                                                    <th class="inc-table__header">Period</th>
+                                                    <th class="inc-table__header inc-table__header--right">Amount</th>
+                                                    <th class="inc-table__header">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="inc-table__cell inc-table__cell--data">AP-2026-00142</td>
+                                                    <td class="inc-table__cell">March 2026</td>
+                                                    <td class="inc-table__cell inc-table__cell--numeric">$18,240.22</td>
+                                                    <td class="inc-table__cell"><span class="inc-badge inc-badge--success inc-badge--pill">Approved</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="inc-list-group">
+                                        <a class="inc-list-group__item inc-list-group__item--action active" href="#">Needs Review</a>
+                                        <a class="inc-list-group__item inc-list-group__item--action" href="#">March Closeout</a>
+                                        <a class="inc-list-group__item inc-list-group__item--action" href="#">Projects Missing Billing Period</a>
+                                    </div>
+                                    <div class="inc-vertical-list inc-vertical-list--compact inc-vertical-list--trim">
+                                        <div class="inc-vertical-list__item inc-flex-between">
+                                            <div>
+                                                <div class="inc-text inc-text--regular-semibold">Lien Waiver Package</div>
+                                                <div class="inc-text inc-text--small inc-text--muted">Last updated 14 minutes ago</div>
+                                            </div>
+                                            <button class="inc-btn inc-btn--secondary inc-btn--sm" type="button">Open</button>
+                                        </div>
+                                        <div class="inc-vertical-list__item inc-flex-between">
+                                            <div>
+                                                <div class="inc-text inc-text--regular-semibold">Compliance Exceptions</div>
+                                                <div class="inc-text inc-text--small inc-text--muted">2 unresolved items</div>
+                                            </div>
+                                            <button class="inc-btn inc-btn--secondary inc-btn--sm" type="button">Review</button>
+                                        </div>
+                                    </div>
+                                </div>
+<pre class="demo-code"><code>&lt;div class="inc-table-responsive"&gt;
+    &lt;table class="inc-table inc-table--sm inc-table--data-table"&gt;
+        &lt;thead&gt;...&lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td class="inc-table__cell inc-table__cell--data"&gt;AP-2026-00142&lt;/td&gt;
+                &lt;td class="inc-table__cell"&gt;March 2026&lt;/td&gt;
+                &lt;td class="inc-table__cell inc-table__cell--numeric"&gt;$18,240.22&lt;/td&gt;
+                &lt;td class="inc-table__cell"&gt;&lt;span class="inc-badge inc-badge--success inc-badge--pill"&gt;Approved&lt;/span&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;div class="inc-list-group"&gt;
+    &lt;a class="inc-list-group__item inc-list-group__item--action active" href="#"&gt;Needs Review&lt;/a&gt;
+    &lt;a class="inc-list-group__item inc-list-group__item--action" href="#"&gt;March Closeout&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div class="inc-vertical-list inc-vertical-list--compact inc-vertical-list--trim"&gt;
+    &lt;div class="inc-vertical-list__item inc-flex-between"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Native Controls</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <details class="inc-disclosure" open>
+                                        <summary class="inc-disclosure__summary">
+                                            <span class="demo-disclosure-title">
+                                                <span class="inc-disclosure__title">Billing summary</span>
+                                                <span class="inc-badge inc-badge--info inc-badge--pill">3 items</span>
+                                            </span>
+                                            <span class="inc-disclosure__meta">Native details</span>
+                                        </summary>
+                                        <div class="inc-disclosure__content">
+                                            <p class="inc-text inc-text--regular">Example disclosure body.</p>
+                                        </div>
+                                    </details>
+                                    <details class="inc-native-menu inc-native-menu--block">
+                                        <summary class="inc-native-menu__summary">
+                                            <span class="inc-user-menu__avatar">AP</span>
+                                            <span class="inc-native-menu__section-title">
+                                                <span class="inc-user-menu__name">Queue Actions</span>
+                                                <span class="inc-user-menu__detail">Summary-based menu</span>
+                                            </span>
+                                        </summary>
+                                        <div class="inc-native-menu__panel">
+                                            <div class="inc-native-menu__header">Quick actions</div>
+                                            <a class="inc-native-menu__item" href="#">Export current view</a>
+                                            <a class="inc-native-menu__item" href="#">Save filter preset</a>
+                                        </div>
+                                    </details>
+                                    <button class="inc-btn inc-btn--primary" type="button" data-inc-native-dialog-open="reference-native-dialog">Launch Native Dialog</button>
+                                </div>
+<pre class="demo-code"><code>&lt;details class="inc-disclosure" open&gt;
+    &lt;summary class="inc-disclosure__summary"&gt;
+        &lt;span class="demo-disclosure-title"&gt;
+            &lt;span class="inc-disclosure__title"&gt;Billing summary&lt;/span&gt;
+            &lt;span class="inc-badge inc-badge--info inc-badge--pill"&gt;3 items&lt;/span&gt;
+        &lt;/span&gt;
+        &lt;span class="inc-disclosure__meta"&gt;Native details&lt;/span&gt;
+    &lt;/summary&gt;
+    &lt;div class="inc-disclosure__content"&gt;...&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;details class="inc-native-menu inc-native-menu--block"&gt;
+    &lt;summary class="inc-native-menu__summary"&gt;
+        &lt;span class="inc-user-menu__avatar"&gt;AP&lt;/span&gt;
+        &lt;span class="inc-native-menu__section-title"&gt;
+            &lt;span class="inc-user-menu__name"&gt;Queue Actions&lt;/span&gt;
+            &lt;span class="inc-user-menu__detail"&gt;Summary-based menu&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/summary&gt;
+    &lt;div class="inc-native-menu__panel"&gt;...&lt;/div&gt;
+&lt;/details&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Validation And Filter Toolbars</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <div class="inc-form__error-summary">
+                                        <h3 class="inc-form__error-summary-title">There are 2 issues to fix</h3>
+                                        <ul class="inc-form__error-summary-list">
+                                            <li>Contract number is required.</li>
+                                            <li>Billing period must be selected.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="demo-layout-grid demo-layout-grid--2">
+                                        <div class="inc-form__group">
+                                            <label class="inc-form__label inc-form__label--required" for="ref-contract">Contract number</label>
+                                            <input id="ref-contract" class="inc-form__control is-invalid" type="text" value="">
+                                            <p class="inc-form__feedback inc-form__feedback--error">Contract number is required.</p>
+                                        </div>
+                                        <div class="inc-form__group">
+                                            <label class="inc-form__label" for="ref-contact">Export contact</label>
+                                            <input id="ref-contact" class="inc-form__control is-valid" type="email" value="ops@incursa.com">
+                                            <p class="inc-form__feedback inc-form__feedback--success">Email looks valid.</p>
+                                        </div>
+                                    </div>
+                                    <section class="inc-filter-bar">
+                                        <div class="inc-filter-bar__main">
+                                            <div class="inc-filter-bar__field inc-filter-bar__field--grow">
+                                                <label class="inc-form__label" for="ref-filter-search">Search</label>
+                                                <input id="ref-filter-search" class="inc-form__control inc-form__control--sm" type="text" value="North Campus">
+                                            </div>
+                                            <div class="inc-filter-bar__field">
+                                                <label class="inc-form__label" for="ref-filter-owner">Owner</label>
+                                                <select id="ref-filter-owner" class="inc-form__select inc-form__select--sm">
+                                                    <option selected>AP Team</option>
+                                                    <option>Legal Review</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="inc-filter-bar__actions">
+                                            <div class="inc-filter-bar__chips">
+                                                <span class="inc-filter-chip inc-filter-chip--accent">Status: Needs review <button class="inc-filter-chip__remove" type="button" aria-label="Remove filter">×</button></span>
+                                                <span class="inc-filter-chip">Owner: AP Team <button class="inc-filter-chip__remove" type="button" aria-label="Remove filter">×</button></span>
+                                            </div>
+                                            <div class="demo-chip-row">
+                                                <button class="inc-btn inc-btn--secondary inc-btn--sm" type="button">Save View</button>
+                                                <button class="inc-btn inc-btn--primary inc-btn--sm" type="button">Apply</button>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+<pre class="demo-code"><code>&lt;div class="inc-form__error-summary"&gt;
+    &lt;h3 class="inc-form__error-summary-title"&gt;There are 2 issues to fix&lt;/h3&gt;
+    &lt;ul class="inc-form__error-summary-list"&gt;
+        &lt;li&gt;Contract number is required.&lt;/li&gt;
+        &lt;li&gt;Billing period must be selected.&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class="inc-form__group"&gt;
+    &lt;label class="inc-form__label inc-form__label--required" for="ref-contract"&gt;Contract number&lt;/label&gt;
+    &lt;input id="ref-contract" class="inc-form__control is-invalid" type="text"&gt;
+    &lt;p class="inc-form__feedback inc-form__feedback--error"&gt;Contract number is required.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;section class="inc-filter-bar"&gt;
+    &lt;div class="inc-filter-bar__main"&gt;...&lt;/div&gt;
+    &lt;div class="inc-filter-bar__actions"&gt;
+        &lt;div class="inc-filter-bar__chips"&gt;
+            &lt;span class="inc-filter-chip"&gt;Owner: AP Team&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Operational States And Feedback</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <div class="demo-layout-grid demo-layout-grid--2">
+                                        <div class="inc-state-panel inc-state-panel--results">
+                                            <div class="inc-state-panel__head">
+                                                <div class="inc-state-panel__icon">?</div>
+                                                <div>
+                                                    <h3 class="inc-state-panel__title">No results matched</h3>
+                                                    <p class="inc-state-panel__body">Distinct from the create-first empty state.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="inc-state-panel inc-state-panel--error">
+                                            <div class="inc-state-panel__head">
+                                                <div class="inc-state-panel__icon">!</div>
+                                                <div>
+                                                    <h3 class="inc-state-panel__title">Export failed</h3>
+                                                    <p class="inc-state-panel__body">Use a proper failure surface, not just a muted paragraph.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="inc-permission-banner">
+                                        <div class="inc-permission-banner__icon">#</div>
+                                        <div>
+                                            <h3 class="inc-permission-banner__title">Finance Manager role required</h3>
+                                            <p class="inc-permission-banner__text">Show when an action is visible but intentionally unavailable.</p>
+                                        </div>
+                                    </div>
+                                    <div class="inc-toast-stack">
+                                        <div class="inc-toast-card">
+                                            <div class="inc-toast-card__icon">i</div>
+                                            <div>
+                                                <h3 class="inc-toast-card__title">View saved</h3>
+                                                <p class="inc-toast-card__text">Use for asynchronous success or background-status messages.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+<pre class="demo-code"><code>&lt;div class="inc-state-panel inc-state-panel--results"&gt;...&lt;/div&gt;
+&lt;div class="inc-state-panel inc-state-panel--error"&gt;...&lt;/div&gt;
+
+&lt;div class="inc-permission-banner"&gt;
+    &lt;div class="inc-permission-banner__icon"&gt;#&lt;/div&gt;
+    &lt;div&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="inc-toast-stack"&gt;
+    &lt;div class="inc-toast-card"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Detail, Timeline, Files, And Grid Patterns</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <div class="inc-key-value-grid">
+                                        <div class="inc-key-value inc-key-value--card">
+                                            <span class="inc-key-value__label">Record Id</span>
+                                            <span class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</span>
+                                        </div>
+                                        <div class="inc-key-value inc-key-value--card">
+                                            <span class="inc-key-value__label">Current request</span>
+                                            <span class="inc-key-value__value inc-key-value__value--data">$18,240.22</span>
+                                        </div>
+                                    </div>
+                                    <div class="inc-timeline">
+                                        <div class="inc-timeline__item">
+                                            <div class="inc-timeline__rail">
+                                                <span class="inc-timeline__dot"></span>
+                                            </div>
+                                            <div class="inc-timeline__content">
+                                                <div class="inc-timeline__header">
+                                                    <h3 class="inc-timeline__title">Imported from OpenPay</h3>
+                                                </div>
+                                                <div class="inc-timeline__meta">
+                                                    <span>8:13 AM</span>
+                                                    <span>Nightly sync</span>
+                                                </div>
+                                                <p class="inc-timeline__body">Timeline entries combine actor, time, event, and state without falling apart visually.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="inc-file-dropzone">
+                                        <div class="inc-file-dropzone__content">
+                                            <h3 class="inc-file-dropzone__title">Drop documents here</h3>
+                                            <p class="inc-file-dropzone__text">For review workflows with waiver or attachment requirements.</p>
+                                        </div>
+                                        <button class="inc-btn inc-btn--primary" type="button">Browse Files</button>
+                                    </div>
+                                    <div class="inc-bulk-bar">
+                                        <div class="inc-bulk-bar__meta">
+                                            <span class="inc-bulk-bar__count">3 rows selected</span>
+                                        </div>
+                                        <div class="inc-bulk-bar__actions">
+                                            <button class="inc-btn inc-btn--danger inc-btn--sm" type="button">Reject Selected</button>
+                                        </div>
+                                    </div>
+                                </div>
+<pre class="demo-code"><code>&lt;div class="inc-key-value-grid"&gt;
+    &lt;div class="inc-key-value inc-key-value--card"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="inc-timeline"&gt;
+    &lt;div class="inc-timeline__item"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="inc-file-dropzone"&gt;...&lt;/div&gt;
+&lt;div class="inc-bulk-bar"&gt;...&lt;/div&gt;</code></pre>
+                            </div>
+                        </section>
+                    </div>
+                </main>
+                <footer class="inc-app-shell__footer inc-footer-bar">
+                    <div class="inc-footer-bar__menu">
+                        <a href="./index.html">Showcase Home</a>
+                        <a href="./demo.html">Dashboard</a>
+                        <a href="./states.html">States</a>
+                        <a href="./forms-and-validation.html">Forms</a>
+                        <a href="./data-grid-advanced.html">Data Grid</a>
+                        <a href="./native-patterns.html">Native</a>
+                    </div>
+                    <div class="inc-footer-bar__meta">Reference page for copy/paste HTML patterns.</div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <dialog id="reference-native-dialog" class="inc-native-dialog">
+        <div class="inc-native-dialog__surface">
+            <div class="inc-native-dialog__header">
+                <div>
+                    <h2 class="inc-native-dialog__title">Reference Dialog</h2>
+                    <p class="inc-text inc-text--small inc-text--muted">Native dialog example for copy/paste use.</p>
+                </div>
+                <form method="dialog">
+                    <button class="inc-native-dialog__close" type="submit" aria-label="Close dialog">×</button>
+                </form>
+            </div>
+            <div class="inc-native-dialog__body">
+                <p class="inc-text inc-text--regular">This is the minimal dialog shell used on the native page. Copy the outer <code>&lt;dialog&gt;</code>, the surface wrapper, and the form-based footer if you want native close behavior.</p>
+            </div>
+            <form method="dialog" class="inc-native-dialog__footer">
+                <button class="inc-btn inc-btn--secondary" type="submit">Close</button>
+                <button class="inc-btn inc-btn--primary" type="submit">Confirm</button>
+            </form>
+        </div>
+    </dialog>
+
+    <script src="./dist/inc-design-language.js"></script>
+    <script>
+        (() => {
+            const dialog = document.getElementById("reference-native-dialog");
+            if (!dialog) {
+                return;
+            }
+
+            document.querySelectorAll("[data-inc-native-dialog-open]").forEach((button) => {
+                button.addEventListener("click", () => {
+                    if (!dialog.open) {
+                        dialog.showModal();
+                    }
+                });
+            });
+
+            dialog.addEventListener("click", (event) => {
+                if (event.target === dialog) {
+                    dialog.close("dismiss");
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

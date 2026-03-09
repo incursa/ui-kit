@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incursa Design Language Showcase - Work Queue</title>
+    <link rel="stylesheet" href="./dist/inc-design-language.css">
+    <link rel="stylesheet" href="./showcase.css">
+</head>
+<body>
+    <div class="inc-app-shell">
+        <header class="inc-app-shell__header">
+            <nav class="inc-navbar inc-navbar--app inc-navbar--dark inc-navbar--expand-lg">
+                <div class="container-fluid">
+                    <a class="inc-navbar__brand" href="./index.html">Incursa</a>
+                    <div class="inc-navbar__collapse">
+                        <div class="inc-navbar__nav">
+                            <a class="nav-link" href="./demo.html">Dashboard</a>
+                            <a class="nav-link active" href="./work-queue.html">Work Queue</a>
+                            <a class="nav-link" href="./record-detail.html">Record Detail</a>
+                            <a class="nav-link" href="./native-patterns.html">Native</a>
+                            <a class="nav-link" href="./reference.html">Reference</a>
+                        </div>
+                        <div class="inc-navbar__utilities">
+                            <div class="inc-user-menu">
+                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#queue-user-menu" aria-haspopup="true" aria-expanded="false">
+                                    <span class="inc-user-menu__avatar">SM</span>
+                                    <span class="inc-user-menu__meta">
+                                        <span class="inc-user-menu__name">Sam McAravey</span>
+                                        <span class="inc-user-menu__detail">Administrator</span>
+                                    </span>
+                                </button>
+                                <div id="queue-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
+                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
+                                    <a class="inc-dropdown__item" href="#">Profile</a>
+                                    <a class="inc-dropdown__item" href="#">Preferences</a>
+                                    <div class="inc-dropdown__divider"></div>
+                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="inc-nav-triad">
+                <div class="inc-nav-triad__container">
+                    <div class="inc-nav-triad__back">
+                        <a class="inc-nav-triad__btn" href="./demo.html">Back To Dashboard</a>
+                    </div>
+                    <div class="inc-nav-triad__breadcrumb">
+                        <ol class="inc-breadcrumb">
+                            <li class="inc-breadcrumb__item"><a href="./index.html">Showcase</a></li>
+                            <li class="inc-breadcrumb__item active"><span>Work Queue</span></li>
+                        </ol>
+                    </div>
+                    <div class="inc-nav-triad__origin">
+                        <a class="inc-nav-triad__btn inc-nav-triad__btn--subtle" href="./record-detail.html">Open Detail Example</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="inc-app-shell__body">
+            <aside class="inc-app-shell__sidebar">
+                <div class="demo-sidebar-stack">
+                    <div class="inc-card">
+                        <div class="inc-card__header inc-card__header--compact">
+                            <h2 class="inc-card__title">Queue Menu</h2>
+                        </div>
+                        <div class="inc-card__body">
+                            <nav class="inc-sidebar-menu" aria-label="Work queue navigation">
+                                <div class="inc-sidebar-menu__section">
+                                    <span class="inc-sidebar-menu__label">Operations</span>
+                                    <a class="inc-sidebar-menu__item active" href="#">
+                                        <span class="inc-sidebar-menu__text">Open pay apps</span>
+                                        <span class="inc-sidebar-menu__hint">32</span>
+                                    </a>
+                                    <a class="inc-sidebar-menu__item" href="#">
+                                        <span class="inc-sidebar-menu__text">Exceptions</span>
+                                        <span class="inc-sidebar-menu__hint">4</span>
+                                    </a>
+                                    <a class="inc-sidebar-menu__item" href="#">
+                                        <span class="inc-sidebar-menu__text">Vendor imports</span>
+                                        <span class="inc-sidebar-menu__hint">9</span>
+                                    </a>
+                                </div>
+                                <div class="inc-sidebar-menu__section">
+                                    <span class="inc-sidebar-menu__label">Management</span>
+                                    <a class="inc-sidebar-menu__item" href="#">
+                                        <span class="inc-sidebar-menu__text">Approvals</span>
+                                        <span class="inc-sidebar-menu__hint">7</span>
+                                    </a>
+                                    <a class="inc-sidebar-menu__item" href="#">
+                                        <span class="inc-sidebar-menu__text">Audit trail</span>
+                                    </a>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="inc-card">
+                        <div class="inc-card__header inc-card__header--compact">
+                            <h2 class="inc-card__title">Saved Views</h2>
+                        </div>
+                        <div class="inc-card__body">
+                            <div class="inc-list-group">
+                                <a class="inc-list-group__item inc-list-group__item--action active" href="#">Needs review</a>
+                                <a class="inc-list-group__item inc-list-group__item--action" href="#">Ready to export</a>
+                                <a class="inc-list-group__item inc-list-group__item--action" href="#">Sync failures</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <div class="inc-app-shell__main">
+                <main class="inc-app-shell__content">
+                    <div class="inc-section-container demo-stack">
+                        <section class="inc-page-header">
+                            <div class="inc-page-header__title">
+                                <p class="demo-eyebrow">Queue Pattern</p>
+                                <h1 class="inc-heading inc-heading--h1">Operator work queue</h1>
+                                <p class="inc-text inc-text--regular inc-text--muted">Sidebar navigation, line tabs, alerts, filter toolbars, and a dense table with pagination.</p>
+                            </div>
+                            <div class="inc-page-header__actions">
+                                <a class="inc-btn inc-btn--outline-secondary" href="./index.html">Overview</a>
+                                <a class="inc-btn inc-btn--secondary" href="./demo.html">Dashboard</a>
+                                <a class="inc-btn inc-btn--secondary" href="./record-detail.html">Detail</a>
+                                <a class="inc-btn inc-btn--secondary" href="./native-patterns.html">Native</a>
+                                <a class="inc-btn inc-btn--primary" href="./reference.html">Reference</a>
+                            </div>
+                        </section>
+
+                        <nav class="demo-page-switcher" aria-label="Showcase pages">
+                            <a class="inc-btn inc-btn--secondary" href="./index.html">Showcase Home</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./demo.html">Dashboard</a>
+                            <a class="inc-btn inc-btn--primary" href="./work-queue.html">Work Queue</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./record-detail.html">Record Detail</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./native-patterns.html">Native</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./reference.html">Reference</a>
+                        </nav>
+
+                        <div class="inc-alert-container">
+                            <div class="inc-alert inc-alert--info">
+                                12 imported pay apps were normalized overnight. Two need operator review before approval routing.
+                            </div>
+                            <div class="inc-alert inc-alert--warning">
+                                Four queued items are missing billing periods and will not export until corrected.
+                            </div>
+                        </div>
+
+                        <section class="inc-tabs-line">
+                            <ul class="inc-tabs-nav">
+                                <li><a class="inc-tab active" href="#queue-pane-review" data-inc-toggle="tab" role="tab" aria-controls="queue-pane-review">Needs Review</a></li>
+                                <li><a class="inc-tab" href="#queue-pane-ready" data-inc-toggle="tab" role="tab" aria-controls="queue-pane-ready">Ready To Approve</a></li>
+                                <li><a class="inc-tab" href="#queue-pane-exported" data-inc-toggle="tab" role="tab" aria-controls="queue-pane-exported">Recently Exported</a></li>
+                            </ul>
+                        </section>
+
+                        <div class="inc-tab-content">
+                            <div class="inc-tab-pane active" id="queue-pane-review" role="tabpanel">
+                                <div class="demo-stack">
+                                    <section class="inc-header-body inc-header-body--card">
+                                        <div class="inc-header-body__header">
+                                            <div>
+                                                <h2 class="inc-header-body__title">Queue Filters</h2>
+                                                <p class="inc-header-body__subtitle">The toolbar uses the new field wrapper so labels stay attached to controls as the row wraps.</p>
+                                            </div>
+                                        </div>
+                                        <div class="inc-header-body__body">
+                                            <form class="inc-form inc-form--inline inc-form--wrap inc-form--gap-md" action="#">
+                                                <div class="inc-form__field inc-form__field--grow">
+                                                    <label class="inc-form__label" for="queue-search">Search</label>
+                                                    <input id="queue-search" class="inc-form__control inc-form__control--sm" type="text" value="North Campus">
+                                                </div>
+                                                <div class="inc-form__field">
+                                                    <label class="inc-form__label" for="queue-status">Status</label>
+                                                    <select id="queue-status" class="inc-form__select inc-form__select--sm">
+                                                        <option>All statuses</option>
+                                                        <option selected>Needs review</option>
+                                                        <option>Approved</option>
+                                                        <option>Rejected</option>
+                                                    </select>
+                                                </div>
+                                                <div class="inc-form__field">
+                                                    <label class="inc-form__label" for="queue-period">Period</label>
+                                                    <select id="queue-period" class="inc-form__select inc-form__select--sm">
+                                                        <option>All periods</option>
+                                                        <option selected>March 2026</option>
+                                                        <option>April 2026</option>
+                                                    </select>
+                                                </div>
+                                                <div class="inc-form__field">
+                                                    <label class="inc-form__label" for="queue-minimum">Minimum</label>
+                                                    <div class="inc-input-group inc-input-group--sm">
+                                                        <span class="inc-input-group__text">$</span>
+                                                        <input id="queue-minimum" class="inc-form__control" type="text" value="5000">
+                                                    </div>
+                                                </div>
+                                                <a class="inc-btn inc-btn--secondary inc-btn--sm" href="#">Save View</a>
+                                                <a class="inc-btn inc-btn--primary inc-btn--sm" href="#">Apply Filters</a>
+                                            </form>
+                                        </div>
+                                    </section>
+
+                                    <section class="inc-card">
+                                        <div class="inc-card__header">
+                                            <div>
+                                                <h2 class="inc-card__title">Open Pay Apps</h2>
+                                                <p class="inc-text inc-text--small inc-text--muted">Dense queue layout with explicit status, right-aligned numerics, and small actions.</p>
+                                            </div>
+                                        </div>
+                                        <div class="inc-card__body inc-stack inc-stack--gap-md">
+                                            <div class="inc-table-responsive">
+                                                <table class="inc-table inc-table--sm inc-table--data-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="inc-table__header">Project</th>
+                                                            <th class="inc-table__header">Vendor</th>
+                                                            <th class="inc-table__header">Period</th>
+                                                            <th class="inc-table__header inc-table__header--right">Amount</th>
+                                                            <th class="inc-table__header">Status</th>
+                                                            <th class="inc-table__header">Owner</th>
+                                                            <th class="inc-table__header inc-table__header--right">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="inc-table__cell inc-table__cell--data">AP-2026-00142</td>
+                                                            <td class="inc-table__cell">OpenPay Electric</td>
+                                                            <td class="inc-table__cell">March 2026</td>
+                                                            <td class="inc-table__cell inc-table__cell--numeric">$18,240.22</td>
+                                                            <td class="inc-table__cell"><span class="inc-badge inc-badge--warning inc-badge--pill">Needs Review</span></td>
+                                                            <td class="inc-table__cell">AP Team</td>
+                                                            <td class="inc-table__cell inc-table__cell--action"><a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="#">Open</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="inc-table__cell inc-table__cell--data">AP-2026-00144</td>
+                                                            <td class="inc-table__cell">ACME Siteworks</td>
+                                                            <td class="inc-table__cell">March 2026</td>
+                                                            <td class="inc-table__cell inc-table__cell--numeric">$11,908.12</td>
+                                                            <td class="inc-table__cell"><span class="inc-badge inc-badge--success inc-badge--pill">Ready</span></td>
+                                                            <td class="inc-table__cell">A. Johnson</td>
+                                                            <td class="inc-table__cell inc-table__cell--action"><a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="#">Open</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="inc-table__cell inc-table__cell--data">AP-2026-00147</td>
+                                                            <td class="inc-table__cell">SitePro Mechanical</td>
+                                                            <td class="inc-table__cell">March 2026</td>
+                                                            <td class="inc-table__cell inc-table__cell--numeric">$7,244.00</td>
+                                                            <td class="inc-table__cell"><span class="inc-badge inc-badge--danger inc-badge--pill">Blocked</span></td>
+                                                            <td class="inc-table__cell">Legal Review</td>
+                                                            <td class="inc-table__cell inc-table__cell--action"><a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="#">Open</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="inc-table__cell inc-table__cell--data">AP-2026-00152</td>
+                                                            <td class="inc-table__cell">North Range Concrete</td>
+                                                            <td class="inc-table__cell">April 2026</td>
+                                                            <td class="inc-table__cell inc-table__cell--numeric">$5,665.80</td>
+                                                            <td class="inc-table__cell"><span class="inc-badge inc-badge--warning inc-badge--pill">Needs Review</span></td>
+                                                            <td class="inc-table__cell">AP Team</td>
+                                                            <td class="inc-table__cell inc-table__cell--action"><a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="#">Open</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="inc-table__cell inc-table__cell--data">AP-2026-00158</td>
+                                                            <td class="inc-table__cell">Highline Framing</td>
+                                                            <td class="inc-table__cell">April 2026</td>
+                                                            <td class="inc-table__cell inc-table__cell--numeric">$21,180.00</td>
+                                                            <td class="inc-table__cell"><span class="inc-badge inc-badge--success inc-badge--pill">Ready</span></td>
+                                                            <td class="inc-table__cell">A. Johnson</td>
+                                                            <td class="inc-table__cell inc-table__cell--action"><a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="#">Open</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="demo-table-toolbar">
+                                                <p class="inc-text inc-text--small inc-text--muted">Showing 1-5 of 32 items</p>
+                                                <nav aria-label="Queue pagination">
+                                                    <ul class="inc-pagination inc-pagination--sm">
+                                                        <li class="inc-pagination__item disabled"><span class="inc-pagination__link">Previous</span></li>
+                                                        <li class="inc-pagination__item active"><span class="inc-pagination__link">1</span></li>
+                                                        <li class="inc-pagination__item"><a class="inc-pagination__link" href="#">2</a></li>
+                                                        <li class="inc-pagination__item"><a class="inc-pagination__link" href="#">3</a></li>
+                                                        <li class="inc-pagination__item"><a class="inc-pagination__link" href="#">Next</a></li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <div class="inc-tab-pane" id="queue-pane-ready" role="tabpanel">
+                                <div class="demo-muted-panel">
+                                    <p class="inc-text inc-text--regular">This pane shows how the same page shell can switch to a lighter approval-ready view without changing the surrounding layout.</p>
+                                </div>
+                            </div>
+                            <div class="inc-tab-pane" id="queue-pane-exported" role="tabpanel">
+                                <div class="demo-muted-panel">
+                                    <p class="inc-text inc-text--regular">Recently exported items can live in a quieter pane with the same toolbar, table, and pagination primitives reused as needed.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="inc-app-shell__footer inc-footer-bar">
+                    <div class="inc-footer-bar__menu">
+                        <a href="./index.html">Showcase Home</a>
+                        <a href="./demo.html">Dashboard</a>
+                        <a href="./record-detail.html">Record Detail</a>
+                        <a href="./native-patterns.html">Native</a>
+                        <a href="./reference.html">Reference</a>
+                    </div>
+                    <div class="inc-footer-bar__meta">Queue example for sidebar navigation, tables, and filter density.</div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="./dist/inc-design-language.js"></script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incursa Design Language Showcase - States</title>
+    <link rel="stylesheet" href="./dist/inc-design-language.css">
+    <link rel="stylesheet" href="./showcase.css">
+</head>
+<body>
+    <div class="inc-app-shell">
+        <header class="inc-app-shell__header">
+            <nav class="inc-navbar inc-navbar--app inc-navbar--dark inc-navbar--expand-lg">
+                <div class="container-fluid">
+                    <a class="inc-navbar__brand" href="./index.html">Incursa</a>
+                    <div class="inc-navbar__collapse">
+                        <div class="inc-navbar__nav">
+                            <a class="nav-link" href="./demo.html">Dashboard</a>
+                            <a class="nav-link" href="./reference.html">Reference</a>
+                            <a class="nav-link active" href="./states.html">States</a>
+                            <a class="nav-link" href="./forms-and-validation.html">Forms</a>
+                            <a class="nav-link" href="./data-grid-advanced.html">Data Grid</a>
+                        </div>
+                        <div class="inc-navbar__utilities">
+                            <div class="inc-user-menu">
+                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#states-user-menu" aria-haspopup="true" aria-expanded="false">
+                                    <span class="inc-user-menu__avatar">SM</span>
+                                    <span class="inc-user-menu__meta">
+                                        <span class="inc-user-menu__name">Sam McAravey</span>
+                                        <span class="inc-user-menu__detail">Administrator</span>
+                                    </span>
+                                </button>
+                                <div id="states-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
+                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
+                                    <a class="inc-dropdown__item" href="#">Profile</a>
+                                    <a class="inc-dropdown__item" href="#">Preferences</a>
+                                    <div class="inc-dropdown__divider"></div>
+                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="inc-nav-triad">
+                <div class="inc-nav-triad__container">
+                    <div class="inc-nav-triad__back">
+                        <a class="inc-nav-triad__btn" href="./index.html">Showcase Home</a>
+                    </div>
+                    <div class="inc-nav-triad__breadcrumb">
+                        <ol class="inc-breadcrumb">
+                            <li class="inc-breadcrumb__item"><a href="./index.html">Showcase</a></li>
+                            <li class="inc-breadcrumb__item active"><span>States</span></li>
+                        </ol>
+                    </div>
+                    <div class="inc-nav-triad__origin">
+                        <a class="inc-nav-triad__btn inc-nav-triad__btn--subtle" href="./reference.html">Copyable Reference</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="inc-app-shell__body">
+            <div class="inc-app-shell__main">
+                <main class="inc-app-shell__content">
+                    <div class="inc-section-container demo-stack">
+                        <section class="inc-page-header">
+                            <div class="inc-page-header__title">
+                                <p class="demo-eyebrow">Operational States</p>
+                                <h1 class="inc-heading inc-heading--h1">The non-happy-path surfaces B2B apps actually need</h1>
+                                <p class="inc-text inc-text--regular inc-text--muted">Empty vs no-results, loading, error, permission, activity history, files, and system notifications all in one place.</p>
+                            </div>
+                            <div class="inc-page-header__actions">
+                                <a class="inc-btn inc-btn--outline-secondary" href="./index.html">Overview</a>
+                                <a class="inc-btn inc-btn--secondary" href="./reference.html">Reference</a>
+                                <a class="inc-btn inc-btn--secondary" href="./forms-and-validation.html">Forms</a>
+                                <a class="inc-btn inc-btn--primary" href="./data-grid-advanced.html">Data Grid</a>
+                            </div>
+                        </section>
+
+                        <nav class="demo-page-switcher" aria-label="Showcase pages">
+                            <a class="inc-btn inc-btn--secondary" href="./index.html">Showcase Home</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./reference.html">Reference</a>
+                            <a class="inc-btn inc-btn--primary" href="./states.html">States</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./forms-and-validation.html">Forms</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./data-grid-advanced.html">Data Grid</a>
+                        </nav>
+
+                        <section class="demo-layout-grid demo-layout-grid--2">
+                            <article class="inc-state-panel inc-state-panel--empty">
+                                <div class="inc-state-panel__head">
+                                    <div class="inc-state-panel__icon">+</div>
+                                    <div>
+                                        <h2 class="inc-state-panel__title">No saved views</h2>
+                                        <p class="inc-state-panel__body">This is the create-first empty state. Use it when a user has not configured anything yet.</p>
+                                    </div>
+                                </div>
+                                <div class="inc-state-panel__actions">
+                                    <a class="inc-btn inc-btn--secondary" href="#">Dismiss</a>
+                                    <a class="inc-btn inc-btn--primary" href="#">Create View</a>
+                                </div>
+                            </article>
+
+                            <article class="inc-state-panel inc-state-panel--results">
+                                <div class="inc-state-panel__head">
+                                    <div class="inc-state-panel__icon">?</div>
+                                    <div>
+                                        <h2 class="inc-state-panel__title">No records matched these filters</h2>
+                                        <p class="inc-state-panel__body">This is intentionally quieter than the empty state. The system has data, but this particular query did not find any.</p>
+                                    </div>
+                                </div>
+                                <div class="inc-state-panel__actions">
+                                    <a class="inc-btn inc-btn--secondary" href="#">Clear Filters</a>
+                                    <a class="inc-btn inc-btn--outline-secondary" href="#">Save Search</a>
+                                </div>
+                            </article>
+                        </section>
+
+                        <section class="demo-layout-grid demo-layout-grid--2">
+                            <article class="inc-state-panel inc-state-panel--loading">
+                                <div class="inc-state-panel__head">
+                                    <div class="inc-state-panel__icon">...</div>
+                                    <div>
+                                        <h2 class="inc-state-panel__title">Refreshing the review queue</h2>
+                                        <p class="inc-state-panel__body">Use a clear loading state for longer-running data refreshes instead of leaving a blank card.</p>
+                                    </div>
+                                </div>
+                                <div class="demo-skeleton-stack">
+                                    <span class="inc-skeleton inc-skeleton--title"></span>
+                                    <span class="inc-skeleton inc-skeleton--text"></span>
+                                    <span class="inc-skeleton inc-skeleton--text inc-skeleton--text-sm"></span>
+                                    <div class="demo-chip-row">
+                                        <span class="inc-skeleton inc-skeleton--chip"></span>
+                                        <span class="inc-skeleton inc-skeleton--chip"></span>
+                                    </div>
+                                </div>
+                                <div class="inc-loading-dots" aria-hidden="true">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </article>
+
+                            <article class="inc-state-panel inc-state-panel--error">
+                                <div class="inc-state-panel__head">
+                                    <div class="inc-state-panel__icon">!</div>
+                                    <div>
+                                        <h2 class="inc-state-panel__title">Export failed</h2>
+                                        <p class="inc-state-panel__body">Use this when the workflow broke and the user needs an obvious next step, not a generic alert buried inside the page.</p>
+                                    </div>
+                                </div>
+                                <div class="inc-alert inc-alert--danger">The ERP endpoint returned a validation error for 4 selected records.</div>
+                                <div class="inc-state-panel__actions">
+                                    <a class="inc-btn inc-btn--secondary" href="#">Download Error Log</a>
+                                    <a class="inc-btn inc-btn--primary" href="#">Retry Export</a>
+                                </div>
+                            </article>
+                        </section>
+
+                        <section class="demo-layout-grid demo-layout-grid--2">
+                            <article class="inc-card">
+                                <div class="inc-card__header">
+                                    <h2 class="inc-card__title">Permission and Locked States</h2>
+                                </div>
+                                <div class="inc-card__body inc-stack inc-stack--gap-md">
+                                    <div class="inc-permission-banner">
+                                        <div class="inc-permission-banner__icon">#</div>
+                                        <div>
+                                            <h3 class="inc-permission-banner__title">Finance Manager role required</h3>
+                                            <p class="inc-permission-banner__text">This action is available only to users who can approve exports above $50,000.</p>
+                                        </div>
+                                    </div>
+                                    <div class="inc-state-panel inc-state-panel--locked">
+                                        <div class="inc-state-panel__head">
+                                            <div class="inc-state-panel__icon">L</div>
+                                            <div>
+                                                <h3 class="inc-state-panel__title">Record is locked for nightly sync</h3>
+                                                <p class="inc-state-panel__body">Use the locked state for records that are temporarily unavailable because another process owns them.</p>
+                                            </div>
+                                        </div>
+                                        <div class="inc-state-panel__actions">
+                                            <a class="inc-btn inc-btn--outline-secondary" href="#">View Read-Only</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="inc-card">
+                                <div class="inc-card__header">
+                                    <h2 class="inc-card__title">Toasts and Side Feedback</h2>
+                                </div>
+                                <div class="inc-card__body">
+                                    <div class="inc-toast-stack">
+                                        <div class="inc-toast-card">
+                                            <div class="inc-toast-card__icon">i</div>
+                                            <div>
+                                                <h3 class="inc-toast-card__title">View saved</h3>
+                                                <p class="inc-toast-card__text">The shared queue filter is now available to the AP Team.</p>
+                                            </div>
+                                        </div>
+                                        <div class="inc-toast-card">
+                                            <div class="inc-toast-card__icon">!</div>
+                                            <div>
+                                                <h3 class="inc-toast-card__title">Background import still running</h3>
+                                                <p class="inc-toast-card__text">Use ephemeral notifications for asynchronous work that succeeded, failed, or is still in motion.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+
+                        <section class="demo-layout-grid demo-layout-grid--2">
+                            <article class="inc-card">
+                                <div class="inc-card__header">
+                                    <h2 class="inc-card__title">Activity Timeline</h2>
+                                </div>
+                                <div class="inc-card__body">
+                                    <div class="inc-timeline">
+                                        <div class="inc-timeline__item">
+                                            <div class="inc-timeline__rail">
+                                                <span class="inc-timeline__dot inc-timeline__dot--success"></span>
+                                            </div>
+                                            <div class="inc-timeline__content">
+                                                <div class="inc-timeline__header">
+                                                    <h3 class="inc-timeline__title">Imported from OpenPay</h3>
+                                                    <span class="inc-badge inc-badge--info inc-badge--pill">System</span>
+                                                </div>
+                                                <div class="inc-timeline__meta">
+                                                    <span>8:13 AM</span>
+                                                    <span>Nightly sync</span>
+                                                    <span>Sam McAravey</span>
+                                                </div>
+                                                <p class="inc-timeline__body">The payload normalized successfully and routed to the Needs Review queue.</p>
+                                            </div>
+                                        </div>
+                                        <div class="inc-timeline__item">
+                                            <div class="inc-timeline__rail">
+                                                <span class="inc-timeline__dot inc-timeline__dot--warning"></span>
+                                            </div>
+                                            <div class="inc-timeline__content">
+                                                <div class="inc-timeline__header">
+                                                    <h3 class="inc-timeline__title">Waiver verification still pending</h3>
+                                                    <span class="inc-badge inc-badge--warning inc-badge--pill">Review</span>
+                                                </div>
+                                                <div class="inc-timeline__meta">
+                                                    <span>8:19 AM</span>
+                                                    <span>Compliance rule</span>
+                                                </div>
+                                                <p class="inc-timeline__body">This timeline variant works better than a plain list once actor, timestamp, and status all matter together.</p>
+                                            </div>
+                                        </div>
+                                        <div class="inc-timeline__item">
+                                            <div class="inc-timeline__rail">
+                                                <span class="inc-timeline__dot"></span>
+                                            </div>
+                                            <div class="inc-timeline__content">
+                                                <div class="inc-timeline__header">
+                                                    <h3 class="inc-timeline__title">Assigned to AP Team</h3>
+                                                    <span class="inc-badge inc-badge--success inc-badge--pill">Queue</span>
+                                                </div>
+                                                <div class="inc-timeline__meta">
+                                                    <span>8:22 AM</span>
+                                                    <span>Routing rule</span>
+                                                </div>
+                                                <p class="inc-timeline__body">Use this for audit-heavy pages where the sequence of events matters as much as the final state.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="inc-card">
+                                <div class="inc-card__header">
+                                    <h2 class="inc-card__title">Files and Documents</h2>
+                                </div>
+                                <div class="inc-card__body inc-stack inc-stack--gap-md">
+                                    <div class="inc-file-dropzone">
+                                        <div class="inc-file-dropzone__content">
+                                            <h3 class="inc-file-dropzone__title">Drop waivers or billing support here</h3>
+                                            <p class="inc-file-dropzone__text">Use this for document-centric flows where operators collect several files before submission.</p>
+                                        </div>
+                                        <a class="inc-btn inc-btn--primary" href="#">Browse Files</a>
+                                    </div>
+
+                                    <div class="inc-file-list">
+                                        <div class="inc-file-row">
+                                            <div class="inc-file-row__meta">
+                                                <p class="inc-file-row__name">conditional-waiver-march.pdf</p>
+                                                <p class="inc-file-row__detail">PDF • 1.8 MB • uploaded 8:28 AM</p>
+                                            </div>
+                                            <span class="inc-badge inc-badge--success inc-badge--pill">Verified</span>
+                                            <div class="inc-file-row__actions">
+                                                <a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="#">Preview</a>
+                                                <a class="inc-btn inc-btn--secondary inc-btn--sm" href="#">Download</a>
+                                            </div>
+                                        </div>
+                                        <div class="inc-file-row">
+                                            <div class="inc-file-row__meta">
+                                                <p class="inc-file-row__name">insurance-certificate.pdf</p>
+                                                <p class="inc-file-row__detail">PDF • 420 KB • expires in 14 days</p>
+                                            </div>
+                                            <span class="inc-badge inc-badge--warning inc-badge--pill">Expiring</span>
+                                            <div class="inc-file-row__actions">
+                                                <a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="#">Preview</a>
+                                                <a class="inc-btn inc-btn--secondary inc-btn--sm" href="#">Replace</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+                    </div>
+                </main>
+                <footer class="inc-app-shell__footer inc-footer-bar">
+                    <div class="inc-footer-bar__menu">
+                        <a href="./index.html">Showcase Home</a>
+                        <a href="./reference.html">Reference</a>
+                        <a href="./forms-and-validation.html">Forms</a>
+                        <a href="./data-grid-advanced.html">Data Grid</a>
+                    </div>
+                    <div class="inc-footer-bar__meta">Operational states, audit trails, notifications, and file workflows.</div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="./dist/inc-design-language.js"></script>
+</body>
+</html>

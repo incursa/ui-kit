@@ -1,0 +1,76 @@
+// Theme-facing variables.
+//
+// Edit this file first when you need to match a target site's fonts or colors.
+// The deeper Bootstrap/token wiring stays in `_inc-tokens.scss`.
+
+$inc-white: #ffffff !default;
+$inc-ink-50: #fdfdfd !default;
+$inc-ink-100: #f6f6f6 !default;
+$inc-ink-150: #f1f1f1 !default;
+$inc-ink-200: #dbdcdc !default;
+$inc-ink-300: #c4c4c5 !default;
+$inc-ink-400: #949596 !default;
+$inc-ink-500: #656668 !default;
+$inc-ink-600: #525355 !default;
+$inc-ink-700: #363639 !default;
+$inc-ink-800: #2e2f32 !default;
+$inc-ink-900: #121316 !default;
+
+$inc-brand-50: #eef1ff !default;
+$inc-brand-100: #dfe5ff !default;
+$inc-brand-200: #b9c5ff !default;
+$inc-brand-300: #8798ee !default;
+$inc-brand-700: #4459c6 !default;
+$inc-brand-800: #3748a4 !default;
+$inc-brand-900: #2b397f !default;
+
+$inc-blue-50: #e9ecfe !default;
+$inc-blue-700: #2544f1 !default;
+$inc-blue-800: #1a30ab !default;
+$inc-blue-900: #111f6c !default;
+
+$inc-accent-50: #fffef0 !default;
+$inc-accent-100: #fffbdc !default;
+$inc-accent-500: #fff06c !default;
+$inc-accent-700: #d9cc5c !default;
+
+$inc-success-50: #e6fbef !default;
+$inc-success-100: #96efbd !default;
+$inc-success-700: #009743 !default;
+$inc-success-800: #00833a !default;
+
+$inc-warning-50: #fff4d4 !default;
+$inc-warning-100: #ffc94a !default;
+$inc-warning-700: #c88a00 !default;
+$inc-warning-800: #a87000 !default;
+
+$inc-danger-50: #fff0f1 !default;
+$inc-danger-100: #ffb2bb !default;
+$inc-danger-700: #d11a2a !default;
+$inc-danger-800: #b01524 !default;
+
+$inc-surface-primary: $inc-white !default;
+$inc-surface-secondary: $inc-ink-100 !default;
+$inc-surface-muted: $inc-ink-150 !default;
+$inc-surface-highlight: $inc-brand-50 !default;
+$inc-surface-strong: #2a3142 !default;
+
+$inc-border-subtle: $inc-ink-200 !default;
+$inc-border-default: $inc-ink-300 !default;
+$inc-border-strong: $inc-ink-400 !default;
+
+$inc-text-primary: $inc-ink-900 !default;
+$inc-text-secondary: $inc-ink-500 !default;
+$inc-text-muted: $inc-ink-400 !default;
+$inc-text-inverse: $inc-white !default;
+$inc-text-link: $inc-blue-800 !default;
+$inc-text-link-hover: $inc-blue-900 !default;
+
+$inc-secondary-fill: #3a4358 !default;
+
+$inc-font-family-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$inc-font-family-mono: "IBM Plex Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$inc-font-size-base: 0.875rem !default;
+$inc-line-height-base: 1.5 !default;
+$inc-heading-weight: 600 !default;
+$inc-button-weight: 600 !default;

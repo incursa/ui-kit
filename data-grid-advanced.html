@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incursa Design Language Showcase - Advanced Data Grid</title>
+    <link rel="stylesheet" href="./dist/inc-design-language.css">
+    <link rel="stylesheet" href="./showcase.css">
+</head>
+<body>
+    <div class="inc-app-shell">
+        <header class="inc-app-shell__header">
+            <nav class="inc-navbar inc-navbar--app inc-navbar--dark inc-navbar--expand-lg">
+                <div class="container-fluid">
+                    <a class="inc-navbar__brand" href="./index.html">Incursa</a>
+                    <div class="inc-navbar__collapse">
+                        <div class="inc-navbar__nav">
+                            <a class="nav-link" href="./demo.html">Dashboard</a>
+                            <a class="nav-link" href="./reference.html">Reference</a>
+                            <a class="nav-link" href="./states.html">States</a>
+                            <a class="nav-link" href="./forms-and-validation.html">Forms</a>
+                            <a class="nav-link active" href="./data-grid-advanced.html">Data Grid</a>
+                        </div>
+                        <div class="inc-navbar__utilities">
+                            <div class="inc-user-menu">
+                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#grid-user-menu" aria-haspopup="true" aria-expanded="false">
+                                    <span class="inc-user-menu__avatar">SM</span>
+                                    <span class="inc-user-menu__meta">
+                                        <span class="inc-user-menu__name">Sam McAravey</span>
+                                        <span class="inc-user-menu__detail">Administrator</span>
+                                    </span>
+                                </button>
+                                <div id="grid-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
+                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
+                                    <a class="inc-dropdown__item" href="#">Profile</a>
+                                    <a class="inc-dropdown__item" href="#">Preferences</a>
+                                    <div class="inc-dropdown__divider"></div>
+                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="inc-nav-triad">
+                <div class="inc-nav-triad__container">
+                    <div class="inc-nav-triad__back">
+                        <a class="inc-nav-triad__btn" href="./work-queue.html">Queue Example</a>
+                    </div>
+                    <div class="inc-nav-triad__breadcrumb">
+                        <ol class="inc-breadcrumb">
+                            <li class="inc-breadcrumb__item"><a href="./index.html">Showcase</a></li>
+                            <li class="inc-breadcrumb__item active"><span>Advanced Data Grid</span></li>
+                        </ol>
+                    </div>
+                    <div class="inc-nav-triad__origin">
+                        <a class="inc-nav-triad__btn inc-nav-triad__btn--subtle" href="./reference.html">Reference Catalog</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="inc-app-shell__body">
+            <div class="inc-app-shell__main">
+                <main class="inc-app-shell__content">
+                    <div class="inc-section-container demo-stack">
+                        <section class="inc-page-header">
+                            <div class="inc-page-header__title">
+                                <p class="demo-eyebrow">Advanced Grid</p>
+                                <h1 class="inc-heading inc-heading--h1">Bulk actions, sticky headers, row states, and a side drawer</h1>
+                                <p class="inc-text inc-text--regular inc-text--muted">This page is aimed squarely at operator workflows: select many rows, keep context visible, and use a drawer for secondary work instead of leaving the grid.</p>
+                            </div>
+                            <div class="inc-page-header__actions">
+                                <a class="inc-btn inc-btn--outline-secondary" href="./index.html">Overview</a>
+                                <a class="inc-btn inc-btn--secondary" href="./reference.html">Reference</a>
+                                <a class="inc-btn inc-btn--secondary" href="./forms-and-validation.html">Forms</a>
+                                <a class="inc-btn inc-btn--primary" href="./states.html">States</a>
+                            </div>
+                        </section>
+
+                        <nav class="demo-page-switcher" aria-label="Showcase pages">
+                            <a class="inc-btn inc-btn--secondary" href="./index.html">Showcase Home</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./reference.html">Reference</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./states.html">States</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./forms-and-validation.html">Forms</a>
+                            <a class="inc-btn inc-btn--primary" href="./data-grid-advanced.html">Data Grid</a>
+                        </nav>
+
+                        <section class="inc-filter-bar">
+                            <div class="inc-filter-bar__main">
+                                <div class="inc-filter-bar__field inc-filter-bar__field--grow">
+                                    <label class="inc-form__label" for="grid-search">Search grid</label>
+                                    <input id="grid-search" class="inc-form__control inc-form__control--sm" type="text" value="March">
+                                </div>
+                                <div class="inc-filter-bar__field">
+                                    <label class="inc-form__label" for="grid-team">Assigned team</label>
+                                    <select id="grid-team" class="inc-form__select inc-form__select--sm">
+                                        <option selected>AP Team</option>
+                                        <option>Legal Review</option>
+                                    </select>
+                                </div>
+                                <div class="inc-filter-bar__field">
+                                    <label class="inc-form__label" for="grid-status">Row state</label>
+                                    <select id="grid-status" class="inc-form__select inc-form__select--sm">
+                                        <option>All rows</option>
+                                        <option selected>Selected and exceptions</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="inc-filter-bar__actions">
+                                <div class="inc-filter-bar__chips">
+                                    <span class="inc-filter-chip inc-filter-chip--accent">Period: March 2026 <button class="inc-filter-chip__remove" type="button" aria-label="Remove filter">×</button></span>
+                                    <span class="inc-filter-chip">Team: AP Team <button class="inc-filter-chip__remove" type="button" aria-label="Remove filter">×</button></span>
+                                </div>
+                                <div class="demo-chip-row">
+                                    <a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="#">Export Visible Rows</a>
+                                    <a class="inc-btn inc-btn--primary inc-btn--sm" href="#">Refresh Grid</a>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="inc-bulk-bar">
+                            <div class="inc-bulk-bar__meta">
+                                <span class="inc-bulk-bar__count">3 rows selected</span>
+                                <span class="inc-badge inc-badge--warning inc-badge--pill">1 needs review</span>
+                            </div>
+                            <div class="inc-bulk-bar__actions">
+                                <a class="inc-btn inc-btn--secondary inc-btn--sm" href="#">Assign</a>
+                                <a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="#">Download</a>
+                                <a class="inc-btn inc-btn--danger inc-btn--sm" href="#">Reject Selected</a>
+                            </div>
+                        </div>
+
+                        <section class="demo-drawer-stage">
+                            <article class="inc-card">
+                                <div class="inc-card__header">
+                                    <div>
+                                        <h2 class="inc-card__title">Review Queue Grid</h2>
+                                        <p class="inc-text inc-text--small inc-text--muted">Sticky header plus row states for selected, warning, danger, and locked rows.</p>
+                                    </div>
+                                </div>
+                                <div class="inc-card__body">
+                                    <div class="inc-table-responsive inc-table-responsive--sticky">
+                                        <table class="inc-table inc-table--sm inc-table--data-table inc-table--sticky-header">
+                                            <thead>
+                                                <tr>
+                                                    <th class="inc-table__header inc-table__header--sticky"><input type="checkbox" checked aria-label="Select all"></th>
+                                                    <th class="inc-table__header">Record</th>
+                                                    <th class="inc-table__header">Vendor</th>
+                                                    <th class="inc-table__header">Status</th>
+                                                    <th class="inc-table__header inc-table__header--right">Amount</th>
+                                                    <th class="inc-table__header">Owner</th>
+                                                    <th class="inc-table__header">Notes</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="inc-table__row inc-table__row--selected">
+                                                    <td class="inc-table__cell inc-table__cell--sticky"><input type="checkbox" checked aria-label="Selected row"></td>
+                                                    <td class="inc-table__cell inc-table__cell--data">AP-2026-00142</td>
+                                                    <td class="inc-table__cell">OpenPay Electric</td>
+                                                    <td class="inc-table__cell"><span class="inc-badge inc-badge--warning inc-badge--pill">Needs Review</span></td>
+                                                    <td class="inc-table__cell inc-table__cell--numeric">$18,240.22</td>
+                                                    <td class="inc-table__cell">AP Team</td>
+                                                    <td class="inc-table__cell">Missing W-9 verification.</td>
+                                                </tr>
+                                                <tr class="inc-table__row inc-table__row--warning">
+                                                    <td class="inc-table__cell inc-table__cell--sticky"><input type="checkbox" checked aria-label="Selected row"></td>
+                                                    <td class="inc-table__cell inc-table__cell--data">AP-2026-00148</td>
+                                                    <td class="inc-table__cell">North Range Concrete</td>
+                                                    <td class="inc-table__cell"><span class="inc-badge inc-badge--warning inc-badge--pill">Expiring Docs</span></td>
+                                                    <td class="inc-table__cell inc-table__cell--numeric">$7,882.00</td>
+                                                    <td class="inc-table__cell">Legal Review</td>
+                                                    <td class="inc-table__cell">Insurance certificate expires in 14 days.</td>
+                                                </tr>
+                                                <tr class="inc-table__row inc-table__row--danger">
+                                                    <td class="inc-table__cell inc-table__cell--sticky"><input type="checkbox" aria-label="Unselected row"></td>
+                                                    <td class="inc-table__cell inc-table__cell--data">AP-2026-00151</td>
+                                                    <td class="inc-table__cell">Highline Framing</td>
+                                                    <td class="inc-table__cell"><span class="inc-badge inc-badge--danger inc-badge--pill">Blocked</span></td>
+                                                    <td class="inc-table__cell inc-table__cell--numeric">$21,180.00</td>
+                                                    <td class="inc-table__cell">Compliance</td>
+                                                    <td class="inc-table__cell">Lien waiver mismatch against prior billing.</td>
+                                                </tr>
+                                                <tr class="inc-table__row inc-table__row--locked">
+                                                    <td class="inc-table__cell inc-table__cell--sticky"><input type="checkbox" disabled aria-label="Locked row"></td>
+                                                    <td class="inc-table__cell inc-table__cell--data">AP-2026-00155</td>
+                                                    <td class="inc-table__cell">SitePro Mechanical</td>
+                                                    <td class="inc-table__cell"><span class="inc-badge inc-badge--info inc-badge--pill">Locked</span></td>
+                                                    <td class="inc-table__cell inc-table__cell--numeric">$4,210.15</td>
+                                                    <td class="inc-table__cell">Nightly Sync</td>
+                                                    <td class="inc-table__cell">Owned by background import until 4:05 PM.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="inc-table__cell inc-table__cell--sticky"><input type="checkbox" aria-label="Unselected row"></td>
+                                                    <td class="inc-table__cell inc-table__cell--data">AP-2026-00157</td>
+                                                    <td class="inc-table__cell">Summit Roofing</td>
+                                                    <td class="inc-table__cell"><span class="inc-badge inc-badge--success inc-badge--pill">Ready</span></td>
+                                                    <td class="inc-table__cell inc-table__cell--numeric">$9,447.60</td>
+                                                    <td class="inc-table__cell">AP Team</td>
+                                                    <td class="inc-table__cell">Ready for export batch.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="inc-table__cell inc-table__cell--sticky"><input type="checkbox" aria-label="Unselected row"></td>
+                                                    <td class="inc-table__cell inc-table__cell--data">AP-2026-00160</td>
+                                                    <td class="inc-table__cell">Apex Drywall</td>
+                                                    <td class="inc-table__cell"><span class="inc-badge inc-badge--info inc-badge--pill">Imported</span></td>
+                                                    <td class="inc-table__cell inc-table__cell--numeric">$12,778.44</td>
+                                                    <td class="inc-table__cell">Routing Pending</td>
+                                                    <td class="inc-table__cell">Awaiting business-unit assignment.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <aside class="inc-drawer">
+                                <div class="inc-drawer__header">
+                                    <div>
+                                        <h2 class="inc-card__title">Review Drawer</h2>
+                                        <p class="inc-text inc-text--small inc-text--muted">Use a side drawer when the operator should keep table context visible.</p>
+                                    </div>
+                                    <a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="#">Close</a>
+                                </div>
+                                <div class="inc-drawer__body">
+                                    <div class="inc-key-value-grid">
+                                        <div class="inc-key-value">
+                                            <span class="inc-key-value__label">Record</span>
+                                            <span class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</span>
+                                        </div>
+                                        <div class="inc-key-value">
+                                            <span class="inc-key-value__label">Owner</span>
+                                            <span class="inc-key-value__value">AP Team</span>
+                                        </div>
+                                        <div class="inc-key-value">
+                                            <span class="inc-key-value__label">Export batch</span>
+                                            <span class="inc-key-value__value">March Closeout 2</span>
+                                        </div>
+                                        <div class="inc-key-value">
+                                            <span class="inc-key-value__label">Current request</span>
+                                            <span class="inc-key-value__value inc-key-value__value--data">$18,240.22</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="inc-alert inc-alert--warning">Missing W-9 verification. Approval routing is blocked until this is resolved.</div>
+
+                                    <div class="inc-form__group">
+                                        <label class="inc-form__label" for="drawer-note">Operator note</label>
+                                        <textarea id="drawer-note" class="inc-form__control" rows="4">Vendor profile needs an updated W-9 before export.</textarea>
+                                    </div>
+
+                                    <div class="inc-toast-card">
+                                        <div class="inc-toast-card__icon">i</div>
+                                        <div>
+                                            <h3 class="inc-toast-card__title">Helpful drawer pattern</h3>
+                                            <p class="inc-toast-card__text">This same surface works for assignment, quick edit, exception review, or preview actions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="inc-drawer__footer">
+                                    <a class="inc-btn inc-btn--secondary" href="#">Assign Owner</a>
+                                    <a class="inc-btn inc-btn--outline-secondary" href="#">Request Document</a>
+                                    <a class="inc-btn inc-btn--primary" href="#">Approve</a>
+                                </div>
+                            </aside>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Busy Actions</h2>
+                            </div>
+                            <div class="inc-card__body">
+                                <div class="demo-chip-row">
+                                    <button class="inc-btn inc-btn--primary is-loading" type="button">Publishing</button>
+                                    <button class="inc-btn inc-btn--secondary is-loading" type="button">Refreshing</button>
+                                    <button class="inc-btn inc-btn--outline-secondary" type="button">Idle Button</button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </main>
+                <footer class="inc-app-shell__footer inc-footer-bar">
+                    <div class="inc-footer-bar__menu">
+                        <a href="./index.html">Showcase Home</a>
+                        <a href="./reference.html">Reference</a>
+                        <a href="./states.html">States</a>
+                        <a href="./forms-and-validation.html">Forms</a>
+                    </div>
+                    <div class="inc-footer-bar__meta">Advanced grid workflows for operators and reviewers.</div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="./dist/inc-design-language.js"></script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incursa Design Language Showcase - Forms And Validation</title>
+    <link rel="stylesheet" href="./dist/inc-design-language.css">
+    <link rel="stylesheet" href="./showcase.css">
+</head>
+<body>
+    <div class="inc-app-shell">
+        <header class="inc-app-shell__header">
+            <nav class="inc-navbar inc-navbar--app inc-navbar--dark inc-navbar--expand-lg">
+                <div class="container-fluid">
+                    <a class="inc-navbar__brand" href="./index.html">Incursa</a>
+                    <div class="inc-navbar__collapse">
+                        <div class="inc-navbar__nav">
+                            <a class="nav-link" href="./demo.html">Dashboard</a>
+                            <a class="nav-link" href="./reference.html">Reference</a>
+                            <a class="nav-link" href="./states.html">States</a>
+                            <a class="nav-link active" href="./forms-and-validation.html">Forms</a>
+                            <a class="nav-link" href="./data-grid-advanced.html">Data Grid</a>
+                        </div>
+                        <div class="inc-navbar__utilities">
+                            <div class="inc-user-menu">
+                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#forms-user-menu" aria-haspopup="true" aria-expanded="false">
+                                    <span class="inc-user-menu__avatar">SM</span>
+                                    <span class="inc-user-menu__meta">
+                                        <span class="inc-user-menu__name">Sam McAravey</span>
+                                        <span class="inc-user-menu__detail">Administrator</span>
+                                    </span>
+                                </button>
+                                <div id="forms-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
+                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
+                                    <a class="inc-dropdown__item" href="#">Profile</a>
+                                    <a class="inc-dropdown__item" href="#">Preferences</a>
+                                    <div class="inc-dropdown__divider"></div>
+                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="inc-nav-triad">
+                <div class="inc-nav-triad__container">
+                    <div class="inc-nav-triad__back">
+                        <a class="inc-nav-triad__btn" href="./reference.html">Reference Catalog</a>
+                    </div>
+                    <div class="inc-nav-triad__breadcrumb">
+                        <ol class="inc-breadcrumb">
+                            <li class="inc-breadcrumb__item"><a href="./index.html">Showcase</a></li>
+                            <li class="inc-breadcrumb__item active"><span>Forms And Validation</span></li>
+                        </ol>
+                    </div>
+                    <div class="inc-nav-triad__origin">
+                        <a class="inc-nav-triad__btn inc-nav-triad__btn--subtle" href="./states.html">Operational States</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="inc-app-shell__body">
+            <div class="inc-app-shell__main">
+                <main class="inc-app-shell__content">
+                    <div class="inc-section-container demo-stack">
+                        <section class="inc-page-header">
+                            <div class="inc-page-header__title">
+                                <p class="demo-eyebrow">Forms And Filters</p>
+                                <h1 class="inc-heading inc-heading--h1">Validation, dense toolbars, and edit-friendly detail blocks</h1>
+                                <p class="inc-text inc-text--regular inc-text--muted">This page covers required labels, help text, validation messaging, error summaries, saved-filter chips, and mixed read-only/edit surfaces.</p>
+                            </div>
+                            <div class="inc-page-header__actions">
+                                <a class="inc-btn inc-btn--outline-secondary" href="./index.html">Overview</a>
+                                <a class="inc-btn inc-btn--secondary" href="./reference.html">Reference</a>
+                                <a class="inc-btn inc-btn--secondary" href="./states.html">States</a>
+                                <a class="inc-btn inc-btn--primary" href="./data-grid-advanced.html">Data Grid</a>
+                            </div>
+                        </section>
+
+                        <nav class="demo-page-switcher" aria-label="Showcase pages">
+                            <a class="inc-btn inc-btn--secondary" href="./index.html">Showcase Home</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./reference.html">Reference</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./states.html">States</a>
+                            <a class="inc-btn inc-btn--primary" href="./forms-and-validation.html">Forms</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./data-grid-advanced.html">Data Grid</a>
+                        </nav>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Validation Summary</h2>
+                            </div>
+                            <div class="inc-card__body inc-stack inc-stack--gap-md">
+                                <div class="inc-form__error-summary">
+                                    <h3 class="inc-form__error-summary-title">There are 3 issues to fix before approval</h3>
+                                    <ul class="inc-form__error-summary-list">
+                                        <li>Contract number is required.</li>
+                                        <li>Billing period must be selected.</li>
+                                        <li>Export contact email is not valid.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="demo-layout-grid demo-layout-grid--2">
+                                    <div class="inc-form__group">
+                                        <label class="inc-form__label inc-form__label--required" for="form-project">Project name</label>
+                                        <input id="form-project" class="inc-form__control is-valid" type="text" value="North Campus Expansion">
+                                        <p class="inc-form__hint">Use the legal project name from the ERP contract.</p>
+                                        <p class="inc-form__feedback inc-form__feedback--success">Looks good.</p>
+                                    </div>
+
+                                    <div class="inc-form__group">
+                                        <label class="inc-form__label inc-form__label--required" for="form-contract">Contract number</label>
+                                        <input id="form-contract" class="inc-form__control is-invalid" type="text" value="">
+                                        <p class="inc-form__hint">Visible to AP and legal reviewers.</p>
+                                        <p class="inc-form__feedback inc-form__feedback--error">Contract number is required.</p>
+                                    </div>
+
+                                    <div class="inc-form__group">
+                                        <label class="inc-form__label inc-form__label--required" for="form-period">Billing period</label>
+                                        <select id="form-period" class="inc-form__select is-invalid">
+                                            <option selected>Select a period</option>
+                                            <option>March 2026</option>
+                                            <option>April 2026</option>
+                                        </select>
+                                        <p class="inc-form__feedback inc-form__feedback--error">Choose the period that will appear on export.</p>
+                                    </div>
+
+                                    <div class="inc-form__group">
+                                        <label class="inc-form__label" for="form-email">Export contact</label>
+                                        <input id="form-email" class="inc-form__control" type="email" value="ops@incursa.com">
+                                        <p class="inc-form__hint">Optional. Used only for exception emails.</p>
+                                    </div>
+                                </div>
+
+                                <div class="demo-layout-grid demo-layout-grid--2">
+                                    <div class="inc-form__check">
+                                        <input class="inc-form__check__input" type="checkbox" id="form-related" checked>
+                                        <label class="inc-form__check__label" for="form-related">Include related contract documents</label>
+                                    </div>
+                                    <div class="inc-form__check inc-form__switch">
+                                        <input class="inc-form__check__input" type="checkbox" id="form-notifications" checked>
+                                        <label class="inc-form__check__label" for="form-notifications">Send notifications after approval</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Dense Filter Toolbar</h2>
+                            </div>
+                            <div class="inc-card__body inc-stack inc-stack--gap-md">
+                                <section class="inc-filter-bar">
+                                    <div class="inc-filter-bar__main">
+                                        <div class="inc-filter-bar__field inc-filter-bar__field--grow">
+                                            <label class="inc-form__label" for="filter-search">Search</label>
+                                            <input id="filter-search" class="inc-form__control inc-form__control--sm" type="text" value="North Campus">
+                                        </div>
+                                        <div class="inc-filter-bar__field">
+                                            <label class="inc-form__label" for="filter-status">Status</label>
+                                            <select id="filter-status" class="inc-form__select inc-form__select--sm">
+                                                <option>All statuses</option>
+                                                <option selected>Needs review</option>
+                                                <option>Ready</option>
+                                            </select>
+                                        </div>
+                                        <div class="inc-filter-bar__field">
+                                            <label class="inc-form__label" for="filter-owner">Owner</label>
+                                            <select id="filter-owner" class="inc-form__select inc-form__select--sm">
+                                                <option selected>AP Team</option>
+                                                <option>Legal Review</option>
+                                            </select>
+                                        </div>
+                                        <div class="inc-filter-bar__field">
+                                            <label class="inc-form__label" for="filter-amount">Minimum amount</label>
+                                            <div class="inc-input-group inc-input-group--sm">
+                                                <span class="inc-input-group__text">$</span>
+                                                <input id="filter-amount" class="inc-form__control" type="text" value="10000">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="inc-filter-bar__actions">
+                                        <div class="inc-filter-bar__chips">
+                                            <span class="inc-filter-chip inc-filter-chip--accent">Status: Needs review <button class="inc-filter-chip__remove" type="button" aria-label="Remove filter">×</button></span>
+                                            <span class="inc-filter-chip">Owner: AP Team <button class="inc-filter-chip__remove" type="button" aria-label="Remove filter">×</button></span>
+                                            <span class="inc-filter-chip">Amount: $10,000+ <button class="inc-filter-chip__remove" type="button" aria-label="Remove filter">×</button></span>
+                                        </div>
+                                        <div class="demo-chip-row">
+                                            <a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="#">Clear All</a>
+                                            <a class="inc-btn inc-btn--secondary inc-btn--sm" href="#">Save View</a>
+                                            <a class="inc-btn inc-btn--primary inc-btn--sm" href="#">Apply Filters</a>
+                                        </div>
+                                    </div>
+                                </section>
+                                <p class="demo-inline-note">This is the pattern to reuse for search-heavy B2B screens: fields above, active chips and actions below.</p>
+                            </div>
+                        </section>
+
+                        <section class="demo-layout-grid demo-layout-grid--2">
+                            <article class="inc-card">
+                                <div class="inc-card__header">
+                                    <h2 class="inc-card__title">Read-Only Detail Grid</h2>
+                                </div>
+                                <div class="inc-card__body">
+                                    <div class="inc-key-value-grid">
+                                        <div class="inc-key-value inc-key-value--card">
+                                            <span class="inc-key-value__label">Project</span>
+                                            <span class="inc-key-value__value inc-key-value__value--strong">North Campus Expansion</span>
+                                        </div>
+                                        <div class="inc-key-value inc-key-value--card">
+                                            <span class="inc-key-value__label">Record Id</span>
+                                            <span class="inc-key-value__value inc-key-value__value--data">AP-2026-00142</span>
+                                        </div>
+                                        <div class="inc-key-value inc-key-value--card">
+                                            <span class="inc-key-value__label">Current Request</span>
+                                            <span class="inc-key-value__value inc-key-value__value--data">$18,240.22</span>
+                                        </div>
+                                        <div class="inc-key-value inc-key-value--card">
+                                            <span class="inc-key-value__label">Status</span>
+                                            <span class="inc-key-value__value">Needs Review</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="inc-card">
+                                <div class="inc-card__header">
+                                    <h2 class="inc-card__title">Inline Edit Pattern</h2>
+                                </div>
+                                <div class="inc-card__body inc-stack inc-stack--gap-md">
+                                    <div class="demo-surface-muted">
+                                        <div class="inc-flex-between">
+                                            <div>
+                                                <div class="inc-text inc-text--small inc-text--muted">Default review owner</div>
+                                                <div class="inc-text inc-text--regular-semibold">AP Team</div>
+                                            </div>
+                                            <a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="#">Edit</a>
+                                        </div>
+                                    </div>
+                                    <div class="demo-surface-muted">
+                                        <div class="inc-stack inc-stack--gap-sm">
+                                            <div class="inc-form__group">
+                                                <label class="inc-form__label" for="inline-owner">Default review owner</label>
+                                                <select id="inline-owner" class="inc-form__select inc-form__select--sm">
+                                                    <option selected>AP Team</option>
+                                                    <option>Legal Review</option>
+                                                    <option>Regional Controllers</option>
+                                                </select>
+                                            </div>
+                                            <div class="demo-chip-row">
+                                                <a class="inc-btn inc-btn--secondary inc-btn--sm" href="#">Cancel</a>
+                                                <a class="inc-btn inc-btn--primary inc-btn--sm" href="#">Save Change</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+                    </div>
+                </main>
+                <footer class="inc-app-shell__footer inc-footer-bar">
+                    <div class="inc-footer-bar__menu">
+                        <a href="./index.html">Showcase Home</a>
+                        <a href="./reference.html">Reference</a>
+                        <a href="./states.html">States</a>
+                        <a href="./data-grid-advanced.html">Data Grid</a>
+                    </div>
+                    <div class="inc-footer-bar__meta">Validation states, filter bars, and read-only/edit detail patterns.</div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="./dist/inc-design-language.js"></script>
+</body>
+</html>

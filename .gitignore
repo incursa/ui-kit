@@ -1,0 +1,15 @@
+node_modules/
+*.log
+*.tgz
+.DS_Store
+Thumbs.db
+
+# Build and tooling noise
+.sass-cache/
+.npm/
+coverage/
+
+# Local preview artifacts
+*-check.png
+*.tmp
+

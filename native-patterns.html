@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incursa Design Language Showcase - Native Patterns</title>
+    <link rel="stylesheet" href="./dist/inc-design-language.css">
+    <link rel="stylesheet" href="./showcase.css">
+</head>
+<body>
+    <div class="inc-app-shell">
+        <header class="inc-app-shell__header">
+            <nav class="inc-navbar inc-navbar--app inc-navbar--dark inc-navbar--expand-lg">
+                <div class="container-fluid">
+                    <a class="inc-navbar__brand" href="./index.html">Incursa</a>
+                    <div class="inc-navbar__collapse">
+                        <div class="inc-navbar__nav">
+                            <a class="nav-link" href="./demo.html">Dashboard</a>
+                            <a class="nav-link" href="./work-queue.html">Work Queue</a>
+                            <a class="nav-link" href="./record-detail.html">Record Detail</a>
+                            <a class="nav-link active" href="./native-patterns.html">Native</a>
+                            <a class="nav-link" href="./reference.html">Reference</a>
+                        </div>
+                        <div class="inc-navbar__utilities">
+                            <details class="inc-native-menu inc-native-menu--navbar">
+                                <summary class="inc-native-menu__summary">
+                                    <span class="inc-user-menu__avatar">SM</span>
+                                    <span class="inc-user-menu__meta">
+                                        <span class="inc-user-menu__name">Sam McAravey</span>
+                                        <span class="inc-user-menu__detail">Administrator</span>
+                                    </span>
+                                </summary>
+                                <div class="inc-native-menu__panel">
+                                    <div class="inc-native-menu__header">Native details menu</div>
+                                    <a class="inc-native-menu__item" href="#">Profile</a>
+                                    <a class="inc-native-menu__item" href="#">Preferences</a>
+                                    <a class="inc-native-menu__item" href="#">Sign out</a>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="inc-nav-triad">
+                <div class="inc-nav-triad__container">
+                    <div class="inc-nav-triad__back">
+                        <a class="inc-nav-triad__btn" href="./index.html">Showcase Home</a>
+                    </div>
+                    <div class="inc-nav-triad__breadcrumb">
+                        <ol class="inc-breadcrumb">
+                            <li class="inc-breadcrumb__item"><a href="./index.html">Showcase</a></li>
+                            <li class="inc-breadcrumb__item active"><span>Native Patterns</span></li>
+                        </ol>
+                    </div>
+                    <div class="inc-nav-triad__origin">
+                        <a class="inc-nav-triad__btn inc-nav-triad__btn--subtle" href="./demo.html">Helper-driven Examples</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="inc-app-shell__body">
+            <div class="inc-app-shell__main">
+                <main class="inc-app-shell__content">
+                    <div class="inc-section-container demo-stack">
+                        <section class="inc-page-header">
+                            <div class="inc-page-header__title">
+                                <p class="demo-eyebrow">Native First</p>
+                                <h1 class="inc-heading inc-heading--h1">Patterns built on browser elements</h1>
+                                <p class="inc-text inc-text--regular inc-text--muted">This page shows a tasteful native path: <code>&lt;details&gt;</code> for disclosures and lightweight menus, <code>&lt;dialog&gt;</code> for modal surfaces, and only a minimal <code>showModal()</code> hook where the browser element still needs an opener.</p>
+                            </div>
+                            <div class="inc-page-header__actions">
+                                <a class="inc-btn inc-btn--outline-secondary" href="./index.html">Overview</a>
+                                <a class="inc-btn inc-btn--secondary" href="./demo.html">Helper Path</a>
+                                <a class="inc-btn inc-btn--secondary" href="./reference.html">Reference</a>
+                                <button class="inc-btn inc-btn--primary" type="button" data-inc-native-dialog-open="native-review-dialog">Open Native Dialog</button>
+                            </div>
+                        </section>
+
+                        <nav class="demo-page-switcher" aria-label="Showcase pages">
+                            <a class="inc-btn inc-btn--secondary" href="./index.html">Showcase Home</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./demo.html">Dashboard</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./work-queue.html">Work Queue</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./record-detail.html">Record Detail</a>
+                            <a class="inc-btn inc-btn--primary" href="./native-patterns.html">Native</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./reference.html">Reference</a>
+                        </nav>
+
+                        <section class="inc-grid inc-grid--cols-2 inc-grid--gap-lg">
+                            <article class="inc-card">
+                                <div class="inc-card__header">
+                                    <h2 class="inc-card__title">When Native Fits</h2>
+                                </div>
+                                <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                    <p class="inc-text inc-text--regular">Use native controls when the interaction is simple, local to the page, and maps well to browser semantics. That usually gives you better baseline accessibility and less JS to maintain.</p>
+                                    <div class="inc-list-group">
+                                        <div class="inc-list-group__item"><code>&lt;details&gt;</code> for section stacks, inspector trays, and lightweight menus</div>
+                                        <div class="inc-list-group__item"><code>&lt;dialog&gt;</code> for modal review, confirmation, and quick-create flows</div>
+                                        <div class="inc-list-group__item">Helper-driven patterns only when the component contract needs more Bootstrap-like state management</div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="inc-card">
+                                <div class="inc-card__header">
+                                    <h2 class="inc-card__title">Tradeoff</h2>
+                                </div>
+                                <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                    <p class="inc-text inc-text--regular">The disclosure and menu examples below are fully native. The dialog itself is native too, but opening it still typically wants one small <code>showModal()</code> call unless you rely on newer command attributes or a framework.</p>
+                                    <div class="demo-muted-panel">
+                                        <p class="demo-note">This page intentionally does not load the helper script. The menu is <code>&lt;details&gt;</code> and the dialog opener is a few lines of vanilla JS only for the modal launch.</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+
+                        <section class="inc-two-column-layout">
+                            <article class="inc-two-column-layout__content inc-card">
+                                <div class="inc-card__header">
+                                    <h2 class="inc-card__title">Native Disclosure Stack</h2>
+                                </div>
+                                <div class="inc-card__body">
+                                    <div class="inc-disclosure-set">
+                                        <details class="inc-disclosure" open>
+                                            <summary class="inc-disclosure__summary">
+                                                <span class="demo-disclosure-title">
+                                                    <span class="inc-disclosure__title">Billing summary</span>
+                                                    <span class="inc-badge inc-badge--info inc-badge--pill">3 items</span>
+                                                </span>
+                                                <span class="inc-disclosure__meta">Native details</span>
+                                            </summary>
+                                            <div class="inc-disclosure__content">
+                                                <div class="inc-list-group">
+                                                    <div class="inc-list-group__item">Billing period: March 2026</div>
+                                                    <div class="inc-list-group__item">Percent complete: 64%</div>
+                                                    <div class="inc-list-group__item">Retention held: 10%</div>
+                                                </div>
+                                            </div>
+                                        </details>
+
+                                        <details class="inc-disclosure">
+                                            <summary class="inc-disclosure__summary">
+                                                <span class="inc-disclosure__title">Required documents</span>
+                                                <span class="inc-disclosure__meta">No helper</span>
+                                            </summary>
+                                            <div class="inc-disclosure__content">
+                                                <div class="inc-list-group">
+                                                    <div class="inc-list-group__item">Conditional waiver received</div>
+                                                    <div class="inc-list-group__item">Insurance certificate current</div>
+                                                    <div class="inc-list-group__item">W-9 verification pending</div>
+                                                </div>
+                                            </div>
+                                        </details>
+
+                                        <details class="inc-disclosure">
+                                            <summary class="inc-disclosure__summary">
+                                                <span class="inc-disclosure__title">Reviewer notes</span>
+                                                <span class="inc-disclosure__meta">Good for local state</span>
+                                            </summary>
+                                            <div class="inc-disclosure__content">
+                                                <p class="inc-text inc-text--regular">This is the cleanest replacement for a lightweight accordion when you do not need coordinated multi-panel state or more custom animation logic.</p>
+                                            </div>
+                                        </details>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <aside class="inc-two-column-layout__sidebar">
+                                <div class="demo-sidebar-stack">
+                                    <article class="inc-card">
+                                        <div class="inc-card__header">
+                                            <h2 class="inc-card__title">Native Menu</h2>
+                                        </div>
+                                        <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                            <details class="inc-native-menu inc-native-menu--block">
+                                                <summary class="inc-native-menu__summary">
+                                                    <span class="inc-user-menu__avatar">AP</span>
+                                                    <span class="inc-native-menu__section-title">
+                                                        <span class="inc-user-menu__name">Queue Actions</span>
+                                                        <span class="inc-user-menu__detail">Summary-based menu</span>
+                                                    </span>
+                                                </summary>
+                                                <div class="inc-native-menu__panel">
+                                                    <div class="inc-native-menu__header">Quick actions</div>
+                                                    <a class="inc-native-menu__item" href="#">Export current view</a>
+                                                    <a class="inc-native-menu__item" href="#">Save filter preset</a>
+                                                    <a class="inc-native-menu__item" href="#">Assign to operator</a>
+                                                </div>
+                                            </details>
+                                            <p class="demo-note">This works well for compact menus where a `<summary>` trigger is acceptable and you do not need richer keyboard choreography than the browser already provides.</p>
+                                        </div>
+                                    </article>
+
+                                    <article class="inc-card">
+                                        <div class="inc-card__header">
+                                            <h2 class="inc-card__title">Native Dialog</h2>
+                                        </div>
+                                        <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                            <p class="inc-text inc-text--regular">The dialog below uses the browser backdrop, focus handling, and close semantics. The only JS here is the call to <code>showModal()</code> on the launcher button.</p>
+                                            <p class="demo-note">If you use <code>&lt;form method="dialog"&gt;</code> for the footer controls, closing stays fully native too.</p>
+                                            <button class="inc-btn inc-btn--primary" type="button" data-inc-native-dialog-open="native-review-dialog">Launch Review Dialog</button>
+                                        </div>
+                                    </article>
+                                </div>
+                            </aside>
+                        </section>
+                    </div>
+                </main>
+                <footer class="inc-app-shell__footer inc-footer-bar">
+                    <div class="inc-footer-bar__menu">
+                        <a href="./index.html">Showcase Home</a>
+                        <a href="./demo.html">Helper Path</a>
+                        <a href="./record-detail.html">Record Detail</a>
+                        <a href="./reference.html">Reference</a>
+                    </div>
+                    <div class="inc-footer-bar__meta">Native details and dialog patterns styled with the same design language.</div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <dialog id="native-review-dialog" class="inc-native-dialog">
+        <div class="inc-native-dialog__surface">
+            <div class="inc-native-dialog__header">
+                <div>
+                    <h2 class="inc-native-dialog__title">Review Native Dialog</h2>
+                    <p class="inc-text inc-text--small inc-text--muted">This surface is <code>&lt;dialog&gt;</code> with package styling, not the helper modal.</p>
+                </div>
+                <form method="dialog">
+                    <button class="inc-native-dialog__close" type="submit" aria-label="Close dialog">×</button>
+                </form>
+            </div>
+            <div class="inc-native-dialog__body inc-stack inc-stack--gap-sm">
+                <p class="inc-text inc-text--regular">Use this path when you want the browser to own modal semantics. The page supplies only a tiny opener and lets the dialog itself handle focus scope, backdrop, and closing via <code>method="dialog"</code> buttons.</p>
+                <div class="inc-alert inc-alert--info">
+                    The same surface styling can be reused for quick-create, approval confirmation, or record-preview dialogs.
+                </div>
+            </div>
+            <form method="dialog" class="inc-native-dialog__footer">
+                <button class="inc-btn inc-btn--secondary" type="submit" value="cancel">Cancel</button>
+                <button class="inc-btn inc-btn--primary" type="submit" value="approve">Approve</button>
+            </form>
+        </div>
+    </dialog>
+
+    <script>
+        (() => {
+            const dialog = document.getElementById("native-review-dialog");
+            if (!dialog) {
+                return;
+            }
+
+            document.querySelectorAll("[data-inc-native-dialog-open]").forEach((button) => {
+                button.addEventListener("click", () => {
+                    if (!dialog.open) {
+                        dialog.showModal();
+                    }
+                });
+            });
+
+            dialog.addEventListener("click", (event) => {
+                if (event.target === dialog) {
+                    dialog.close("dismiss");
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

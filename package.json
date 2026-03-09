@@ -1,0 +1,61 @@
+{
+  "name": "@incursa/ui-kit",
+  "version": "0.2.1",
+  "private": false,
+  "license": "Apache-2.0",
+  "description": "Reusable UI kit for data-heavy business applications.",
+  "keywords": [
+    "ui-kit",
+    "css",
+    "scss",
+    "bootstrap",
+    "b2b",
+    "admin-ui",
+    "razor-pages"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/incursa/ui-kit.git"
+  },
+  "homepage": "https://github.com/incursa/ui-kit#readme",
+  "bugs": {
+    "url": "https://github.com/incursa/ui-kit/issues"
+  },
+  "main": "./dist/inc-design-language.js",
+  "style": "./dist/inc-design-language.css",
+  "sass": "./src/inc-design-language.scss",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "AI-AGENT-INSTRUCTIONS.md",
+    "NOTICE"
+  ],
+  "exports": {
+    ".": {
+      "default": "./dist/inc-design-language.js",
+      "style": "./dist/inc-design-language.css",
+      "sass": "./src/inc-design-language.scss"
+    },
+    "./dist/inc-design-language.css": "./dist/inc-design-language.css",
+    "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",
+    "./src/inc-design-language.scss": "./src/inc-design-language.scss",
+    "./src/_inc-theme.scss": "./src/_inc-theme.scss",
+    "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"
+  },
+  "scripts": {
+    "build:css": "sass --load-path=node_modules src/inc-design-language.scss dist/inc-design-language.css --style=expanded",
+    "build:css:min": "sass --load-path=node_modules src/inc-design-language.scss dist/inc-design-language.min.css --style=compressed",
+    "build:js": "node -e \"require('fs').copyFileSync('src/inc-design-language.js', 'dist/inc-design-language.js')\"",
+    "build": "npm run build:css && npm run build:css:min && npm run build:js",
+    "pack:tarball": "npm pack",
+    "package": "npm run build && npm run pack:tarball"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "bootstrap": "^5.3.3",
+    "sass": "^1.93.2"
+  }
+}

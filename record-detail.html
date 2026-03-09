@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incursa Design Language Showcase - Record Detail</title>
+    <link rel="stylesheet" href="./dist/inc-design-language.css">
+    <link rel="stylesheet" href="./showcase.css">
+</head>
+<body>
+    <div class="inc-app-shell">
+        <header class="inc-app-shell__header">
+            <nav class="inc-navbar inc-navbar--app inc-navbar--dark inc-navbar--expand-lg">
+                <div class="container-fluid">
+                    <a class="inc-navbar__brand" href="./index.html">Incursa</a>
+                    <div class="inc-navbar__collapse">
+                        <div class="inc-navbar__nav">
+                            <a class="nav-link" href="./demo.html">Dashboard</a>
+                            <a class="nav-link" href="./work-queue.html">Work Queue</a>
+                            <a class="nav-link active" href="./record-detail.html">Record Detail</a>
+                            <a class="nav-link" href="./native-patterns.html">Native</a>
+                            <a class="nav-link" href="./reference.html">Reference</a>
+                        </div>
+                        <div class="inc-navbar__utilities">
+                            <div class="inc-user-menu">
+                                <button class="inc-user-menu__toggle" type="button" data-inc-toggle="menu" data-inc-target="#detail-user-menu" aria-haspopup="true" aria-expanded="false">
+                                    <span class="inc-user-menu__avatar">SM</span>
+                                    <span class="inc-user-menu__meta">
+                                        <span class="inc-user-menu__name">Sam McAravey</span>
+                                        <span class="inc-user-menu__detail">Administrator</span>
+                                    </span>
+                                </button>
+                                <div id="detail-user-menu" class="inc-dropdown__menu inc-dropdown__menu--end" role="menu">
+                                    <h6 class="inc-dropdown__header">Signed in as Sam McAravey</h6>
+                                    <a class="inc-dropdown__item" href="#">Profile</a>
+                                    <a class="inc-dropdown__item" href="#">Preferences</a>
+                                    <div class="inc-dropdown__divider"></div>
+                                    <a class="inc-dropdown__item" href="#">Sign out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="inc-nav-triad">
+                <div class="inc-nav-triad__container">
+                    <div class="inc-nav-triad__back">
+                        <a class="inc-nav-triad__btn" href="./work-queue.html">Back To Queue</a>
+                    </div>
+                    <div class="inc-nav-triad__breadcrumb">
+                        <ol class="inc-breadcrumb">
+                            <li class="inc-breadcrumb__item"><a href="./index.html">Showcase</a></li>
+                            <li class="inc-breadcrumb__item"><a href="./work-queue.html">Work Queue</a></li>
+                            <li class="inc-breadcrumb__item active"><span>Record Detail</span></li>
+                        </ol>
+                    </div>
+                    <div class="inc-nav-triad__origin">
+                        <a class="inc-nav-triad__btn inc-nav-triad__btn--subtle" href="./demo.html">Back To Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="inc-app-shell__body">
+            <div class="inc-app-shell__main">
+                <main class="inc-app-shell__content">
+                    <div class="inc-section-container demo-stack">
+                        <section class="inc-page-header">
+                            <div class="inc-page-header__title">
+                                <p class="demo-eyebrow">Detail Pattern</p>
+                                <h1 class="inc-heading inc-heading--h1">Project pay app record</h1>
+                                <p class="inc-text inc-text--regular inc-text--muted">Three-column detail screens, right-rail actions, secondary menus, accordion sections, and a nested two-column content area.</p>
+                            </div>
+                            <div class="inc-page-header__actions">
+                                <a class="inc-btn inc-btn--outline-secondary" href="./index.html">Overview</a>
+                                <a class="inc-btn inc-btn--secondary" href="./work-queue.html">Queue</a>
+                                <a class="inc-btn inc-btn--secondary" href="./demo.html">Dashboard</a>
+                                <a class="inc-btn inc-btn--secondary" href="./native-patterns.html">Native</a>
+                                <a class="inc-btn inc-btn--primary" href="./reference.html">Reference</a>
+                            </div>
+                        </section>
+
+                        <nav class="demo-page-switcher" aria-label="Showcase pages">
+                            <a class="inc-btn inc-btn--secondary" href="./index.html">Showcase Home</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./demo.html">Dashboard</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./work-queue.html">Work Queue</a>
+                            <a class="inc-btn inc-btn--primary" href="./record-detail.html">Record Detail</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./native-patterns.html">Native</a>
+                            <a class="inc-btn inc-btn--outline-secondary" href="./reference.html">Reference</a>
+                        </nav>
+
+                        <section class="inc-three-column-layout">
+                            <aside class="inc-three-column-layout__left">
+                                <div class="demo-sidebar-stack">
+                                    <article class="inc-card">
+                                        <div class="inc-card__header inc-card__header--compact">
+                                            <h2 class="inc-card__title">Sections</h2>
+                                        </div>
+                                        <div class="inc-card__body">
+                                            <nav class="inc-sidebar-menu" aria-label="Record sections">
+                                                <div class="inc-sidebar-menu__section">
+                                                    <span class="inc-sidebar-menu__label">Project Record</span>
+                                                    <a class="inc-sidebar-menu__item active" href="#">
+                                                        <span class="inc-sidebar-menu__text">Overview</span>
+                                                    </a>
+                                                    <a class="inc-sidebar-menu__item" href="#">
+                                                        <span class="inc-sidebar-menu__text">Billing details</span>
+                                                    </a>
+                                                    <a class="inc-sidebar-menu__item" href="#">
+                                                        <span class="inc-sidebar-menu__text">Waivers</span>
+                                                    </a>
+                                                    <a class="inc-sidebar-menu__item" href="#">
+                                                        <span class="inc-sidebar-menu__text">Notes</span>
+                                                    </a>
+                                                </div>
+                                            </nav>
+                                        </div>
+                                    </article>
+
+                                    <article class="inc-card">
+                                        <div class="inc-card__header inc-card__header--compact">
+                                            <h2 class="inc-card__title">Related Items</h2>
+                                        </div>
+                                        <div class="inc-card__body">
+                                            <div class="inc-list-group">
+                                                <a class="inc-list-group__item inc-list-group__item--action" href="#">North Campus contract</a>
+                                                <a class="inc-list-group__item inc-list-group__item--action" href="#">Vendor profile</a>
+                                                <a class="inc-list-group__item inc-list-group__item--action" href="#">Prior month pay app</a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </aside>
+
+                            <div class="inc-three-column-layout__main">
+                                <div class="demo-stack">
+                                    <section class="inc-header-body inc-header-body--card">
+                                        <div class="inc-header-body__header">
+                                            <div>
+                                                <h2 class="inc-header-body__title">AP-2026-00142</h2>
+                                                <p class="inc-header-body__subtitle">North Campus Expansion / OpenPay Electric / March 2026</p>
+                                            </div>
+                                            <div class="demo-chip-row">
+                                                <span class="inc-badge inc-badge--warning inc-badge--pill">Needs Review</span>
+                                                <span class="inc-badge inc-badge--info inc-badge--pill">Imported</span>
+                                            </div>
+                                        </div>
+                                        <div class="inc-header-body__body">
+                                            <div class="inc-alert inc-alert--primary">
+                                                This detail pattern is intended for entity or case review screens where the center column does the heavy lifting and the right rail stays action-oriented.
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <section class="inc-two-column-layout">
+                                        <article class="inc-two-column-layout__sidebar inc-card">
+                                            <div class="inc-card__header inc-card__header--compact">
+                                                <h2 class="inc-card__title">Amounts</h2>
+                                            </div>
+                                            <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                                <div>
+                                                    <div class="inc-text inc-text--small inc-text--muted">Current request</div>
+                                                    <div class="inc-data inc-data--display">$18,240.22</div>
+                                                </div>
+                                                <div>
+                                                    <div class="inc-text inc-text--small inc-text--muted">Previous billed</div>
+                                                    <div class="inc-data inc-data--regular-semibold">$112,994.03</div>
+                                                </div>
+                                                <div>
+                                                    <div class="inc-text inc-text--small inc-text--muted">Remaining contract</div>
+                                                    <div class="inc-data inc-data--regular-semibold">$48,202.55</div>
+                                                </div>
+                                            </div>
+                                        </article>
+
+                                        <article class="inc-two-column-layout__content inc-card">
+                                            <div class="inc-card__header inc-card__header--compact">
+                                                <h2 class="inc-card__title">Review Notes</h2>
+                                            </div>
+                                            <div class="inc-card__body">
+                                                <p class="inc-text inc-text--regular">Use the nested two-column layout when a detail page needs a compact numeric summary beside a broader narrative or notes area. This keeps dense metadata visible without collapsing everything into one long card.</p>
+                                                <p class="inc-text inc-text--regular">For downstream products, this same pattern can hold case details, audit reasoning, configuration context, or document annotations.</p>
+                                            </div>
+                                        </article>
+                                    </section>
+
+                                    <article class="inc-card">
+                                        <div class="inc-card__header">
+                                            <h2 class="inc-card__title">Section Stack</h2>
+                                        </div>
+                                        <div class="inc-card__body">
+                                            <div class="inc-accordion" id="record-sections" data-inc-accordion>
+                                                <div class="inc-accordion__item">
+                                                    <h2 class="inc-accordion__header">
+                                                        <button id="record-billing-trigger" class="inc-accordion__button" type="button" data-inc-toggle="collapse" data-inc-target="#record-billing-panel" aria-controls="record-billing-panel" aria-expanded="true">Billing summary</button>
+                                                    </h2>
+                                                    <div id="record-billing-panel" class="inc-accordion__collapse show" role="region" aria-labelledby="record-billing-trigger">
+                                                        <div class="inc-accordion__body">
+                                                            <div class="inc-list-group">
+                                                                <div class="inc-list-group__item">Billing period: March 2026</div>
+                                                                <div class="inc-list-group__item">Percent complete: 64%</div>
+                                                                <div class="inc-list-group__item">Retention held: 10%</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="inc-accordion__item">
+                                                    <h2 class="inc-accordion__header">
+                                                        <button id="record-documents-trigger" class="inc-accordion__button collapsed" type="button" data-inc-toggle="collapse" data-inc-target="#record-documents-panel" aria-controls="record-documents-panel" aria-expanded="false">Required documents</button>
+                                                    </h2>
+                                                    <div id="record-documents-panel" class="inc-accordion__collapse" role="region" aria-labelledby="record-documents-trigger">
+                                                        <div class="inc-accordion__body">
+                                                            <div class="inc-list-group">
+                                                                <div class="inc-list-group__item">Conditional waiver received</div>
+                                                                <div class="inc-list-group__item">Insurance certificate current</div>
+                                                                <div class="inc-list-group__item">W-9 verification pending</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+
+                            <aside class="inc-three-column-layout__right">
+                                <div class="demo-sidebar-stack">
+                                    <article class="inc-card">
+                                        <div class="inc-card__header inc-card__header--compact">
+                                            <h2 class="inc-card__title">Actions</h2>
+                                        </div>
+                                        <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                            <a class="inc-btn inc-btn--primary" href="#">Approve Record</a>
+                                            <a class="inc-btn inc-btn--secondary" href="#">Request Changes</a>
+                                            <a class="inc-btn inc-btn--outline-secondary" href="#">Send To Legal</a>
+                                        </div>
+                                    </article>
+
+                                    <article class="inc-card">
+                                        <div class="inc-card__header inc-card__header--compact">
+                                            <h2 class="inc-card__title">Status</h2>
+                                        </div>
+                                        <div class="inc-card__body inc-stack inc-stack--gap-sm">
+                                            <span class="inc-badge inc-badge--warning inc-badge--pill">Needs Review</span>
+                                            <span class="inc-badge inc-badge--info inc-badge--pill">Imported 8:13 AM</span>
+                                            <span class="inc-badge inc-badge--success inc-badge--pill">Vendor matched</span>
+                                        </div>
+                                    </article>
+
+                                    <article class="inc-card">
+                                        <div class="inc-card__header inc-card__header--compact">
+                                            <h2 class="inc-card__title">Activity Feed</h2>
+                                        </div>
+                                        <div class="inc-card__body">
+                                            <div class="inc-vertical-list inc-vertical-list--comfy inc-vertical-list--trim">
+                                                <div class="inc-vertical-list__item">
+                                                    <div class="inc-text inc-text--regular-semibold">Imported from OpenPay</div>
+                                                    <div class="inc-text inc-text--small inc-text--muted">8:13 AM by nightly sync</div>
+                                                </div>
+                                                <div class="inc-vertical-list__item">
+                                                    <div class="inc-text inc-text--regular-semibold">Routing rule matched</div>
+                                                    <div class="inc-text inc-text--small inc-text--muted">Assigned to AP Team for first-pass review</div>
+                                                </div>
+                                                <div class="inc-vertical-list__item">
+                                                    <div class="inc-text inc-text--regular-semibold">Waiver check flagged</div>
+                                                    <div class="inc-text inc-text--small inc-text--muted">W-9 verification still missing from vendor profile</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </aside>
+                        </section>
+                    </div>
+                </main>
+                <footer class="inc-app-shell__footer inc-footer-bar">
+                    <div class="inc-footer-bar__menu">
+                        <a href="./index.html">Showcase Home</a>
+                        <a href="./demo.html">Dashboard</a>
+                        <a href="./work-queue.html">Work Queue</a>
+                        <a href="./native-patterns.html">Native</a>
+                        <a href="./reference.html">Reference</a>
+                    </div>
+                    <div class="inc-footer-bar__meta">Detail example for three-column layout, side rails, and accordion sections.</div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="./dist/inc-design-language.js"></script>
+</body>
+</html>

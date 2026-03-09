@@ -1,0 +1,146 @@
+// Distilled theme tokens and Bootstrap overrides for the Incursa
+// design language package.
+//
+// Edit `_inc-theme.scss` first for brand-facing font and color changes.
+// This file keeps the deeper token and Bootstrap wiring.
+
+@import "./inc-theme";
+
+$inc-space-1: 0.25rem !default;
+$inc-space-2: 0.5rem !default;
+$inc-space-3: 1rem !default;
+$inc-space-4: 1.5rem !default;
+$inc-space-5: 2rem !default;
+$inc-space-6: 2.5rem !default;
+
+$inc-radius-xs: 0.125rem !default;
+$inc-radius-sm: 0.25rem !default;
+$inc-radius-md: 0.5rem !default;
+$inc-radius-panel: $inc-radius-sm !default;
+$inc-radius-pill: 5.625rem !default;
+
+$inc-shadow-xs: 1.5px 1.5px 3px 0 rgba(0, 0, 0, 0.12) !default;
+$inc-shadow-sm: 0 1px 4px 0 rgba(18, 19, 22, 0.1) !default;
+$inc-shadow-md: 4px 4px 8px 0 rgba(172, 172, 172, 0.12) !default;
+$inc-shadow-lg: 0 8px 32px 0 rgba(172, 172, 172, 0.16) !default;
+
+$inc-z-index-content: 1 !default;
+$inc-z-index-dropdown: 1040 !default;
+$inc-z-index-alerts: 1050 !default;
+$inc-z-index-modal-backdrop: 1059 !default;
+$inc-z-index-modal: 1060 !default;
+$inc-footer-height: 3rem !default;
+$inc-shell-max-width: 87.5rem !default;
+
+$enable-shadows: true !default;
+$enable-gradients: false !default;
+
+$white: $inc-white !default;
+$black: $inc-surface-strong !default;
+$blue: $inc-blue-700 !default;
+$teal: $inc-brand-800 !default;
+$yellow: $inc-accent-500 !default;
+$red: $inc-danger-700 !default;
+$green: $inc-success-700 !default;
+
+$primary: $inc-brand-700 !default;
+$secondary: $inc-secondary-fill !default;
+$success: $inc-success-700 !default;
+$info: $inc-brand-300 !default;
+$warning: $inc-warning-700 !default;
+$danger: $inc-danger-700 !default;
+$light: $inc-surface-secondary !default;
+$dark: $inc-text-primary !default;
+
+$gray-100: $inc-ink-50 !default;
+$gray-200: $inc-ink-100 !default;
+$gray-300: $inc-ink-150 !default;
+$gray-400: $inc-ink-200 !default;
+$gray-500: $inc-ink-300 !default;
+$gray-600: $inc-ink-400 !default;
+$gray-700: $inc-ink-500 !default;
+$gray-800: $inc-ink-600 !default;
+$gray-900: $inc-ink-700 !default;
+
+$body-bg: $inc-surface-primary !default;
+$body-color: $inc-text-primary !default;
+$link-color: $inc-text-link !default;
+$link-hover-color: $inc-text-link-hover !default;
+
+$spacer: $inc-space-3 !default;
+$spacers: (
+    0: 0,
+    1: $inc-space-1,
+    2: $inc-space-2,
+    3: $inc-space-3,
+    4: $inc-space-4,
+    5: $inc-space-6
+) !default;
+
+$border-width: 0.0625rem !default;
+$border-color: $inc-border-default !default;
+$border-radius: $inc-radius-sm !default;
+$border-radius-sm: $inc-radius-xs !default;
+$border-radius-lg: $inc-radius-md !default;
+$border-radius-pill: $inc-radius-pill !default;
+
+$font-family-sans-serif: $inc-font-family-sans !default;
+$font-family-monospace: $inc-font-family-mono !default;
+$font-family-base: $font-family-sans-serif !default;
+$font-size-base: $inc-font-size-base !default;
+$font-weight-base: 400 !default;
+$line-height-base: $inc-line-height-base !default;
+
+$headings-font-family: $font-family-sans-serif !default;
+$headings-font-weight: $inc-heading-weight !default;
+$headings-line-height: 1.2 !default;
+$headings-color: inherit !default;
+
+$h1-font-size: 1.5rem !default;
+$h2-font-size: 1.125rem !default;
+$h3-font-size: 1rem !default;
+$h4-font-size: 0.875rem !default;
+$h5-font-size: 0.75rem !default;
+$h6-font-size: 0.75rem !default;
+
+$display-font-sizes: (
+    1: 2.25rem,
+    2: 2rem,
+    3: 1.75rem,
+    4: 1.5rem,
+    5: 1.25rem,
+    6: 1.125rem
+) !default;
+$display-font-weight: $inc-heading-weight !default;
+$display-line-height: 1.1 !default;
+
+$btn-font-family: $font-family-sans-serif !default;
+$btn-font-weight: $inc-button-weight !default;
+$btn-border-radius: $border-radius !default;
+$btn-border-radius-sm: $border-radius-sm !default;
+$btn-border-radius-lg: $border-radius-lg !default;
+
+$input-bg: $inc-surface-primary !default;
+$input-color: $inc-text-primary !default;
+$input-border-color: $inc-border-default !default;
+$input-border-radius: $border-radius !default;
+$input-focus-border-color: $inc-brand-200 !default;
+$input-focus-box-shadow: 0 0 0 0.2rem rgba($primary, 0.15) !default;
+
+$card-bg: $inc-surface-primary !default;
+$card-border-color: $inc-border-subtle !default;
+$card-border-radius: $inc-radius-panel !default;
+$card-cap-bg: $inc-surface-secondary !default;
+
+$modal-content-bg: $inc-surface-primary !default;
+$modal-header-border-color: $inc-border-subtle !default;
+$modal-footer-border-color: $inc-border-subtle !default;
+
+$table-border-color: $inc-border-default !default;
+
+$nav-link-color: $inc-text-secondary !default;
+$nav-link-hover-color: $inc-brand-800 !default;
+$nav-tabs-border-color: $inc-border-subtle !default;
+$nav-tabs-link-active-color: $inc-text-primary !default;
+$nav-tabs-link-active-bg: $inc-surface-primary !default;
+$nav-tabs-link-active-border-color: $inc-border-subtle $inc-border-subtle $inc-surface-primary !default;
