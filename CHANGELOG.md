@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1
+
+- Fixed the npm Trusted Publishing workflow to follow npm's documented requirements more closely.
+- Upgraded npm in the publish job before publishing with provenance.
+- Removed manual workflow dispatch from the publish workflow and documented that failed publishes should be retried from the original tag-triggered run.
+
 ## 0.3.0
 
 - Added a guided PowerShell release helper and switched npm publishing to a tag-driven workflow.
