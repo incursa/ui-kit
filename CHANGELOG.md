@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.5
+
+- Added `.inc-header-body--table-body` to pad table-body content and remove nested table bottom margins.
+- Regenerated the published CSS artifacts for the new table-body layout variant.
+
 ## 0.3.4
 
 - Refined `.inc-btn` to use inline flex alignment so button icons and labels center consistently.
