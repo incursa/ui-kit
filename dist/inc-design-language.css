@@ -13077,6 +13077,13 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
 .inc-header-body--flush .inc-header-body__body {
   padding: 0;
 }
+.inc-header-body--table-body .inc-header-body__body {
+  padding: 1rem;
+}
+.inc-header-body--table-body .inc-table-responsive,
+.inc-header-body--table-body .inc-table {
+  margin-bottom: 0;
+}
 .inc-header-body--compact .inc-header-body__header {
   padding: 0.5rem 0.75rem;
 }

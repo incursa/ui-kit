@@ -1463,6 +1463,17 @@
         }
     }
 
+    &--table-body {
+        .inc-header-body__body {
+            padding: 1rem;
+        }
+
+        .inc-table-responsive,
+        .inc-table {
+            margin-bottom: 0;
+        }
+    }
+
     &--compact {
         .inc-header-body__header {
             padding: 0.5rem 0.75rem;
