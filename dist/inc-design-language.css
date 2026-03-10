@@ -12465,6 +12465,13 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   overflow: hidden !important;
 }
 
+.inc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  vertical-align: middle;
+}
 .inc-btn--success {
   color: #ffffff;
 }
@@ -12526,6 +12533,13 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   color: #2544f1;
   border: 1px solid #2544f1;
 }
+.inc-alert:empty {
+  display: none;
+}
+.alert:empty, .inc-alert:empty {
+  display: none;
+}
+
 .inc-form__control--micro {
   padding: 0.15rem 0.4rem;
   font-size: 0.7rem;

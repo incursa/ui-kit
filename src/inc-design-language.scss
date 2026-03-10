@@ -379,6 +379,11 @@
 
 .inc-btn {
     @extend .btn;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    vertical-align: middle;
 
     &--primary {
         @extend .btn-primary;
@@ -576,6 +581,10 @@
 .inc-alert {
     @extend .alert;
 
+    &:empty {
+        display: none;
+    }
+
     &--primary {
         @extend .alert-primary;
     }
@@ -615,6 +624,10 @@
     &__heading {
         @extend .alert-heading;
     }
+}
+
+.alert:empty {
+    display: none;
 }
 
 .inc-form {
