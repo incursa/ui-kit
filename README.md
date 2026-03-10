@@ -10,6 +10,10 @@
 
 This folder contains a distilled, reusable UI kit for data-heavy business applications. The goal is to keep the recurring visual patterns that define the UI language and expose them consistently through the `inc-*` class surface.
 
+## Live Examples
+
+> Open the hosted examples and component reference: [https://incursa.github.io/ui-kit](https://incursa.github.io/ui-kit)
+
 Licensed under Apache 2.0.
 
 ## What was kept
