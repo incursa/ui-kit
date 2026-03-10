@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.2
+
+- Removed unused runtime dependency metadata so the published package no longer advertises Sass and watcher internals as consumer dependencies.
+- Kept the package focused on compiled CSS, optional helper JavaScript, and SCSS source entry points.
+
 ## 0.3.1
 
 - Fixed the npm Trusted Publishing workflow to follow npm's documented requirements more closely.
