@@ -41,9 +41,11 @@ What the underlying npm scripts do:
 - runs `preversion`, which builds the package and verifies it with `npm pack --dry-run`
 - the PowerShell helper then commits and tags the release as `v0.2.2`
 
-5. Pushing the `v*` tag triggers `.github/workflows/npm-publish.yml`, which publishes `@incursa/ui-kit` to npm via Trusted Publishing.
+5. Pushing the `v*` tag triggers `.github/workflows/npm-publish.yml`, which publishes `@incursa/ui-kit` to npm via Trusted Publishing and creates the matching GitHub Release from the new `CHANGELOG.md` section.
 
 If the publish job fails and you need to retry, rerun the original tag-triggered workflow run in GitHub Actions. Do not use a separate manual dispatch for publishing.
+
+The release description is generated from the version section you just added to `CHANGELOG.md`, and it appends links to the live example pages on GitHub Pages.
 
 ## When to use patch, minor, or major
 

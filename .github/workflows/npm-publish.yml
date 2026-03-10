@@ -6,7 +6,7 @@ on:
       - "v*"
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
 
 jobs:
@@ -37,3 +37,11 @@ jobs:
 
       - name: Publish package
         run: npm publish --access public --provenance
+
+      - name: Generate GitHub release notes
+        run: node scripts/generate-github-release-notes.mjs --tag "${GITHUB_REF_NAME}" --output github-release-notes.md
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}" --title "${GITHUB_REF_NAME}" --notes-file github-release-notes.md --verify-tag
