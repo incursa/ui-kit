@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.4
+
+- Refined `.inc-btn` to use inline flex alignment so button icons and labels center consistently.
+- Hid empty `.inc-alert` and `.alert` containers to avoid rendering blank alert chrome.
+- Added a release-time changelog check so patch, minor, and major bumps fail locally if the matching changelog section is missing.
+
+## 0.3.3
+
+- Refined `.inc-btn` to use inline flex alignment so button icons and labels center consistently.
+- Hid empty `.inc-alert` and `.alert` containers to avoid rendering blank alert chrome.
+
 ## 0.3.2
 
 - Removed unused runtime dependency metadata so the published package no longer advertises Sass and watcher internals as consumer dependencies.

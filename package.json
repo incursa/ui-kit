@@ -49,9 +49,9 @@
     "build:js": "node -e \"require('fs').copyFileSync('src/inc-design-language.js', 'dist/inc-design-language.js')\"",
     "build": "npm run build:css && npm run build:css:min && npm run build:js",
     "preversion": "npm run build && npm pack --dry-run",
-    "release:patch": "npm version patch",
-    "release:minor": "npm version minor",
-    "release:major": "npm version major",
+    "release:patch": "node scripts/assert-changelog-version.mjs patch && npm version patch",
+    "release:minor": "node scripts/assert-changelog-version.mjs minor && npm version minor",
+    "release:major": "node scripts/assert-changelog-version.mjs major && npm version major",
     "pack:tarball": "npm pack",
     "package": "npm run build && npm run pack:tarball"
   },
