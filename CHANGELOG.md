@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.7
+
+Update Sass build commands and token imports
+
+Why:
+- The Sass build process needed improvements for better handling of deprecation warnings and to reduce output noise during compilation.
+
+What:
+- Updated the uild:css and uild:css:min scripts in package.json to include options for quieting deprecation warnings and reducing output verbosity.
+- Changed the import method in _inc-tokens.scss from @import to @forward and @use for better modularity and to align with the latest Sass best practices.
+- Updated inc-design-language.scss to use the new token import method.
+
+Notes / risks:
+- Ensure that all styles are still correctly compiled after these changes.
+- Review any potential impacts on existing styles due to the new import structure.
+
+Tests:
+- Tests: Existing unit tests for styles should cover these changes.
+
 ## 0.3.6
 
 Add guidance for table-body header layout variant
