@@ -1,4 +1,4 @@
-@import "./inc-tokens";
+@use "./inc-tokens" as *;
 @import "bootstrap/scss/bootstrap";
 
 // -----------------------------------------------------------------------------

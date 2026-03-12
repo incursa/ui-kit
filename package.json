@@ -45,8 +45,8 @@
     "NOTICE"
   ],
   "scripts": {
-    "build:css": "sass --load-path=node_modules src/inc-design-language.scss dist/inc-design-language.css --style=expanded",
-    "build:css:min": "sass --load-path=node_modules src/inc-design-language.scss dist/inc-design-language.min.css --style=compressed",
+    "build:css": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.css --style=expanded",
+    "build:css:min": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.min.css --style=compressed",
     "build:js": "node -e \"require('fs').copyFileSync('src/inc-design-language.js', 'dist/inc-design-language.js')\"",
     "build": "npm run build:css && npm run build:css:min && npm run build:js",
     "preversion": "npm run build && npm pack --dry-run",

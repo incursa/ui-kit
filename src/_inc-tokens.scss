@@ -4,7 +4,8 @@
 // Edit `_inc-theme.scss` first for brand-facing font and color changes.
 // This file keeps the deeper token and Bootstrap wiring.
 
-@import "./inc-theme";
+@forward "./inc-theme";
+@use "./inc-theme" as *;
 
 $inc-space-1: 0.25rem !default;
 $inc-space-2: 0.5rem !default;
@@ -66,6 +67,7 @@ $body-bg: $inc-surface-primary !default;
 $body-color: $inc-text-primary !default;
 $link-color: $inc-text-link !default;
 $link-hover-color: $inc-text-link-hover !default;
+$color-contrast-dark: $inc-text-primary !default;
 
 $spacer: $inc-space-3 !default;
 $spacers: (
