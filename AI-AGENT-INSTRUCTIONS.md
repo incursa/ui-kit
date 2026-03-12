@@ -32,6 +32,7 @@ Repository brand assets live under `assets/brand/`. Prefer those local files whe
   Use `inc-filter-bar`, `inc-filter-chip`, and `inc-bulk-bar` for search-heavy or multi-select operator screens.
 - Cards and shells:
   Use `inc-card` for plain cards and `inc-header-body inc-header-body--card` for titled sections with actions.
+  Use `inc-header-body--table-body` when the body contains a table and should keep section padding without adding extra bottom table margin.
 - App layout:
   Use `inc-app-shell`, `inc-footer-bar`, `inc-navbar`, `inc-breadcrumb`, `inc-nav-triad`, and `inc-sidebar-menu` when you need an opinionated application frame instead of isolated components.
 - States and workflow:

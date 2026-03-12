@@ -1,0 +1,64 @@
+Incursa UI Kit
+
+Short description:
+Reusable UI kit for data-heavy business applications. The public surface uses `inc-*` classes and ships compiled CSS, optional vanilla-JS helpers, and SCSS source entrypoints.
+
+Package identity:
+- npm package: `@incursa/ui-kit`
+- license: Apache-2.0
+- repository: https://github.com/incursa/ui-kit
+
+Fast path:
+- Use `dist/inc-design-language.css` if the target app already has working HTML and mainly needs the visual language.
+- Use `dist/inc-design-language.js` only for stateful primitives such as menus, tabs, and collapsible sections.
+- Use `src/inc-design-language.scss` if the consumer needs to tune tokens, theme variables, density, or Bootstrap defaults.
+
+Primary files:
+- `dist/inc-design-language.css`: compiled standalone CSS output.
+- `dist/inc-design-language.js`: optional dependency-free helper for menus, tabs, and collapsible sections.
+- `src/inc-design-language.scss`: main SCSS entrypoint.
+- `src/_inc-theme.scss`: brand-facing fonts, palette, semantic surfaces, and text colors.
+- `src/_inc-tokens.scss`: deeper token and Bootstrap-facing overrides.
+- `reference.html`: copy/paste catalog for standard controls and markup patterns.
+- `states.html`, `forms-and-validation.html`, `data-grid-advanced.html`, `overlay-workflows.html`: workflow-heavy composition patterns.
+- `demo.html`, `work-queue.html`, `record-detail.html`, `native-patterns.html`: fuller page examples.
+
+Public naming rules:
+- Use the `inc-` prefix for public classes.
+- Keep the existing BEM structure: `inc-block`, `inc-block__element`, `inc-block--modifier`.
+
+Core primitives:
+- Tables: start with `inc-table`; use modifiers such as `inc-table__cell--numeric`, `inc-table__cell--action`, `inc-table__cell--min`, and `inc-table__cell--expand`.
+- Buttons: use `inc-btn` with semantic modifiers such as `inc-btn--primary`, `inc-btn--secondary`, and `inc-btn--danger`. Use `inc-btn--micro` for in-row actions.
+- Forms: use `inc-form--inline`, `inc-form__field`, `inc-form__group`, `inc-input-group`, `inc-form__hint`, `inc-form__feedback--error`, `inc-form__feedback--success`, and `inc-form__error-summary`.
+- Filter bars: use `inc-filter-bar`, `inc-filter-chip`, and `inc-bulk-bar`.
+- Cards and shells: use `inc-card` for plain cards. Use `inc-header-body` for titled sections with actions. Use `inc-header-body--table-body` when the body contains a table and should keep body padding without extra bottom table margin.
+- App layout: use `inc-app-shell`, `inc-footer-bar`, `inc-navbar`, `inc-breadcrumb`, `inc-nav-triad`, and `inc-sidebar-menu`.
+- States and workflow: use `inc-state-panel`, `inc-permission-banner`, `inc-toast-card`, `inc-timeline`, `inc-file-dropzone`, `inc-file-row`, and `inc-key-value`.
+- Interaction: use `data-inc-toggle="menu"`, `data-inc-toggle="tab"`, and `data-inc-toggle="collapse"` with `data-inc-target="#target-id"` when you want the helper to wire behavior.
+- Native interaction: use `details.inc-disclosure`, `details.inc-native-menu`, and `dialog.inc-native-dialog`.
+- Status: use `inc-badge--success|warning|danger|info`.
+- Metrics: use `inc-summary-overview` and `inc-summary-block`.
+
+Customization order:
+1. Change fonts and colors in `src/_inc-theme.scss`.
+2. Use `src/_inc-tokens.scss` only for deeper token or Bootstrap-level tuning.
+3. Rebuild the CSS.
+4. Only add new component rules after checking whether an existing `inc-*` block already fits.
+
+Packaging and build:
+- `npm run build` rebuilds distributables.
+- `npm pack` or `npm run package` produces a local installable tarball.
+- The compiled CSS already includes the Bootstrap layer it was built from, so consumers do not need Bootstrap CSS at runtime when using compiled assets.
+- The SCSS source path does require Bootstrap Sass at build time because it imports `bootstrap/scss/bootstrap`.
+
+Guardrails:
+- Keep typography split: sans for UI text, mono for data.
+- Preserve explicit alignment classes for numeric table data.
+- Avoid product-specific shell or background styles in this package.
+- Keep new components generic enough to reuse across admin/data apps.
+- Prefer native browser behavior first for disclosures and dialogs when it fits the product.
+
+See also:
+- `README.md` for package usage, release flow, and repository structure.
+- `AI-AGENT-INSTRUCTIONS.md` for the same guidance in markdown form.

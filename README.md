@@ -72,6 +72,8 @@ Licensed under Apache 2.0.
   Sticky-header table, bulk selection, row states, busy buttons, and side drawer pattern.
 - `showcase.css`
   Small demo-only helper stylesheet for the static examples.
+- `LLMS.txt`
+  Plain-text agent guidance in the emerging `llms.txt`-style format for packaged consumers and tooling.
 - `AI-AGENT-INSTRUCTIONS.md`
   Short operational guidance for an AI agent or another engineer.
 
@@ -88,6 +90,8 @@ Examples:
 - `inc-summary-block`
 
 The BEM/modifier structure stays consistent across the package, for example `inc-table__cell--numeric` or `inc-btn--primary`.
+
+For titled sections that wrap tables, use `inc-header-body--table-body` to keep body padding while removing extra bottom margin from nested table wrappers.
 
 ## Design language summary
 
@@ -146,7 +150,7 @@ npm pack
 Then in the consuming app:
 
 ```bash
-npm install ../path-to-tarball/incursa-ui-kit-0.2.1.tgz
+npm install ../path-to-tarball/incursa-ui-kit-x.y.z.tgz
 ```
 
 Or, while iterating locally:
