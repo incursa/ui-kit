@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.6
+
+Add guidance for table-body header layout variant
+
 ## 0.3.5
 
 - Added `.inc-header-body--table-body` to pad table-body content and remove nested table bottom margins.
