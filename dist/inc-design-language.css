@@ -14067,6 +14067,58 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
   gap: 0.75rem;
 }
 
+.inc-auto-refresh {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right, 0px) + 1rem);
+  bottom: max(1rem, env(safe-area-inset-bottom, 0px) + 1rem);
+  z-index: 1049;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #dbdcdc;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #121316;
+  box-shadow: 0 0.75rem 1.5rem rgba(42, 49, 66, 0.12);
+  font-size: 0.75rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+}
+.inc-auto-refresh--inline {
+  position: static;
+  right: auto;
+  bottom: auto;
+  z-index: auto;
+  vertical-align: middle;
+}
+.inc-auto-refresh__countdown, .inc-auto-refresh__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 1rem;
+}
+.inc-auto-refresh__label, .inc-auto-refresh__status-text {
+  color: var(--bs-secondary-color);
+  font-weight: 600;
+}
+.inc-auto-refresh__value {
+  font-family: "IBM Plex Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: #2a3142;
+}
+.inc-auto-refresh__spinner {
+  display: inline-flex;
+  align-items: center;
+  color: #4459c6;
+}
+.inc-auto-refresh.is-loading {
+  border-color: rgba(68, 89, 198, 0.2);
+  box-shadow: 0 0.9rem 1.75rem rgba(68, 89, 198, 0.14);
+}
+
 .inc-progress,
 .inc-meter {
   width: 100%;

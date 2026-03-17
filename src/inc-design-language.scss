@@ -2787,6 +2787,66 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
     gap: 0.75rem;
 }
 
+.inc-auto-refresh {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right, 0px) + 1rem);
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px) + 1rem);
+    z-index: $inc-z-index-alerts - 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid $inc-border-subtle;
+    border-radius: 999px;
+    background: rgba($inc-surface-primary, 0.96);
+    color: $body-color;
+    box-shadow: 0 0.75rem 1.5rem rgba($inc-surface-strong, 0.12);
+    font-size: 0.75rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    backdrop-filter: blur(10px);
+
+    &--inline {
+        position: static;
+        right: auto;
+        bottom: auto;
+        z-index: auto;
+        vertical-align: middle;
+    }
+
+    &__countdown,
+    &__status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-height: 1rem;
+    }
+
+    &__label,
+    &__status-text {
+        color: $text-muted;
+        font-weight: 600;
+    }
+
+    &__value {
+        font-family: $font-family-monospace;
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+        color: $inc-surface-strong;
+    }
+
+    &__spinner {
+        display: inline-flex;
+        align-items: center;
+        color: $primary;
+    }
+
+    &.is-loading {
+        border-color: rgba($primary, 0.2);
+        box-shadow: 0 0.9rem 1.75rem rgba($primary, 0.14);
+    }
+}
+
 .inc-progress,
 .inc-meter {
     width: 100%;

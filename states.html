@@ -175,6 +175,25 @@
                                     <h2 class="inc-card__title">Toasts and Side Feedback</h2>
                                 </div>
                                 <div class="inc-card__body">
+                                    <div class="demo-stack">
+                                        <p class="inc-text inc-text--small inc-text--muted">An inline auto-refresh widget works well on queue and review pages where fresh data matters but the control should stay out of the main action area.</p>
+                                        <div class="inc-auto-refresh inc-auto-refresh--inline"
+                                             data-inc-auto-refresh
+                                             data-inc-refresh-seconds="300"
+                                             data-inc-refresh-label="Queue refresh in"
+                                             data-inc-refresh-loading-label="Refreshing queue">
+                                            <span class="inc-auto-refresh__countdown">
+                                                <span class="inc-auto-refresh__label">Queue refresh in</span>
+                                                <span class="inc-auto-refresh__value">300s</span>
+                                            </span>
+                                            <span class="inc-auto-refresh__status" role="status" aria-live="polite" aria-atomic="true" hidden>
+                                                <span class="inc-auto-refresh__spinner" aria-hidden="true">
+                                                    <span class="inc-spinner--border inc-spinner--border--sm inc-spinner--border--primary"></span>
+                                                </span>
+                                                <span class="inc-auto-refresh__status-text">Refreshing queue</span>
+                                            </span>
+                                        </div>
+                                    </div>
                                     <div class="inc-live-region" aria-live="polite" aria-atomic="true">
                                         <div class="inc-toast-stack">
                                         <div class="inc-toast-card" role="status">

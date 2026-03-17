@@ -6,6 +6,7 @@
         menu: ".inc-dropdown__menu",
         collapseToggle: '[data-inc-toggle="collapse"]',
         tabToggle: '[data-inc-toggle="tab"]',
+        autoRefresh: "[data-inc-auto-refresh]",
         modalToggle: '[data-inc-toggle="modal"]',
         modalDismiss: '[data-inc-dismiss="modal"]',
         offcanvasToggle: '[data-inc-toggle="offcanvas"]',
@@ -24,6 +25,9 @@
         'textarea:not([disabled])',
         '[tabindex]:not([tabindex="-1"])',
     ].join(", ");
+
+    const autoRefreshControllers = [];
+    let autoRefreshReloadScheduled = false;
 
     function getTarget(trigger) {
         const rawTarget = trigger.getAttribute("data-inc-target")
@@ -380,6 +384,190 @@
         return overlays[overlays.length - 1] || null;
     }
 
+    function parsePositiveInteger(value) {
+        const parsed = Number.parseInt(value || "", 10);
+
+        if (!Number.isFinite(parsed) || parsed < 1) {
+            return null;
+        }
+
+        return parsed;
+    }
+
+    function formatAutoRefreshRemaining(totalSeconds) {
+        if (totalSeconds < 60) {
+            return `${totalSeconds}s`;
+        }
+
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${minutes}m ${seconds}s`;
+    }
+
+    function getAutoRefreshParts(root) {
+        return {
+            countdown: root.querySelector(".inc-auto-refresh__countdown"),
+            label: root.querySelector(".inc-auto-refresh__label"),
+            value: root.querySelector(".inc-auto-refresh__value"),
+            status: root.querySelector(".inc-auto-refresh__status"),
+            statusText: root.querySelector(".inc-auto-refresh__status-text"),
+        };
+    }
+
+    function renderAutoRefreshCountdown(controller, remainingSeconds) {
+        const { root, parts, refreshLabel } = controller;
+
+        if (parts.label) {
+            parts.label.textContent = refreshLabel;
+        }
+
+        if (parts.value) {
+            parts.value.textContent = formatAutoRefreshRemaining(remainingSeconds);
+        }
+
+        root.classList.remove("is-loading");
+        root.setAttribute("aria-busy", "false");
+
+        if (parts.countdown) {
+            parts.countdown.hidden = false;
+        }
+
+        if (parts.status) {
+            parts.status.hidden = true;
+        }
+    }
+
+    function setAutoRefreshLoadingState(controller) {
+        const { root, parts, loadingLabel } = controller;
+
+        root.classList.add("is-loading");
+        root.setAttribute("aria-busy", "true");
+
+        if (parts.countdown) {
+            parts.countdown.hidden = true;
+        }
+
+        if (parts.statusText) {
+            parts.statusText.textContent = loadingLabel;
+        }
+
+        if (parts.status) {
+            parts.status.hidden = false;
+        }
+    }
+
+    function stopAutoRefreshController(controller) {
+        if (controller.timeoutId) {
+            window.clearTimeout(controller.timeoutId);
+            controller.timeoutId = 0;
+        }
+    }
+
+    function scheduleWindowReload() {
+        if (autoRefreshReloadScheduled) {
+            return;
+        }
+
+        autoRefreshReloadScheduled = true;
+        autoRefreshControllers.forEach((controller) => stopAutoRefreshController(controller));
+
+        const deferToPaint = window.requestAnimationFrame
+            ? window.requestAnimationFrame.bind(window)
+            : (callback) => window.setTimeout(callback, 16);
+
+        deferToPaint(() => {
+            window.setTimeout(() => {
+                window.location.reload();
+            }, 120);
+        });
+    }
+
+    function startAutoRefreshReload(controller) {
+        if (autoRefreshReloadScheduled || controller.isLoading) {
+            return;
+        }
+
+        controller.isLoading = true;
+        stopAutoRefreshController(controller);
+        setAutoRefreshLoadingState(controller);
+        scheduleWindowReload();
+    }
+
+    function scheduleAutoRefreshTick(controller) {
+        if (autoRefreshReloadScheduled || controller.isLoading) {
+            return;
+        }
+
+        stopAutoRefreshController(controller);
+
+        const remainingMs = controller.deadline - Date.now();
+
+        if (remainingMs <= 0) {
+            startAutoRefreshReload(controller);
+            return;
+        }
+
+        const remainingSeconds = Math.ceil(remainingMs / 1000);
+        renderAutoRefreshCountdown(controller, remainingSeconds);
+
+        const nextDelay = remainingMs % 1000 || 1000;
+        controller.timeoutId = window.setTimeout(() => {
+            scheduleAutoRefreshTick(controller);
+        }, nextDelay);
+    }
+
+    function initializeAutoRefresh() {
+        document.querySelectorAll(selectors.autoRefresh).forEach((root) => {
+            if (!(root instanceof HTMLElement) || root._incAutoRefreshInitialized) {
+                return;
+            }
+
+            root._incAutoRefreshInitialized = true;
+
+            const refreshSeconds = parsePositiveInteger(root.getAttribute("data-inc-refresh-seconds"));
+
+            if (!refreshSeconds) {
+                return;
+            }
+
+            const controller = {
+                root,
+                parts: getAutoRefreshParts(root),
+                refreshLabel: root.getAttribute("data-inc-refresh-label") || "Refresh in",
+                loadingLabel: root.getAttribute("data-inc-refresh-loading-label") || "Refreshing",
+                deadline: Date.now() + (refreshSeconds * 1000),
+                timeoutId: 0,
+                isLoading: false,
+            };
+
+            autoRefreshControllers.push(controller);
+            scheduleAutoRefreshTick(controller);
+        });
+
+        if (!document._incAutoRefreshVisibilityBound && autoRefreshControllers.length) {
+            document._incAutoRefreshVisibilityBound = true;
+
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden || autoRefreshReloadScheduled) {
+                    return;
+                }
+
+                autoRefreshControllers.forEach((controller) => {
+                    if (controller.isLoading) {
+                        return;
+                    }
+
+                    if ((controller.deadline - Date.now()) <= 0) {
+                        startAutoRefreshReload(controller);
+                        return;
+                    }
+
+                    scheduleAutoRefreshTick(controller);
+                });
+            });
+        }
+    }
+
     function trapFocus(event, container) {
         if (event.key !== "Tab") {
             return false;
@@ -686,6 +874,7 @@
         initializeMenus();
         initializeCollapses();
         initializeTabs();
+        initializeAutoRefresh();
         attachEventHandlers();
     }
 

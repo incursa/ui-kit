@@ -849,6 +849,55 @@
 &lt;div class="inc-bulk-bar"&gt;...&lt;/div&gt;</code></pre>
                             </div>
                         </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Auto Refresh Widget</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <p class="inc-text inc-text--small inc-text--muted">Use the inline modifier inside cards or toolbars, and the base class when you want the widget pinned to the page corner.</p>
+                                    <div class="inc-auto-refresh inc-auto-refresh--inline"
+                                         data-inc-auto-refresh
+                                         data-inc-refresh-seconds="180"
+                                         data-inc-refresh-label="Queue refresh in"
+                                         data-inc-refresh-loading-label="Refreshing queue">
+                                        <span class="inc-auto-refresh__countdown">
+                                            <span class="inc-auto-refresh__label">Queue refresh in</span>
+                                            <span class="inc-auto-refresh__value">180s</span>
+                                        </span>
+                                        <span class="inc-auto-refresh__status" role="status" aria-live="polite" aria-atomic="true" hidden>
+                                            <span class="inc-auto-refresh__spinner" aria-hidden="true">
+                                                <span class="inc-spinner--border inc-spinner--border--sm inc-spinner--border--primary"></span>
+                                            </span>
+                                            <span class="inc-auto-refresh__status-text">Refreshing queue</span>
+                                        </span>
+                                    </div>
+                                </div>
+<pre class="demo-code"><code>&lt;div class="inc-auto-refresh"
+     data-inc-auto-refresh
+     data-inc-refresh-seconds="30"
+     data-inc-refresh-label="Refresh in"
+     data-inc-refresh-loading-label="Refreshing"&gt;
+    &lt;span class="inc-auto-refresh__countdown"&gt;
+        &lt;span class="inc-auto-refresh__label"&gt;Refresh in&lt;/span&gt;
+        &lt;span class="inc-auto-refresh__value"&gt;30s&lt;/span&gt;
+    &lt;/span&gt;
+    &lt;span class="inc-auto-refresh__status" role="status" aria-live="polite" aria-atomic="true" hidden&gt;
+        &lt;span class="inc-auto-refresh__spinner" aria-hidden="true"&gt;
+            &lt;span class="inc-spinner--border inc-spinner--border--sm inc-spinner--border--primary"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+        &lt;span class="inc-auto-refresh__status-text"&gt;Refreshing&lt;/span&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class="inc-auto-refresh inc-auto-refresh--inline"
+     data-inc-auto-refresh
+     data-inc-refresh-seconds="90"&gt;
+    ...
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </section>
                     </div>
                 </main>
                 <footer class="inc-app-shell__footer inc-footer-bar">

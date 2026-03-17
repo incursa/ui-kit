@@ -24,7 +24,7 @@ Licensed under Apache 2.0.
 - Card, section-shell, summary-block, vertical-list, and layout primitives used across admin screens.
 - Status-oriented badges and alerts with soft backgrounds and stronger foreground/border cues.
 - Validation states, error summaries, fieldset/legend groups, filter chips, and dense toolbar patterns for search-heavy screens.
-- Operational states such as empty, no-results, loading, error, permission, lock, toast, live-region, and activity timeline surfaces.
+- Operational states such as empty, no-results, loading, error, permission, lock, toast, live-region, auto-refresh, and activity timeline surfaces.
 - Bulk-action, sticky-header, and row-state table patterns for operator-facing grids.
 - File/document dropzones, file rows, read-only description-list grids, progress/meter surfaces, and drawer-style side panels.
 - A small overlay/navigation layer for tabs, pagination, dropdown actions, modals, and offcanvas panels.
@@ -49,7 +49,7 @@ Licensed under Apache 2.0.
 - `dist/inc-design-language.css`
   Compiled standalone CSS output.
 - `dist/inc-design-language.js`
-  Optional vanilla-JS helper for menus, tabs, and collapsible sections.
+  Optional vanilla-JS helper for menus, tabs, collapsible sections, and auto-refresh widgets.
 - `index.html`
   Showcase hub for the included example pages.
 - `demo.html`
@@ -110,9 +110,9 @@ For titled sections that wrap tables, use `inc-header-body--table-body` to keep 
 
 - CSS-only/native behavior is enough for layout, cards, tables, buttons, alerts, form fields, badges, breadcrumbs, sticky footer, and most surface styling.
 - Stateful controls still need behavior:
-  tabs, collapsible sections, menus/dropdowns, modals, offcanvas panels, dismissible alerts, and toasts.
+  tabs, collapsible sections, menus/dropdowns, modals, offcanvas panels, dismissible alerts, toasts, and auto-refresh countdowns.
 - This package now includes an optional dependency-free helper at `dist/inc-design-language.js` for:
-  user-menu dropdowns, tab switching, and collapse/accordion toggles.
+  user-menu dropdowns, tab switching, collapse/accordion toggles, and page auto-refresh countdown widgets.
 - This package also includes native-styled patterns for:
   `details.inc-disclosure`, `details.inc-native-menu`, `dialog.inc-native-dialog`, and `dialog.inc-native-dialog--drawer`.
 - If you prefer native HTML behavior where possible, use browser primitives like `<details>` and `<dialog>` for product-specific implementations. The helper exists for places where the design language is intentionally Bootstrap-like and needs matching interaction behavior.
