@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0
+
+- Added a reusable inc-auto-refresh widget with fixed and inline presentation modes.
+- Extended the optional helper JavaScript to drive countdown rendering, hidden-tab deadline handling, and reload-state transitions.
+- Documented the new pattern in the reference catalog, operational states showcase, and README.
+
 ## 0.3.7
 
 Update Sass build commands and token imports
