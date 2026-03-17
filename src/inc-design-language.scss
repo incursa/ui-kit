@@ -2841,6 +2841,28 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
         color: $primary;
     }
 
+    &__toggle {
+        flex: 0 0 auto;
+
+        &.inc-btn {
+            min-height: 1.625rem;
+            padding: 0.2rem 0.55rem;
+            font-size: 0.6875rem;
+            line-height: 1;
+        }
+    }
+
+    &__toggle-text {
+        display: inline-block;
+        min-width: 3.25rem;
+        text-align: center;
+    }
+
+    &.is-paused {
+        border-color: rgba($warning, 0.24);
+        box-shadow: 0 0.9rem 1.75rem rgba($warning, 0.1);
+    }
+
     &.is-loading {
         border-color: rgba($primary, 0.2);
         box-shadow: 0 0.9rem 1.75rem rgba($primary, 0.14);

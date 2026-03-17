@@ -49,7 +49,7 @@ Licensed under Apache 2.0.
 - `dist/inc-design-language.css`
   Compiled standalone CSS output.
 - `dist/inc-design-language.js`
-  Optional vanilla-JS helper for menus, tabs, collapsible sections, and auto-refresh widgets.
+  Optional vanilla-JS helper for menus, tabs, collapsible sections, and auto-refresh widgets with pause/resume controls.
 - `index.html`
   Showcase hub for the included example pages.
 - `demo.html`
@@ -110,7 +110,7 @@ For titled sections that wrap tables, use `inc-header-body--table-body` to keep 
 
 - CSS-only/native behavior is enough for layout, cards, tables, buttons, alerts, form fields, badges, breadcrumbs, sticky footer, and most surface styling.
 - Stateful controls still need behavior:
-  tabs, collapsible sections, menus/dropdowns, modals, offcanvas panels, dismissible alerts, toasts, and auto-refresh countdowns.
+  tabs, collapsible sections, menus/dropdowns, modals, offcanvas panels, dismissible alerts, toasts, and auto-refresh countdowns with pause/resume behavior.
 - This package now includes an optional dependency-free helper at `dist/inc-design-language.js` for:
   user-menu dropdowns, tab switching, collapse/accordion toggles, and page auto-refresh countdown widgets.
 - This package also includes native-styled patterns for:

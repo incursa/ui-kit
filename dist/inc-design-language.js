@@ -7,6 +7,7 @@
         collapseToggle: '[data-inc-toggle="collapse"]',
         tabToggle: '[data-inc-toggle="tab"]',
         autoRefresh: "[data-inc-auto-refresh]",
+        autoRefreshToggle: '[data-inc-action="auto-refresh-toggle"]',
         modalToggle: '[data-inc-toggle="modal"]',
         modalDismiss: '[data-inc-dismiss="modal"]',
         offcanvasToggle: '[data-inc-toggle="offcanvas"]',
@@ -411,7 +412,26 @@
             value: root.querySelector(".inc-auto-refresh__value"),
             status: root.querySelector(".inc-auto-refresh__status"),
             statusText: root.querySelector(".inc-auto-refresh__status-text"),
+            toggle: root.querySelector(".inc-auto-refresh__toggle"),
+            toggleText: root.querySelector(".inc-auto-refresh__toggle-text"),
         };
+    }
+
+    function updateAutoRefreshToggle(controller) {
+        const { parts, isPaused, isLoading, pauseActionLabel, resumeActionLabel } = controller;
+
+        if (!(parts.toggle instanceof HTMLElement)) {
+            return;
+        }
+
+        const actionLabel = isPaused ? resumeActionLabel : pauseActionLabel;
+        parts.toggle.disabled = Boolean(isLoading);
+        parts.toggle.setAttribute("aria-pressed", isPaused ? "true" : "false");
+        parts.toggle.setAttribute("aria-label", actionLabel);
+
+        if (parts.toggleText) {
+            parts.toggleText.textContent = actionLabel;
+        }
     }
 
     function renderAutoRefreshCountdown(controller, remainingSeconds) {
@@ -425,6 +445,7 @@
             parts.value.textContent = formatAutoRefreshRemaining(remainingSeconds);
         }
 
+        root.classList.remove("is-paused");
         root.classList.remove("is-loading");
         root.setAttribute("aria-busy", "false");
 
@@ -435,11 +456,40 @@
         if (parts.status) {
             parts.status.hidden = true;
         }
+
+        updateAutoRefreshToggle(controller);
+    }
+
+    function renderAutoRefreshPaused(controller, remainingSeconds) {
+        const { root, parts, pausedLabel } = controller;
+
+        if (parts.label) {
+            parts.label.textContent = pausedLabel;
+        }
+
+        if (parts.value) {
+            parts.value.textContent = formatAutoRefreshRemaining(remainingSeconds);
+        }
+
+        root.classList.add("is-paused");
+        root.classList.remove("is-loading");
+        root.setAttribute("aria-busy", "false");
+
+        if (parts.countdown) {
+            parts.countdown.hidden = false;
+        }
+
+        if (parts.status) {
+            parts.status.hidden = true;
+        }
+
+        updateAutoRefreshToggle(controller);
     }
 
     function setAutoRefreshLoadingState(controller) {
         const { root, parts, loadingLabel } = controller;
 
+        root.classList.remove("is-paused");
         root.classList.add("is-loading");
         root.setAttribute("aria-busy", "true");
 
@@ -454,6 +504,8 @@
         if (parts.status) {
             parts.status.hidden = false;
         }
+
+        updateAutoRefreshToggle(controller);
     }
 
     function stopAutoRefreshController(controller) {
@@ -461,6 +513,37 @@
             window.clearTimeout(controller.timeoutId);
             controller.timeoutId = 0;
         }
+    }
+
+    function pauseAutoRefresh(controller) {
+        if (autoRefreshReloadScheduled || controller.isLoading || controller.isPaused) {
+            return;
+        }
+
+        controller.isPaused = true;
+        controller.remainingMs = Math.max(controller.deadline - Date.now(), 0);
+        stopAutoRefreshController(controller);
+        renderAutoRefreshPaused(controller, Math.max(1, Math.ceil(controller.remainingMs / 1000)));
+    }
+
+    function resumeAutoRefresh(controller) {
+        if (autoRefreshReloadScheduled || controller.isLoading || !controller.isPaused) {
+            return;
+        }
+
+        controller.isPaused = false;
+        controller.deadline = Date.now() + controller.remainingMs;
+        controller.remainingMs = 0;
+        scheduleAutoRefreshTick(controller);
+    }
+
+    function toggleAutoRefresh(controller) {
+        if (controller.isPaused) {
+            resumeAutoRefresh(controller);
+            return;
+        }
+
+        pauseAutoRefresh(controller);
     }
 
     function scheduleWindowReload() {
@@ -494,7 +577,7 @@
     }
 
     function scheduleAutoRefreshTick(controller) {
-        if (autoRefreshReloadScheduled || controller.isLoading) {
+        if (autoRefreshReloadScheduled || controller.isLoading || controller.isPaused) {
             return;
         }
 
@@ -535,11 +618,17 @@
                 parts: getAutoRefreshParts(root),
                 refreshLabel: root.getAttribute("data-inc-refresh-label") || "Refresh in",
                 loadingLabel: root.getAttribute("data-inc-refresh-loading-label") || "Refreshing",
+                pausedLabel: root.getAttribute("data-inc-refresh-paused-label") || "Paused at",
+                pauseActionLabel: root.getAttribute("data-inc-refresh-pause-action-label") || "Pause",
+                resumeActionLabel: root.getAttribute("data-inc-refresh-resume-action-label") || "Resume",
                 deadline: Date.now() + (refreshSeconds * 1000),
+                remainingMs: refreshSeconds * 1000,
                 timeoutId: 0,
                 isLoading: false,
+                isPaused: false,
             };
 
+            root._incAutoRefreshController = controller;
             autoRefreshControllers.push(controller);
             scheduleAutoRefreshTick(controller);
         });
@@ -553,7 +642,7 @@
                 }
 
                 autoRefreshControllers.forEach((controller) => {
-                    if (controller.isLoading) {
+                    if (controller.isLoading || controller.isPaused) {
                         return;
                     }
 
@@ -658,6 +747,20 @@
 
     function attachEventHandlers() {
         document.addEventListener("click", (event) => {
+            const autoRefreshToggle = event.target.closest(selectors.autoRefreshToggle);
+
+            if (autoRefreshToggle) {
+                const autoRefreshRoot = autoRefreshToggle.closest(selectors.autoRefresh);
+                const controller = autoRefreshRoot?._incAutoRefreshController;
+
+                if (controller) {
+                    event.preventDefault();
+                    toggleAutoRefresh(controller);
+                }
+
+                return;
+            }
+
             const menuToggle = event.target.closest(selectors.menuToggle);
 
             if (menuToggle) {

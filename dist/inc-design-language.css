@@ -14114,6 +14114,24 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
   align-items: center;
   color: #4459c6;
 }
+.inc-auto-refresh__toggle {
+  flex: 0 0 auto;
+}
+.inc-auto-refresh__toggle.inc-btn {
+  min-height: 1.625rem;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.6875rem;
+  line-height: 1;
+}
+.inc-auto-refresh__toggle-text {
+  display: inline-block;
+  min-width: 3.25rem;
+  text-align: center;
+}
+.inc-auto-refresh.is-paused {
+  border-color: rgba(200, 138, 0, 0.24);
+  box-shadow: 0 0.9rem 1.75rem rgba(200, 138, 0, 0.1);
+}
 .inc-auto-refresh.is-loading {
   border-color: rgba(68, 89, 198, 0.2);
   box-shadow: 0 0.9rem 1.75rem rgba(68, 89, 198, 0.14);
