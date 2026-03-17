@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1
+
+- Added pause and resume controls to the inc-auto-refresh widget.
+- Updated the helper JavaScript to preserve remaining time while paused and resume from the same countdown.
+- Refreshed the reference examples, showcase, and published assets for the updated widget markup.
+
 ## 0.4.0
 
 - Added a reusable inc-auto-refresh widget with fixed and inline presentation modes.
