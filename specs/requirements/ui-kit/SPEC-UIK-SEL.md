@@ -41,7 +41,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-SEL-0002 Provide density and expansion variants
-The select surface MUST provide `inc-form__select--sm`, `inc-form__select--lg`, `inc-form__select--micro`, `inc-form__select--expand`, and `inc-form__select--warning` variants that only affect density, width, and visual emphasis rather than native select behavior.
+The select surface MUST provide `inc-form__select--sm`, `inc-form__select--lg`, `inc-form__select--micro`, `inc-form__select--expand`, and `inc-form__select--warning` variants that only affect density, width, and visual emphasis rather than native select behavior while complying with `REQ-UIK-TOK-0008`.
 
 Trace:
 - Code Refs:
@@ -69,7 +69,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-SEL-0004 Comply with shared naming, token, and accessibility rules
-Select surfaces MUST comply with `REQ-UIK-STD-0001`, `REQ-UIK-TOK-0002`, `REQ-UIK-TOK-0004`, and `REQ-UIK-A11Y-0001`.
+Select surfaces MUST comply with `REQ-UIK-STD-0001`, `REQ-UIK-CNV-0001` through `REQ-UIK-CNV-0006`, `REQ-UIK-TOK-0002`, `REQ-UIK-TOK-0004`, `REQ-UIK-TOK-0008`, `REQ-UIK-A11Y-0001`, and `REQ-UIK-A11Y-0006`.
 
 Trace:
 - Code Refs:

@@ -10,12 +10,12 @@ Package identity:
 
 Fast path:
 - Use `dist/inc-design-language.css` if the target app already has working HTML and mainly needs the visual language.
-- Use `dist/inc-design-language.js` only for stateful primitives such as menus, tabs, collapsible sections, and legacy modal/offcanvas shells.
+- Use `dist/inc-design-language.js` only for stateful primitives such as menus, tabs, collapsible sections, auto-refresh widgets, the native dialog launch hook, and legacy modal/offcanvas shells.
 - Use `src/inc-design-language.scss` if the consumer needs to tune tokens, theme variables, density, or Bootstrap defaults.
 
 Primary files:
 - `dist/inc-design-language.css`: compiled standalone CSS output.
-- `dist/inc-design-language.js`: optional dependency-free helper for menus, tabs, collapsible sections, and legacy modal/offcanvas shells.
+- `dist/inc-design-language.js`: optional dependency-free helper for menus, tabs, collapsible sections, auto-refresh widgets, the native dialog launch hook, and legacy modal/offcanvas shells.
 - `src/inc-design-language.scss`: main SCSS entrypoint.
 - `src/_inc-theme.scss`: brand-facing fonts, palette, semantic surfaces, and text colors.
 - `src/_inc-tokens.scss`: deeper token and Bootstrap-facing overrides.
@@ -23,6 +23,7 @@ Primary files:
 - `specs/requirements/ui-kit/_index.md`: first-pass Spec Trace suite for the UI kit.
 - `specs/requirements/ui-kit/REQUIREMENT-GAPS.md`: unresolved requirement gaps and follow-up questions.
 - `specs/requirements/ui-kit/SPEC-UIK-STD.md`: public surface standards for `inc-` naming and accessible interactive behavior.
+- `specs/requirements/ui-kit/SPEC-UIK-CNV.md`: shared control conventions for base-plus-modifier surfaces, density suffixes, and state hooks.
 - `specs/verification/ui-kit/_index.md`: auditable source-review verification baseline for the UI kit surface.
 - `states.html`, `forms-and-validation.html`, `data-grid-advanced.html`, `overlay-workflows.html`: workflow-heavy composition patterns.
 - `demo.html`, `work-queue.html`, `record-detail.html`, `native-patterns.html`: fuller page examples.
@@ -30,19 +31,25 @@ Primary files:
 Public naming rules:
 - Use the `inc-` prefix for public classes.
 - Keep the existing BEM structure: `inc-block`, `inc-block__element`, `inc-block--modifier`.
+- Use the shared control modifier grammar for density, expansion, and state hooks instead of inventing one-off suffixes.
+- Avoid nested element names such as `inc-form__check__input`; keep public element names one level deep.
 - Preserve native semantics and accessible focus/disabled/hidden states for interactive surfaces.
+- Treat light and dark as global theme concerns activated through `data-bs-theme` on the root scope, not public component-class modifiers.
 
 Core primitives:
 - Typography: use `inc-text`, `inc-heading`, `inc-data`, `inc-button-text`, `inc-form-text`, and `inc-table-text` for public text helpers.
 - Tables: start with `inc-table`; use modifiers such as `inc-table__cell--numeric`, `inc-table__cell--action`, `inc-table__cell--min`, and `inc-table__cell--expand`.
-- Buttons: use `inc-btn` with semantic modifiers such as `inc-btn--primary`, `inc-btn--secondary`, and `inc-btn--danger`. Use `inc-btn--micro` for in-row actions.
+- Buttons: use `inc-btn` with semantic modifiers such as `inc-btn--primary`, `inc-btn--secondary`, and `inc-btn--danger`. Keep the visual treatment identical on `<button>` and `<a>` markup, use `<button>` for in-place actions, use `<a>` for navigation, and use `inc-btn--micro` for in-row actions.
 - Forms: use `inc-form--inline`, `inc-form__field`, `inc-form__fieldset`, `inc-form__legend`, `inc-form__control`, `inc-form__select`, `inc-input-group`, `inc-readonly-field`, `inc-form-text`, `inc-form__feedback--error`, `inc-form__feedback--success`, and `inc-form__error-summary`.
+- Form choices: use `inc-form__check`, `inc-form__check-input`, `inc-form__check-label`, `inc-form__switch`, and `inc-form__choices` for checkbox and radio groups.
+- Control conventions: use the shared base-plus-modifier patterns from `SPEC-UIK-CNV.md` for density, expansion, and state hooks.
+- Control density: use the shared `inc-control-density-micro-*` tokens for compact buttons, inputs, selects, and input groups instead of hard-coded micro values.
 - Filter bars: use `inc-filter-bar`, `inc-filter-chip`, and `inc-bulk-bar`.
 - Cards and shells: use `inc-card` for plain cards. Use `inc-header-body` for titled sections with actions. Use `inc-header-body--table-body` when the body contains a table and should keep body padding without extra bottom table margin.
 - App layout: use `inc-app-shell`, `inc-footer-bar`, `inc-navbar`, `inc-breadcrumb`, `inc-nav-triad`, and `inc-sidebar-menu`.
 - Utilities: use `inc-u-stack-*`, `inc-u-gap-*`, `inc-grid`, `inc-row`, `inc-col`, `inc-stack`, and `inc-flex-*` when composition needs a public helper class.
 - States and workflow: use `inc-state-panel`, `inc-permission-banner`, `inc-toast-card`, `inc-timeline`, `inc-file-dropzone`, `inc-file-row`, and `inc-key-value`.
-- Interaction: use `data-inc-toggle="menu"`, `data-inc-toggle="tab"`, and `data-inc-toggle="collapse"` with `data-inc-target="#target-id"` when you want the helper to wire behavior.
+- Interaction: use `data-inc-toggle="menu"`, `data-inc-toggle="tab"`, and `data-inc-toggle="collapse"` with `data-inc-target="#target-id"` when you want the helper to wire behavior. Use `data-inc-dismiss="modal"` / `data-inc-dismiss="offcanvas"`, `data-inc-accordion`, `data-inc-backdrop-for`, `data-inc-initial-focus`, `data-inc-auto-refresh`, and the `data-inc-refresh-seconds`, `data-inc-refresh-label`, `data-inc-refresh-loading-label`, `data-inc-refresh-paused-label`, `data-inc-refresh-pause-action-label`, and `data-inc-refresh-resume-action-label` hooks when you need the rest of the helper contract. Use `data-inc-native-dialog-open="dialog-id"` when you want the helper to open a native `<dialog>`.
 - Native interaction: use `details.inc-disclosure`, `details.inc-native-menu`, and `dialog.inc-native-dialog`.
 - Status: use `inc-badge--success|warning|danger|info`.
 - Metrics: use `inc-summary-overview` and `inc-summary-block`.

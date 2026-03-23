@@ -27,7 +27,7 @@ This specification covers alerts, banners, empty states, state panels, toast sur
 Operational UIs need explicit messaging for success, warning, failure, absence, and loading states without forcing application-specific styling.
 
 ## REQ-UIK-FDBK-0001 Provide alert and banner surfaces
-The UI kit MUST provide `inc-alert`, `inc-alert-container`, `inc-alert--primary`, `inc-alert--secondary`, `inc-alert--success`, `inc-alert--danger`, `inc-alert--warning`, `inc-alert--info`, `inc-alert--light`, `inc-alert--dark`, `inc-alert--dismissible`, and `inc-alert__heading` surfaces for inline and block-level messages with severity variants readable without relying on color alone.
+The UI kit MUST provide `inc-alert`, `inc-alert-container`, `inc-alert--primary`, `inc-alert--secondary`, `inc-alert--success`, `inc-alert--danger`, `inc-alert--warning`, `inc-alert--info`, `inc-alert--dismissible`, and `inc-alert__heading` surfaces for inline and block-level messages with severity variants readable without relying on color alone.
 
 Trace:
 - Code Refs:
@@ -66,7 +66,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-FDBK-0004 Provide loading and spinner surfaces
-The feedback surface MUST provide `inc-loading`, `inc-skeleton`, `inc-skeleton--title`, `inc-skeleton--text`, `inc-skeleton--text-sm`, `inc-skeleton--chip`, `inc-skeleton--avatar`, `inc-skeleton--button`, `inc-loading-dots`, `inc-spinner`, `inc-spinner--border`, `inc-spinner--border--sm`, `inc-spinner--border--primary`, `inc-spinner--border--secondary`, `inc-spinner--border--success`, `inc-spinner--border--danger`, `inc-spinner--border--warning`, `inc-spinner--border--info`, `inc-spinner--border--light`, `inc-spinner--border--dark`, `inc-spinner--grow`, and `inc-spinner--grow--sm` for asynchronous flows that preserve the surrounding layout footprint where possible.
+The feedback surface MUST provide `inc-loading`, `inc-skeleton`, `inc-skeleton--title`, `inc-skeleton--text`, `inc-skeleton--text-sm`, `inc-skeleton--chip`, `inc-skeleton--avatar`, `inc-skeleton--button`, `inc-loading-dots`, `inc-spinner`, `inc-spinner--border`, `inc-spinner--border--sm`, `inc-spinner--border--primary`, `inc-spinner--border--secondary`, `inc-spinner--border--success`, `inc-spinner--border--danger`, `inc-spinner--border--warning`, `inc-spinner--border--info`, `inc-spinner--grow`, and `inc-spinner--grow--sm` for asynchronous flows that preserve the surrounding layout footprint where possible and serve as the shared busy-state vocabulary for controls and workflow surfaces.
 
 Trace:
 - Code Refs:
@@ -120,7 +120,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-FDBK-0008 Comply with shared naming, token, and accessibility rules
-Feedback and operational-state surfaces MUST comply with `REQ-UIK-STD-0001`, `REQ-UIK-TOK-0004`, `REQ-UIK-A11Y-0001`, and `REQ-UIK-A11Y-0003`.
+Feedback and operational-state surfaces MUST comply with `REQ-UIK-STD-0001`, `REQ-UIK-TOK-0004`, `REQ-UIK-CNV-0004`, `REQ-UIK-A11Y-0001`, `REQ-UIK-A11Y-0003`, and `REQ-UIK-A11Y-0006`.
 
 Trace:
 - Code Refs:

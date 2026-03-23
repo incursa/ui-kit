@@ -11,6 +11,13 @@ verifies:
   - REQ-UIK-A11Y-0003
   - REQ-UIK-A11Y-0004
   - REQ-UIK-A11Y-0005
+  - REQ-UIK-A11Y-0006
+  - REQ-UIK-CNV-0001
+  - REQ-UIK-CNV-0002
+  - REQ-UIK-CNV-0003
+  - REQ-UIK-CNV-0004
+  - REQ-UIK-CNV-0005
+  - REQ-UIK-CNV-0006
   - REQ-UIK-BTN-0001
   - REQ-UIK-BTN-0002
   - REQ-UIK-BTN-0003
@@ -19,6 +26,9 @@ verifies:
   - REQ-UIK-BTN-0006
   - REQ-UIK-BTN-0007
   - REQ-UIK-BTN-0008
+  - REQ-UIK-BTN-0009
+  - REQ-UIK-BTN-0010
+  - REQ-UIK-BTN-0011
   - REQ-UIK-CARD-0001
   - REQ-UIK-CARD-0002
   - REQ-UIK-CARD-0003
@@ -73,6 +83,7 @@ verifies:
   - REQ-UIK-INT-0006
   - REQ-UIK-INT-0007
   - REQ-UIK-INT-0008
+  - REQ-UIK-INT-0009
   - REQ-UIK-LAY-0001
   - REQ-UIK-LAY-0002
   - REQ-UIK-LAY-0003
@@ -113,6 +124,7 @@ verifies:
   - REQ-UIK-STD-0001
   - REQ-UIK-STD-0002
   - REQ-UIK-STD-0003
+  - REQ-UIK-STD-0004
   - REQ-UIK-TBL-0001
   - REQ-UIK-TBL-0002
   - REQ-UIK-TBL-0003
@@ -127,6 +139,8 @@ verifies:
   - REQ-UIK-TOK-0005
   - REQ-UIK-TOK-0006
   - REQ-UIK-TOK-0007
+  - REQ-UIK-TOK-0008
+  - REQ-UIK-TOK-0009
   - REQ-UIK-TXT-0001
   - REQ-UIK-TXT-0002
   - REQ-UIK-TXT-0003
@@ -157,7 +171,7 @@ Record the baseline source-review verification for the revised UI kit public sur
 
 ## Scope
 
-This verification covers the public surface naming baseline, the shared token and accessibility foundations, the public text helpers, the form shell split, the public utility classes, the navigation and page-layout surfaces, the content-family surfaces, the native-first overlay surfaces, and the optional JavaScript helper contract that are currently shipped in the repository.
+This verification covers the public surface naming baseline, the shared token, accessibility, and control-convention foundations, the public text helpers, the form shell split, the public utility classes, the navigation and page-layout surfaces, the content-family surfaces, the native-first overlay surfaces, and the optional JavaScript helper contract that are currently shipped in the repository.
 
 ## Preconditions
 
@@ -171,20 +185,20 @@ Static source review against the shipped SCSS, compiled CSS, JS helper, and exam
 
 ## Requirements Verified
 
-- Shared foundations: `REQ-UIK-STD-0001` through `REQ-UIK-STD-0003`, `REQ-UIK-TOK-0001` through `REQ-UIK-TOK-0007`, and `REQ-UIK-A11Y-0001` through `REQ-UIK-A11Y-0005`.
-- Typography and action surfaces: `REQ-UIK-TXT-0001` through `REQ-UIK-TXT-0005`, and `REQ-UIK-BTN-0001` through `REQ-UIK-BTN-0008`.
-- Form shell and form controls: `REQ-UIK-FRM-0001` through `REQ-UIK-FRM-0007`, `REQ-UIK-INP-0001` through `REQ-UIK-INP-0007`, `REQ-UIK-SEL-0001` through `REQ-UIK-SEL-0004`, `REQ-UIK-GRP-0001` through `REQ-UIK-GRP-0004`, and `REQ-UIK-RO-0001` through `REQ-UIK-RO-0003`.
+- Shared foundations: `REQ-UIK-STD-0001` through `REQ-UIK-STD-0003`, `REQ-UIK-TOK-0001` through `REQ-UIK-TOK-0008`, `REQ-UIK-A11Y-0001` through `REQ-UIK-A11Y-0006`, and `REQ-UIK-CNV-0001` through `REQ-UIK-CNV-0006`.
+- Typography and action surfaces: `REQ-UIK-TXT-0001` through `REQ-UIK-TXT-0005`, and `REQ-UIK-BTN-0001` through `REQ-UIK-BTN-0011`.
+- Form shell, editable controls, select controls, input groups, and read-only surfaces: `REQ-UIK-FRM-0001` through `REQ-UIK-FRM-0007`, `REQ-UIK-INP-0001` through `REQ-UIK-INP-0007`, `REQ-UIK-SEL-0001` through `REQ-UIK-SEL-0004`, `REQ-UIK-GRP-0001` through `REQ-UIK-GRP-0004`, and `REQ-UIK-RO-0001` through `REQ-UIK-RO-0003`.
 - Binary choice and validation: `REQ-UIK-CHO-0001` through `REQ-UIK-CHO-0005`, and `REQ-UIK-VAL-0001` through `REQ-UIK-VAL-0006`.
 - Toolbar, content, and utility surfaces: `REQ-UIK-FLT-0001` through `REQ-UIK-FLT-0005`, `REQ-UIK-CARD-0001` through `REQ-UIK-CARD-0005`, `REQ-UIK-LIST-0001` through `REQ-UIK-LIST-0005`, `REQ-UIK-TBL-0001` through `REQ-UIK-TBL-0007`, and `REQ-UIK-UTL-0001` through `REQ-UIK-UTL-0005`.
 - Navigation and page layout surfaces: `REQ-UIK-NAV-0001` through `REQ-UIK-NAV-0007`, and `REQ-UIK-LAY-0001` through `REQ-UIK-LAY-0004`.
 - Feedback, overlay, metrics, and file surfaces: `REQ-UIK-FDBK-0001` through `REQ-UIK-FDBK-0008`, `REQ-UIK-OVL-0001` through `REQ-UIK-OVL-0008`, `REQ-UIK-MET-0001` through `REQ-UIK-MET-0006`, and `REQ-UIK-FILE-0001` through `REQ-UIK-FILE-0005`.
-- Interaction surfaces: `REQ-UIK-INT-0001` through `REQ-UIK-INT-0008`.
+- Interaction surfaces: `REQ-UIK-INT-0001` through `REQ-UIK-INT-0009`.
 
 ## Evidence
 
-- The SCSS source and compiled CSS export the public `inc-*` class surface covered by the revised specs, including the naming baseline, the shared token layer, the navigation shell, and the page layout split.
-- The example pages exercise the same classes in the shipped markup patterns.
-- The JS helper exposes the documented `data-inc-toggle` and `data-inc-dismiss` behaviors for menus, tabs, collapse, modal, offcanvas, dropdown menus, and auto-refresh.
+- The SCSS source and compiled CSS export the public `inc-*` class surface covered by the revised specs, including the naming baseline, the shared token layer, the control-convention layer, the navigation shell, and the page layout split.
+- The example pages exercise the same classes in the shipped markup patterns, including checkbox, radio, and switch choice controls with the flat check element names plus both button and anchor button surfaces.
+- The JS helper exposes the documented `data-inc-toggle`, `data-inc-dismiss`, `data-inc-backdrop-for`, `data-inc-auto-refresh`, `data-inc-refresh-seconds`, `data-inc-refresh-label`, `data-inc-refresh-loading-label`, `data-inc-refresh-paused-label`, `data-inc-refresh-pause-action-label`, `data-inc-refresh-resume-action-label`, and `data-inc-native-dialog-open` behaviors for menus, tabs, collapse, modal, offcanvas, dropdown menus, native dialog launch, and auto-refresh.
 
 ## Status
 

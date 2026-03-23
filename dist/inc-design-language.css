@@ -2000,8 +2000,7 @@ progress {
   border-color: var(--bs-table-border-color);
 }
 
-.table-light, .inc-table__cell--light, .inc-table__row--light, .inc-table__header--light,
-.inc-table__header th.inc-table__header--light, .inc-table--light {
+.table-light {
   --bs-table-color: #121316;
   --bs-table-bg: #f6f6f6;
   --bs-table-border-color: rgb(200.4, 200.6, 201.2);
@@ -2015,8 +2014,7 @@ progress {
   border-color: var(--bs-table-border-color);
 }
 
-.table-dark, .inc-table__cell--dark, .inc-table__row--dark, .inc-table__header--dark,
-.inc-table__header th.inc-table__header--dark, .inc-table--dark {
+.table-dark {
   --bs-table-color: #ffffff;
   --bs-table-bg: #121316;
   --bs-table-border-color: rgb(65.4, 66.2, 68.6);
@@ -2313,7 +2311,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   padding-left: 1.5em;
   margin-bottom: 0.125rem;
 }
-.form-check .form-check-input, .form-check .inc-form__check__input, .inc-form__check .form-check-input, .inc-form__check .inc-form__check__input {
+.form-check .form-check-input, .form-check .inc-form__check-input, .inc-form__check .form-check-input, .inc-form__check .inc-form__check-input {
   float: left;
   margin-left: -1.5em;
 }
@@ -2323,13 +2321,13 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   padding-left: 0;
   text-align: right;
 }
-.form-check-reverse .form-check-input, .form-check-reverse .inc-form__check__input {
+.form-check-reverse .form-check-input, .form-check-reverse .inc-form__check-input {
   float: right;
   margin-right: -1.5em;
   margin-left: 0;
 }
 
-.form-check-input, .inc-form__check__input {
+.form-check-input, .inc-form__check-input {
   --bs-form-check-bg: #ffffff;
   flex-shrink: 0;
   width: 1em;
@@ -2345,41 +2343,41 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   border: var(--bs-border-width) solid var(--bs-border-color);
   print-color-adjust: exact;
 }
-.form-check-input[type=checkbox], [type=checkbox].inc-form__check__input {
+.form-check-input[type=checkbox], [type=checkbox].inc-form__check-input {
   border-radius: 0.25em;
 }
-.form-check-input[type=radio], [type=radio].inc-form__check__input {
+.form-check-input[type=radio], [type=radio].inc-form__check-input {
   border-radius: 50%;
 }
-.form-check-input:active, .inc-form__check__input:active {
+.form-check-input:active, .inc-form__check-input:active {
   filter: brightness(90%);
 }
-.form-check-input:focus, .inc-form__check__input:focus {
+.form-check-input:focus, .inc-form__check-input:focus {
   border-color: #b9c5ff;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(68, 89, 198, 0.25);
 }
-.form-check-input:checked, .inc-form__check__input:checked {
+.form-check-input:checked, .inc-form__check-input:checked {
   background-color: #4459c6;
   border-color: #4459c6;
 }
-.form-check-input:checked[type=checkbox], .inc-form__check__input:checked[type=checkbox] {
+.form-check-input:checked[type=checkbox], .inc-form__check-input:checked[type=checkbox] {
   --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
 }
-.form-check-input:checked[type=radio], .inc-form__check__input:checked[type=radio] {
+.form-check-input:checked[type=radio], .inc-form__check-input:checked[type=radio] {
   --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23ffffff'/%3e%3c/svg%3e");
 }
-.form-check-input[type=checkbox]:indeterminate, [type=checkbox].inc-form__check__input:indeterminate {
+.form-check-input[type=checkbox]:indeterminate, [type=checkbox].inc-form__check-input:indeterminate {
   background-color: #4459c6;
   border-color: #4459c6;
   --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
 }
-.form-check-input:disabled, .inc-form__check__input:disabled {
+.form-check-input:disabled, .inc-form__check-input:disabled {
   pointer-events: none;
   filter: none;
   opacity: 0.5;
 }
-.form-check-input[disabled] ~ .form-check-label, .form-check-input[disabled] ~ .inc-form__check__label, [disabled].inc-form__check__input ~ .form-check-label, [disabled].inc-form__check__input ~ .inc-form__check__label, .form-check-input:disabled ~ .form-check-label, .form-check-input:disabled ~ .inc-form__check__label, .inc-form__check__input:disabled ~ .form-check-label, .inc-form__check__input:disabled ~ .inc-form__check__label {
+.form-check-input[disabled] ~ .form-check-label, .form-check-input[disabled] ~ .inc-form__check-label, [disabled].inc-form__check-input ~ .form-check-label, [disabled].inc-form__check-input ~ .inc-form__check-label, .form-check-input:disabled ~ .form-check-label, .form-check-input:disabled ~ .inc-form__check-label, .inc-form__check-input:disabled ~ .form-check-label, .inc-form__check-input:disabled ~ .inc-form__check-label {
   cursor: default;
   opacity: 0.5;
 }
@@ -2387,7 +2385,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
 .form-switch, .inc-form__switch {
   padding-left: 2.5em;
 }
-.form-switch .form-check-input, .inc-form__switch .form-check-input, .form-switch .inc-form__check__input, .inc-form__switch .inc-form__check__input {
+.form-switch .form-check-input, .inc-form__switch .form-check-input, .form-switch .inc-form__check-input, .inc-form__switch .inc-form__check-input {
   --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%2842, 49, 66, 0.25%29'/%3e%3c/svg%3e");
   width: 2em;
   margin-left: -2.5em;
@@ -2397,14 +2395,14 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   transition: background-position 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-switch .form-check-input, .inc-form__switch .form-check-input, .form-switch .inc-form__check__input, .inc-form__switch .inc-form__check__input {
+  .form-switch .form-check-input, .inc-form__switch .form-check-input, .form-switch .inc-form__check-input, .inc-form__switch .inc-form__check-input {
     transition: none;
   }
 }
-.form-switch .form-check-input:focus, .inc-form__switch .form-check-input:focus, .form-switch .inc-form__check__input:focus, .inc-form__switch .inc-form__check__input:focus {
+.form-switch .form-check-input:focus, .inc-form__switch .form-check-input:focus, .form-switch .inc-form__check-input:focus, .inc-form__switch .inc-form__check-input:focus {
   --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23b9c5ff'/%3e%3c/svg%3e");
 }
-.form-switch .form-check-input:checked, .inc-form__switch .form-check-input:checked, .form-switch .inc-form__check__input:checked, .inc-form__switch .inc-form__check__input:checked {
+.form-switch .form-check-input:checked, .inc-form__switch .form-check-input:checked, .form-switch .inc-form__check-input:checked, .inc-form__switch .inc-form__check-input:checked {
   background-position: right center;
   --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23ffffff'/%3e%3c/svg%3e");
 }
@@ -2412,7 +2410,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   padding-right: 2.5em;
   padding-left: 0;
 }
-.form-switch.form-check-reverse .form-check-input, .form-check-reverse.inc-form__switch .form-check-input, .form-switch.form-check-reverse .inc-form__check__input, .form-check-reverse.inc-form__switch .inc-form__check__input {
+.form-switch.form-check-reverse .form-check-input, .form-check-reverse.inc-form__switch .form-check-input, .form-switch.form-check-reverse .inc-form__check-input, .form-check-reverse.inc-form__switch .inc-form__check-input {
   margin-right: -2.5em;
   margin-left: 0;
 }
@@ -2433,7 +2431,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   opacity: 0.65;
 }
 
-[data-bs-theme=dark] .form-switch .form-check-input:not(:checked):not(:focus), [data-bs-theme=dark] .inc-form__switch .form-check-input:not(:checked):not(:focus), [data-bs-theme=dark] .form-switch .inc-form__check__input:not(:checked):not(:focus), [data-bs-theme=dark] .inc-form__switch .inc-form__check__input:not(:checked):not(:focus) {
+[data-bs-theme=dark] .form-switch .form-check-input:not(:checked):not(:focus), [data-bs-theme=dark] .inc-form__switch .form-check-input:not(:checked):not(:focus), [data-bs-theme=dark] .form-switch .inc-form__check-input:not(:checked):not(:focus), [data-bs-theme=dark] .inc-form__switch .inc-form__check-input:not(:checked):not(:focus) {
   --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%28255, 255, 255, 0.25%29'/%3e%3c/svg%3e");
 }
 
@@ -2878,20 +2876,20 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   width: calc(3rem + calc(1.5em + 0.75rem));
 }
 
-.was-validated .form-check-input:valid, .was-validated .inc-form__check__input:valid, .form-check-input.is-valid, .form-check-input.inc-form--is-valid, .is-valid.inc-form__check__input, .inc-form__check__input.inc-form--is-valid {
+.was-validated .form-check-input:valid, .was-validated .inc-form__check-input:valid, .form-check-input.is-valid, .form-check-input.inc-form--is-valid, .is-valid.inc-form__check-input, .inc-form__check-input.inc-form--is-valid {
   border-color: var(--bs-form-valid-border-color);
 }
-.was-validated .form-check-input:valid:checked, .was-validated .inc-form__check__input:valid:checked, .form-check-input.is-valid:checked, .form-check-input.inc-form--is-valid:checked, .is-valid.inc-form__check__input:checked, .inc-form__check__input.inc-form--is-valid:checked {
+.was-validated .form-check-input:valid:checked, .was-validated .inc-form__check-input:valid:checked, .form-check-input.is-valid:checked, .form-check-input.inc-form--is-valid:checked, .is-valid.inc-form__check-input:checked, .inc-form__check-input.inc-form--is-valid:checked {
   background-color: var(--bs-form-valid-color);
 }
-.was-validated .form-check-input:valid:focus, .was-validated .inc-form__check__input:valid:focus, .form-check-input.is-valid:focus, .form-check-input.inc-form--is-valid:focus, .is-valid.inc-form__check__input:focus, .inc-form__check__input.inc-form--is-valid:focus {
+.was-validated .form-check-input:valid:focus, .was-validated .inc-form__check-input:valid:focus, .form-check-input.is-valid:focus, .form-check-input.inc-form--is-valid:focus, .is-valid.inc-form__check-input:focus, .inc-form__check-input.inc-form--is-valid:focus {
   box-shadow: 0 0 0 0.25rem rgba(var(--bs-success-rgb), 0.25);
 }
-.was-validated .form-check-input:valid ~ .form-check-label, .was-validated .form-check-input:valid ~ .inc-form__check__label, .was-validated .inc-form__check__input:valid ~ .form-check-label, .was-validated .inc-form__check__input:valid ~ .inc-form__check__label, .form-check-input.is-valid ~ .form-check-label, .form-check-input.inc-form--is-valid ~ .form-check-label, .form-check-input.is-valid ~ .inc-form__check__label, .form-check-input.inc-form--is-valid ~ .inc-form__check__label, .is-valid.inc-form__check__input ~ .form-check-label, .inc-form__check__input.inc-form--is-valid ~ .form-check-label, .is-valid.inc-form__check__input ~ .inc-form__check__label, .inc-form__check__input.inc-form--is-valid ~ .inc-form__check__label {
+.was-validated .form-check-input:valid ~ .form-check-label, .was-validated .form-check-input:valid ~ .inc-form__check-label, .was-validated .inc-form__check-input:valid ~ .form-check-label, .was-validated .inc-form__check-input:valid ~ .inc-form__check-label, .form-check-input.is-valid ~ .form-check-label, .form-check-input.inc-form--is-valid ~ .form-check-label, .form-check-input.is-valid ~ .inc-form__check-label, .form-check-input.inc-form--is-valid ~ .inc-form__check-label, .is-valid.inc-form__check-input ~ .form-check-label, .inc-form__check-input.inc-form--is-valid ~ .form-check-label, .is-valid.inc-form__check-input ~ .inc-form__check-label, .inc-form__check-input.inc-form--is-valid ~ .inc-form__check-label {
   color: var(--bs-form-valid-color);
 }
 
-.form-check-inline .form-check-input ~ .valid-feedback, .form-check-inline .form-check-input ~ .inc-form__valid-feedback, .form-check-inline .inc-form__check__input ~ .valid-feedback, .form-check-inline .inc-form__check__input ~ .inc-form__valid-feedback {
+.form-check-inline .form-check-input ~ .valid-feedback, .form-check-inline .form-check-input ~ .inc-form__valid-feedback, .form-check-inline .inc-form__check-input ~ .valid-feedback, .form-check-inline .inc-form__check-input ~ .inc-form__valid-feedback {
   margin-left: 0.5em;
 }
 
@@ -2995,20 +2993,20 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   width: calc(3rem + calc(1.5em + 0.75rem));
 }
 
-.was-validated .form-check-input:invalid, .was-validated .inc-form__check__input:invalid, .form-check-input.is-invalid, .form-check-input.inc-form--is-invalid, .is-invalid.inc-form__check__input, .inc-form__check__input.inc-form--is-invalid {
+.was-validated .form-check-input:invalid, .was-validated .inc-form__check-input:invalid, .form-check-input.is-invalid, .form-check-input.inc-form--is-invalid, .is-invalid.inc-form__check-input, .inc-form__check-input.inc-form--is-invalid {
   border-color: var(--bs-form-invalid-border-color);
 }
-.was-validated .form-check-input:invalid:checked, .was-validated .inc-form__check__input:invalid:checked, .form-check-input.is-invalid:checked, .form-check-input.inc-form--is-invalid:checked, .is-invalid.inc-form__check__input:checked, .inc-form__check__input.inc-form--is-invalid:checked {
+.was-validated .form-check-input:invalid:checked, .was-validated .inc-form__check-input:invalid:checked, .form-check-input.is-invalid:checked, .form-check-input.inc-form--is-invalid:checked, .is-invalid.inc-form__check-input:checked, .inc-form__check-input.inc-form--is-invalid:checked {
   background-color: var(--bs-form-invalid-color);
 }
-.was-validated .form-check-input:invalid:focus, .was-validated .inc-form__check__input:invalid:focus, .form-check-input.is-invalid:focus, .form-check-input.inc-form--is-invalid:focus, .is-invalid.inc-form__check__input:focus, .inc-form__check__input.inc-form--is-invalid:focus {
+.was-validated .form-check-input:invalid:focus, .was-validated .inc-form__check-input:invalid:focus, .form-check-input.is-invalid:focus, .form-check-input.inc-form--is-invalid:focus, .is-invalid.inc-form__check-input:focus, .inc-form__check-input.inc-form--is-invalid:focus {
   box-shadow: 0 0 0 0.25rem rgba(var(--bs-danger-rgb), 0.25);
 }
-.was-validated .form-check-input:invalid ~ .form-check-label, .was-validated .form-check-input:invalid ~ .inc-form__check__label, .was-validated .inc-form__check__input:invalid ~ .form-check-label, .was-validated .inc-form__check__input:invalid ~ .inc-form__check__label, .form-check-input.is-invalid ~ .form-check-label, .form-check-input.inc-form--is-invalid ~ .form-check-label, .form-check-input.is-invalid ~ .inc-form__check__label, .form-check-input.inc-form--is-invalid ~ .inc-form__check__label, .is-invalid.inc-form__check__input ~ .form-check-label, .inc-form__check__input.inc-form--is-invalid ~ .form-check-label, .is-invalid.inc-form__check__input ~ .inc-form__check__label, .inc-form__check__input.inc-form--is-invalid ~ .inc-form__check__label {
+.was-validated .form-check-input:invalid ~ .form-check-label, .was-validated .form-check-input:invalid ~ .inc-form__check-label, .was-validated .inc-form__check-input:invalid ~ .form-check-label, .was-validated .inc-form__check-input:invalid ~ .inc-form__check-label, .form-check-input.is-invalid ~ .form-check-label, .form-check-input.inc-form--is-invalid ~ .form-check-label, .form-check-input.is-invalid ~ .inc-form__check-label, .form-check-input.inc-form--is-invalid ~ .inc-form__check-label, .is-invalid.inc-form__check-input ~ .form-check-label, .inc-form__check-input.inc-form--is-invalid ~ .form-check-label, .is-invalid.inc-form__check-input ~ .inc-form__check-label, .inc-form__check-input.inc-form--is-invalid ~ .inc-form__check-label {
   color: var(--bs-form-invalid-color);
 }
 
-.form-check-inline .form-check-input ~ .invalid-feedback, .form-check-inline .form-check-input ~ .inc-form__invalid-feedback, .form-check-inline .inc-form__check__input ~ .invalid-feedback, .form-check-inline .inc-form__check__input ~ .inc-form__invalid-feedback {
+.form-check-inline .form-check-input ~ .invalid-feedback, .form-check-inline .form-check-input ~ .inc-form__invalid-feedback, .form-check-inline .inc-form__check-input ~ .invalid-feedback, .form-check-inline .inc-form__check-input ~ .inc-form__invalid-feedback {
   margin-left: 0.5em;
 }
 
@@ -3224,7 +3222,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   --bs-btn-disabled-border-color: #d11a2a;
 }
 
-.btn-light, .inc-btn--light {
+.btn-light {
   --bs-btn-color: #121316;
   --bs-btn-bg: #f6f6f6;
   --bs-btn-border-color: #f6f6f6;
@@ -3241,7 +3239,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   --bs-btn-disabled-border-color: #f6f6f6;
 }
 
-.btn-dark, .inc-btn--dark {
+.btn-dark {
   --bs-btn-color: #ffffff;
   --bs-btn-bg: #121316;
   --bs-btn-border-color: #121316;
@@ -3275,7 +3273,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   --bs-gradient: none;
 }
 
-.btn-outline-secondary, .inc-btn--outline-secondary {
+.btn-outline-secondary, .inc-user-menu__toggle, .inc-btn--outline-secondary {
   --bs-btn-color: #3a4358;
   --bs-btn-border-color: #3a4358;
   --bs-btn-hover-color: #ffffff;
@@ -3360,7 +3358,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   --bs-gradient: none;
 }
 
-.btn-outline-light, .inc-user-menu__toggle, .inc-btn--outline-light {
+.btn-outline-light {
   --bs-btn-color: #f6f6f6;
   --bs-btn-border-color: #f6f6f6;
   --bs-btn-hover-color: #121316;
@@ -3377,7 +3375,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   --bs-gradient: none;
 }
 
-.btn-outline-dark, .inc-btn--outline-dark {
+.btn-outline-dark {
   --bs-btn-color: #121316;
   --bs-btn-border-color: #121316;
   --bs-btn-hover-color: #ffffff;
@@ -3771,7 +3769,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   color: var(--bs-dropdown-link-color);
 }
 
-.dropdown-menu-dark, .inc-dropdown__menu--dark {
+.dropdown-menu-dark {
   --bs-dropdown-color: #f1f1f1;
   --bs-dropdown-bg: #525355;
   --bs-dropdown-border-color: var(--bs-border-color-translucent);
@@ -4554,7 +4552,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   overflow-y: visible;
 }
 
-.navbar-dark, .inc-navbar--dark,
+.navbar-dark,
 .navbar[data-bs-theme=dark],
 [data-bs-theme=dark].inc-navbar {
   --bs-navbar-color: rgba(255, 255, 255, 0.55);
@@ -5160,14 +5158,14 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   --bs-alert-link-color: var(--bs-danger-text-emphasis);
 }
 
-.alert-light, .inc-alert--light {
+.alert-light {
   --bs-alert-color: var(--bs-light-text-emphasis);
   --bs-alert-bg: var(--bs-light-bg-subtle);
   --bs-alert-border-color: var(--bs-light-border-subtle);
   --bs-alert-link-color: var(--bs-light-text-emphasis);
 }
 
-.alert-dark, .inc-alert--dark {
+.alert-dark {
   --bs-alert-color: var(--bs-dark-text-emphasis);
   --bs-alert-bg: var(--bs-dark-bg-subtle);
   --bs-alert-border-color: var(--bs-dark-border-subtle);
@@ -5554,7 +5552,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   --bs-list-group-active-border-color: var(--bs-danger-text-emphasis);
 }
 
-.list-group-item-light, .inc-list-group__item--light {
+.list-group-item-light {
   --bs-list-group-color: var(--bs-light-text-emphasis);
   --bs-list-group-bg: var(--bs-light-bg-subtle);
   --bs-list-group-border-color: var(--bs-light-border-subtle);
@@ -5567,7 +5565,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   --bs-list-group-active-border-color: var(--bs-light-text-emphasis);
 }
 
-.list-group-item-dark, .inc-list-group__item--dark {
+.list-group-item-dark {
   --bs-list-group-color: var(--bs-dark-text-emphasis);
   --bs-list-group-bg: var(--bs-dark-bg-subtle);
   --bs-list-group-border-color: var(--bs-dark-border-subtle);
@@ -8725,12 +8723,12 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   color: rgba(var(--bs-danger-rgb), var(--bs-text-opacity)) !important;
 }
 
-.text-light, .inc-spinner--grow--light, .inc-spinner--border--light {
+.text-light {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-light-rgb), var(--bs-text-opacity)) !important;
 }
 
-.text-dark, .inc-spinner--grow--dark, .inc-spinner--border--dark, .inc-form__select--warning, .inc-form__control--warning {
+.text-dark, .inc-form__select--warning, .inc-form__control--warning {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-dark-rgb), var(--bs-text-opacity)) !important;
 }
@@ -9020,12 +9018,12 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
   background-color: rgba(var(--bs-danger-rgb), var(--bs-bg-opacity)) !important;
 }
 
-.bg-light, .inc-badge--light {
+.bg-light {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
 
-.bg-dark, .inc-badge--dark {
+.bg-dark {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
@@ -14298,11 +14296,6 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
   border-top-right-radius: 0.25rem;
   border-right: none;
 }
-.inc-table--light thead th {
-  background-color: #ffffff !important;
-  color: #121316 !important;
-  border-color: #c4c4c5 !important;
-}
 .inc-table tbody td,
 .inc-table tbody th,
 .inc-table tfoot td,
@@ -14907,7 +14900,7 @@ body.inc-offcanvas-open {
   border-color: #009743;
   box-shadow: 0 0 0 0.1875rem rgba(0, 151, 67, 0.12);
 }
-.inc-form__check.is-invalid .inc-form__check__label, .inc-form__check.inc-form--is-invalid .inc-form__check__label {
+.inc-form__check.is-invalid .inc-form__check-label, .inc-form__check.inc-form--is-invalid .inc-form__check-label {
   color: #d11a2a;
 }
 .inc-form__error-summary {

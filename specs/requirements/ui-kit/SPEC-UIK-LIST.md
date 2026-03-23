@@ -40,7 +40,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-LIST-0002 Provide list-group item variants
-The list surface MUST provide `inc-list-group__item--action`, `inc-list-group__item--primary`, `inc-list-group__item--secondary`, `inc-list-group__item--success`, `inc-list-group__item--danger`, `inc-list-group__item--warning`, `inc-list-group__item--info`, `inc-list-group__item--light`, and `inc-list-group__item--dark` for selectable or themed rows, with action rows remaining obviously clickable or focusable when used as navigation surfaces.
+The list surface MUST provide `inc-list-group__item--action`, `inc-list-group__item--primary`, `inc-list-group__item--secondary`, `inc-list-group__item--success`, `inc-list-group__item--danger`, `inc-list-group__item--warning`, and `inc-list-group__item--info` for selectable or themed rows, with action rows remaining obviously clickable or focusable when used as navigation surfaces.
 
 Trace:
 - Code Refs:

@@ -20,14 +20,14 @@ Define the behavior of the optional vanilla-JS helper shipped with the UI kit.
 
 ## Scope
 
-This specification covers the helper-managed state transitions for menus, tabs, collapse, modal, offcanvas, and auto-refresh controls. Native `<details>` and `<dialog>` workflows are handled by the browser and are intentionally outside this helper contract.
+This specification covers the helper-managed state transitions for menus, tabs, collapse, modal, offcanvas, and auto-refresh controls, plus the public launch hook used to open native `<dialog>` surfaces. Native `<details>` workflows are handled by the browser, and native `<dialog>` behavior remains browser-native after launch.
 
 ## Context
 
-Most of the kit is CSS-only, but the shipped helper gives the design language a small state layer for the handful of primitives that still need it. Native browser primitives are preferred whenever the platform already provides the behavior.
+Most of the kit is CSS-only, but the shipped helper gives the design language a small state layer for the handful of primitives that still need it. Native browser primitives are preferred whenever the platform already provides the behavior, and the dialog launch hook exists only to open the native element rather than emulate one.
 
 ## REQ-UIK-INT-0001 Recognize helper-managed toggle triggers
-The helper MUST recognize `data-inc-toggle="menu"`, `data-inc-toggle="tab"`, `data-inc-toggle="collapse"`, `data-inc-toggle="modal"`, and `data-inc-toggle="offcanvas"` triggers while leaving native `<details>` and `<dialog>` behavior to the browser.
+The helper MUST recognize `data-inc-toggle="menu"`, `data-inc-toggle="tab"`, `data-inc-toggle="collapse"`, `data-inc-toggle="modal"`, and `data-inc-toggle="offcanvas"` triggers while leaving native `<details>` behavior to the browser.
 
 Trace:
 - Code Refs:
@@ -65,7 +65,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-INT-0004 Support dismiss and focus-restoration behavior
-The helper MUST support dismiss triggers for modal and offcanvas surfaces and restore focus to the invoking control when possible, while trapping focus inside open overlays.
+The helper MUST support `data-inc-dismiss` triggers for modal and offcanvas surfaces and restore focus to the invoking control when possible, while trapping focus inside open overlays.
 
 Trace:
 - Code Refs:
@@ -76,7 +76,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-INT-0005 Support auto-refresh toggle controls
-The helper SHOULD support auto-refresh widgets with pause and resume controls while keeping the toggle state reflected in `aria-pressed` and visible status text.
+The helper SHOULD support auto-refresh widgets exposed with `data-inc-auto-refresh` and `data-inc-action="auto-refresh-toggle"` hooks while keeping the toggle state reflected in `aria-pressed` and visible status text sourced from `data-inc-refresh-seconds`, `data-inc-refresh-label`, `data-inc-refresh-loading-label`, `data-inc-refresh-paused-label`, `data-inc-refresh-pause-action-label`, and `data-inc-refresh-resume-action-label`.
 
 Trace:
   - Code Refs:
@@ -119,5 +119,17 @@ Trace:
   - `src/inc-design-language.scss`
   - `overlay-workflows.html`
   - `reference.html`
+- Verified By:
+  - `VER-UIK-0001`
+
+## REQ-UIK-INT-0009 Support native dialog open hooks
+The helper MUST recognize `data-inc-native-dialog-open` triggers and open the referenced native `<dialog>` surface without replacing the dialog's native close, backdrop, or focus behavior.
+
+Trace:
+- Code Refs:
+  - `src/inc-design-language.js`
+  - `reference.html`
+  - `native-patterns.html`
+  - `dist/inc-design-language.js`
 - Verified By:
   - `VER-UIK-0001`

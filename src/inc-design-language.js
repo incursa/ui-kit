@@ -6,6 +6,7 @@
         menu: ".inc-dropdown__menu",
         collapseToggle: '[data-inc-toggle="collapse"]',
         tabToggle: '[data-inc-toggle="tab"]',
+        nativeDialogOpen: "[data-inc-native-dialog-open]",
         autoRefresh: "[data-inc-auto-refresh]",
         autoRefreshToggle: '[data-inc-action="auto-refresh-toggle"]',
         modalToggle: '[data-inc-toggle="modal"]',
@@ -357,6 +358,24 @@
         });
         syncOverlayBodyState();
         focusWithin(panel);
+    }
+
+    function openNativeDialog(trigger) {
+        const dialogId = trigger.getAttribute("data-inc-native-dialog-open");
+        const dialog = dialogId ? document.getElementById(dialogId) : null;
+
+        if (!(dialog instanceof HTMLElement) || dialog.tagName !== "DIALOG" || dialog.open) {
+            return;
+        }
+
+        if (typeof dialog.showModal === "function") {
+            dialog.showModal();
+            return;
+        }
+
+        if (typeof dialog.show === "function") {
+            dialog.show();
+        }
     }
 
     function closeOffcanvas(panel, options = {}) {
@@ -799,6 +818,14 @@
                 }
 
                 activateTab(tabToggle);
+                return;
+            }
+
+            const nativeDialogOpen = event.target.closest(selectors.nativeDialogOpen);
+
+            if (nativeDialogOpen) {
+                event.preventDefault();
+                openNativeDialog(nativeDialogOpen);
                 return;
             }
 

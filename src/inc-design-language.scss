@@ -423,14 +423,6 @@
         color: $inc-text-inverse;
     }
 
-    &--light {
-        @extend .btn-light;
-    }
-
-    &--dark {
-        @extend .btn-dark;
-    }
-
     &--link {
         @extend .btn-link;
     }
@@ -459,14 +451,6 @@
         @extend .btn-outline-info;
     }
 
-    &--outline-light {
-        @extend .btn-outline-light;
-    }
-
-    &--outline-dark {
-        @extend .btn-outline-dark;
-    }
-
     &--sm {
         @extend .btn-sm;
     }
@@ -476,10 +460,10 @@
     }
 
     &--micro {
-        padding: 0.15rem 0.4rem;
-        font-size: 0.7rem;
-        line-height: 1.2;
-        border-radius: 0.15rem;
+        padding: $inc-control-density-micro-padding-block $inc-control-density-micro-padding-inline;
+        font-size: $inc-control-density-micro-font-size;
+        line-height: $inc-control-density-micro-line-height;
+        border-radius: $inc-control-density-micro-border-radius;
     }
 
     &--nowrap {
@@ -565,14 +549,6 @@
         border: 1px solid $inc-blue-700;
     }
 
-    &--light {
-        @extend .bg-light;
-    }
-
-    &--dark {
-        @extend .bg-dark;
-    }
-
     &--pill {
         @extend .rounded-pill;
     }
@@ -609,14 +585,6 @@
         @extend .alert-info;
     }
 
-    &--light {
-        @extend .alert-light;
-    }
-
-    &--dark {
-        @extend .alert-dark;
-    }
-
     &--dismissible {
         @extend .alert-dismissible;
     }
@@ -647,11 +615,11 @@
         }
 
         &--micro {
-            padding: 0.15rem 0.4rem;
-            font-size: 0.7rem;
-            line-height: 1.2;
-            min-height: 1.5rem;
-            border-radius: 0.15rem;
+            padding: $inc-control-density-micro-padding-block $inc-control-density-micro-padding-inline;
+            font-size: $inc-control-density-micro-font-size;
+            line-height: $inc-control-density-micro-line-height;
+            min-height: $inc-control-density-micro-min-height;
+            border-radius: $inc-control-density-micro-border-radius;
         }
 
         &--expand {
@@ -682,13 +650,13 @@
         }
 
         &--micro {
-            padding: 0.15rem 0.4rem 0.15rem 0.75rem;
-            font-size: 0.7rem;
-            line-height: 1.2;
-            min-height: 1.5rem;
-            border-radius: 0.15rem;
-            background-position: right 0.3rem center;
-            background-size: 8px 6px;
+            padding: $inc-control-density-micro-padding-block $inc-control-density-micro-padding-inline $inc-control-density-micro-padding-block $inc-control-density-micro-select-padding-inline-start;
+            font-size: $inc-control-density-micro-font-size;
+            line-height: $inc-control-density-micro-line-height;
+            min-height: $inc-control-density-micro-min-height;
+            border-radius: $inc-control-density-micro-border-radius;
+            background-position: right $inc-control-density-micro-select-arrow-inset-inline-end center;
+            background-size: $inc-control-density-micro-select-arrow-width $inc-control-density-micro-select-arrow-height;
         }
 
         &--expand {
@@ -704,11 +672,11 @@
     &__check {
         @extend .form-check;
 
-        &__input {
+        &-input {
             @extend .form-check-input;
         }
 
-        &__label {
+        &-label {
             @extend .form-check-label;
         }
     }
@@ -934,20 +902,20 @@
     }
 
     &--micro {
-        min-height: 1.5rem;
+        min-height: $inc-control-density-micro-min-height;
 
         > .inc-form__control,
         > .inc-form__select {
-            font-size: 0.7rem;
-            padding: 0.15rem 0.4rem;
-            line-height: 1.2;
+            font-size: $inc-control-density-micro-font-size;
+            padding: $inc-control-density-micro-padding-block $inc-control-density-micro-padding-inline;
+            line-height: $inc-control-density-micro-line-height;
         }
 
         > .input-group-text,
         > .inc-input-group__text {
-            padding: 0.15rem 0.4rem;
-            font-size: 0.7rem;
-            line-height: 1.2;
+            padding: $inc-control-density-micro-padding-block $inc-control-density-micro-padding-inline;
+            font-size: $inc-control-density-micro-font-size;
+            line-height: $inc-control-density-micro-line-height;
         }
     }
 
@@ -1015,10 +983,6 @@
 
     &__menu {
         @extend .dropdown-menu;
-
-        &--dark {
-            @extend .dropdown-menu-dark;
-        }
 
         &--end {
             @extend .dropdown-menu-end;
@@ -1900,14 +1864,6 @@
         margin-left: auto;
     }
 
-    &--light {
-        @extend .navbar-light;
-    }
-
-    &--dark {
-        @extend .navbar-dark;
-    }
-
     &--expand-sm {
         @extend .navbar-expand-sm;
     }
@@ -1967,7 +1923,7 @@
 
     &__toggle {
         @extend .btn;
-        @extend .btn-outline-light;
+        @extend .btn-outline-secondary;
         display: inline-flex;
         align-items: center;
         gap: 0.625rem;
@@ -2771,13 +2727,6 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
             @extend .list-group-item-info;
         }
 
-        &--light {
-            @extend .list-group-item-light;
-        }
-
-        &--dark {
-            @extend .list-group-item-dark;
-        }
     }
 }
 
@@ -3088,13 +3037,6 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
             @extend .text-info;
         }
 
-        &--light {
-            @extend .text-light;
-        }
-
-        &--dark {
-            @extend .text-dark;
-        }
     }
 
     &--grow {
@@ -3128,13 +3070,6 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
             @extend .text-info;
         }
 
-        &--light {
-            @extend .text-light;
-        }
-
-        &--dark {
-            @extend .text-dark;
-        }
     }
 }
 
@@ -3185,12 +3120,6 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
     thead tr:first-child th:last-child {
         border-top-right-radius: $inc-radius-panel;
         border-right: none;
-    }
-
-    &--light thead th {
-        background-color: $inc-surface-primary !important;
-        color: $inc-text-primary !important;
-        border-color: $inc-border-default !important;
     }
 
     tbody,
@@ -3291,14 +3220,6 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
 
     &--info {
         @extend .table-info;
-    }
-
-    &--light {
-        @extend .table-light;
-    }
-
-    &--dark {
-        @extend .table-dark;
     }
 
     &--text-small {
@@ -3448,16 +3369,6 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
             @extend .table-info;
         }
 
-        &--light,
-        th.inc-table__header--light {
-            @extend .table-light;
-        }
-
-        &--dark,
-        th.inc-table__header--dark {
-            @extend .table-dark;
-        }
-
         &--center,
         th.inc-table__header--center {
             text-align: center;
@@ -3514,13 +3425,6 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
             @extend .table-info;
         }
 
-        &--light {
-            @extend .table-light;
-        }
-
-        &--dark {
-            @extend .table-dark;
-        }
     }
 
     &__cell {
@@ -3550,14 +3454,6 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
 
         &--info {
             @extend .table-info;
-        }
-
-        &--light {
-            @extend .table-light;
-        }
-
-        &--dark {
-            @extend .table-dark;
         }
 
         &--action {
@@ -4128,7 +4024,7 @@ body.inc-offcanvas-open {
     }
 
     &__check {
-        &.is-invalid .inc-form__check__label {
+        &.is-invalid .inc-form__check-label {
             color: $danger;
         }
     }

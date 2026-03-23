@@ -54,7 +54,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-MET-0003 Provide compact status indicators
-The metrics surface MUST provide `inc-badge`, `inc-badge--primary`, `inc-badge--secondary`, `inc-badge--success`, `inc-badge--danger`, `inc-badge--warning`, `inc-badge--info`, `inc-badge--light`, `inc-badge--dark`, `inc-badge--pill`, `inc-progress`, `inc-progress--sm`, `inc-progress--success`, `inc-progress--warning`, `inc-progress--danger`, `inc-meter`, `inc-meter--success`, `inc-meter--warning`, and `inc-meter--danger` indicators for compact status and completion signaling that communicate state with both text and visual emphasis where appropriate.
+The metrics surface MUST provide `inc-badge`, `inc-badge--primary`, `inc-badge--secondary`, `inc-badge--success`, `inc-badge--danger`, `inc-badge--warning`, `inc-badge--info`, `inc-badge--pill`, `inc-progress`, `inc-progress--sm`, `inc-progress--success`, `inc-progress--warning`, `inc-progress--danger`, `inc-meter`, `inc-meter--success`, `inc-meter--warning`, and `inc-meter--danger` indicators for compact status and completion signaling that communicate state with both text and visual emphasis where appropriate.
 
 Trace:
   - Code Refs:

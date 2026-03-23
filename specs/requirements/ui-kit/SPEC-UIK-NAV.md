@@ -27,7 +27,7 @@ This specification covers the navbar shell, navigation links, breadcrumb-backed 
 The kit uses navigation as part of the page shell, so the app chrome has its own spec boundary rather than being mixed into generic layout documentation.
 
 ## REQ-UIK-NAV-0001 Provide a navbar shell
-The UI kit MUST provide `inc-navbar`, `inc-navbar--app`, `inc-navbar--dark`, `inc-navbar--expand-sm`, `inc-navbar--expand-md`, `inc-navbar--expand-lg`, `inc-navbar__brand`, `inc-navbar__text`, `inc-navbar__toggler`, `inc-navbar__toggler-icon`, `inc-navbar__collapse`, `inc-navbar__nav`, `inc-navbar__utilities`, `inc-navbar-expand-xl`, and `inc-navbar-expand-xxl` for app chrome that keeps brand, primary navigation, and utility actions visually separated.
+The UI kit MUST provide `inc-navbar`, `inc-navbar--app`, `inc-navbar--expand-sm`, `inc-navbar--expand-md`, `inc-navbar--expand-lg`, `inc-navbar__brand`, `inc-navbar__text`, `inc-navbar__toggler`, `inc-navbar__toggler-icon`, `inc-navbar__collapse`, `inc-navbar__nav`, `inc-navbar__utilities`, `inc-navbar-expand-xl`, and `inc-navbar-expand-xxl` for app chrome that keeps brand, primary navigation, and utility actions visually separated.
 
 Trace:
 - Code Refs:

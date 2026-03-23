@@ -21,11 +21,11 @@ Define the accessibility obligations that apply across the UI kit surface.
 
 ## Scope
 
-This specification covers keyboard use, focus visibility, labels, live status regions, overlay focus management, and the narrow-screen usability baseline for dense admin-style interfaces.
+This specification covers keyboard use, focus visibility, labels, disabled-state expectations, live status regions, overlay focus management, and the narrow-screen usability baseline for dense admin-style interfaces.
 
 ## Context
 
-Many UI kit surfaces are reused inside data-heavy workflows, so the shared accessibility contract needs to stay separate from component-specific styling rules.
+Many UI kit surfaces are reused inside data-heavy workflows, so the shared accessibility contract needs to stay separate from component-specific styling rules and explicitly cover focus, labels, disabled state, live status, and narrow-screen behavior.
 
 ## REQ-UIK-A11Y-0001 Keep interactive surfaces keyboard operable and visibly focused
 Interactive public surfaces MUST remain keyboard operable while preserving a visible focus indicator.
@@ -79,10 +79,27 @@ Trace:
 Dense public surfaces SHOULD remain usable on narrow screens without requiring hover-only interaction.
 
 Trace:
-- Code Refs:
-  - `src/inc-design-language.scss`
-  - `demo.html`
-  - `work-queue.html`
-  - `data-grid-advanced.html`
-- Verified By:
-  - `VER-UIK-0001`
+  - Code Refs:
+    - `src/inc-design-language.scss`
+    - `demo.html`
+    - `work-queue.html`
+    - `data-grid-advanced.html`
+  - Verified By:
+    - `VER-UIK-0001`
+
+## REQ-UIK-A11Y-0006 Keep disabled controls perceivable and noninteractive
+Interactive public surfaces MUST keep disabled controls perceivable as disabled and noninteractive, whether the disabled state comes from native attributes or a helper-managed state hook.
+
+Trace:
+  - Code Refs:
+    - `src/inc-design-language.scss`
+    - `reference.html`
+    - `demo.html`
+    - `forms-and-validation.html`
+    - `overlay-workflows.html`
+    - `native-patterns.html`
+    - `states.html`
+    - `work-queue.html`
+    - `data-grid-advanced.html`
+  - Verified By:
+    - `VER-UIK-0001`

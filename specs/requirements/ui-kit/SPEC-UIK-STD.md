@@ -69,3 +69,15 @@ Trace:
   - `states.html`
 - Verified By:
   - `VER-UIK-0001`
+
+## REQ-UIK-STD-0004 Forbid element-of-element names
+Public BEM element names MUST NOT use nested element separators such as `inc-block__element__child`.
+
+Trace:
+- Code Refs:
+  - `src/inc-design-language.scss`
+  - `reference.html`
+  - `forms-and-validation.html`
+  - `LLMS.txt`
+- Verified By:
+  - `VER-UIK-0001`

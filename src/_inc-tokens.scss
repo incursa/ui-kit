@@ -20,6 +20,18 @@ $inc-radius-md: 0.5rem !default;
 $inc-radius-panel: $inc-radius-sm !default;
 $inc-radius-pill: 5.625rem !default;
 
+// Shared compact control-density tokens used by micro-sized public surfaces.
+$inc-control-density-micro-padding-block: 0.15rem !default;
+$inc-control-density-micro-padding-inline: 0.4rem !default;
+$inc-control-density-micro-select-padding-inline-start: 0.75rem !default;
+$inc-control-density-micro-select-arrow-inset-inline-end: 0.3rem !default;
+$inc-control-density-micro-font-size: 0.7rem !default;
+$inc-control-density-micro-line-height: 1.2 !default;
+$inc-control-density-micro-min-height: 1.5rem !default;
+$inc-control-density-micro-border-radius: 0.15rem !default;
+$inc-control-density-micro-select-arrow-width: 8px !default;
+$inc-control-density-micro-select-arrow-height: 6px !default;
+
 $inc-shadow-xs: 1.5px 1.5px 3px 0 rgba(0, 0, 0, 0.12) !default;
 $inc-shadow-sm: 0 1px 4px 0 rgba(18, 19, 22, 0.1) !default;
 $inc-shadow-md: 4px 4px 8px 0 rgba(172, 172, 172, 0.12) !default;

@@ -87,7 +87,7 @@ Notes:
 - The examples currently use `is-valid` and `is-invalid` state classes on controls and selects, while the source also exposes wrapper-level validity helpers.
 
 ## REQ-UIK-VAL-0006 Comply with shared naming and accessibility rules
-Validation surfaces MUST comply with `REQ-UIK-STD-0001`, `REQ-UIK-A11Y-0002`, and `REQ-UIK-A11Y-0003`.
+Validation surfaces MUST comply with `REQ-UIK-STD-0001`, `REQ-UIK-CNV-0004`, `REQ-UIK-A11Y-0002`, `REQ-UIK-A11Y-0003`, and `REQ-UIK-A11Y-0006`.
 
 Trace:
 - Code Refs:

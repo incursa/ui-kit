@@ -39,7 +39,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-GRP-0002 Provide input-group density and expansion variants
-The input-group surface MUST provide `inc-input-group--sm`, `inc-input-group--micro`, `inc-input-group--lg`, and `inc-input-group--expand`.
+The input-group surface MUST provide `inc-input-group--sm`, `inc-input-group--micro`, `inc-input-group--lg`, and `inc-input-group--expand` while complying with `REQ-UIK-TOK-0008`.
 
 Trace:
 - Code Refs:
@@ -63,7 +63,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-GRP-0004 Comply with shared naming, token, and accessibility rules
-Input-group surfaces MUST comply with `REQ-UIK-STD-0001`, `REQ-UIK-TOK-0002`, and `REQ-UIK-A11Y-0001`.
+Input-group surfaces MUST comply with `REQ-UIK-STD-0001`, `REQ-UIK-CNV-0001` through `REQ-UIK-CNV-0006`, `REQ-UIK-TOK-0002`, `REQ-UIK-TOK-0008`, and `REQ-UIK-A11Y-0001`.
 
 Trace:
 - Code Refs:

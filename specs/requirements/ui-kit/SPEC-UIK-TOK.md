@@ -21,7 +21,7 @@ Define the shared token names and token-layer responsibilities that the componen
 
 ## Scope
 
-This specification covers the theme-facing token file, the deeper token file, the public color and typography scales, and the Bootstrap override mapping built on top of those tokens.
+This specification covers the theme-facing token file, the deeper token file, the public color and typography scales, the shared spacing and shape scales, and the Bootstrap override mapping built on top of those tokens.
 
 ## Context
 
@@ -50,10 +50,10 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-TOK-0003 Expose the public color scales
-The theme layer MUST expose the canonical color scales `$inc-white`, `$inc-ink-*`, `$inc-brand-*`, `$inc-blue-*`, `$inc-accent-*`, `$inc-success-*`, `$inc-warning-*`, and `$inc-danger-*`.
+The theme layer MUST expose the canonical color scales `$inc-white`, `$inc-ink-*`, `$inc-brand-*`, `$inc-blue-*`, `$inc-accent-*`, `$inc-success-*`, `$inc-warning-*`, `$inc-danger-*`, and `$inc-secondary-fill`.
 
 Notes:
-- The current source uses those scales as the stable anchors for action, accent, success, warning, and danger styling.
+- The current source uses those scales as the stable anchors for action, accent, success, warning, danger, and secondary styling.
 
 Trace:
 - Code Refs:
@@ -63,7 +63,10 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-TOK-0004 Expose semantic surface, border, and text tokens
-The theme layer MUST expose semantic surface, border, and text tokens including `$inc-surface-primary`, `$inc-surface-secondary`, `$inc-surface-muted`, `$inc-surface-highlight`, `$inc-surface-strong`, `$inc-border-subtle`, `$inc-border-default`, `$inc-border-strong`, `$inc-text-primary`, `$inc-text-secondary`, `$inc-text-muted`, `$inc-text-inverse`, `$inc-text-link`, and `$inc-text-link-hover`.
+The theme layer MUST expose semantic surface, border, and text tokens including `$inc-surface-primary`, `$inc-surface-secondary`, `$inc-surface-muted`, `$inc-surface-highlight`, `$inc-surface-strong`, `$inc-border-subtle`, `$inc-border-default`, `$inc-border-strong`, `$inc-text-primary`, `$inc-text-secondary`, `$inc-text-muted`, `$inc-text-inverse`, `$inc-text-link`, and `$inc-text-link-hover` as the shared palette for theme-driven component schemes.
+
+Notes:
+- The kit treats color mode as a global theme concern rather than a public component-class family.
 
 Trace:
 - Code Refs:
@@ -86,6 +89,9 @@ Trace:
 ## REQ-UIK-TOK-0006 Expose the composition token family
 The token layer MUST expose the canonical scale tokens `$inc-space-*`, `$inc-radius-*`, `$inc-shadow-*`, `$inc-z-index-*`, `$inc-footer-height`, and `$inc-shell-max-width`.
 
+Notes:
+- The radius family includes the shipped aliases `$inc-radius-panel` and `$inc-radius-pill`.
+
 Trace:
 - Code Refs:
   - `src/_inc-tokens.scss`
@@ -100,5 +106,33 @@ Trace:
 - Code Refs:
   - `src/_inc-tokens.scss`
   - `src/inc-design-language.scss`
+- Verified By:
+  - `VER-UIK-0001`
+
+## REQ-UIK-TOK-0008 Expose the shared control-density token family
+The token layer MUST expose the canonical control-density tokens `$inc-control-density-micro-padding-block`, `$inc-control-density-micro-padding-inline`, `$inc-control-density-micro-select-padding-inline-start`, `$inc-control-density-micro-select-arrow-inset-inline-end`, `$inc-control-density-micro-font-size`, `$inc-control-density-micro-line-height`, `$inc-control-density-micro-min-height`, `$inc-control-density-micro-border-radius`, `$inc-control-density-micro-select-arrow-width`, and `$inc-control-density-micro-select-arrow-height`.
+
+Notes:
+- The current source uses these values as the stable anchors for compact buttons, inputs, selects, and input-group surfaces.
+- The repo intentionally permits the `--micro` density modifier on any supported control surface; touch-context warnings belong in tooling, not in this contract.
+
+Trace:
+- Code Refs:
+  - `src/_inc-tokens.scss`
+  - `src/inc-design-language.scss`
+- Verified By:
+  - `VER-UIK-0001`
+
+## REQ-UIK-TOK-0009 Use the root theme attribute as the global color-mode activation hook
+The UI kit MUST use `data-bs-theme` on the document root or another outer theme scope as the public activation hook for global light and dark theme mappings while avoiding public component-level light and dark modifiers.
+
+Trace:
+- Code Refs:
+  - `src/_inc-theme.scss`
+  - `src/_inc-tokens.scss`
+  - `dist/inc-design-language.css`
+  - `reference.html`
+  - `demo.html`
+  - `index.html`
 - Verified By:
   - `VER-UIK-0001`

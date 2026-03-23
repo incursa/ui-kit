@@ -51,7 +51,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-OVL-0003 Provide helper-managed accordion and collapse surfaces
-The UI kit MUST provide `inc-accordion`, `inc-accordion__item`, `inc-accordion__header`, `inc-accordion__button`, `inc-accordion__collapse`, `inc-accordion__body`, and `inc-collapse` for helper-managed expandable content when native disclosure is not used with collapsed content hidden until the associated trigger expands it.
+The UI kit MUST provide `inc-accordion`, `inc-accordion__item`, `inc-accordion__header`, `inc-accordion__button`, `inc-accordion__collapse`, `inc-accordion__body`, and `inc-collapse` for helper-managed expandable content when native disclosure is not used, with `data-inc-accordion` acting as the helper-managed grouping hook for accordion roots that coordinate mutually exclusive collapse panels.
 
 Trace:
 - Code Refs:
@@ -63,7 +63,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-OVL-0004 Provide helper-managed modal surfaces
-The UI kit MUST provide `inc-modal`, `inc-modal__backdrop`, `inc-modal__dialog`, `inc-modal__dialog--sm`, `inc-modal__dialog--lg`, `inc-modal__dialog--xl`, `inc-modal__dialog--fullscreen`, `inc-modal__content`, `inc-modal__header`, `inc-modal__title`, `inc-modal__body`, `inc-modal__footer`, `inc-modal__close`, and `body.inc-modal-open` for legacy or Bootstrap-like modal workflows that are not implemented with native `<dialog>` while opening above a backdrop, suppressing background interaction, and keeping their footprint stable across size variants.
+The UI kit MUST provide `inc-modal`, `inc-modal__backdrop`, `inc-modal__dialog`, `inc-modal__dialog--sm`, `inc-modal__dialog--lg`, `inc-modal__dialog--xl`, `inc-modal__dialog--fullscreen`, `inc-modal__content`, `inc-modal__header`, `inc-modal__title`, `inc-modal__body`, `inc-modal__footer`, `inc-modal__close`, and `body.inc-modal-open` for legacy or Bootstrap-like modal workflows that are not implemented with native `<dialog>`, while using `data-inc-dismiss="modal"` and `data-inc-initial-focus` hooks to support dismissal and initial focus placement above a backdrop.
 
 Trace:
 - Code Refs:
@@ -75,7 +75,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-OVL-0005 Provide helper-managed offcanvas surfaces
-The UI kit MUST provide `inc-offcanvas`, `inc-offcanvas-start`, `inc-offcanvas-end`, `inc-offcanvas-top`, `inc-offcanvas-bottom`, `inc-offcanvas-backdrop`, `inc-offcanvas-header`, `inc-offcanvas-title`, `inc-offcanvas-body`, and `body.inc-offcanvas-open` for side-panel workflows that present as side sheets with a dismissible backdrop and visible open/closed body state.
+The UI kit MUST provide `inc-offcanvas`, `inc-offcanvas-start`, `inc-offcanvas-end`, `inc-offcanvas-top`, `inc-offcanvas-bottom`, `inc-offcanvas-backdrop`, `inc-offcanvas-header`, `inc-offcanvas-title`, `inc-offcanvas-body`, and `body.inc-offcanvas-open` for side-panel workflows that present as side sheets with a dismissible backdrop and visible open/closed body state, while using `data-inc-dismiss="offcanvas"` and `data-inc-backdrop-for` hooks to support dismissal and backdrop targeting.
 
 Trace:
 - Code Refs:
@@ -99,7 +99,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-OVL-0007 Provide contextual floating content surfaces
-The overlay surface MUST provide `inc-dropdown`, `inc-dropdown__toggle`, `inc-dropdown__menu`, `inc-dropdown__menu--dark`, `inc-dropdown__menu--end`, `inc-dropdown__item`, `inc-dropdown__divider`, `inc-dropdown__header`, `inc-dropdown-actions`, `inc-dropdown-menu-actions`, `inc-tooltip`, `inc-tooltip__inner`, `inc-popover`, `inc-popover-header`, and `inc-popover-body` primitives for contextual auxiliary content that stay visually anchored to their trigger without covering unrelated content by default.
+The overlay surface MUST provide `inc-dropdown`, `inc-dropdown__toggle`, `inc-dropdown__menu`, `inc-dropdown__menu--end`, `inc-dropdown__item`, `inc-dropdown__divider`, `inc-dropdown__header`, `inc-dropdown-actions`, `inc-dropdown-menu-actions`, `inc-tooltip`, `inc-tooltip__inner`, `inc-popover`, `inc-popover-header`, and `inc-popover-body` primitives for contextual auxiliary content that stay visually anchored to their trigger without covering unrelated content by default.
 
 Trace:
 - Code Refs:

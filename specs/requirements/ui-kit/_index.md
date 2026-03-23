@@ -7,11 +7,12 @@ The suite is organized by shared foundations first, then by stable UI concern ra
 - [SPEC-UIK-STD](SPEC-UIK-STD.md) - public surface standards
 - [SPEC-UIK-TOK](SPEC-UIK-TOK.md) - theme tokens and value contract
 - [SPEC-UIK-A11Y](SPEC-UIK-A11Y.md) - accessibility baseline and semantic behavior
+- [SPEC-UIK-CNV](SPEC-UIK-CNV.md) - control surface conventions and shared modifiers
 - [SPEC-UIK-LAY](SPEC-UIK-LAY.md) - layout primitives and shell
 - [SPEC-UIK-BTN](SPEC-UIK-BTN.md) - button and action controls
 - [SPEC-UIK-TXT](SPEC-UIK-TXT.md) - typography and text helpers
 - [SPEC-UIK-FRM](SPEC-UIK-FRM.md) - form layout and grouping
-- [SPEC-UIK-INP](SPEC-UIK-INP.md) - text entry controls
+- [SPEC-UIK-INP](SPEC-UIK-INP.md) - editable form controls
 - [SPEC-UIK-SEL](SPEC-UIK-SEL.md) - select controls
 - [SPEC-UIK-GRP](SPEC-UIK-GRP.md) - input group composition
 - [SPEC-UIK-RO](SPEC-UIK-RO.md) - read-only field display

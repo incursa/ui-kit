@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0
+
+- Reworked the shared Spec Trace foundation into explicit naming, token, control-convention, accessibility, and interaction layers.
+- Renamed binary choice child elements to flat BEM names and canonized `data-bs-theme` as the global theme activation hook.
+- Traced the helper data attributes for accordion grouping, modal and offcanvas dismissal, auto-refresh labels, and native dialog launch.
+- Refreshed the published CSS, JS helper, examples, and verification notes to match the revised public surface.
+
 ## 0.4.1
 
 - Added pause and resume controls to the inc-auto-refresh widget.
