@@ -27,14 +27,21 @@ Licensed under Apache 2.0.
 - Operational states such as empty, no-results, loading, error, permission, lock, toast, live-region, auto-refresh, and activity timeline surfaces.
 - Bulk-action, sticky-header, and row-state table patterns for operator-facing grids.
 - File/document dropzones, file rows, read-only description-list grids, progress/meter surfaces, and drawer-style side panels.
-- A small overlay/navigation layer for tabs, pagination, dropdown actions, modals, and offcanvas panels.
+- A small overlay/navigation layer for tabs, pagination, dropdown actions, native details/dialog patterns, and compatibility modals/offcanvas panels.
 - Opinionated app-shell pieces for navbar/topbar, breadcrumb/nav-triad, sticky footer, user menu, and common two/three-column page layouts.
+- A public-surface standards layer for `inc-` prefixing, BEM naming, and accessible interactive behavior.
 
 ## What was intentionally left out
 
 - App-specific backgrounds, admin footer behavior, report CSS, print CSS, and vendor assets.
 - App-specific background art and report/print-only styling.
 - Feature-specific one-off classes that do not generalize cleanly across products.
+
+## Specification Baseline
+
+- First-pass Spec Trace suite: [specs/requirements/ui-kit/_index.md](./specs/requirements/ui-kit/_index.md)
+- Open requirement gaps and follow-up questions: [specs/requirements/ui-kit/REQUIREMENT-GAPS.md](./specs/requirements/ui-kit/REQUIREMENT-GAPS.md)
+- Verification baseline: [specs/verification/ui-kit/_index.md](./specs/verification/ui-kit/_index.md)
 
 ## Files
 
@@ -64,6 +71,10 @@ Licensed under Apache 2.0.
   Modal and offcanvas workflow example with validation and assignment flows.
 - `reference.html`
   Copy/paste catalog for the standard controls and markup patterns.
+- `specs/requirements/ui-kit/`
+  First-pass Spec Trace specification suite for the UI kit, including the gap log for unresolved questions.
+- `specs/verification/ui-kit/`
+  Auditable verification baseline for the current UI kit public surface.
 - `states.html`
   Empty, no-results, loading, error, permission, timeline, file, and notification patterns.
 - `forms-and-validation.html`
@@ -85,6 +96,9 @@ Examples:
 
 - `inc-table`
 - `inc-btn`
+- `inc-text`
+- `inc-heading`
+- `inc-data`
 - `inc-card`
 - `inc-header-body`
 - `inc-summary-block`
@@ -112,7 +126,7 @@ For titled sections that wrap tables, use `inc-header-body--table-body` to keep 
 - Stateful controls still need behavior:
   tabs, collapsible sections, menus/dropdowns, modals, offcanvas panels, dismissible alerts, toasts, and auto-refresh countdowns with pause/resume behavior.
 - This package now includes an optional dependency-free helper at `dist/inc-design-language.js` for:
-  user-menu dropdowns, tab switching, collapse/accordion toggles, and page auto-refresh countdown widgets.
+  user-menu dropdowns, tab switching, collapse/accordion toggles, legacy modal/offcanvas shells, and page auto-refresh countdown widgets.
 - This package also includes native-styled patterns for:
   `details.inc-disclosure`, `details.inc-native-menu`, `dialog.inc-native-dialog`, and `dialog.inc-native-dialog--drawer`.
 - If you prefer native HTML behavior where possible, use browser primitives like `<details>` and `<dialog>` for product-specific implementations. The helper exists for places where the design language is intentionally Bootstrap-like and needs matching interaction behavior.
