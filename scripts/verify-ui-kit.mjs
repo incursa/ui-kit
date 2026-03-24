@@ -1,0 +1,227 @@
+import { existsSync, readFileSync, statSync } from "node:fs";
+import { parseHTML } from "linkedom";
+
+const requiredFiles = [
+    "CHANGELOG.md",
+    "README.md",
+    "AI-AGENT-INSTRUCTIONS.md",
+    "LLMS.txt",
+    "RELEASING.md",
+    "package.json",
+    "package-lock.json",
+    "src/_inc-theme.scss",
+    "src/_inc-tokens.scss",
+    "src/inc-design-language.scss",
+    "src/inc-design-language.js",
+    "dist/inc-design-language.css",
+    "dist/inc-design-language.css.map",
+    "dist/inc-design-language.min.css",
+    "dist/inc-design-language.min.css.map",
+    "dist/inc-design-language.js",
+    "forms-and-validation.html",
+    "data-grid-advanced.html",
+    "states.html",
+    "reference.html",
+    "specs/architecture/_index.md",
+    "specs/architecture/ui-kit/ARC-UIK-0001.md",
+    "specs/requirements/ui-kit/_index.md",
+    "specs/requirements/ui-kit/REQUIREMENT-GAPS.md",
+    "specs/verification/ui-kit/_index.md",
+    "specs/verification/ui-kit/VER-UIK-0001.md",
+    "specs/verification/ui-kit/VER-UIK-0002.md",
+];
+
+const cssSelectors = [
+    ".inc-page",
+    ".inc-page__breadcrumbs",
+    ".inc-page__body",
+    ".inc-breadcrumb-body",
+    ".inc-footer-bar__menu",
+    ".inc-footer-bar__meta",
+    ".inc-list-group--flush",
+    ".inc-list-group--numbered",
+    ".inc-vertical-list--inset",
+    ".inc-summary-overview--4-col",
+    ".inc-summary-block__header--with-action",
+    ".inc-summary-block__body--right",
+    ".inc-summary-block__value--small",
+    ".inc-tooltip",
+    ".inc-tooltip__inner",
+    ".inc-popover",
+    ".inc-popover-header",
+    ".inc-popover-body",
+    ".inc-spinner",
+    ".inc-spinner--grow",
+    ".inc-spinner--grow--sm",
+    ".inc-btn.is-loading",
+    ":has(> .inc-spinner)",
+    ".inc-form__control.is-invalid",
+    ".inc-form__select.is-invalid",
+    ".inc-form__check.is-invalid",
+];
+
+const referenceMarkers = [
+    'class="inc-page inc-breadcrumb-body"',
+    'class="inc-page__breadcrumbs inc-breadcrumb-body__breadcrumb"',
+    'class="inc-page__body inc-breadcrumb-body__body"',
+    'class="inc-footer-bar__menu"',
+    'class="inc-list-group inc-list-group--flush"',
+    'class="inc-list-group inc-list-group--numbered"',
+    'class="inc-vertical-list inc-vertical-list--compact inc-vertical-list--trim inc-vertical-list--inset"',
+    'class="inc-summary-overview inc-summary-overview--4-col"',
+    'class="inc-summary-block__header inc-summary-block__header--with-action"',
+    'class="inc-summary-block__body inc-summary-block__body--right"',
+    'class="inc-summary-block__value inc-summary-block__value--small"',
+    'class="inc-tooltip show bs-tooltip-auto"',
+    'class="inc-tooltip__inner"',
+    'class="inc-popover show bs-popover-auto"',
+    'class="inc-popover-header"',
+    'class="inc-popover-body"',
+    'class="inc-btn inc-btn--primary is-loading"',
+    'class="inc-spinner inc-spinner--border inc-spinner--border--sm"',
+    'class="inc-spinner inc-spinner--grow inc-spinner--grow--sm inc-spinner--grow--primary"',
+    'aria-invalid="true"',
+];
+
+const formsMarkers = [
+    'aria-invalid="true"',
+];
+
+const dataGridMarkers = [
+    'class="inc-btn inc-btn--primary is-loading"',
+    'class="inc-spinner inc-spinner--border inc-spinner--border--sm"',
+];
+
+const statesMarkers = [
+    'class="inc-spinner inc-spinner--border inc-spinner--border--sm inc-spinner--border--primary"',
+];
+
+function readUtf8(path) {
+    return readFileSync(path, "utf8");
+}
+
+function ensure(condition, message, failures) {
+    if (!condition) {
+        failures.push(message);
+    }
+}
+
+function parseDocument(path) {
+    return parseHTML(readUtf8(path)).document;
+}
+
+function assertMarkers(path, markers, failures) {
+    const content = readUtf8(path);
+
+    for (const marker of markers) {
+        ensure(content.includes(marker), `${path} is missing coverage marker: ${marker}`, failures);
+    }
+}
+
+function hasDirectChildWithClass(element, className) {
+    return Array.from(element.children ?? []).some((child) => child.classList?.contains(className));
+}
+
+function hasLoadingHelperChild(element) {
+    return hasDirectChildWithClass(element, "inc-spinner") || hasDirectChildWithClass(element, "inc-loading-dots");
+}
+
+const failures = [];
+
+for (const file of requiredFiles) {
+    ensure(existsSync(file), `Missing required file: ${file}`, failures);
+}
+
+if (existsSync("package.json") && existsSync("package-lock.json")) {
+    const packageJson = JSON.parse(readUtf8("package.json"));
+    const packageLock = JSON.parse(readUtf8("package-lock.json"));
+
+    ensure(packageJson.version === packageLock.version, "package.json and package-lock.json must declare the same version", failures);
+    ensure(packageJson.version === packageLock.packages?.[""]?.version, "package-lock.json package root version must match package.json", failures);
+}
+
+if (existsSync("src/inc-design-language.js") && existsSync("dist/inc-design-language.js")) {
+    const sourceJs = readFileSync("src/inc-design-language.js");
+    const distJs = readFileSync("dist/inc-design-language.js");
+
+    ensure(Buffer.compare(sourceJs, distJs) === 0, "dist/inc-design-language.js must exactly match src/inc-design-language.js", failures);
+}
+
+if (existsSync("dist/inc-design-language.css")) {
+    const css = readUtf8("dist/inc-design-language.css");
+
+    for (const selector of cssSelectors) {
+        ensure(css.includes(selector), `dist/inc-design-language.css is missing selector: ${selector}`, failures);
+    }
+}
+
+if (existsSync("reference.html")) {
+    const reference = readUtf8("reference.html");
+
+    for (const marker of referenceMarkers) {
+        ensure(reference.includes(marker), `reference.html is missing coverage marker: ${marker}`, failures);
+    }
+}
+
+if (existsSync("reference.html")) {
+    const referenceDocument = parseDocument("reference.html");
+
+    ensure(referenceDocument.querySelector(".inc-page.inc-breadcrumb-body"), "reference.html is missing the canonical page-frame wrapper", failures);
+    ensure(referenceDocument.querySelector(".inc-page__breadcrumbs.inc-breadcrumb-body__breadcrumb"), "reference.html is missing the breadcrumb wrapper", failures);
+    ensure(referenceDocument.querySelector(".inc-page__body.inc-breadcrumb-body__body"), "reference.html is missing the page body wrapper", failures);
+    ensure(referenceDocument.querySelector(".inc-footer-bar__menu"), "reference.html is missing the footer-bar action cluster", failures);
+    ensure(referenceDocument.querySelector(".inc-tooltip.show.bs-tooltip-auto"), "reference.html is missing the tooltip shell", failures);
+    ensure(referenceDocument.querySelector(".inc-popover.show.bs-popover-auto"), "reference.html is missing the popover shell", failures);
+    ensure(referenceDocument.querySelector(".inc-auto-refresh__spinner .inc-spinner"), "reference.html is missing the auto-refresh spinner helper", failures);
+    ensure(referenceDocument.querySelector(".inc-spinner.inc-spinner--grow"), "reference.html is missing the grow spinner helper", failures);
+
+    const loadingButtons = Array.from(referenceDocument.querySelectorAll("button.inc-btn.is-loading"));
+    ensure(loadingButtons.length > 0, "reference.html is missing a loading button example", failures);
+    ensure(loadingButtons.every(hasLoadingHelperChild), "reference.html loading buttons must use the shared spinner helper child", failures);
+}
+
+if (existsSync("forms-and-validation.html")) {
+    const formsDocument = parseDocument("forms-and-validation.html");
+
+    ensure(formsDocument.querySelector("#form-contract[aria-invalid='true']"), "forms-and-validation.html is missing the invalid contract field accessibility hook", failures);
+    ensure(formsDocument.querySelector("#form-period[aria-invalid='true']"), "forms-and-validation.html is missing the invalid select accessibility hook", failures);
+}
+
+if (existsSync("data-grid-advanced.html")) {
+    assertMarkers("data-grid-advanced.html", dataGridMarkers, failures);
+
+    const dataGridDocument = parseDocument("data-grid-advanced.html");
+    const loadingButtons = Array.from(dataGridDocument.querySelectorAll("button.inc-btn.is-loading"));
+
+    ensure(loadingButtons.length >= 2, "data-grid-advanced.html is missing the busy button examples", failures);
+    ensure(loadingButtons.every(hasLoadingHelperChild), "data-grid-advanced.html loading buttons must use the shared spinner helper child", failures);
+}
+
+if (existsSync("states.html")) {
+    assertMarkers("states.html", statesMarkers, failures);
+
+    const statesDocument = parseDocument("states.html");
+    ensure(statesDocument.querySelector(".inc-auto-refresh__spinner .inc-spinner"), "states.html is missing the inline auto-refresh spinner helper", failures);
+    ensure(statesDocument.querySelector(".inc-loading-dots"), "states.html is missing loading dots coverage", failures);
+}
+
+if (existsSync("dist/inc-design-language.css") && existsSync("dist/inc-design-language.min.css")) {
+    const cssSize = statSync("dist/inc-design-language.css").size;
+    const minCssSize = statSync("dist/inc-design-language.min.css").size;
+
+    ensure(cssSize > 0, "dist/inc-design-language.css must not be empty", failures);
+    ensure(minCssSize > 0, "dist/inc-design-language.min.css must not be empty", failures);
+    ensure(minCssSize < cssSize, "dist/inc-design-language.min.css should be smaller than the expanded CSS output", failures);
+}
+
+if (failures.length > 0) {
+    console.error("UI kit smoke checks failed:");
+    for (const failure of failures) {
+        console.error(`- ${failure}`);
+    }
+    process.exit(1);
+}
+
+const htmlMarkerCount = referenceMarkers.length + formsMarkers.length + dataGridMarkers.length + statesMarkers.length;
+
+console.log(`UI kit smoke checks passed (${requiredFiles.length} required files, ${cssSelectors.length} CSS selectors, ${htmlMarkerCount} HTML markers, and DOM coverage for the shipped example pages).`);

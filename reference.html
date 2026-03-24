@@ -73,6 +73,51 @@
 
                         <section class="inc-card">
                             <div class="inc-card__header">
+                                <h2 class="inc-card__title">Page Framing</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <div class="inc-page inc-breadcrumb-body">
+                                        <div class="inc-page__breadcrumbs inc-breadcrumb-body__breadcrumb">
+                                            <ol class="inc-breadcrumb">
+                                                <li class="inc-breadcrumb__item"><a href="./index.html">Examples</a></li>
+                                                <li class="inc-breadcrumb__item active"><span>Reference</span></li>
+                                            </ol>
+                                        </div>
+                                        <div class="inc-page__body inc-breadcrumb-body__body">
+                                            <div class="inc-section-container demo-stack">
+                                                <section class="inc-page-header">
+                                                    <div class="inc-page-header__title">
+                                                        <h3 class="inc-heading inc-heading--h3">Breadcrumb body wrapper</h3>
+                                                        <p class="inc-text inc-text--regular inc-text--muted">Use the canonical page wrapper when you want a breadcrumb strip and body stack without introducing another bespoke shell.</p>
+                                                    </div>
+                                                    <div class="inc-page-header__actions">
+                                                        <button class="inc-btn inc-btn--secondary inc-btn--sm" type="button">Secondary action</button>
+                                                        <button class="inc-btn inc-btn--primary inc-btn--sm" type="button">Primary action</button>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+<pre class="demo-code"><code>&lt;div class="inc-page inc-breadcrumb-body"&gt;
+    &lt;div class="inc-page__breadcrumbs inc-breadcrumb-body__breadcrumb"&gt;
+        &lt;ol class="inc-breadcrumb"&gt;
+            &lt;li class="inc-breadcrumb__item"&gt;&lt;a href="./index.html"&gt;Examples&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="inc-breadcrumb__item active"&gt;&lt;span&gt;Reference&lt;/span&gt;&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/div&gt;
+    &lt;div class="inc-page__body inc-breadcrumb-body__body"&gt;
+        &lt;div class="inc-section-container demo-stack"&gt;
+            &lt;section class="inc-page-header"&gt;...&lt;/section&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
                                 <h2 class="inc-card__title">Buttons</h2>
                             </div>
                             <div class="inc-card__body demo-reference-grid">
@@ -93,6 +138,10 @@
                                             <button class="inc-btn inc-btn--primary" type="button">Right</button>
                                         </div>
                                     </div>
+                                    <div class="demo-chip-row">
+                                        <button class="inc-btn inc-btn--primary is-loading" type="button">Publishing<span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"></span></button>
+                                        <button class="inc-btn inc-btn--secondary is-loading" type="button">Refreshing<span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"></span></button>
+                                    </div>
                                 </div>
 <pre class="demo-code"><code>&lt;button class="inc-btn inc-btn--primary" type="button"&gt;Primary&lt;/button&gt;
 &lt;button class="inc-btn inc-btn--secondary" type="button"&gt;Secondary&lt;/button&gt;
@@ -105,7 +154,10 @@
 &lt;div class="inc-button-group inc-button-group--sm"&gt;
     &lt;button class="inc-btn inc-btn--secondary" type="button"&gt;Left&lt;/button&gt;
     &lt;button class="inc-btn inc-btn--primary" type="button"&gt;Right&lt;/button&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+
+&lt;button class="inc-btn inc-btn--primary is-loading" type="button"&gt;Publishing&lt;span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"&gt;&lt;/span&gt;&lt;/button&gt;
+&lt;button class="inc-btn inc-btn--secondary is-loading" type="button"&gt;Refreshing&lt;span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"&gt;&lt;/span&gt;&lt;/button&gt;</code></pre>
                             </div>
                         </section>
 
@@ -289,6 +341,40 @@
                                             </div>
                                         </article>
                                     </section>
+                                    <section class="inc-summary-overview inc-summary-overview--4-col">
+                                        <article class="inc-summary-block">
+                                            <div class="inc-summary-block__header inc-summary-block__header--with-action">
+                                                <span>Open Items</span>
+                                                <span class="inc-summary-block__header-action">Updated 10m ago</span>
+                                            </div>
+                                            <div class="inc-summary-block__body inc-summary-block__body--left">
+                                                <div class="inc-summary-block__value inc-summary-block__value--large">18</div>
+                                            </div>
+                                        </article>
+                                        <article class="inc-summary-block">
+                                            <div class="inc-summary-block__header">Queue Health</div>
+                                            <div class="inc-summary-block__body inc-summary-block__body--right">
+                                                <div class="inc-summary-block__value inc-summary-block__value--small">92%</div>
+                                                <span class="inc-summary-block__status-badge inc-summary-block__status-badge--approved">On track</span>
+                                            </div>
+                                        </article>
+                                        <article class="inc-summary-block">
+                                            <div class="inc-summary-block__header">Approvals</div>
+                                            <div class="inc-summary-block__body inc-summary-block__body--status-count">
+                                                <div class="inc-summary-block__status inc-summary-block__status--horizontal">
+                                                    <div class="inc-summary-block__status-count">7</div>
+                                                    <span class="inc-summary-block__status-badge inc-summary-block__status-badge--pending">Waiting</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <article class="inc-summary-block">
+                                            <div class="inc-summary-block__header">Exceptions</div>
+                                            <div class="inc-summary-block__body inc-summary-block__body--left">
+                                                <div class="inc-summary-block__value inc-summary-block__value--medium">4</div>
+                                                <span class="inc-summary-block__status-badge inc-summary-block__status-badge--warning">Needs review</span>
+                                            </div>
+                                        </article>
+                                    </section>
                                     <div class="inc-empty-state">
                                         <div class="inc-empty-state__content">
                                             <div class="inc-empty-state__icon">+</div>
@@ -303,6 +389,27 @@
                                 </div>
 <pre class="demo-code"><code>&lt;section class="inc-summary-overview inc-summary-overview--3-col"&gt;
     &lt;article class="inc-summary-block"&gt;...&lt;/article&gt;
+    &lt;article class="inc-summary-block"&gt;...&lt;/article&gt;
+    &lt;article class="inc-summary-block"&gt;...&lt;/article&gt;
+&lt;/section&gt;
+
+&lt;section class="inc-summary-overview inc-summary-overview--4-col"&gt;
+    &lt;article class="inc-summary-block"&gt;
+        &lt;div class="inc-summary-block__header inc-summary-block__header--with-action"&gt;
+            &lt;span&gt;Open Items&lt;/span&gt;
+            &lt;span class="inc-summary-block__header-action"&gt;Updated 10m ago&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="inc-summary-block__body inc-summary-block__body--left"&gt;
+            &lt;div class="inc-summary-block__value inc-summary-block__value--large"&gt;18&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/article&gt;
+    &lt;article class="inc-summary-block"&gt;
+        &lt;div class="inc-summary-block__header"&gt;Queue Health&lt;/div&gt;
+        &lt;div class="inc-summary-block__body inc-summary-block__body--right"&gt;
+            &lt;div class="inc-summary-block__value inc-summary-block__value--small"&gt;92%&lt;/div&gt;
+            &lt;span class="inc-summary-block__status-badge inc-summary-block__status-badge--approved"&gt;On track&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/article&gt;
     &lt;article class="inc-summary-block"&gt;...&lt;/article&gt;
     &lt;article class="inc-summary-block"&gt;...&lt;/article&gt;
 &lt;/section&gt;
@@ -407,7 +514,16 @@
                                         <a class="inc-list-group__item inc-list-group__item--action" href="#">March Closeout</a>
                                         <a class="inc-list-group__item inc-list-group__item--action" href="#">Projects Missing Billing Period</a>
                                     </div>
-                                    <div class="inc-vertical-list inc-vertical-list--compact inc-vertical-list--trim">
+                                    <div class="inc-list-group inc-list-group--flush">
+                                        <a class="inc-list-group__item inc-list-group__item--action" href="#">Inbox</a>
+                                        <a class="inc-list-group__item inc-list-group__item--action" href="#">Assigned to me</a>
+                                    </div>
+                                    <ol class="inc-list-group inc-list-group--numbered">
+                                        <li class="inc-list-group__item">First review pass</li>
+                                        <li class="inc-list-group__item">Secondary approval</li>
+                                        <li class="inc-list-group__item">Final export</li>
+                                    </ol>
+                                    <div class="inc-vertical-list inc-vertical-list--compact inc-vertical-list--trim inc-vertical-list--inset">
                                         <div class="inc-vertical-list__item inc-flex-between">
                                             <div>
                                                 <div class="inc-text inc-text--regular-semibold">Lien Waiver Package</div>
@@ -443,7 +559,18 @@
     &lt;a class="inc-list-group__item inc-list-group__item--action" href="#"&gt;March Closeout&lt;/a&gt;
 &lt;/div&gt;
 
-&lt;div class="inc-vertical-list inc-vertical-list--compact inc-vertical-list--trim"&gt;
+&lt;div class="inc-list-group inc-list-group--flush"&gt;
+    &lt;a class="inc-list-group__item inc-list-group__item--action" href="#"&gt;Inbox&lt;/a&gt;
+    &lt;a class="inc-list-group__item inc-list-group__item--action" href="#"&gt;Assigned to me&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;ol class="inc-list-group inc-list-group--numbered"&gt;
+    &lt;li class="inc-list-group__item"&gt;First review pass&lt;/li&gt;
+    &lt;li class="inc-list-group__item"&gt;Secondary approval&lt;/li&gt;
+    &lt;li class="inc-list-group__item"&gt;Final export&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class="inc-vertical-list inc-vertical-list--compact inc-vertical-list--trim inc-vertical-list--inset"&gt;
     &lt;div class="inc-vertical-list__item inc-flex-between"&gt;...&lt;/div&gt;
 &lt;/div&gt;</code></pre>
                             </div>
@@ -525,6 +652,43 @@
 
                         <section class="inc-card">
                             <div class="inc-card__header">
+                                <h2 class="inc-card__title">Floating Content</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-layout-grid demo-layout-grid--2">
+                                    <div class="demo-muted-panel position-relative" style="min-height: 6rem;">
+                                        <div class="inc-tooltip show bs-tooltip-auto" role="tooltip">
+                                            <div class="tooltip-arrow" aria-hidden="true"></div>
+                                            <div class="inc-tooltip__inner">Tooltip text for short hover help.</div>
+                                        </div>
+                                    </div>
+                                    <div class="demo-muted-panel position-relative" style="min-height: 8rem;">
+                                        <div class="inc-popover show bs-popover-auto" role="tooltip">
+                                            <div class="popover-arrow" aria-hidden="true"></div>
+                                            <div class="inc-popover-header">Popover title</div>
+                                            <div class="inc-popover-body">Popover content can hold short guidance, counts, or a compact callout.</div>
+                                        </div>
+                                    </div>
+                                </div>
+<pre class="demo-code"><code>&lt;div class="demo-muted-panel position-relative"&gt;
+    &lt;div class="inc-tooltip show bs-tooltip-auto" role="tooltip"&gt;
+        &lt;div class="tooltip-arrow" aria-hidden="true"&gt;&lt;/div&gt;
+        &lt;div class="inc-tooltip__inner"&gt;Tooltip text for short hover help.&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="demo-muted-panel position-relative"&gt;
+    &lt;div class="inc-popover show bs-popover-auto" role="tooltip"&gt;
+        &lt;div class="popover-arrow" aria-hidden="true"&gt;&lt;/div&gt;
+        &lt;div class="inc-popover-header"&gt;Popover title&lt;/div&gt;
+        &lt;div class="inc-popover-body"&gt;Popover content can hold short guidance, counts, or a compact callout.&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
                                 <h2 class="inc-card__title">Validation And Filter Toolbars</h2>
                             </div>
                             <div class="inc-card__body demo-reference-grid">
@@ -539,7 +703,7 @@
                                     <div class="demo-layout-grid demo-layout-grid--2">
                                         <div class="inc-form__group">
                                             <label class="inc-form__label inc-form__label--required" for="ref-contract">Contract number</label>
-                                            <input id="ref-contract" class="inc-form__control is-invalid" type="text" value="">
+                                            <input id="ref-contract" class="inc-form__control is-invalid" type="text" value="" aria-invalid="true">
                                             <p class="inc-form__feedback inc-form__feedback--error">Contract number is required.</p>
                                         </div>
                                         <div class="inc-form__group">
@@ -584,7 +748,7 @@
 
 &lt;div class="inc-form__group"&gt;
     &lt;label class="inc-form__label inc-form__label--required" for="ref-contract"&gt;Contract number&lt;/label&gt;
-    &lt;input id="ref-contract" class="inc-form__control is-invalid" type="text"&gt;
+    &lt;input id="ref-contract" class="inc-form__control is-invalid" type="text" aria-invalid="true"&gt;
     &lt;p class="inc-form__feedback inc-form__feedback--error"&gt;Contract number is required.&lt;/p&gt;
 &lt;/div&gt;
 
@@ -895,7 +1059,8 @@
                                         </span>
                                         <span class="inc-auto-refresh__status" role="status" aria-live="polite" aria-atomic="true" hidden>
                                             <span class="inc-auto-refresh__spinner" aria-hidden="true">
-                                                <span class="inc-spinner--border inc-spinner--border--sm inc-spinner--border--primary"></span>
+                                                <span class="inc-spinner inc-spinner--border inc-spinner--border--sm inc-spinner--border--primary"></span>
+                                                <span class="inc-spinner inc-spinner--grow inc-spinner--grow--sm inc-spinner--grow--primary"></span>
                                             </span>
                                             <span class="inc-auto-refresh__status-text">Refreshing queue</span>
                                         </span>
@@ -919,7 +1084,8 @@
     &lt;/span&gt;
     &lt;span class="inc-auto-refresh__status" role="status" aria-live="polite" aria-atomic="true" hidden&gt;
         &lt;span class="inc-auto-refresh__spinner" aria-hidden="true"&gt;
-            &lt;span class="inc-spinner--border inc-spinner--border--sm inc-spinner--border--primary"&gt;&lt;/span&gt;
+            &lt;span class="inc-spinner inc-spinner--border inc-spinner--border--sm inc-spinner--border--primary"&gt;&lt;/span&gt;
+            &lt;span class="inc-spinner inc-spinner--grow inc-spinner--grow--sm inc-spinner--grow--primary"&gt;&lt;/span&gt;
         &lt;/span&gt;
         &lt;span class="inc-auto-refresh__status-text"&gt;Refreshing&lt;/span&gt;
     &lt;/span&gt;
@@ -942,6 +1108,10 @@
                     </div>
                 </main>
                 <footer class="inc-app-shell__footer inc-footer-bar">
+                    <div class="inc-footer-bar__menu">
+                        <button class="inc-btn inc-btn--secondary inc-btn--sm" type="button">Copy snippet</button>
+                        <button class="inc-btn inc-btn--primary inc-btn--sm" type="button">Open docs</button>
+                    </div>
                     <div class="inc-footer-bar__meta">Reference page for copy/paste HTML patterns.</div>
                 </footer>
             </div>

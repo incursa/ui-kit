@@ -8,8 +8,8 @@ Repository brand assets live under `assets/brand/`. Prefer those local files whe
 
 - Prefer `dist/inc-design-language.css` if the target app already has working HTML and only needs the look.
 - Prefer `src/inc-design-language.scss` if you need to tune tokens, density, or Bootstrap defaults.
-- Prefer `dist/inc-design-language.js` only for stateful UI primitives such as menus, tabs, or collapsible sections.
-- Prefer `reference.html` when you need copy/paste starter markup for a supported control before composing a full page.
+- Prefer `dist/inc-design-language.js` only for stateful UI primitives such as menus, tabs, collapsible sections, modal/offcanvas shells, native dialog launch hooks, and auto-refresh widgets.
+- Prefer `reference.html` when you need copy/paste starter markup for a supported control or page-frame primitive before composing a full page.
 - Prefer `states.html`, `forms-and-validation.html`, and `data-grid-advanced.html` when the target screen is workflow-heavy and you need realistic composition patterns, not isolated snippets.
 
 ## Naming rules
@@ -34,11 +34,11 @@ Repository brand assets live under `assets/brand/`. Prefer those local files whe
   Use `inc-card` for plain cards and `inc-header-body inc-header-body--card` for titled sections with actions.
   Use `inc-header-body--table-body` when the body contains a table and should keep section padding without adding extra bottom table margin.
 - App layout:
-  Use `inc-app-shell`, `inc-footer-bar`, `inc-navbar`, `inc-breadcrumb`, `inc-nav-triad`, and `inc-sidebar-menu` when you need an opinionated application frame instead of isolated components.
+  Use `inc-app-shell`, `inc-page`, `inc-breadcrumb-body`, `inc-footer-bar`, `inc-footer-bar__menu`, `inc-footer-bar__meta`, `inc-navbar`, `inc-breadcrumb`, `inc-nav-triad`, and `inc-sidebar-menu` when you need an opinionated application frame instead of isolated components.
 - States and workflow:
   Use `inc-state-panel`, `inc-permission-banner`, `inc-toast-card`, `inc-timeline`, `inc-file-dropzone`, `inc-file-row`, and `inc-key-value` for non-happy-path and detail-heavy B2B flows.
 - Interaction:
-  Use `data-inc-toggle="menu"`, `data-inc-toggle="tab"`, and `data-inc-toggle="collapse"` with `data-inc-target="#target-id"` when you want the optional vanilla-JS helper to wire behavior.
+  Use `data-inc-toggle="menu"`, `data-inc-toggle="tab"`, and `data-inc-toggle="collapse"` with `data-inc-target="#target-id"` when you want the optional vanilla-JS helper to wire behavior. Use `data-inc-toggle="modal"`, `data-inc-toggle="offcanvas"`, `data-inc-dismiss="modal"`, `data-inc-dismiss="offcanvas"`, and `data-inc-native-dialog-open` only when the helper-managed or launch-hook contract is the intended path.
 - Native interaction:
   Use `details.inc-disclosure` for section stacks, `details.inc-native-menu` for lightweight menus, and `dialog.inc-native-dialog` for native modal surfaces.
 - Status:
@@ -55,6 +55,7 @@ Repository brand assets live under `assets/brand/`. Prefer those local files whe
 
 ## Packaging
 
+- Use `npm run verify` before versioning when you want to rebuild, smoke-test, and dry-run the package.
 - Use `npm run build` to rebuild distributables.
 - Use `npm pack` or `npm run package` to produce a local installable tarball.
 - The repository is licensed under Apache 2.0.

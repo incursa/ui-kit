@@ -43,6 +43,10 @@ Trace:
 ## REQ-UIK-LAY-0002 Provide page framing primitives
 The UI kit MUST provide `inc-page`, `inc-page__breadcrumbs`, `inc-page__body`, `inc-page-header`, `inc-page-header__title`, `inc-page-header__actions`, `inc-section-container`, `inc-breadcrumb-body`, `inc-footer-bar`, `inc-footer-bar__menu`, and `inc-footer-bar__meta` as page-framing wrappers.
 
+Notes:
+- `inc-page` is the preferred canonical wrapper; `inc-breadcrumb-body` remains a compatibility alias that maps to the same layout contract.
+- `inc-footer-bar__menu` is a compact action cluster inside the footer bar, not a separate navigation system.
+
 Trace:
 - Code Refs:
   - `src/inc-design-language.scss`

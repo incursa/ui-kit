@@ -21,7 +21,7 @@ Use `minor` or `major` instead of `patch` when needed.
 - verify you are on `main`
 - verify the working tree is clean
 - bump `package.json` and `package-lock.json`
-- run package validation through the npm version flow
+- run build, smoke, and package validation through the npm version flow
 - prepend the new section to `CHANGELOG.md`
 - commit the release
 - create the matching Git tag
@@ -38,8 +38,11 @@ Use `minor` or `major` instead of `patch` when needed.
 What the underlying npm scripts do:
 
 - `npm version <type>` bumps `package.json` and `package-lock.json`
-- runs `preversion`, which builds the package and verifies it with `npm pack --dry-run`
-- the PowerShell helper then commits and tags the release as `v0.2.2`
+- runs `preversion`, which rebuilds the package, runs the smoke gate, and verifies it with `npm pack --dry-run`
+- `npm run verify` performs the same build, smoke, and dry-run package validation without bumping the version
+- `npm run smoke` checks source/dist parity and public-surface coverage against the built artifacts
+- `npm run package` rebuilds, smokes, and produces the tarball
+- the PowerShell helper then commits and tags the release with the matching `v*` tag
 
 5. Pushing the `v*` tag triggers `.github/workflows/npm-publish.yml`, which publishes `@incursa/ui-kit` to npm via Trusted Publishing and creates the matching GitHub Release from the new `CHANGELOG.md` section.
 

@@ -21,14 +21,15 @@ Licensed under Apache 2.0.
 - Bootstrap theming overrides for colors, typography, spacing, borders, inputs, cards, tabs, and tables.
 - Dense but readable table styling with strong teal headers and mono-friendly numeric cells.
 - Compact action buttons and inline forms that work well inside grids and table rows.
-- Card, section-shell, summary-block, vertical-list, and layout primitives used across admin screens.
+- Card, section-shell, summary-block, page-frame, vertical-list, and layout primitives used across admin screens.
 - Status-oriented badges and alerts with soft backgrounds and stronger foreground/border cues.
 - Validation states, error summaries, fieldset/legend groups, filter chips, and dense toolbar patterns for search-heavy screens.
 - Operational states such as empty, no-results, loading, error, permission, lock, toast, live-region, auto-refresh, and activity timeline surfaces.
 - Bulk-action, sticky-header, and row-state table patterns for operator-facing grids.
 - File/document dropzones, file rows, read-only description-list grids, progress/meter surfaces, and drawer-style side panels.
+- Contextual floating content for tooltip and popover shells anchored to a trigger.
 - A small overlay/navigation layer for tabs, pagination, dropdown actions, native details/dialog patterns, and compatibility modals/offcanvas panels.
-- Opinionated app-shell pieces for navbar/topbar, breadcrumb/nav-triad, sticky footer, user menu, and common two/three-column page layouts.
+- Opinionated app-shell pieces for navbar/topbar, breadcrumb/nav-triad, page-frame wrappers, footer-bar action clusters, sticky footer, user menu, and common two/three-column page layouts.
 - A public-surface standards layer for `inc-` prefixing, BEM naming, and accessible interactive behavior.
 
 ## What was intentionally left out
@@ -41,7 +42,8 @@ Licensed under Apache 2.0.
 
 - First-pass Spec Trace suite: [specs/requirements/ui-kit/_index.md](./specs/requirements/ui-kit/_index.md)
 - Open requirement gaps and follow-up questions: [specs/requirements/ui-kit/REQUIREMENT-GAPS.md](./specs/requirements/ui-kit/REQUIREMENT-GAPS.md)
-- Verification baseline: [specs/verification/ui-kit/_index.md](./specs/verification/ui-kit/_index.md)
+- Architecture / design-rationale layer: [specs/architecture/_index.md](./specs/architecture/_index.md)
+- Verification baseline and smoke gate: [specs/verification/ui-kit/_index.md](./specs/verification/ui-kit/_index.md)
 
 ## Files
 
@@ -56,7 +58,7 @@ Licensed under Apache 2.0.
 - `dist/inc-design-language.css`
   Compiled standalone CSS output.
 - `dist/inc-design-language.js`
-  Optional vanilla-JS helper for menus, tabs, collapsible sections, and auto-refresh widgets with pause/resume controls.
+  Optional vanilla-JS helper for menus, tabs, collapsible sections, modal/offcanvas shells, native dialog launch hooks, and auto-refresh widgets with pause/resume controls.
 - `index.html`
   Showcase hub for the included example pages.
 - `demo.html`
@@ -70,11 +72,11 @@ Licensed under Apache 2.0.
 - `overlay-workflows.html`
   Modal and offcanvas workflow example with validation and assignment flows.
 - `reference.html`
-  Copy/paste catalog for the standard controls and markup patterns.
+  Copy/paste catalog for the standard controls, page framing, metrics, lists, overlays, and markup patterns.
 - `specs/requirements/ui-kit/`
   First-pass Spec Trace specification suite for the UI kit, including the gap log for unresolved questions.
 - `specs/verification/ui-kit/`
-  Auditable verification baseline for the current UI kit public surface.
+  Auditable verification baseline for the current UI kit public surface, including the repo-local smoke gate.
 - `states.html`
   Empty, no-results, loading, error, permission, timeline, file, and notification patterns.
 - `forms-and-validation.html`
@@ -124,9 +126,10 @@ For titled sections that wrap tables, use `inc-header-body--table-body` to keep 
 
 - CSS-only/native behavior is enough for layout, cards, tables, buttons, alerts, form fields, badges, breadcrumbs, sticky footer, and most surface styling.
 - Stateful controls still need behavior:
-  tabs, collapsible sections, menus/dropdowns, modals, offcanvas panels, dismissible alerts, toasts, and auto-refresh countdowns with pause/resume behavior.
+  tabs, collapsible sections, menus/dropdowns, modal and offcanvas shells, and auto-refresh countdowns with pause/resume behavior.
+- Alert and toast surfaces stay CSS/HTML-first unless the consuming app adds its own dismissal or lifecycle logic.
 - This package now includes an optional dependency-free helper at `dist/inc-design-language.js` for:
-  user-menu dropdowns, tab switching, collapse/accordion toggles, legacy modal/offcanvas shells, and page auto-refresh countdown widgets.
+  user-menu dropdowns, tab switching, collapse/accordion toggles, legacy modal/offcanvas shells, native dialog launching, and page auto-refresh countdown widgets.
 - This package also includes native-styled patterns for:
   `details.inc-disclosure`, `details.inc-native-menu`, `dialog.inc-native-dialog`, and `dialog.inc-native-dialog--drawer`.
 - If you prefer native HTML behavior where possible, use browser primitives like `<details>` and `<dialog>` for product-specific implementations. The helper exists for places where the design language is intentionally Bootstrap-like and needs matching interaction behavior.
@@ -136,7 +139,7 @@ For titled sections that wrap tables, use `inc-header-body--table-body` to keep 
 If you just want the look in another app:
 
 1. Copy `dist/inc-design-language.css`.
-2. If you need interactive tabs/menus/collapses, also copy `dist/inc-design-language.js`.
+2. If you need interactive tabs/menus/collapses or helper-managed overlays, also copy `dist/inc-design-language.js`.
 3. Load the CSS after your reset or base stylesheet.
 4. Load the optional JS near the end of the page.
 5. Use the `inc-*` classes shown in `reference.html` for direct copy/paste control markup.
@@ -152,12 +155,13 @@ This repository is shaped as a normal npm package:
 - `npm pack` produces a local tarball.
 - `publishConfig.access` is set for public scoped publishing.
 - GitHub Actions is set up for npm Trusted Publishing on release.
+- `npm run verify` is the repo-local build, smoke, and dry-run package gate.
 
 Typical flow:
 
 ```bash
 npm install
-npm run build
+npm run verify
 npm pack
 ```
 
@@ -240,7 +244,7 @@ For normal releases:
 "@
 ```
 
-Use `minor` or `major` when needed. The script verifies the repo state, bumps the version, runs the package validation step, updates `CHANGELOG.md`, creates the release commit and tag, and pushes them. Pushing the tag publishes the package to npm automatically. If you need to retry a failed publish, rerun the original tag-triggered workflow run rather than dispatching a separate manual publish.
+Use `minor` or `major` when needed. The script verifies the repo state, bumps the version, runs the build, smoke, and package validation step, updates `CHANGELOG.md`, creates the release commit and tag, and pushes them. Pushing the tag publishes the package to npm automatically. If you need to retry a failed publish, rerun the original tag-triggered workflow run rather than dispatching a separate manual publish.
 
 ## Use it as source
 

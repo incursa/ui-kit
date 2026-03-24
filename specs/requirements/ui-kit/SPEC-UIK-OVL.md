@@ -101,6 +101,9 @@ Trace:
 ## REQ-UIK-OVL-0007 Provide contextual floating content surfaces
 The overlay surface MUST provide `inc-dropdown`, `inc-dropdown__toggle`, `inc-dropdown__menu`, `inc-dropdown__menu--end`, `inc-dropdown__item`, `inc-dropdown__divider`, `inc-dropdown__header`, `inc-dropdown-actions`, `inc-dropdown-menu-actions`, `inc-tooltip`, `inc-tooltip__inner`, `inc-popover`, `inc-popover-header`, and `inc-popover-body` primitives for contextual auxiliary content that stay visually anchored to their trigger without covering unrelated content by default.
 
+Notes:
+- `inc-tooltip` and `inc-popover` are styling shells for host-managed floating content; the package does not provide a general-purpose positioning runtime for them.
+
 Trace:
 - Code Refs:
   - `src/inc-design-language.scss`

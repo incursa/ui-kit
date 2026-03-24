@@ -13307,24 +13307,24 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
     padding: 1rem;
   }
 }
-.inc-page {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  min-width: 0;
-}
-.inc-page__breadcrumbs {
-  margin-bottom: 0;
-}
-.inc-page__body {
-  min-width: 0;
-}
-
+.inc-page,
 .inc-breadcrumb-body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  min-width: 0;
 }
+
+.inc-page__breadcrumbs,
+.inc-breadcrumb-body__breadcrumb {
+  margin-bottom: 0;
+}
+
+.inc-page__body,
+.inc-breadcrumb-body__body {
+  min-width: 0;
+}
+
 .inc-breadcrumb-body__breadcrumb {
   margin-bottom: 0;
 }
@@ -15202,6 +15202,9 @@ body.inc-offcanvas-open {
   overflow: hidden;
   white-space: nowrap;
 }
+.inc-btn.is-loading:has(> .inc-spinner)::after, .inc-btn.is-loading:has(> .inc-loading-dots)::after {
+  display: none;
+}
 .inc-btn.is-loading::after {
   content: "";
   position: absolute;
@@ -15213,6 +15216,12 @@ body.inc-offcanvas-open {
   border: 0.125rem solid currentColor;
   border-right-color: transparent;
   animation: inc-loading-spin 0.8s linear infinite;
+}
+.inc-btn.is-loading > .inc-spinner,
+.inc-btn.is-loading > .inc-loading-dots {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
 }
 
 .inc-bulk-bar {

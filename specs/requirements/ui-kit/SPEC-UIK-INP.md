@@ -61,7 +61,7 @@ Trace:
   - `VER-UIK-0001`
 
 ## REQ-UIK-INP-0003 Provide attention-state modifiers
-The editable-control surface MUST provide `inc-form__control--warning` and `inc-form__control--error` modifiers for non-validity emphasis using the shared color families defined in `REQ-UIK-TOK-0003`, while keeping validity hooks separate under `REQ-UIK-VAL-0003` and respecting `REQ-UIK-CNV-0005`.
+The editable-control surface MUST provide `inc-form__control--warning` and `inc-form__control--error` modifiers for non-validity emphasis using the shared color families defined in `REQ-UIK-TOK-0003`, while keeping validity styling separate from those attention states and using the shared hook vocabulary defined in `REQ-UIK-VAL-0003` and respecting `REQ-UIK-CNV-0005`.
 
 Trace:
 - Code Refs:
@@ -143,3 +143,19 @@ Trace:
   - `states.html`
 - Verified By:
   - `VER-UIK-0001`
+
+## REQ-UIK-INP-0008 Provide editable-control validity styling
+The editable-control surface MUST provide validity styling for `inc-form__control` states, including `is-valid`, `is-invalid`, and `aria-invalid`, with adjacent feedback and helper text remaining readable and the styling staying aligned to `REQ-UIK-VAL-0003` and `REQ-UIK-VAL-0005`.
+
+Trace:
+  - Code Refs:
+    - `src/inc-design-language.scss`
+    - `reference.html`
+    - `forms-and-validation.html`
+    - `demo.html`
+    - `overlay-workflows.html`
+    - `work-queue.html`
+    - `data-grid-advanced.html`
+    - `states.html`
+  - Verified By:
+    - `VER-UIK-0001`

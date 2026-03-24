@@ -81,3 +81,17 @@ Trace:
   - `states.html`
 - Verified By:
   - `VER-UIK-0001`
+
+## REQ-UIK-SEL-0005 Provide select validity styling
+The select surface MUST provide validity styling for `inc-form__select` states, including `is-valid`, `is-invalid`, and `aria-invalid`, while preserving native select behavior and aligning with the shared hook vocabulary defined in `REQ-UIK-VAL-0003`.
+
+Trace:
+  - Code Refs:
+    - `src/inc-design-language.scss`
+    - `reference.html`
+    - `forms-and-validation.html`
+    - `demo.html`
+    - `work-queue.html`
+    - `states.html`
+  - Verified By:
+    - `VER-UIK-0001`

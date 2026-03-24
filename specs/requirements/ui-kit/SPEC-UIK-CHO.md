@@ -86,3 +86,16 @@ Trace:
   - `states.html`
 - Verified By:
   - `VER-UIK-0001`
+
+## REQ-UIK-CHO-0006 Provide choice validity styling
+The choice control surface MUST provide validity styling for `inc-form__check` and `inc-form__switch` states, including invalid labels and `aria-invalid` or equivalent hooks, while preserving the native checkbox and radio semantics defined by the family and aligning with `REQ-UIK-VAL-0003`.
+
+Trace:
+  - Code Refs:
+    - `src/inc-design-language.scss`
+    - `reference.html`
+    - `forms-and-validation.html`
+    - `demo.html`
+    - `states.html`
+  - Verified By:
+    - `VER-UIK-0001`

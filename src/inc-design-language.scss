@@ -1705,26 +1705,25 @@
     }
 }
 
-.inc-page {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    min-width: 0;
-
-    &__breadcrumbs {
-        margin-bottom: 0;
-    }
-
-    &__body {
-        min-width: 0;
-    }
-}
-
+.inc-page,
 .inc-breadcrumb-body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    min-width: 0;
+}
 
+.inc-page__breadcrumbs,
+.inc-breadcrumb-body__breadcrumb {
+    margin-bottom: 0;
+}
+
+.inc-page__body,
+.inc-breadcrumb-body__body {
+    min-width: 0;
+}
+
+.inc-breadcrumb-body {
     &__breadcrumb {
         margin-bottom: 0;
     }
@@ -4370,6 +4369,11 @@ body.inc-offcanvas-open {
     overflow: hidden;
     white-space: nowrap;
 
+    &:has(> .inc-spinner)::after,
+    &:has(> .inc-loading-dots)::after {
+        display: none;
+    }
+
     &::after {
         content: "";
         position: absolute;
@@ -4381,6 +4385,13 @@ body.inc-offcanvas-open {
         border: 0.125rem solid currentColor;
         border-right-color: transparent;
         animation: inc-loading-spin 0.8s linear infinite;
+    }
+
+    > .inc-spinner,
+    > .inc-loading-dots {
+        position: absolute;
+        inset: 50% auto auto 50%;
+        transform: translate(-50%, -50%);
     }
 }
 

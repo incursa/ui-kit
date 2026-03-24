@@ -24,7 +24,7 @@ This specification covers aggregated error summaries, field-level feedback, and 
 
 ## Context
 
-Validation is cross-cutting, but the kit should still present it with one consistent pattern that can be reused across many controls.
+Validation is cross-cutting, but the kit keeps the shared error-summary and feedback vocabulary together while the control-family specs own their own validity styling.
 
 ## REQ-UIK-VAL-0001 Provide an error-summary surface
 The UI kit MUST provide `inc-form__error-summary`, `inc-form__error-summary-title`, and `inc-form__error-summary-list` for aggregated validation errors with a readable top-level message and the individual issues listed beneath it.
@@ -48,8 +48,8 @@ Trace:
 - Verified By:
   - `VER-UIK-0001`
 
-## REQ-UIK-VAL-0003 Provide validity state styling for editable controls
-The validation surface MUST provide validity state styling for `inc-form__control`, `inc-form__select`, and `inc-form__check` surfaces, including invalid choice labels, with `aria-invalid` or equivalent state hooks in addition to visual styling.
+## REQ-UIK-VAL-0003 Provide shared validity hook vocabulary
+The validation surface MUST define the shared validity hooks used by the control-family specs, including `is-valid`, `is-invalid`, `aria-invalid`, and the related feedback-linking affordances, so editable inputs, selects, and choice controls can present family-specific styling without inventing separate validation semantics.
 
 Trace:
   - Code Refs:

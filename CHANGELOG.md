@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1
+
+- Moved validity styling into the control-family requirements while keeping the shared validation vocabulary centralized.
+- Normalized loading-button examples to use the shared spinner helper markup and expanded the repo-local smoke gate with DOM coverage.
+- Tightened the architecture and release docs so the packaged surface, examples, and release flow stay aligned.
+
 ## 1.0.0
 
 - Reworked the shared Spec Trace foundation into explicit naming, token, control-convention, accessibility, and interaction layers.
