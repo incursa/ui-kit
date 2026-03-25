@@ -4,6 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Incursa Design Language Showcase - Reference</title>
+    <script>
+        (() => {
+            const storageKey = "inc-theme-mode";
+            const resolveTheme = (mode) => mode === "dark" || mode === "light"
+                ? mode
+                : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            let mode = "system";
+
+            try {
+                const storedMode = window.localStorage.getItem(storageKey);
+
+                if (storedMode === "light" || storedMode === "dark" || storedMode === "system") {
+                    mode = storedMode;
+                }
+            } catch {
+                // Ignore storage restrictions before the helper bootstraps.
+            }
+
+            document.documentElement.setAttribute("data-inc-theme-mode", mode);
+            document.documentElement.setAttribute("data-bs-theme", resolveTheme(mode));
+            document.documentElement.style.colorScheme = resolveTheme(mode);
+        })();
+    </script>
     <link rel="stylesheet" href="./dist/inc-design-language.css">
     <link rel="stylesheet" href="./showcase.css">
 </head>
@@ -27,6 +50,7 @@
                             <a class="nav-link active" href="./reference.html">Reference</a>
                         </div>
                         <div class="inc-navbar__utilities">
+                            <div data-inc-theme-switcher data-inc-theme-switcher-variant="navbar"></div>
                             <details class="inc-native-menu inc-native-menu--navbar">
                                 <summary class="inc-native-menu__summary">
                                     <span class="inc-user-menu__avatar">SM</span>
@@ -68,6 +92,48 @@
                                 <p class="demo-eyebrow">Reference Catalog</p>
                                 <h1 class="inc-heading inc-heading--h1">Rendered controls with copyable HTML</h1>
                                 <p class="inc-text inc-text--regular inc-text--muted">This page is the practical copy/paste surface. Each section shows the rendered result first, then the HTML markup directly below it.</p>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Theme Switcher</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <div class="inc-theme-toggle" data-inc-theme-switcher>
+                                        <div class="inc-theme-toggle__label">
+                                            <p class="inc-theme-toggle__title">Appearance</p>
+                                            <p class="inc-theme-toggle__value" data-inc-theme-label>System</p>
+                                        </div>
+                                        <div class="inc-button-group inc-button-group--sm" role="group" aria-label="Theme mode">
+                                            <button class="inc-btn inc-btn--secondary active" type="button" data-inc-theme-mode="light">Light</button>
+                                            <button class="inc-btn inc-btn--secondary" type="button" data-inc-theme-mode="dark">Dark</button>
+                                            <button class="inc-btn inc-btn--secondary" type="button" data-inc-theme-mode="system">System</button>
+                                        </div>
+                                        <button class="inc-btn inc-btn--outline-secondary inc-btn--sm" type="button" data-inc-theme-toggle>Cycle</button>
+                                    </div>
+                                    <div data-inc-theme-switcher data-inc-theme-switcher-block></div>
+                                    <p class="inc-text inc-text--regular inc-text--muted">The bundled helper stores the selected mode in localStorage, resolves system against prefers-color-scheme, keeps the root `data-bs-theme` attribute in sync, and can either wire your own controls or mount the packaged switcher into an empty host.</p>
+                                </div>
+<pre class="demo-code"><code>&lt;div class="inc-theme-toggle" data-inc-theme-switcher&gt;
+    &lt;div class="inc-theme-toggle__label"&gt;
+        &lt;p class="inc-theme-toggle__title"&gt;Appearance&lt;/p&gt;
+        &lt;p class="inc-theme-toggle__value" data-inc-theme-label&gt;System&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="inc-button-group inc-button-group--sm" role="group" aria-label="Theme mode"&gt;
+        &lt;button class="inc-btn inc-btn--secondary" type="button" data-inc-theme-mode="light"&gt;Light&lt;/button&gt;
+        &lt;button class="inc-btn inc-btn--secondary" type="button" data-inc-theme-mode="dark"&gt;Dark&lt;/button&gt;
+        &lt;button class="inc-btn inc-btn--secondary" type="button" data-inc-theme-mode="system"&gt;System&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;button class="inc-btn inc-btn--outline-secondary inc-btn--sm" type="button" data-inc-theme-toggle&gt;Cycle&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div data-inc-theme-switcher data-inc-theme-switcher-block&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    window.IncTheme.setMode("dark");
+&lt;/script&gt;</code></pre>
                             </div>
                         </section>
 

@@ -6,6 +6,11 @@
         menu: ".inc-dropdown__menu",
         collapseToggle: '[data-inc-toggle="collapse"]',
         tabToggle: '[data-inc-toggle="tab"]',
+        themeMode: "[data-inc-theme-mode]:not(html)",
+        themeToggle: "[data-inc-theme-toggle]",
+        themeSelect: "[data-inc-theme-select]",
+        themeLabel: "[data-inc-theme-label]",
+        themeSwitcher: "[data-inc-theme-switcher], details.inc-theme-switcher",
         nativeDialogOpen: "[data-inc-native-dialog-open]",
         autoRefresh: "[data-inc-auto-refresh]",
         autoRefreshToggle: '[data-inc-action="auto-refresh-toggle"]',
@@ -30,6 +35,411 @@
 
     const autoRefreshControllers = [];
     let autoRefreshReloadScheduled = false;
+    const themeModes = ["light", "dark", "system"];
+    const themeDescriptions = {
+        light: "Use the brighter application palette.",
+        dark: "Use the darker application palette.",
+        system: "Match the device preference automatically.",
+    };
+    const themeStorageKey = "inc-theme-mode";
+    const themeState = {
+        mode: "system",
+        resolved: "light",
+    };
+    let themeMediaQuery = null;
+    let themeMediaListenerBound = false;
+    let themeStorageListenerBound = false;
+    let themeInitialized = false;
+
+    function isThemeMode(value) {
+        return themeModes.includes(value);
+    }
+
+    function getThemeLabel(mode) {
+        if (!isThemeMode(mode)) {
+            return "System";
+        }
+
+        return mode.charAt(0).toUpperCase() + mode.slice(1);
+    }
+
+    function getThemeStatusLabel(mode = themeState.mode, resolved = themeState.resolved) {
+        return mode === "system"
+            ? `${getThemeLabel(mode)} (${getThemeLabel(resolved)})`
+            : getThemeLabel(mode);
+    }
+
+    function getStoredThemeMode() {
+        try {
+            const stored = window.localStorage.getItem(themeStorageKey);
+            return isThemeMode(stored) ? stored : null;
+        } catch {
+            return null;
+        }
+    }
+
+    function getConfiguredThemeMode() {
+        const root = document.documentElement;
+
+        return root.getAttribute("data-inc-theme-mode")
+            || root.dataset.incThemeMode
+            || root.getAttribute("data-bs-theme")
+            || "system";
+    }
+
+    function persistThemeMode(mode) {
+        try {
+            if (mode === "system") {
+                window.localStorage.removeItem(themeStorageKey);
+                return;
+            }
+
+            window.localStorage.setItem(themeStorageKey, mode);
+        } catch {
+            // Ignore storage failures in private mode or restricted contexts.
+        }
+    }
+
+    function getSystemTheme() {
+        if (!window.matchMedia) {
+            return "light";
+        }
+
+        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+
+    function resolveThemeMode(mode) {
+        return mode === "system" ? getSystemTheme() : mode;
+    }
+
+    function syncThemeControls(mode, resolved) {
+        document.querySelectorAll(selectors.themeMode).forEach((control) => {
+            if (!(control instanceof HTMLElement)) {
+                return;
+            }
+
+            const controlMode = control.getAttribute("data-inc-theme-mode");
+            const isSelected = controlMode === mode;
+            const role = control.getAttribute("role");
+
+            control.classList.toggle("active", isSelected);
+            control.classList.toggle("is-selected", isSelected);
+
+            if (role === "menuitemradio" || role === "radio") {
+                control.setAttribute("aria-checked", isSelected ? "true" : "false");
+            } else if (control.tagName === "BUTTON" || control.tagName === "A") {
+                control.setAttribute("aria-pressed", isSelected ? "true" : "false");
+            }
+
+            if (control.tagName === "INPUT" && (control.type === "radio" || control.type === "checkbox")) {
+                control.checked = isSelected;
+            }
+
+            if (control.tagName === "OPTION") {
+                control.selected = isSelected;
+            }
+        });
+
+        document.querySelectorAll(selectors.themeSelect).forEach((control) => {
+            if (control instanceof HTMLSelectElement) {
+                control.value = mode;
+            }
+        });
+
+        document.querySelectorAll(selectors.themeLabel).forEach((label) => {
+            if (!(label instanceof HTMLElement)) {
+                return;
+            }
+
+            const labelType = label.getAttribute("data-inc-theme-label") || "status";
+
+            if (labelType === "resolved") {
+                label.textContent = getThemeLabel(resolved);
+                return;
+            }
+
+            if (labelType === "mode") {
+                label.textContent = getThemeLabel(mode);
+                return;
+            }
+
+            label.textContent = getThemeStatusLabel(mode, resolved);
+        });
+
+        document.querySelectorAll(selectors.themeSwitcher).forEach((switcher) => {
+            if (!(switcher instanceof HTMLElement)) {
+                return;
+            }
+
+            switcher.dataset.incThemeModeState = mode;
+            switcher.dataset.incThemeResolved = resolved;
+        });
+    }
+
+    function publishThemeChange() {
+        document.documentElement.dispatchEvent(new CustomEvent("inc-theme-change", {
+            bubbles: true,
+            composed: true,
+            detail: {
+                mode: themeState.mode,
+                resolved: themeState.resolved,
+            },
+        }));
+    }
+
+    function applyThemeMode(mode, options = {}) {
+        const nextMode = isThemeMode(mode) ? mode : "system";
+        const resolved = resolveThemeMode(nextMode);
+        const root = document.documentElement;
+
+        themeState.mode = nextMode;
+        themeState.resolved = resolved;
+
+        root.setAttribute("data-inc-theme-mode", nextMode);
+        root.setAttribute("data-bs-theme", resolved);
+        root.style.colorScheme = resolved;
+        root.dataset.incThemeModeState = nextMode;
+        root.dataset.incThemeResolved = resolved;
+
+        if (options.persist !== false) {
+            persistThemeMode(nextMode);
+        }
+
+        if (options.syncControls !== false) {
+            syncThemeControls(nextMode, resolved);
+        }
+
+        if (options.dispatch !== false) {
+            publishThemeChange();
+        }
+
+        return themeState;
+    }
+
+    function cycleThemeMode() {
+        const currentIndex = themeModes.indexOf(themeState.mode);
+        const nextMode = themeModes[(currentIndex + 1) % themeModes.length];
+
+        return applyThemeMode(nextMode);
+    }
+
+    function createThemeSwitcherOption(mode) {
+        const button = document.createElement("button");
+        const body = document.createElement("span");
+        const label = document.createElement("span");
+        const detail = document.createElement("span");
+
+        button.type = "button";
+        button.className = "inc-theme-switcher__option";
+        button.setAttribute("data-inc-theme-mode", mode);
+        button.setAttribute("role", "menuitemradio");
+
+        body.className = "inc-theme-switcher__option-body";
+        label.className = "inc-theme-switcher__option-label";
+        label.textContent = getThemeLabel(mode);
+        detail.className = "inc-theme-switcher__option-detail";
+        detail.textContent = themeDescriptions[mode];
+
+        body.append(label, detail);
+        button.append(body);
+
+        return button;
+    }
+
+    function createThemeSwitcher(options = {}) {
+        const switcher = document.createElement("details");
+        const summary = document.createElement("summary");
+        const meta = document.createElement("span");
+        const label = document.createElement("span");
+        const status = document.createElement("span");
+        const panel = document.createElement("div");
+        const header = document.createElement("div");
+
+        switcher.className = "inc-native-menu inc-theme-switcher";
+
+        if (options.variant === "navbar") {
+            switcher.classList.add("inc-native-menu--navbar");
+        }
+
+        if (options.block) {
+            switcher.classList.add("inc-native-menu--block");
+        }
+
+        summary.className = "inc-native-menu__summary inc-theme-switcher__summary";
+        meta.className = "inc-theme-switcher__meta";
+        label.className = "inc-theme-switcher__label";
+        label.textContent = options.label || "Theme";
+        status.className = "inc-theme-switcher__status";
+        status.setAttribute("data-inc-theme-label", "status");
+        status.textContent = getThemeStatusLabel();
+        meta.append(label, status);
+        summary.append(meta);
+
+        panel.className = "inc-native-menu__panel inc-theme-switcher__panel";
+        panel.setAttribute("role", "menu");
+        panel.setAttribute("aria-label", options.menuLabel || "Theme");
+
+        header.className = "inc-native-menu__header";
+        header.textContent = options.heading || "Choose appearance";
+        panel.append(header);
+
+        themeModes.forEach((mode) => {
+            panel.append(createThemeSwitcherOption(mode));
+        });
+
+        switcher.append(summary, panel);
+        syncThemeControls(themeState.mode, themeState.resolved);
+
+        return switcher;
+    }
+
+    function mountThemeSwitcher(target, options = {}) {
+        let host = target;
+
+        if (typeof target === "string") {
+            host = document.querySelector(target);
+        }
+
+        if (!(host instanceof HTMLElement)) {
+            return null;
+        }
+
+        const switcher = createThemeSwitcher(options);
+        host.replaceChildren(switcher);
+        syncThemeControls(themeState.mode, themeState.resolved);
+
+        return switcher;
+    }
+
+    function getThemeSwitcherOptions(control) {
+        const panel = control.closest(".inc-theme-switcher__panel");
+
+        if (!panel) {
+            return [];
+        }
+
+        return Array.from(panel.querySelectorAll(selectors.themeMode)).filter((option) => option.closest(".inc-theme-switcher__panel") === panel);
+    }
+
+    function focusThemeSwitcherOption(control, direction) {
+        const options = getThemeSwitcherOptions(control);
+
+        if (!options.length) {
+            return;
+        }
+
+        const activeIndex = options.findIndex((option) => option === control);
+
+        if (direction === "first") {
+            options[0]?.focus();
+            return;
+        }
+
+        if (direction === "last") {
+            options[options.length - 1]?.focus();
+            return;
+        }
+
+        const delta = direction === "next" ? 1 : -1;
+        const startIndex = activeIndex === -1 ? 0 : activeIndex;
+        const nextIndex = (startIndex + delta + options.length) % options.length;
+        options[nextIndex]?.focus();
+    }
+
+    function initializeThemeSwitchers() {
+        document.querySelectorAll(selectors.themeSwitcher).forEach((switcher) => {
+            if (!(switcher instanceof HTMLElement) || switcher.dataset.incThemeSwitcherInitialized === "true") {
+                return;
+            }
+
+            switcher.dataset.incThemeSwitcherInitialized = "true";
+
+            if (switcher.matches("details.inc-theme-switcher")) {
+                syncThemeControls(themeState.mode, themeState.resolved);
+                return;
+            }
+
+            if (switcher.querySelector(selectors.themeMode)) {
+                syncThemeControls(themeState.mode, themeState.resolved);
+                return;
+            }
+
+            mountThemeSwitcher(switcher, {
+                variant: switcher.getAttribute("data-inc-theme-switcher-variant")
+                    || (switcher.closest(".inc-navbar, .inc-navbar__utilities") ? "navbar" : undefined),
+                block: switcher.hasAttribute("data-inc-theme-switcher-block"),
+                label: switcher.getAttribute("data-inc-theme-switcher-label") || "Theme",
+                menuLabel: switcher.getAttribute("data-inc-theme-switcher-menu-label") || "Theme",
+                heading: switcher.getAttribute("data-inc-theme-switcher-heading") || "Choose appearance",
+            });
+        });
+    }
+
+    function bindThemeMediaListener() {
+        if (themeMediaListenerBound || !window.matchMedia) {
+            return;
+        }
+
+        themeMediaListenerBound = true;
+        themeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+        const handleThemePreferenceChange = () => {
+            if (themeState.mode === "system") {
+                applyThemeMode("system", { persist: false });
+            }
+        };
+
+        if (typeof themeMediaQuery.addEventListener === "function") {
+            themeMediaQuery.addEventListener("change", handleThemePreferenceChange);
+        } else if (typeof themeMediaQuery.addListener === "function") {
+            themeMediaQuery.addListener(handleThemePreferenceChange);
+        }
+    }
+
+    function bindThemeStorageListener() {
+        if (themeStorageListenerBound) {
+            return;
+        }
+
+        themeStorageListenerBound = true;
+
+        window.addEventListener("storage", (event) => {
+            if (event.key !== themeStorageKey) {
+                return;
+            }
+
+            applyThemeMode(getStoredThemeMode() || getConfiguredThemeMode(), {
+                persist: false,
+            });
+        });
+    }
+
+    function initializeTheme() {
+        if (themeInitialized) {
+            syncThemeControls(themeState.mode, themeState.resolved);
+            initializeThemeSwitchers();
+            return themeState;
+        }
+
+        themeInitialized = true;
+
+        applyThemeMode(getStoredThemeMode() || getConfiguredThemeMode(), {
+            persist: false,
+        });
+
+        bindThemeMediaListener();
+        bindThemeStorageListener();
+        initializeThemeSwitchers();
+        syncThemeControls(themeState.mode, themeState.resolved);
+
+        return themeState;
+    }
+
+    applyThemeMode(getStoredThemeMode() || getConfiguredThemeMode(), {
+        dispatch: false,
+        persist: false,
+        syncControls: false,
+    });
 
     function getTarget(trigger) {
         const rawTarget = trigger.getAttribute("data-inc-target")
@@ -766,6 +1176,34 @@
 
     function attachEventHandlers() {
         document.addEventListener("click", (event) => {
+            const themeToggle = event.target.closest(selectors.themeToggle);
+
+            if (themeToggle) {
+                event.preventDefault();
+                cycleThemeMode();
+                return;
+            }
+
+            const themeModeControl = event.target.closest(selectors.themeMode);
+
+            if (themeModeControl && themeModeControl.tagName !== "INPUT") {
+                event.preventDefault();
+                applyThemeMode(themeModeControl.getAttribute("data-inc-theme-mode"));
+
+                const owningSwitcher = themeModeControl.closest("details.inc-theme-switcher");
+                const switcherSummary = owningSwitcher?.querySelector("summary");
+
+                if (owningSwitcher instanceof HTMLDetailsElement) {
+                    owningSwitcher.open = false;
+                }
+
+                if (switcherSummary instanceof HTMLElement) {
+                    switcherSummary.focus();
+                }
+
+                return;
+            }
+
             const autoRefreshToggle = event.target.closest(selectors.autoRefreshToggle);
 
             if (autoRefreshToggle) {
@@ -879,11 +1317,68 @@
             }
         });
 
+        document.addEventListener("change", (event) => {
+            const themeModeControl = event.target.closest(selectors.themeMode);
+
+            if (themeModeControl) {
+                applyThemeMode(themeModeControl.getAttribute("data-inc-theme-mode"));
+                return;
+            }
+
+            const themeSelect = event.target.closest(selectors.themeSelect);
+
+            if (themeSelect) {
+                applyThemeMode(themeSelect.value);
+            }
+        });
+
         document.addEventListener("keydown", (event) => {
             const menuToggle = event.target.closest(selectors.menuToggle);
             const menu = event.target.closest(selectors.menu);
             const tabToggle = event.target.closest(selectors.tabToggle);
+            const themeModeControl = event.target.closest(selectors.themeMode);
             const openOverlay = getTopOpenOverlay();
+
+            if (themeModeControl && themeModeControl.closest(".inc-theme-switcher__panel")) {
+                if (event.key === "ArrowDown") {
+                    event.preventDefault();
+                    focusThemeSwitcherOption(themeModeControl, "next");
+                    return;
+                }
+
+                if (event.key === "ArrowUp") {
+                    event.preventDefault();
+                    focusThemeSwitcherOption(themeModeControl, "previous");
+                    return;
+                }
+
+                if (event.key === "Home") {
+                    event.preventDefault();
+                    focusThemeSwitcherOption(themeModeControl, "first");
+                    return;
+                }
+
+                if (event.key === "End") {
+                    event.preventDefault();
+                    focusThemeSwitcherOption(themeModeControl, "last");
+                    return;
+                }
+
+                if (event.key === "Escape") {
+                    const owningSwitcher = themeModeControl.closest("details.inc-theme-switcher");
+                    const switcherSummary = owningSwitcher?.querySelector("summary");
+
+                    if (owningSwitcher instanceof HTMLDetailsElement) {
+                        owningSwitcher.open = false;
+                    }
+
+                    if (switcherSummary instanceof HTMLElement) {
+                        switcherSummary.focus();
+                    }
+
+                    return;
+                }
+            }
 
             if (menuToggle) {
                 if (event.key === "ArrowDown" || event.key === "ArrowUp") {
@@ -1000,7 +1495,32 @@
         });
     }
 
+    window.IncTheme = {
+        getMode() {
+            return themeState.mode;
+        },
+        getResolvedTheme() {
+            return themeState.resolved;
+        },
+        setMode(mode) {
+            return applyThemeMode(mode);
+        },
+        cycleMode() {
+            return cycleThemeMode();
+        },
+        createSwitcher(options = {}) {
+            return createThemeSwitcher(options);
+        },
+        mountSwitcher(target, options = {}) {
+            return mountThemeSwitcher(target, options);
+        },
+        init() {
+            return initializeTheme();
+        },
+    };
+
     function initialize() {
+        initializeTheme();
         initializeMenus();
         initializeCollapses();
         initializeTabs();

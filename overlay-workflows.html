@@ -4,6 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Incursa Design Language Showcase - Overlay Workflows</title>
+    <script>
+        (() => {
+            const storageKey = "inc-theme-mode";
+            const resolveTheme = (mode) => mode === "dark" || mode === "light"
+                ? mode
+                : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            let mode = "system";
+
+            try {
+                const storedMode = window.localStorage.getItem(storageKey);
+
+                if (storedMode === "light" || storedMode === "dark" || storedMode === "system") {
+                    mode = storedMode;
+                }
+            } catch {
+                // Ignore storage restrictions before the helper bootstraps.
+            }
+
+            document.documentElement.setAttribute("data-inc-theme-mode", mode);
+            document.documentElement.setAttribute("data-bs-theme", resolveTheme(mode));
+            document.documentElement.style.colorScheme = resolveTheme(mode);
+        })();
+    </script>
     <link rel="stylesheet" href="./dist/inc-design-language.css">
     <link rel="stylesheet" href="./showcase.css">
 </head>
@@ -27,6 +50,7 @@
                             <a class="nav-link" href="./reference.html">Reference</a>
                         </div>
                         <div class="inc-navbar__utilities">
+                            <div data-inc-theme-switcher data-inc-theme-switcher-variant="navbar"></div>
                             <details class="inc-native-menu inc-native-menu--navbar">
                                 <summary class="inc-native-menu__summary">
                                     <span class="inc-user-menu__avatar">SM</span>

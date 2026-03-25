@@ -1,13 +1,39 @@
 @use "./inc-tokens" as *;
 @import "bootstrap/scss/bootstrap";
 
+:root {
+    --inc-surface-primary: var(--bs-body-bg);
+    --inc-surface-secondary: var(--bs-secondary-bg);
+    --inc-surface-muted: var(--bs-tertiary-bg);
+    --inc-surface-highlight: var(--bs-primary-bg-subtle);
+    --inc-surface-strong: #2a3142;
+    --inc-surface-strong-rgb: 42, 49, 66;
+    --inc-border-subtle: var(--bs-border-color-translucent);
+    --inc-border-default: var(--bs-border-color);
+    --inc-border-strong: var(--bs-secondary-color);
+    --inc-text-primary: var(--bs-body-color);
+    --inc-text-secondary: var(--bs-secondary-color);
+    --inc-text-muted: var(--bs-tertiary-color);
+    --inc-text-inverse: #ffffff;
+    --inc-text-inverse-rgb: 255, 255, 255;
+    --inc-text-link: var(--bs-link-color);
+    --inc-text-link-hover: var(--bs-link-hover-color);
+    --inc-surface-primary-rgb: var(--bs-body-bg-rgb);
+    --inc-surface-secondary-rgb: var(--bs-secondary-bg-rgb);
+    --inc-surface-muted-rgb: var(--bs-tertiary-bg-rgb);
+    --inc-text-primary-rgb: var(--bs-body-color-rgb);
+    --inc-text-secondary-rgb: var(--bs-secondary-color-rgb);
+    --inc-text-muted-rgb: var(--bs-tertiary-color-rgb);
+    --inc-shadow-rgb: var(--bs-black-rgb);
+}
+
 // -----------------------------------------------------------------------------
 // Typography
 // -----------------------------------------------------------------------------
 
 .inc-text {
     font-family: $font-family-sans-serif;
-    color: $body-color;
+    color: var(--inc-text-primary);
     margin: 0;
 
     &--large {
@@ -76,7 +102,7 @@
     }
 
     &--muted {
-        color: $text-muted !important;
+        color: var(--inc-text-muted) !important;
     }
 
     &--lead {
@@ -86,7 +112,7 @@
     &--body {
         font-size: $font-size-base;
         line-height: $line-height-base;
-        color: $body-color;
+        color: var(--inc-text-primary);
     }
 }
 
@@ -175,7 +201,7 @@
 
 .inc-data {
     font-family: $font-family-monospace;
-    color: $body-color;
+    color: var(--inc-text-primary);
     margin: 0;
 
     &--display {
@@ -285,7 +311,7 @@
 
     &--help {
         font-size: 0.75rem;
-        color: $text-muted;
+        color: var(--inc-text-muted);
     }
 }
 
@@ -696,9 +722,9 @@
     &__fieldset {
         margin: 0;
         padding: 1rem 1rem 0.875rem;
-        border: 1px solid $inc-border-subtle;
+        border: 1px solid var(--inc-border-subtle);
         border-radius: $inc-radius-md;
-        background: linear-gradient(180deg, rgba($inc-surface-secondary, 0.72), $inc-surface-primary 3rem);
+        background: linear-gradient(180deg, rgba(var(--inc-surface-secondary-rgb), 0.72), var(--inc-surface-primary) 3rem);
     }
 
     &__legend {
@@ -706,7 +732,7 @@
         width: auto;
         margin: 0;
         padding: 0 0.375rem;
-        color: $body-color;
+        color: var(--inc-text-primary);
         font-size: 0.8125rem;
         font-weight: 600;
         line-height: 1.4;
@@ -1388,7 +1414,7 @@
     }
 
     &__subtitle {
-        color: var(--bs-secondary);
+        color: var(--inc-text-secondary);
         font-size: 0.875rem;
         margin: 0.25rem 0 0;
     }
@@ -1412,7 +1438,7 @@
     }
 
     &--panel {
-        background-color: var(--bs-body-bg);
+        background-color: var(--inc-surface-primary);
         box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 7.5%);
         border-radius: var(--bs-border-radius);
 
@@ -1515,8 +1541,8 @@
 }
 
 .inc-summary-block {
-    background-color: $white;
-    border: $border-width solid $border-color;
+    background-color: var(--inc-surface-primary);
+    border: $border-width solid var(--inc-border-default);
     border-radius: $border-radius;
     padding: $spacer * 1.25;
     transition: box-shadow 0.2s ease-in-out;
@@ -1531,7 +1557,7 @@
         justify-content: space-between;
         margin-bottom: $spacer * 0.75;
         font-size: $font-size-sm;
-        color: $text-muted;
+        color: var(--inc-text-muted);
         font-weight: $font-weight-medium;
         text-align: left;
 
@@ -1544,7 +1570,7 @@
 
     &__header-action {
         font-size: $font-size-sm;
-        color: $text-muted;
+        color: var(--inc-text-muted);
     }
 
     &__body {
@@ -1566,7 +1592,7 @@
     &__value {
         font-size: $h2-font-size;
         font-weight: $font-weight-bold;
-        color: $dark;
+        color: var(--inc-text-primary);
         line-height: 1.2;
         margin: 0;
 
@@ -1599,7 +1625,7 @@
     &__status-count {
         font-size: $h3-font-size;
         font-weight: $font-weight-bold;
-        color: $dark;
+        color: var(--inc-text-primary);
         line-height: 1;
         margin: 0;
     }
@@ -1646,8 +1672,8 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: $body-bg;
-    color: $body-color;
+    background-color: var(--inc-surface-primary);
+    color: var(--inc-text-primary);
 
     &__header {
         position: relative;
@@ -1663,8 +1689,8 @@
     &__sidebar {
         flex: 0 0 17rem;
         max-width: 17rem;
-        background-color: $inc-surface-secondary;
-        border-right: 1px solid $inc-border-subtle;
+        background-color: var(--inc-surface-secondary);
+        border-right: 1px solid var(--inc-border-subtle);
         padding: 1rem;
     }
 
@@ -1696,7 +1722,7 @@
         &__sidebar {
             max-width: none;
             border-right: 0;
-            border-bottom: 1px solid $inc-border-subtle;
+            border-bottom: 1px solid var(--inc-border-subtle);
         }
 
         &__content {
@@ -1782,9 +1808,9 @@
     justify-content: space-between;
     gap: 1rem;
     padding: 0.5rem 1rem;
-    border-top: 1px solid $inc-border-subtle;
-    background-color: $inc-surface-secondary;
-    color: $inc-text-secondary;
+    border-top: 1px solid var(--inc-border-subtle);
+    background-color: var(--inc-surface-secondary);
+    color: var(--inc-text-secondary);
 
     &__menu {
         display: flex;
@@ -1795,7 +1821,7 @@
 
     &__meta {
         font-size: 0.75rem;
-        color: $inc-text-muted;
+        color: var(--inc-text-muted);
     }
 }
 
@@ -1975,6 +2001,41 @@
     margin-top: 0.5rem;
 }
 
+.inc-theme-toggle {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 0.75rem;
+    border: 1px solid var(--inc-border-subtle);
+    border-radius: $inc-radius-panel;
+    background: var(--inc-surface-primary);
+    color: var(--inc-text-primary);
+
+    &__label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+        min-width: 0;
+    }
+
+    &__title {
+        margin: 0;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--inc-text-muted);
+    }
+
+    &__value {
+        margin: 0;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--inc-text-primary);
+    }
+}
+
 .inc-sidebar-menu {
     display: flex;
     flex-direction: column;
@@ -1987,7 +2048,7 @@
     &__label {
         display: block;
         margin-bottom: 0.5rem;
-        color: $inc-text-muted;
+        color: var(--inc-text-muted);
         font-size: 0.6875rem;
         font-weight: 600;
         letter-spacing: 0.08em;
@@ -2002,23 +2063,23 @@
         padding: 0.625rem 0.75rem;
         border: 1px solid transparent;
         border-radius: $inc-radius-panel;
-        color: $inc-text-secondary;
+        color: var(--inc-text-secondary);
         text-decoration: none;
         transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 
         &:hover,
         &:focus-visible {
-            background-color: $inc-surface-muted;
-            border-color: $inc-border-subtle;
-            color: $inc-text-primary;
+            background-color: var(--inc-surface-muted);
+            border-color: var(--inc-border-subtle);
+            color: var(--inc-text-primary);
             text-decoration: none;
         }
 
         &.active,
         &--active {
-            background-color: rgba($inc-brand-300, 0.12);
-            border-color: rgba($inc-brand-700, 0.2);
-            color: $inc-brand-800;
+            background-color: var(--inc-surface-highlight);
+            border-color: rgba(var(--bs-primary-rgb), 0.2);
+            color: var(--bs-primary-text-emphasis);
             font-weight: 600;
         }
     }
@@ -2028,15 +2089,15 @@
     }
 
     &__hint {
-        color: $inc-text-muted;
+        color: var(--inc-text-muted);
         font-size: 0.75rem;
         white-space: nowrap;
     }
 }
 
 .inc-nav-triad {
-    background-color: var(--bs-light);
-    border-bottom: 1px solid var(--bs-border-color);
+    background-color: var(--inc-surface-secondary);
+    border-bottom: 1px solid var(--inc-border-default);
     padding: 0.75rem 1rem;
     min-height: 3rem;
     position: sticky;
@@ -2073,17 +2134,17 @@
         align-items: center;
         gap: 0.5rem;
         padding: 0.5rem 0.75rem;
-        border: 1px solid var(--bs-border-color);
+        border: 1px solid var(--inc-border-default);
         border-radius: $inc-radius-panel;
-        background-color: var(--bs-white);
-        color: var(--bs-body-color);
+        background-color: var(--inc-surface-primary);
+        color: var(--inc-text-primary);
         text-decoration: none;
         font-size: 0.875rem;
         transition: all 0.2s ease;
 
         &:hover {
-            background-color: var(--bs-light);
-            border-color: var(--bs-secondary);
+            background-color: var(--inc-surface-muted);
+            border-color: var(--inc-border-strong);
             text-decoration: none;
         }
 
@@ -2096,12 +2157,12 @@
     &__btn--subtle {
         border-color: transparent;
         background-color: transparent;
-        color: var(--bs-secondary);
+        color: var(--inc-text-secondary);
 
         &:hover {
-            background-color: var(--bs-light);
-            border-color: var(--bs-border-color);
-            color: var(--bs-body-color);
+            background-color: var(--inc-surface-muted);
+            border-color: var(--inc-border-default);
+            color: var(--inc-text-primary);
         }
     }
 
@@ -2182,36 +2243,36 @@
             gap: 0.5rem;
             padding: 1rem;
             font: inherit;
-            color: $inc-ink-600;
+            color: var(--inc-text-secondary);
             border-top-left-radius: $inc-radius-panel;
             border-top-right-radius: $inc-radius-panel;
-            background-color: $inc-surface-secondary;
+            background-color: var(--inc-surface-secondary);
             height: 2.5rem;
             text-decoration: none;
-            border: 1px solid $inc-border-subtle;
+            border: 1px solid var(--inc-border-subtle);
             cursor: pointer;
             appearance: none;
 
             .inc-tab-icon {
-                color: $inc-brand-800;
+                color: var(--bs-primary);
             }
 
             &:not(.active):hover {
-                color: $inc-brand-900;
-                background-color: $inc-surface-muted;
-                border-color: $inc-border-default;
+                color: var(--inc-text-primary);
+                background-color: var(--inc-surface-muted);
+                border-color: var(--inc-border-default);
 
                 .inc-tab-icon {
-                    color: $inc-brand-900;
+                    color: var(--bs-primary);
                 }
             }
 
             &.active {
-                color: $inc-brand-800;
-                background-color: $inc-surface-primary;
+                color: var(--bs-primary-text-emphasis);
+                background-color: var(--inc-surface-primary);
                 font-weight: 600;
-                border-color: $inc-border-subtle;
-                border-bottom-color: $inc-surface-primary;
+                border-color: var(--inc-border-subtle);
+                border-bottom-color: var(--inc-surface-primary);
                 position: relative;
                 z-index: 1;
             }
@@ -2219,8 +2280,8 @@
     }
 
     .inc-tab-content {
-        background-color: $inc-surface-primary;
-        border: 1px solid $inc-border-subtle;
+        background-color: var(--inc-surface-primary);
+        border: 1px solid var(--inc-border-subtle);
         padding: 1.5rem;
         border-radius: $inc-radius-panel;
         border-top-left-radius: 0;
@@ -2230,7 +2291,7 @@
 }
 
 .inc-tabs-line {
-    border-bottom: 1px solid $inc-border-subtle;
+    border-bottom: 1px solid var(--inc-border-subtle);
 
     .inc-tabs-nav {
         display: flex;
@@ -2248,7 +2309,7 @@
             gap: 0.5rem;
             padding: 1rem 0.25rem;
             font: inherit;
-            color: $inc-text-secondary;
+            color: var(--inc-text-secondary);
             background: none;
             border: 0;
             text-decoration: none;
@@ -2257,25 +2318,25 @@
             appearance: none;
 
             .inc-tab-icon {
-                color: $inc-brand-800;
+                color: var(--bs-primary);
             }
 
             &:not(.active):hover {
-                color: $inc-accent-700;
-                border-bottom-color: $inc-accent-700;
+                color: var(--bs-primary);
+                border-bottom-color: var(--bs-primary);
 
                 .inc-tab-icon {
-                    color: $inc-accent-700;
+                    color: var(--bs-primary);
                 }
             }
 
             &.active {
-                color: $inc-text-primary;
+                color: var(--inc-text-primary);
                 font-weight: 600;
-                border-bottom-color: $inc-accent-700;
+                border-bottom-color: var(--bs-primary);
 
                 .inc-tab-icon {
-                    color: $inc-text-primary;
+                    color: var(--inc-text-primary);
                 }
             }
         }
@@ -2337,9 +2398,9 @@
 }
 
 details.inc-disclosure {
-    border: 1px solid $inc-border-subtle;
+    border: 1px solid var(--inc-border-subtle);
     border-radius: $inc-radius-panel;
-    background-color: $inc-surface-primary;
+    background-color: var(--inc-surface-primary);
     box-shadow: $inc-shadow-xs;
     overflow: clip;
 
@@ -2354,8 +2415,8 @@ details.inc-disclosure {
     justify-content: space-between;
     gap: 1rem;
     padding: 1rem 1.25rem;
-    background-color: $inc-surface-secondary;
-    color: $inc-text-primary;
+    background-color: var(--inc-surface-secondary);
+    color: var(--inc-text-primary);
     cursor: pointer;
     list-style: none;
     font-size: 0.9375rem;
@@ -2382,8 +2443,8 @@ details.inc-disclosure {
 }
 
 details.inc-disclosure[open] > .inc-disclosure__summary {
-    border-bottom: 1px solid $inc-border-subtle;
-    background-color: rgba($inc-brand-50, 0.85);
+    border-bottom: 1px solid var(--inc-border-subtle);
+    background-color: var(--inc-surface-highlight);
 
     &::after {
         transform: rotate(225deg) translateY(-0.05rem);
@@ -2397,7 +2458,7 @@ details.inc-disclosure[open] > .inc-disclosure__summary {
 }
 
 .inc-disclosure__meta {
-    color: $inc-text-muted;
+    color: var(--inc-text-muted);
     font-size: 0.75rem;
     font-weight: 500;
 }
@@ -2420,24 +2481,24 @@ details.inc-native-menu.inc-native-menu--navbar {
     .inc-native-menu__summary {
         min-height: 2.625rem;
         padding: 0.375rem 0.75rem;
-        border-color: rgba($inc-text-inverse, 0.16);
-        background-color: rgba($inc-text-inverse, 0.08);
-        color: rgba($inc-text-inverse, 0.92);
+        border-color: rgba(255, 255, 255, 0.16);
+        background-color: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.92);
         box-shadow: none;
     }
 
     .inc-user-menu__avatar {
-        background-color: rgba($inc-text-inverse, 0.18);
+        background-color: rgba(255, 255, 255, 0.18);
         color: $inc-text-inverse;
     }
 
     .inc-user-menu__detail {
-        color: rgba($inc-text-inverse, 0.72);
+        color: rgba(255, 255, 255, 0.72);
     }
 
     &[open] > .inc-native-menu__summary {
-        border-color: rgba($inc-text-inverse, 0.24);
-        background-color: rgba($inc-text-inverse, 0.14);
+        border-color: rgba(255, 255, 255, 0.24);
+        background-color: rgba(255, 255, 255, 0.14);
     }
 
     > .inc-native-menu__panel {
@@ -2451,10 +2512,10 @@ details.inc-native-menu.inc-native-menu--navbar {
     gap: 0.625rem;
     min-width: 0;
     padding: 0.5rem 0.75rem;
-    border: 1px solid $inc-border-subtle;
+    border: 1px solid var(--inc-border-subtle);
     border-radius: $inc-radius-panel;
-    background-color: $inc-surface-primary;
-    color: $inc-text-primary;
+    background-color: var(--inc-surface-primary);
+    color: var(--inc-text-primary);
     cursor: pointer;
     list-style: none;
     box-shadow: $inc-shadow-xs;
@@ -2513,14 +2574,14 @@ details.inc-native-menu.inc-native-menu--navbar {
     .inc-user-menu__detail {
         display: block;
         font-size: 0.75rem;
-        color: $text-muted;
+        color: var(--inc-text-muted);
         line-height: 1.15;
     }
 }
 
 details.inc-native-menu[open] > .inc-native-menu__summary {
-    border-color: $inc-border-default;
-    background-color: $inc-surface-secondary;
+    border-color: var(--inc-border-default);
+    background-color: var(--inc-surface-secondary);
 
     &::after {
         transform: rotate(225deg) translateY(-0.05rem);
@@ -2533,9 +2594,9 @@ details.inc-native-menu[open] > .inc-native-menu__summary {
     right: 0;
     min-width: 14rem;
     padding: 0.375rem 0;
-    border: 1px solid $inc-border-subtle;
+    border: 1px solid var(--inc-border-subtle);
     border-radius: $inc-radius-panel;
-    background-color: $inc-surface-primary;
+    background-color: var(--inc-surface-primary);
     box-shadow: $inc-shadow-md;
     z-index: $inc-z-index-dropdown;
 }
@@ -2545,7 +2606,7 @@ details.inc-native-menu.inc-native-menu--block > .inc-native-menu__summary {
     justify-content: flex-start;
     min-height: 3rem;
     padding: 0.625rem 0.75rem;
-    background: linear-gradient(180deg, $inc-surface-primary, $inc-surface-secondary);
+    background: linear-gradient(180deg, var(--inc-surface-primary), var(--inc-surface-secondary));
 }
 
 details.inc-native-menu.inc-native-menu--block > .inc-native-menu__panel {
@@ -2556,7 +2617,7 @@ details.inc-native-menu.inc-native-menu--block > .inc-native-menu__panel {
 
 .inc-native-menu__header {
     padding: 0.25rem 0.875rem 0.5rem;
-    color: $inc-text-muted;
+    color: var(--inc-text-muted);
     font-size: 0.75rem;
     font-weight: 600;
 }
@@ -2564,13 +2625,13 @@ details.inc-native-menu.inc-native-menu--block > .inc-native-menu__panel {
 .inc-native-menu__item {
     display: block;
     padding: 0.5rem 0.875rem;
-    color: $inc-text-primary;
+    color: var(--inc-text-primary);
     text-decoration: none;
 
     &:hover,
     &:focus-visible {
-        background-color: $inc-surface-secondary;
-        color: $inc-text-primary;
+        background-color: var(--inc-surface-secondary);
+        color: var(--inc-text-primary);
         text-decoration: none;
     }
 }
@@ -2588,13 +2649,132 @@ details.inc-native-menu.inc-native-menu--block > .inc-native-menu__panel {
     }
 }
 
+.inc-theme-switcher {
+    min-width: 0;
+}
+
+.inc-theme-switcher__summary {
+    min-width: 11rem;
+}
+
+.inc-theme-switcher__meta {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    line-height: 1.15;
+}
+
+.inc-theme-switcher__label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--inc-text-muted);
+}
+
+.inc-theme-switcher__status {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: inherit;
+}
+
+.inc-theme-switcher__panel {
+    min-width: 16rem;
+}
+
+.inc-theme-switcher__option {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 0.875rem;
+    border: 0;
+    background: transparent;
+    color: var(--inc-text-primary);
+    text-align: left;
+    cursor: pointer;
+
+    &::before,
+    &::after {
+        content: "";
+        display: block;
+    }
+
+    &::before {
+        width: 0.75rem;
+        height: 0.75rem;
+        border: 1px solid var(--inc-border-strong);
+        border-radius: 999px;
+        background: var(--inc-surface-primary);
+        box-shadow: inset 0 0 0 0 rgba(var(--bs-primary-rgb), 0.85);
+        transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    &::after {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 999px;
+        background: transparent;
+        transition: background-color 0.18s ease;
+    }
+
+    &:hover,
+    &:focus-visible {
+        background: var(--inc-surface-secondary);
+        color: var(--inc-text-primary);
+    }
+
+    &.is-selected {
+        background: var(--bs-primary-bg-subtle);
+        color: var(--bs-primary-text-emphasis);
+
+        &::before {
+            border-color: rgba(var(--bs-primary-rgb), 0.72);
+            box-shadow: inset 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.92);
+        }
+
+        &::after {
+            background: var(--bs-primary);
+        }
+    }
+}
+
+.inc-theme-switcher__option-body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+.inc-theme-switcher__option-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.inc-theme-switcher__option-detail {
+    font-size: 0.75rem;
+    color: var(--inc-text-muted);
+}
+
+details.inc-theme-switcher.inc-native-menu--navbar {
+    .inc-theme-switcher__label {
+        color: rgba(var(--inc-text-inverse-rgb), 0.64);
+    }
+
+    .inc-theme-switcher__status {
+        color: rgba(var(--inc-text-inverse-rgb), 0.9);
+    }
+}
+
 dialog.inc-native-dialog {
     width: min(100% - 2rem, 42rem);
     max-width: 42rem;
     padding: 0;
     border: 0;
     background: transparent;
-    color: $inc-text-primary;
+    color: var(--inc-text-primary);
 
     &::backdrop {
         background: rgba($inc-ink-900, 0.48);
@@ -2616,9 +2796,9 @@ dialog.inc-native-dialog.inc-native-dialog--drawer {
 }
 
 .inc-native-dialog__surface {
-    border: 1px solid $inc-border-subtle;
+    border: 1px solid var(--inc-border-subtle);
     border-radius: $inc-radius-panel;
-    background-color: $inc-surface-primary;
+    background-color: var(--inc-surface-primary);
     box-shadow: $inc-shadow-lg;
     overflow: hidden;
 }
@@ -2637,8 +2817,8 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__surface {
     justify-content: space-between;
     gap: 1rem;
     padding: 1rem 1.25rem;
-    border-bottom: 1px solid $inc-border-subtle;
-    background-color: $inc-surface-secondary;
+    border-bottom: 1px solid var(--inc-border-subtle);
+    background-color: var(--inc-surface-secondary);
 }
 
 .inc-native-dialog__title {
@@ -2661,8 +2841,8 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
     justify-content: flex-end;
     gap: 0.75rem;
     padding: 1rem 1.25rem;
-    border-top: 1px solid $inc-border-subtle;
-    background-color: $inc-surface-secondary;
+    border-top: 1px solid var(--inc-border-subtle);
+    background-color: var(--inc-surface-secondary);
 }
 
 .inc-native-dialog__close {
@@ -2674,13 +2854,13 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
     border: 0;
     border-radius: $inc-radius-panel;
     background: transparent;
-    color: $inc-text-secondary;
+    color: var(--inc-text-secondary);
     cursor: pointer;
 
     &:hover,
     &:focus-visible {
-        background-color: rgba($inc-ink-300, 0.35);
-        color: $inc-text-primary;
+        background-color: var(--inc-surface-muted);
+        color: var(--inc-text-primary);
     }
 }
 
@@ -2744,11 +2924,11 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
     align-items: center;
     gap: 0.625rem;
     padding: 0.5rem 0.75rem;
-    border: 1px solid $inc-border-subtle;
+    border: 1px solid var(--inc-border-subtle);
     border-radius: 999px;
-    background: rgba($inc-surface-primary, 0.96);
-    color: $body-color;
-    box-shadow: 0 0.75rem 1.5rem rgba($inc-surface-strong, 0.12);
+    background: rgba(var(--inc-surface-primary-rgb), 0.96);
+    color: var(--inc-text-primary);
+    box-shadow: 0 0.75rem 1.5rem rgba(var(--inc-surface-strong-rgb), 0.12);
     font-size: 0.75rem;
     line-height: 1.2;
     white-space: nowrap;
@@ -2772,7 +2952,7 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
 
     &__label,
     &__status-text {
-        color: $text-muted;
+        color: var(--inc-text-muted);
         font-weight: 600;
     }
 
@@ -2780,13 +2960,13 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
         font-family: $font-family-monospace;
         font-variant-numeric: tabular-nums;
         font-weight: 600;
-        color: $inc-surface-strong;
+        color: var(--inc-text-primary);
     }
 
     &__spinner {
         display: inline-flex;
         align-items: center;
-        color: $primary;
+        color: var(--bs-primary);
     }
 
     &__toggle {
@@ -2807,13 +2987,13 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
     }
 
     &.is-paused {
-        border-color: rgba($warning, 0.24);
-        box-shadow: 0 0.9rem 1.75rem rgba($warning, 0.1);
+        border-color: var(--bs-warning-border-subtle);
+        box-shadow: 0 0.9rem 1.75rem rgba(var(--bs-warning-rgb), 0.1);
     }
 
     &.is-loading {
-        border-color: rgba($primary, 0.2);
-        box-shadow: 0 0.9rem 1.75rem rgba($primary, 0.14);
+        border-color: var(--bs-primary-border-subtle);
+        box-shadow: 0 0.9rem 1.75rem rgba(var(--bs-primary-rgb), 0.14);
     }
 }
 
@@ -2824,10 +3004,10 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
     overflow: hidden;
     border: 0;
     border-radius: 999px;
-    background: $inc-surface-muted;
+    background: var(--inc-surface-muted);
     vertical-align: middle;
     appearance: none;
-    --inc-track-color: #{$inc-surface-muted};
+    --inc-track-color: var(--inc-surface-muted);
     --inc-fill-color: #{$primary};
 }
 
@@ -2913,7 +3093,7 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
         transition: opacity 0.3s ease, transform 0.3s ease;
 
         &:focus {
-            outline: 2px solid $primary;
+            outline: 2px solid var(--bs-primary);
             outline-offset: 2px;
         }
 
@@ -2934,37 +3114,37 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
 
     .alert-success,
     .inc-alert--success {
-        background-color: rgba($inc-success-50, 0.9);
-        border-color: $inc-success-100;
-        color: $inc-success-700;
+        background-color: var(--bs-success-bg-subtle);
+        border-color: var(--bs-success-border-subtle);
+        color: var(--bs-success-text-emphasis);
     }
 
     .alert-warning,
     .inc-alert--warning {
-        background-color: rgba($inc-warning-50, 0.9);
-        border-color: $inc-warning-100;
-        color: $inc-warning-700;
+        background-color: var(--bs-warning-bg-subtle);
+        border-color: var(--bs-warning-border-subtle);
+        color: var(--bs-warning-text-emphasis);
     }
 
     .alert-danger,
     .inc-alert--danger {
-        background-color: rgba($inc-danger-50, 0.9);
-        border-color: $inc-danger-100;
-        color: $inc-danger-700;
+        background-color: var(--bs-danger-bg-subtle);
+        border-color: var(--bs-danger-border-subtle);
+        color: var(--bs-danger-text-emphasis);
     }
 
     .alert-info,
     .inc-alert--info {
-        background-color: rgba($inc-blue-50, 0.9);
-        border-color: rgba($inc-blue-700, 0.25);
-        color: $inc-blue-800;
+        background-color: var(--bs-info-bg-subtle);
+        border-color: var(--bs-info-border-subtle);
+        color: var(--bs-info-text-emphasis);
     }
 
     .alert-primary,
     .inc-alert--primary {
-        background-color: rgba($inc-brand-50, 0.9);
-        border-color: rgba($inc-brand-300, 0.35);
-        color: $inc-brand-800;
+        background-color: var(--bs-primary-bg-subtle);
+        border-color: var(--bs-primary-border-subtle);
+        color: var(--bs-primary-text-emphasis);
     }
 }
 
@@ -3085,18 +3265,18 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
     overflow: hidden;
     border-collapse: separate;
     border-spacing: 0;
-    border: 1px solid $inc-border-default;
+    border: 1px solid var(--inc-border-default);
 
     thead {
         overflow: hidden;
 
         th {
             text-align: left;
-            background-color: $inc-brand-800;
+            background-color: var(--bs-primary);
             color: $inc-text-inverse;
-            border-color: $inc-brand-800;
+            border-color: var(--bs-primary);
             font-weight: 600;
-            border-right: 1px solid rgba($inc-text-inverse, 0.2);
+            border-right: 1px solid rgba(var(--inc-text-inverse-rgb), 0.2);
             font-size: 1rem;
             line-height: 1.5;
 
@@ -3106,7 +3286,7 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
 
                 &:hover,
                 &:focus {
-                    color: rgba($inc-text-inverse, 0.9);
+                    color: rgba(var(--inc-text-inverse-rgb), 0.9);
                 }
             }
         }
@@ -3125,7 +3305,7 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
     tfoot {
         td,
         th {
-            border-right: 1px solid $inc-border-default;
+            border-right: 1px solid var(--inc-border-default);
             vertical-align: middle;
 
             &:last-child {
@@ -3277,44 +3457,44 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
         }
 
         tbody tr:hover > * {
-            background: rgba($primary, 0.035);
+            background: rgba(var(--bs-primary-rgb), 0.035);
         }
     }
 
     &--analytics-grid {
-        border-color: rgba($inc-border-subtle, 0.95);
-        box-shadow: 0 1rem 2rem rgba($inc-surface-strong, 0.05);
+        border-color: var(--inc-border-subtle);
+        box-shadow: 0 1rem 2rem rgba(var(--inc-surface-strong-rgb), 0.05);
 
         thead th {
-            background-color: $inc-surface-secondary;
-            color: $inc-text-primary;
-            border-color: $inc-border-subtle;
+            background-color: var(--inc-surface-secondary);
+            color: var(--inc-text-primary);
+            border-color: var(--inc-border-subtle);
             font-size: 0.75rem;
             letter-spacing: 0.08em;
             text-transform: uppercase;
         }
 
         tbody tr:nth-child(even) > * {
-            background: rgba($primary, 0.02);
+            background: rgba(var(--bs-primary-rgb), 0.02);
         }
 
         .inc-table__cell--numeric,
         .inc-table__cell--numeric-small,
         .inc-table__header--right {
-            color: $inc-surface-strong;
+            color: var(--inc-text-primary);
             font-weight: 600;
         }
     }
 
     &--spreadsheet-grid {
-        border-color: rgba($inc-border-subtle, 1);
+        border-color: var(--inc-border-subtle);
         border-radius: $inc-radius-md;
-        box-shadow: inset 0 0 0 1px rgba($inc-border-subtle, 0.35);
+        box-shadow: inset 0 0 0 1px var(--inc-border-subtle);
 
         thead th {
-            background-color: #eef2f7;
-            color: $inc-text-primary;
-            border-color: $inc-border-subtle;
+            background-color: var(--inc-surface-secondary);
+            color: var(--inc-text-primary);
+            border-color: var(--inc-border-subtle);
             font-size: 0.75rem;
             letter-spacing: 0.04em;
         }
@@ -3333,7 +3513,7 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
         }
 
         tbody tr:hover > * {
-            background: rgba($primary, 0.04);
+            background: rgba(var(--bs-primary-rgb), 0.04);
         }
     }
 
@@ -3609,7 +3789,7 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
 }
 
 .inc-table__bundle-hint {
-    color: $gray-700;
+    color: var(--inc-text-muted);
     font-size: 0.75rem;
     line-height: 1.3;
     white-space: normal;
@@ -3671,8 +3851,8 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
         justify-content: space-between;
         align-items: center;
         padding: 0.75rem;
-        background-color: var(--bs-light);
-        border-top: 1px solid var(--bs-border-color);
+        background-color: var(--inc-surface-secondary);
+        border-top: 1px solid var(--inc-border-default);
     }
 
     &__pagination {
@@ -3733,13 +3913,13 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
     }
 
     &__dialog {
-        background: $inc-surface-primary;
+        background: var(--inc-surface-primary);
         border-radius: $inc-radius-md;
         max-width: 31.25rem;
         width: 90%;
         max-height: 90vh;
         overflow-y: auto;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 10px 25px rgba(var(--inc-surface-strong-rgb), 0.5);
         position: relative;
         z-index: 2;
 
@@ -3771,7 +3951,7 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
 
     &__header {
         padding: 1rem 1.5rem;
-        border-bottom: 1px solid $inc-border-subtle;
+        border-bottom: 1px solid var(--inc-border-subtle);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -3806,7 +3986,7 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
 
     &__footer {
         padding: 1rem 1.5rem;
-        border-top: 1px solid $inc-border-subtle;
+        border-top: 1px solid var(--inc-border-subtle);
         display: flex;
         gap: 1rem;
         justify-content: flex-end;
@@ -3848,10 +4028,10 @@ body.inc-modal-open {
     display: flex;
     flex-direction: column;
     max-width: 100%;
-    background: $inc-surface-primary;
-    color: $body-color;
+    background: var(--inc-surface-primary);
+    color: var(--inc-text-primary);
     visibility: hidden;
-    box-shadow: 0 1.25rem 2.5rem rgba($inc-surface-strong, 0.18);
+    box-shadow: 0 1.25rem 2.5rem rgba(var(--inc-surface-strong-rgb), 0.18);
     transition: transform 0.25s ease, visibility 0.25s ease;
 
     &.is-open {
@@ -3930,7 +4110,7 @@ body.inc-modal-open {
     justify-content: space-between;
     gap: 1rem;
     padding: 1rem 1.25rem;
-    border-bottom: 1px solid $inc-border-subtle;
+    border-bottom: 1px solid var(--inc-border-subtle);
 }
 
 .inc-offcanvas-title {
@@ -3981,7 +4161,7 @@ body.inc-offcanvas-open {
     &__label {
         &--required::after {
             content: " *";
-            color: $danger;
+            color: var(--bs-danger-text-emphasis);
         }
     }
 
@@ -3993,18 +4173,18 @@ body.inc-offcanvas-open {
     }
 
     &__hint {
-        color: $text-muted;
+        color: var(--inc-text-muted);
     }
 
     &__feedback {
         font-weight: 500;
 
         &--error {
-            color: $danger;
+            color: var(--bs-danger-text-emphasis);
         }
 
         &--success {
-            color: $success;
+            color: var(--bs-success-text-emphasis);
         }
     }
 
@@ -4012,19 +4192,19 @@ body.inc-offcanvas-open {
     &__select {
         &.is-invalid,
         &[aria-invalid="true"] {
-            border-color: $danger;
-            box-shadow: 0 0 0 0.1875rem rgba($danger, 0.12);
+            border-color: var(--bs-danger-border-subtle);
+            box-shadow: 0 0 0 0.1875rem rgba(var(--bs-danger-rgb), 0.12);
         }
 
         &.is-valid {
-            border-color: $success;
-            box-shadow: 0 0 0 0.1875rem rgba($success, 0.12);
+            border-color: var(--bs-success-border-subtle);
+            box-shadow: 0 0 0 0.1875rem rgba(var(--bs-success-rgb), 0.12);
         }
     }
 
     &__check {
         &.is-invalid .inc-form__check-label {
-            color: $danger;
+            color: var(--bs-danger-text-emphasis);
         }
     }
 
@@ -4033,23 +4213,23 @@ body.inc-offcanvas-open {
         flex-direction: column;
         gap: 0.5rem;
         padding: 1rem 1.125rem;
-        border: 1px solid rgba($danger, 0.3);
-        border-left: 0.25rem solid $danger;
+        border: 1px solid var(--bs-danger-border-subtle);
+        border-left: 0.25rem solid var(--bs-danger-text-emphasis);
         border-radius: $inc-radius-md;
-        background: rgba($danger, 0.06);
+        background: var(--bs-danger-bg-subtle);
 
         &-title {
             margin: 0;
             font-size: 0.875rem;
             font-weight: 600;
-            color: $danger;
+            color: var(--bs-danger-text-emphasis);
         }
 
         &-list {
             margin: 0;
             padding-left: 1rem;
             font-size: 0.8125rem;
-            color: $body-color;
+            color: var(--inc-text-primary);
         }
     }
 }
@@ -4059,9 +4239,9 @@ body.inc-offcanvas-open {
     flex-direction: column;
     gap: 1rem;
     padding: 1rem 1.125rem;
-    border: 1px solid $inc-border-subtle;
+    border: 1px solid var(--inc-border-subtle);
     border-radius: $inc-radius-md;
-    background: $inc-surface-primary;
+    background: var(--inc-surface-primary);
 
     &__main {
         display: flex;
@@ -4103,10 +4283,10 @@ body.inc-offcanvas-open {
     align-items: center;
     gap: 0.5rem;
     padding: 0.375rem 0.75rem;
-    border: 1px solid $inc-border-subtle;
+    border: 1px solid var(--inc-border-subtle);
     border-radius: 999px;
-    background: $inc-surface-secondary;
-    color: $body-color;
+    background: var(--inc-surface-secondary);
+    color: var(--inc-text-primary);
     font-size: 0.75rem;
     font-weight: 600;
     line-height: 1;
@@ -4115,7 +4295,7 @@ body.inc-offcanvas-open {
         appearance: none;
         border: 0;
         background: transparent;
-        color: $text-muted;
+        color: var(--inc-text-muted);
         font-size: 0.875rem;
         line-height: 1;
         padding: 0;
@@ -4123,9 +4303,9 @@ body.inc-offcanvas-open {
     }
 
     &--accent {
-        border-color: rgba($primary, 0.2);
-        background: rgba($primary, 0.08);
-        color: $primary;
+        border-color: rgba(var(--bs-primary-rgb), 0.2);
+        background: rgba(var(--bs-primary-rgb), 0.08);
+        color: var(--bs-primary);
     }
 }
 
@@ -4134,9 +4314,9 @@ body.inc-offcanvas-open {
     flex-direction: column;
     gap: 1rem;
     padding: 1.5rem;
-    border: 1px solid $inc-border-subtle;
+    border: 1px solid var(--inc-border-subtle);
     border-radius: $inc-radius-md;
-    background: $inc-surface-primary;
+    background: var(--inc-surface-primary);
 
     &__head {
         display: flex;
@@ -4151,8 +4331,8 @@ body.inc-offcanvas-open {
         align-items: center;
         justify-content: center;
         border-radius: 0.875rem;
-        background: $inc-surface-secondary;
-        color: $primary;
+        background: var(--inc-surface-secondary);
+        color: var(--bs-primary);
         font-size: 1.25rem;
         font-weight: 700;
         flex: 0 0 auto;
@@ -4165,7 +4345,7 @@ body.inc-offcanvas-open {
     }
 
     &__body {
-        color: $text-muted;
+        color: var(--inc-text-muted);
         font-size: 0.875rem;
         line-height: 1.6;
         margin: 0;
@@ -4178,35 +4358,35 @@ body.inc-offcanvas-open {
     }
 
     &--empty {
-        background: linear-gradient(180deg, rgba($primary, 0.05), rgba($primary, 0.01));
+        background: linear-gradient(180deg, rgba(var(--bs-primary-rgb), 0.05), rgba(var(--bs-primary-rgb), 0.01));
     }
 
     &--results {
         border-style: dashed;
-        background: $inc-surface-secondary;
+        background: var(--inc-surface-secondary);
     }
 
     &--loading {
-        background: linear-gradient(180deg, rgba($primary, 0.04), $inc-surface-primary);
+        background: linear-gradient(180deg, rgba(var(--bs-primary-rgb), 0.04), var(--inc-surface-primary));
     }
 
     &--error {
-        border-color: rgba($danger, 0.22);
-        background: rgba($danger, 0.04);
+        border-color: var(--bs-danger-border-subtle);
+        background: var(--bs-danger-bg-subtle);
 
         .inc-state-panel__icon {
-            background: rgba($danger, 0.12);
-            color: $danger;
+            background: rgba(var(--bs-danger-rgb), 0.12);
+            color: var(--bs-danger-text-emphasis);
         }
     }
 
     &--locked {
-        border-color: rgba($warning, 0.24);
-        background: rgba($warning, 0.05);
+        border-color: var(--bs-warning-border-subtle);
+        background: var(--bs-warning-bg-subtle);
 
         .inc-state-panel__icon {
-            background: rgba($warning, 0.14);
-            color: $warning;
+            background: rgba(var(--bs-warning-rgb), 0.14);
+            color: var(--bs-warning-text-emphasis);
         }
     }
 }
@@ -4216,9 +4396,9 @@ body.inc-offcanvas-open {
     align-items: flex-start;
     gap: 1rem;
     padding: 1rem 1.125rem;
-    border: 1px solid rgba($warning, 0.22);
+    border: 1px solid var(--bs-warning-border-subtle);
     border-radius: $inc-radius-md;
-    background: rgba($warning, 0.06);
+    background: var(--bs-warning-bg-subtle);
 
     &__icon {
         width: 2rem;
@@ -4227,8 +4407,8 @@ body.inc-offcanvas-open {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        background: rgba($warning, 0.14);
-        color: $warning;
+        background: rgba(var(--bs-warning-rgb), 0.14);
+        color: var(--bs-warning-text-emphasis);
         font-weight: 700;
         flex: 0 0 auto;
     }
@@ -4242,7 +4422,7 @@ body.inc-offcanvas-open {
     &__text {
         margin: 0;
         font-size: 0.8125rem;
-        color: $body-color;
+        color: var(--inc-text-primary);
     }
 }
 
@@ -4261,14 +4441,14 @@ body.inc-offcanvas-open {
 
     &--card {
         padding: 0.875rem 1rem;
-        border: 1px solid $inc-border-subtle;
+        border: 1px solid var(--inc-border-subtle);
         border-radius: $inc-radius-md;
-        background: $inc-surface-primary;
+        background: var(--inc-surface-primary);
     }
 
     &__label {
         margin: 0;
-        color: $text-muted;
+        color: var(--inc-text-muted);
         font-size: 0.75rem;
         font-weight: 600;
         letter-spacing: 0.04em;
@@ -4277,7 +4457,7 @@ body.inc-offcanvas-open {
 
     &__value {
         margin: 0;
-        color: $body-color;
+        color: var(--inc-text-primary);
         font-size: 0.875rem;
         font-weight: 500;
         line-height: 1.5;
@@ -4296,7 +4476,7 @@ body.inc-offcanvas-open {
 .inc-skeleton {
     display: block;
     border-radius: 999px;
-    background: linear-gradient(90deg, rgba($inc-border-subtle, 0.8) 20%, rgba($inc-surface-muted, 0.95) 50%, rgba($inc-border-subtle, 0.8) 80%);
+    background: linear-gradient(90deg, var(--inc-surface-muted) 20%, var(--inc-surface-secondary) 50%, var(--inc-surface-muted) 80%);
     background-size: 200% 100%;
     animation: inc-skeleton-shimmer 1.5s linear infinite;
 
@@ -4401,9 +4581,9 @@ body.inc-offcanvas-open {
     justify-content: space-between;
     gap: 1rem;
     padding: 0.75rem 1rem;
-    border: 1px solid rgba($primary, 0.18);
+    border: 1px solid var(--bs-primary-border-subtle);
     border-radius: $inc-radius-md;
-    background: rgba($primary, 0.08);
+    background: var(--bs-primary-bg-subtle);
 
     &__meta {
         display: flex;
@@ -4416,7 +4596,7 @@ body.inc-offcanvas-open {
     &__count {
         font-size: 0.875rem;
         font-weight: 600;
-        color: $primary;
+        color: var(--bs-primary-text-emphasis);
     }
 
     &__actions {
@@ -4460,20 +4640,20 @@ body.inc-offcanvas-open {
 
     &__row {
         &--selected > * {
-            background: rgba($primary, 0.08) !important;
+            background: rgba(var(--bs-primary-rgb), 0.08) !important;
         }
 
         &--warning > * {
-            background: rgba($warning, 0.08) !important;
+            background: rgba(var(--bs-warning-rgb), 0.08) !important;
         }
 
         &--danger > * {
-            background: rgba($danger, 0.06) !important;
+            background: rgba(var(--bs-danger-rgb), 0.06) !important;
         }
 
         &--locked > * {
-            background: rgba($inc-border-subtle, 0.35) !important;
-            color: $text-muted;
+            background: var(--inc-surface-muted) !important;
+            color: var(--inc-text-muted);
         }
     }
 }
@@ -4507,7 +4687,7 @@ body.inc-offcanvas-open {
             top: 0;
             bottom: -1rem;
             width: 0.125rem;
-            background: $inc-border-subtle;
+            background: var(--inc-border-subtle);
         }
     }
 
@@ -4520,7 +4700,7 @@ body.inc-offcanvas-open {
         height: 0.75rem;
         border-radius: 999px;
         background: $primary;
-        box-shadow: 0 0 0 0.1875rem $inc-surface-primary;
+        box-shadow: 0 0 0 0.1875rem var(--inc-surface-primary);
         position: relative;
         z-index: 1;
 
@@ -4542,9 +4722,9 @@ body.inc-offcanvas-open {
         flex-direction: column;
         gap: 0.5rem;
         padding: 0.875rem 1rem;
-        border: 1px solid $inc-border-subtle;
+        border: 1px solid var(--inc-border-subtle);
         border-radius: $inc-radius-md;
-        background: $inc-surface-primary;
+        background: var(--inc-surface-primary);
     }
 
     &__header,
@@ -4562,13 +4742,13 @@ body.inc-offcanvas-open {
     }
 
     &__meta {
-        color: $text-muted;
+        color: var(--inc-text-muted);
         font-size: 0.75rem;
     }
 
     &__body {
         margin: 0;
-        color: $body-color;
+        color: var(--inc-text-primary);
         font-size: 0.8125rem;
         line-height: 1.6;
     }
@@ -4582,7 +4762,7 @@ body.inc-offcanvas-open {
     padding: 1rem 1.125rem;
     border: 1.5px dashed $inc-border-strong;
     border-radius: $inc-radius-md;
-    background: linear-gradient(180deg, $inc-surface-secondary, $inc-surface-primary);
+    background: linear-gradient(180deg, var(--inc-surface-secondary), var(--inc-surface-primary));
 
     &__content {
         display: flex;
@@ -4599,12 +4779,12 @@ body.inc-offcanvas-open {
     &__text {
         margin: 0;
         font-size: 0.8125rem;
-        color: $text-muted;
+        color: var(--inc-text-muted);
     }
 
     &--active {
-        border-color: $primary;
-        background: linear-gradient(180deg, rgba($primary, 0.08), rgba($primary, 0.02));
+        border-color: var(--bs-primary);
+        background: linear-gradient(180deg, var(--bs-primary-bg-subtle), var(--inc-surface-primary));
     }
 
     @media (max-width: 767.98px) {
@@ -4625,9 +4805,9 @@ body.inc-offcanvas-open {
     gap: 1rem;
     align-items: center;
     padding: 0.875rem 1rem;
-    border: 1px solid $inc-border-subtle;
+    border: 1px solid var(--inc-border-subtle);
     border-radius: $inc-radius-md;
-    background: $inc-surface-primary;
+    background: var(--inc-surface-primary);
 
     &__meta {
         display: flex;
@@ -4645,7 +4825,7 @@ body.inc-offcanvas-open {
     &__detail {
         margin: 0;
         font-size: 0.75rem;
-        color: $text-muted;
+        color: var(--inc-text-muted);
     }
 
     &__actions {
@@ -4671,9 +4851,9 @@ body.inc-offcanvas-open {
     gap: 1rem;
     height: 100%;
     padding: 1.25rem;
-    border-left: 1px solid $inc-border-subtle;
-    background: $inc-surface-primary;
-    box-shadow: -1rem 0 2rem rgba($inc-surface-strong, 0.08);
+    border-left: 1px solid var(--inc-border-subtle);
+    background: var(--inc-surface-primary);
+    box-shadow: -1rem 0 2rem rgba(var(--inc-surface-strong-rgb), 0.08);
 
     &__header {
         display: flex;
@@ -4681,7 +4861,7 @@ body.inc-offcanvas-open {
         justify-content: space-between;
         gap: 1rem;
         padding-bottom: 1rem;
-        border-bottom: 1px solid $inc-border-subtle;
+        border-bottom: 1px solid var(--inc-border-subtle);
     }
 
     &__body {
@@ -4695,7 +4875,7 @@ body.inc-offcanvas-open {
         flex-wrap: wrap;
         gap: 0.75rem;
         padding-top: 1rem;
-        border-top: 1px solid $inc-border-subtle;
+        border-top: 1px solid var(--inc-border-subtle);
         margin-top: auto;
     }
 }
@@ -4711,10 +4891,10 @@ body.inc-offcanvas-open {
     align-items: flex-start;
     gap: 0.875rem;
     padding: 0.875rem 1rem;
-    border: 1px solid $inc-border-subtle;
+    border: 1px solid var(--inc-border-subtle);
     border-radius: $inc-radius-md;
-    background: $inc-surface-primary;
-    box-shadow: 0 0.75rem 1.5rem rgba($inc-surface-strong, 0.08);
+    background: var(--inc-surface-primary);
+    box-shadow: 0 0.75rem 1.5rem rgba(var(--inc-surface-strong-rgb), 0.08);
 
     &__icon {
         width: 2rem;
@@ -4723,8 +4903,8 @@ body.inc-offcanvas-open {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        background: rgba($primary, 0.1);
-        color: $primary;
+        background: var(--bs-primary-bg-subtle);
+        color: var(--bs-primary-text-emphasis);
         font-weight: 700;
         flex: 0 0 auto;
     }
@@ -4738,6 +4918,6 @@ body.inc-offcanvas-open {
     &__text {
         margin: 0;
         font-size: 0.8125rem;
-        color: $text-muted;
+        color: var(--inc-text-muted);
     }
 }

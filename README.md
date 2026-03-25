@@ -58,7 +58,7 @@ Licensed under Apache 2.0.
 - [`dist/inc-design-language.css`](dist/inc-design-language.css)
   Compiled standalone CSS output.
 - [`dist/inc-design-language.js`](dist/inc-design-language.js)
-  Optional vanilla-JS helper for menus, tabs, collapsible sections, modal/offcanvas shells, native dialog launch hooks, and auto-refresh widgets with pause/resume controls.
+  Optional vanilla-JS helper for menus, tabs, collapsible sections, modal/offcanvas shells, native dialog launch hooks, auto-refresh widgets with pause/resume controls, and light/dark/system theme switching with pluggable controls.
 - [`index.html`](index.html)
   Showcase hub for the included example pages.
 - [`demo.html`](demo.html)
@@ -121,6 +121,7 @@ For titled sections that wrap tables, use [`inc-header-body--table-body`](refere
 - Layout aware: sidebar menus, inline form fields, and multi-column page examples are included so common admin-page composition is demonstrated directly.
 - Workflow aware: validation, filter bars, bulk action bars, audit timelines, and file-review surfaces are part of the package now because those patterns recur constantly in B2B products.
 - Native capable: the package now also includes styled `<details>` disclosures, a native summary-based menu, and `<dialog>` surfaces for both centered modals and drawer-style side sheets so you can choose browser primitives when they fit better than helper-managed components.
+- Color mode: `data-bs-theme` is the global light/dark activation hook, and the bundled `IncTheme` helper can persist light, dark, or system mode from a small control surface.
 
 ## CSS-only vs JS-assisted
 
@@ -129,7 +130,9 @@ For titled sections that wrap tables, use [`inc-header-body--table-body`](refere
   tabs, collapsible sections, menus/dropdowns, modal and offcanvas shells, and auto-refresh countdowns with pause/resume behavior.
 - Alert and toast surfaces stay CSS/HTML-first unless the consuming app adds its own dismissal or lifecycle logic.
 - This package now includes an optional dependency-free helper at [`dist/inc-design-language.js`](dist/inc-design-language.js) for:
-  user-menu dropdowns, tab switching, collapse/accordion toggles, legacy modal/offcanvas shells, native dialog launching, and page auto-refresh countdown widgets.
+  user-menu dropdowns, tab switching, collapse/accordion toggles, legacy modal/offcanvas shells, native dialog launching, page auto-refresh countdown widgets, and theme switching controls.
+- The helper also exposes `window.IncTheme` and listens for `[data-inc-theme-mode]`, `[data-inc-theme-toggle]`, and `[data-inc-theme-select]` controls.
+- `window.IncTheme` also supports `createSwitcher(options)` and `mountSwitcher(target, options)` when you want to drop in the packaged switcher without hand-writing the markup.
 - This package also includes native-styled patterns for:
   [`details.inc-disclosure`](reference.html), [`details.inc-native-menu`](reference.html), [`dialog.inc-native-dialog`](reference.html), and [`dialog.inc-native-dialog--drawer`](reference.html).
 - If you prefer native HTML behavior where possible, use browser primitives like `<details>` and `<dialog>` for product-specific implementations. The helper exists for places where the design language is intentionally Bootstrap-like and needs matching interaction behavior.
@@ -145,6 +148,57 @@ If you just want the look in another app:
 5. Use the [`inc-*`](reference.html) classes shown in [`reference.html`](reference.html) for direct copy/paste control markup.
 6. Check [`states.html`](states.html), [`forms-and-validation.html`](forms-and-validation.html), [`data-grid-advanced.html`](data-grid-advanced.html), and [`overlay-workflows.html`](overlay-workflows.html) for the workflow-heavy patterns that do not read well as isolated snippets.
 7. Use [`demo.html`](demo.html), [`work-queue.html`](work-queue.html), [`record-detail.html`](record-detail.html), and [`native-patterns.html`](native-patterns.html) for fuller page composition.
+
+If you want the color mode to follow the saved user preference before first paint, add a tiny bootstrap script in the `<head>`:
+
+```html
+<script>
+    (() => {
+        const storageKey = "inc-theme-mode";
+        const resolveTheme = (mode) => mode === "dark" || mode === "light"
+            ? mode
+            : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        let mode = "system";
+
+        try {
+            const storedMode = window.localStorage.getItem(storageKey);
+
+            if (storedMode === "light" || storedMode === "dark" || storedMode === "system") {
+                mode = storedMode;
+            }
+        } catch {
+            // Ignore storage restrictions.
+        }
+
+        document.documentElement.setAttribute("data-inc-theme-mode", mode);
+        document.documentElement.setAttribute("data-bs-theme", resolveTheme(mode));
+        document.documentElement.style.colorScheme = resolveTheme(mode);
+    })();
+</script>
+```
+
+Then you can either mount the packaged switcher:
+
+```html
+<div data-inc-theme-switcher data-inc-theme-switcher-variant="navbar"></div>
+```
+
+or control the mode yourself:
+
+```html
+<button type="button" data-inc-theme-toggle>Cycle theme</button>
+<button type="button" data-inc-theme-mode="light">Light</button>
+<button type="button" data-inc-theme-mode="dark">Dark</button>
+<button type="button" data-inc-theme-mode="system">System</button>
+```
+
+```html
+<script src="/path/to/inc-design-language.js"></script>
+<script>
+    window.IncTheme.setMode("dark");
+    window.IncTheme.mountSwitcher("[data-inc-theme-switcher]", { variant: "navbar" });
+</script>
+```
 
 ## Use it as a package
 
@@ -206,6 +260,7 @@ There are two supported ways to use it.
 - This is the simplest path.
 - You do not need Bootstrap CSS at runtime because the compiled CSS already includes the Bootstrap layer it was built on.
 - You do not need Bootstrap JS unless your app separately uses Bootstrap's own JavaScript components.
+- If you want light/dark/system switching, keep `data-bs-theme` on the root element and let `window.IncTheme` persist the user's override or mount the packaged switcher into your layout.
 
 2. Use the SCSS source.
 
@@ -216,7 +271,7 @@ There are two supported ways to use it.
 Practical recommendation for a .NET Razor Pages or MVC app:
 
 - If you just want the finished look, copy or install the package and reference [`dist/inc-design-language.css`](dist/inc-design-language.css) from your layout.
-- Add [`dist/inc-design-language.js`](dist/inc-design-language.js) only if you want the optional [`inc-*`](reference.html) menu/tab/collapse helper behavior.
+- Add [`dist/inc-design-language.js`](dist/inc-design-language.js) if you want the optional [`inc-*`](reference.html) menu/tab/collapse helper behavior or the bundled theme switcher helper.
 - Use the native `<details>` and `<dialog>` patterns when you want less JavaScript.
 - Use the SCSS source path only if you want this package to become part of your app's own asset build and theme pipeline.
 

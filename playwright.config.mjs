@@ -1,5 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const browserChannel = process.env.PLAYWRIGHT_BROWSER_CHANNEL;
+const browserExecutablePath = process.env.PLAYWRIGHT_EXECUTABLE_PATH;
+
 export default defineConfig({
     testDir: "./tests/browser",
     timeout: 30_000,
@@ -13,15 +16,16 @@ export default defineConfig({
     use: {
         trace: "on-first-retry",
         screenshot: "only-on-failure",
-        video: "retain-on-failure",
+        video: browserExecutablePath ? "off" : "retain-on-failure",
         viewport: { width: 1440, height: 1200 },
-        colorScheme: "light",
     },
     projects: [
         {
             name: "chromium",
             use: {
                 ...devices["Desktop Chrome"],
+                ...(browserChannel ? { channel: browserChannel } : {}),
+                ...(browserExecutablePath ? { launchOptions: { executablePath: browserExecutablePath } } : {}),
             },
         },
     ],
