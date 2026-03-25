@@ -13,6 +13,7 @@ const requiredFiles = [
     "src/_inc-tokens.scss",
     "src/inc-design-language.scss",
     "src/inc-design-language.js",
+    "src/web-components/README.md",
     "dist/inc-design-language.css",
     "dist/inc-design-language.css.map",
     "dist/inc-design-language.min.css",
@@ -22,6 +23,7 @@ const requiredFiles = [
     "data-grid-advanced.html",
     "states.html",
     "reference.html",
+    "web-components.html",
     "specs/architecture/_index.md",
     "specs/architecture/ui-kit/ARC-UIK-0001.md",
     "specs/requirements/ui-kit/_index.md",
@@ -30,12 +32,21 @@ const requiredFiles = [
     "specs/verification/ui-kit/VER-UIK-0001.md",
     "specs/verification/ui-kit/VER-UIK-0002.md",
     "specs/verification/ui-kit/VER-UIK-0003.md",
+    "specs/verification/ui-kit/VER-UIK-0004.md",
     "playwright.config.mjs",
     "tests/browser/_helpers.mjs",
     "tests/browser/auto-refresh.spec.mjs",
     "tests/browser/native-dialog.spec.mjs",
     "tests/browser/overlays.spec.mjs",
     "tests/browser/tabs.spec.mjs",
+    "tests/browser/web-components/_helpers.mjs",
+    "tests/browser/web-components/fixture.html",
+    "tests/browser/web-components/render.spec.mjs",
+    "tests/browser/web-components/rendering.spec.mjs",
+    "tests/browser/web-components/interactions.spec.mjs",
+    "tests/browser/web-components/theme.spec.mjs",
+    "tests/browser/web-components/responsive.spec.mjs",
+    "tests/browser/web-components/feedback.spec.mjs",
 ];
 
 const cssSelectors = [
@@ -137,6 +148,34 @@ const failures = [];
 
 for (const file of requiredFiles) {
     ensure(existsSync(file), `Missing required file: ${file}`, failures);
+}
+
+if (existsSync("src/web-components")) {
+    ensure(existsSync("src/web-components/package.json"), "src/web-components/package.json must exist when src/web-components is present", failures);
+    ensure(existsSync("src/web-components/index.js"), "src/web-components/index.js must exist when src/web-components is present", failures);
+    ensure(existsSync("dist/web-components/index.js"), "dist/web-components/index.js must exist when src/web-components is present", failures);
+    ensure(existsSync("dist/web-components/package.json"), "dist/web-components/package.json must exist when src/web-components is present", failures);
+    const webComponentFiles = [
+        "package.json",
+        "base-element.js",
+        "shared.js",
+        "registry.js",
+        "index.js",
+        "README.md",
+        "controllers/focus.js",
+        "controllers/overlay.js",
+        "controllers/selection.js",
+        "controllers/theme.js",
+        "components/layout.js",
+        "components/navigation.js",
+        "components/forms.js",
+        "components/overlays.js",
+    ];
+
+    for (const file of webComponentFiles) {
+        ensure(existsSync(`src/web-components/${file}`), `Missing WC source file: src/web-components/${file}`, failures);
+        ensure(existsSync(`dist/web-components/${file}`), `Missing WC dist file: dist/web-components/${file}`, failures);
+    }
 }
 
 if (existsSync("package.json") && existsSync("package-lock.json")) {

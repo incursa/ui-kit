@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" data-inc-theme-mode="system" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incursa UI Kit - Web Components</title>
+    <link rel="stylesheet" href="./dist/inc-design-language.css">
+    <link rel="stylesheet" href="./showcase.css">
+    <style>
+        body {
+            margin: 0;
+            background:
+                radial-gradient(circle at top left, rgba(11, 101, 108, 0.08), transparent 32%),
+                radial-gradient(circle at top right, rgba(15, 95, 115, 0.05), transparent 24%),
+                var(--bs-body-bg);
+        }
+
+        .wc-showcase {
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        .wc-hero {
+            display: grid;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .wc-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .wc-grid--2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .wc-grid--3 {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .wc-note {
+            color: var(--inc-text-muted);
+            margin: 0;
+        }
+
+        .wc-code {
+            background: color-mix(in srgb, var(--inc-surface-secondary) 88%, black 12%);
+            border: 1px solid var(--inc-border-subtle);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            overflow: auto;
+        }
+
+        .wc-tabs {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .wc-tabs [slot="tab"] {
+            appearance: none;
+            border: 1px solid var(--inc-border-subtle);
+            background: var(--inc-surface-secondary);
+            color: var(--inc-text-secondary);
+            border-radius: 0.5rem;
+            padding: 0.65rem 0.9rem;
+        }
+
+        .wc-tabs [slot="tab"][aria-selected="true"] {
+            background: var(--inc-surface-primary);
+            color: var(--inc-text-primary);
+            font-weight: 600;
+        }
+
+        .wc-tabs [slot="panel"][hidden] {
+            display: none !important;
+        }
+
+        .wc-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        @media (max-width: 900px) {
+            .wc-grid--2,
+            .wc-grid--3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <inc-app-shell id="wc-shell" variant="demo">
+        <header slot="header">
+            <inc-navbar id="wc-navbar" app breakpoint="lg">
+                <a slot="brand" class="inc-navbar__brand" href="#wc-home">Incursa</a>
+                <div slot="nav" class="inc-navbar__nav">
+                    <a class="nav-link active" href="#wc-home">Web Components</a>
+                    <a class="nav-link" href="./reference.html">CSS Reference</a>
+                    <a class="nav-link" href="./README.md">README</a>
+                </div>
+                <div slot="utilities" class="inc-navbar__utilities">
+                    <inc-theme-switcher id="wc-theme-switcher" variant="navbar" block label="Theme" menu-label="Theme menu" heading="Choose appearance"></inc-theme-switcher>
+                </div>
+                <div slot="collapse" class="inc-navbar__collapse">
+                    <button id="wc-navbar-toggle" class="inc-navbar__toggler inc-btn inc-btn--outline-secondary inc-btn--sm" type="button" data-inc-navbar-toggle>
+                        Menu
+                    </button>
+                </div>
+            </inc-navbar>
+        </header>
+
+        <main slot="main">
+            <inc-page id="wc-page" wide>
+                <div slot="breadcrumbs">
+                    <ol class="inc-breadcrumb">
+                        <li class="inc-breadcrumb__item"><a href="#wc-home">Examples</a></li>
+                        <li class="inc-breadcrumb__item active"><span>Web Components</span></li>
+                    </ol>
+                </div>
+
+                <inc-page-header slot="header" id="wc-header">
+                    <div slot="title" class="wc-hero">
+                        <p class="demo-eyebrow">Optional Layer</p>
+                        <h1 class="inc-heading inc-heading--h1">Browser-native components that stay inside the same CSS kit.</h1>
+                        <p class="inc-text inc-text--regular inc-text--muted">Use the class-based UI kit when you only need the language. Use the Web Component layer when you want declarative HTML, attributes, slots, DOM events, and the same design vocabulary from plain browser markup.</p>
+                    </div>
+                    <div slot="actions" class="wc-actions">
+                        <a class="inc-btn inc-btn--secondary inc-btn--sm" href="./README.md">Read the package docs</a>
+                        <a class="inc-btn inc-btn--primary inc-btn--sm" href="./src/web-components/README.md">Read the maintainer notes</a>
+                    </div>
+                </inc-page-header>
+
+                <section slot="body" id="wc-home" class="wc-showcase">
+                    <inc-card elevated>
+                        <div slot="header" class="inc-card__header">
+                            <h2 class="inc-card__title">Load the entrypoint</h2>
+                        </div>
+                        <div slot="body" class="wc-grid wc-grid--2">
+                            <div>
+                                <p class="inc-text inc-text--regular">The package export is `@incursa/ui-kit/web-components`. Once the module loads, call `defineAll()` to register the shipped elements.</p>
+                                <pre class="wc-code"><code>&lt;script type="module"&gt;
+  import { defineAll } from "@incursa/ui-kit/web-components";
+
+  defineAll();
+&lt;/script&gt;</code></pre>
+                            </div>
+                            <div>
+                                <p class="wc-note">The v1 layer covers layouts, navbar/tabs/user-menu, field/input-group/choice-group/readonly-field/validation-summary, state/live-region/auto-refresh/theme-switcher, and disclosure/dialog/drawer.</p>
+                                <p class="wc-note">Tables, data presentation, filters, bulk workflows, files, utilities, and similar presentation-only atoms stay CSS-first for now.</p>
+                            </div>
+                        </div>
+                    </inc-card>
+
+                    <section id="wc-comparison" class="demo-compare demo-compare--2">
+                        <article class="demo-compare__panel">
+                            <p class="demo-eyebrow">Plain HTML equivalent</p>
+                            <h2 class="demo-compare__title inc-heading inc-heading--h3">Explicit class wiring</h2>
+                            <p class="demo-compare__copy">This is the CSS-first version of the same screen shape. It works, but the structure is louder because every wrapper is spelled out by hand.</p>
+                            <pre class="demo-code"><code>&lt;section class="inc-card"&gt;
+  &lt;div class="inc-card__header"&gt;
+    &lt;h2 class="inc-card__title"&gt;Queue summary&lt;/h2&gt;
+  &lt;/div&gt;
+  &lt;div class="inc-card__body"&gt;
+    &lt;table class="inc-table inc-table--sm inc-table--data-table"&gt;
+      &lt;thead&gt;...&lt;/thead&gt;
+      &lt;tbody&gt;...&lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+                        </article>
+
+                        <article class="demo-compare__panel">
+                            <p class="demo-eyebrow">Web Components equivalent</p>
+                            <h2 class="demo-compare__title inc-heading inc-heading--h3">Shorter markup, same result</h2>
+                            <p class="demo-compare__copy">The Web Component layer lets the browser own the semantics while the slots keep the layout contract obvious and reusable.</p>
+                            <pre class="demo-code"><code>&lt;inc-card elevated&gt;
+  &lt;div slot="header" class="inc-card__header"&gt;
+    &lt;h2 class="inc-card__title"&gt;Queue summary&lt;/h2&gt;
+  &lt;/div&gt;
+  &lt;div slot="body"&gt;
+    &lt;table class="inc-table inc-table--sm inc-table--data-table"&gt;
+      &lt;thead&gt;...&lt;/thead&gt;
+      &lt;tbody&gt;...&lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/inc-card&gt;</code></pre>
+                        </article>
+                    </section>
+
+                    <inc-card id="wc-shell-metrics">
+                        <div slot="header" class="inc-card__header">
+                            <h2 class="inc-card__title">Shell, navigation, and metrics</h2>
+                        </div>
+                        <div slot="body" class="wc-grid wc-grid--2">
+                            <inc-summary-overview columns="3">
+                                <inc-summary-block>
+                                    <div slot="header">Queue</div>
+                                    <div slot="body"><strong>124</strong></div>
+                                    <div slot="footer">Pending review</div>
+                                </inc-summary-block>
+                                <inc-summary-block tone="warning">
+                                    <div slot="header">Risks</div>
+                                    <div slot="body"><strong>7</strong></div>
+                                    <div slot="footer">Needs attention</div>
+                                </inc-summary-block>
+                                <inc-summary-block tone="positive">
+                                    <div slot="header">Saved</div>
+                                    <div slot="body"><strong>$18.2k</strong></div>
+                                    <div slot="footer">This week</div>
+                                </inc-summary-block>
+                            </inc-summary-overview>
+                            <inc-tabs id="wc-tabs" orientation="horizontal" activation="auto" selected="wc-tab-review">
+                                <button slot="tab" id="wc-tab-review" type="button" class="inc-tab" aria-controls="wc-panel-review">Needs Review</button>
+                                <button slot="tab" id="wc-tab-ready" type="button" class="inc-tab" aria-controls="wc-panel-ready">Ready To Approve</button>
+                                <button slot="tab" id="wc-tab-exported" type="button" class="inc-tab" aria-controls="wc-panel-exported">Recently Exported</button>
+                                <section slot="panel" id="wc-panel-review" class="inc-tab-pane">Review queue content.</section>
+                                <section slot="panel" id="wc-panel-ready" class="inc-tab-pane">Ready-to-approve content.</section>
+                                <section slot="panel" id="wc-panel-exported" class="inc-tab-pane">Recently exported content.</section>
+                            </inc-tabs>
+                        </div>
+                    </inc-card>
+
+                    <inc-card id="wc-data-presentation">
+                        <div slot="header" class="inc-card__header">
+                            <h2 class="inc-card__title">Tables, colors, and buttons stay CSS-first</h2>
+                        </div>
+                        <div slot="body" class="wc-grid wc-grid--2">
+                            <div class="inc-stack inc-stack--gap-sm">
+                                <p class="wc-note">The Web Component layer does not replace the table styling language. It reuses the same class-based table system where that is still the right contract.</p>
+                                <table class="inc-table inc-table--sm inc-table--data-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="inc-table__header">Project</th>
+                                            <th class="inc-table__header">Period</th>
+                                            <th class="inc-table__header inc-table__header--right">Amount</th>
+                                            <th class="inc-table__header">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="inc-table__cell inc-table__cell--data">AP-2026-00142</td>
+                                            <td class="inc-table__cell">March 2026</td>
+                                            <td class="inc-table__cell inc-table__cell--numeric">$18,240.22</td>
+                                            <td class="inc-table__cell"><span class="inc-badge inc-badge--success inc-badge--pill">Approved</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="inc-table__cell inc-table__cell--data">AP-2026-00144</td>
+                                            <td class="inc-table__cell">March 2026</td>
+                                            <td class="inc-table__cell inc-table__cell--numeric">$4,992.00</td>
+                                            <td class="inc-table__cell"><span class="inc-badge inc-badge--warning inc-badge--pill">Pending</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="inc-stack inc-stack--gap-sm">
+                                <p class="wc-note">The color story and compact action buttons still match the CSS-first kit exactly.</p>
+                                <div class="demo-swatch-grid">
+                                    <div class="demo-swatch" style="background: var(--bs-primary); color: #fff; border-color: transparent;">
+                                        <span class="demo-swatch__token">Primary</span>
+                                        <span class="demo-swatch__name">Action color</span>
+                                        <span class="demo-swatch__value">var(--bs-primary)</span>
+                                    </div>
+                                    <div class="demo-swatch" style="background: var(--bs-warning); color: #27363b; border-color: transparent;">
+                                        <span class="demo-swatch__token">Warning</span>
+                                        <span class="demo-swatch__name">Attention state</span>
+                                        <span class="demo-swatch__value">var(--bs-warning)</span>
+                                    </div>
+                                    <div class="demo-swatch" style="background: var(--bs-danger); color: #fff; border-color: transparent;">
+                                        <span class="demo-swatch__token">Danger</span>
+                                        <span class="demo-swatch__name">High-risk state</span>
+                                        <span class="demo-swatch__value">var(--bs-danger)</span>
+                                    </div>
+                                    <div class="demo-swatch" style="background: var(--inc-surface-secondary); color: var(--inc-text-primary);">
+                                        <span class="demo-swatch__token">Surface</span>
+                                        <span class="demo-swatch__name">Neutral panel</span>
+                                        <span class="demo-swatch__value">var(--inc-surface-secondary)</span>
+                                    </div>
+                                </div>
+                                <div class="wc-actions">
+                                    <button class="inc-btn inc-btn--secondary inc-btn--sm" type="button">Secondary</button>
+                                    <button class="inc-btn inc-btn--primary inc-btn--sm" type="button">Primary</button>
+                                    <button class="inc-btn inc-btn--outline-secondary inc-btn--sm" type="button">Outline</button>
+                                </div>
+                            </div>
+                        </div>
+                    </inc-card>
+
+                    <inc-card>
+                        <div slot="header" class="inc-card__header">
+                            <h2 class="inc-card__title">Forms and feedback</h2>
+                        </div>
+                        <div slot="body" class="wc-grid wc-grid--2">
+                            <inc-field label="Project name" hint="Visible to operators" error="Project name is required." required invalid>
+                                <label slot="label" class="inc-form__label" for="project-name">Project name</label>
+                                <input slot="control" id="project-name" type="text" value="North Campus Expansion">
+                                <p slot="hint">Visible to operators.</p>
+                                <p slot="error">Project name is required.</p>
+                            </inc-field>
+                            <inc-input-group prefix="$" suffix="USD" dense expand>
+                                <span slot="prefix" class="inc-input-group__text">$</span>
+                                <input slot="control" type="text" value="18240.22">
+                                <span slot="suffix" class="inc-input-group__text">USD</span>
+                            </inc-input-group>
+                            <inc-choice-group legend="Approval route" hint="Choose one">
+                                <legend slot="legend">Approval route</legend>
+                                <div slot="item" class="inc-form__check">
+                                    <input id="route-fast" name="route" type="radio" checked>
+                                    <label for="route-fast">Fast approval</label>
+                                </div>
+                                <div slot="item" class="inc-form__check">
+                                    <input id="route-standard" name="route" type="radio">
+                                    <label for="route-standard">Standard approval</label>
+                                </div>
+                            </inc-choice-group>
+                            <inc-validation-summary count="2" live="polite">
+                                <ul>
+                                    <li slot="item"><a href="#project-name">Project name is required.</a></li>
+                                    <li slot="item"><a href="#route-standard">Approval owner missing.</a></li>
+                                </ul>
+                            </inc-validation-summary>
+                            <inc-readonly-field label="Record ID" value="AP-2026-00142">
+                                <span slot="meta">Synced 8:13 AM</span>
+                            </inc-readonly-field>
+                            <inc-live-region id="wc-live-region" politeness="polite" atomic="true">Ready for status announcements.</inc-live-region>
+                        </div>
+                    </inc-card>
+
+                    <inc-card>
+                        <div slot="header" class="inc-card__header">
+                            <h2 class="inc-card__title">Overlays and disclosures</h2>
+                        </div>
+                        <div slot="body" class="wc-actions">
+                            <button id="open-dialog" class="inc-btn inc-btn--primary" type="button">Open dialog</button>
+                            <button id="open-drawer" class="inc-btn inc-btn--secondary" type="button">Open drawer</button>
+                            <inc-disclosure id="wc-disclosure" summary="Review notes" open>
+                                <div slot="content">
+                                    <p class="inc-text inc-text--regular">Disclosure content stays native-details based in the WC layer.</p>
+                                </div>
+                            </inc-disclosure>
+                        </div>
+                    </inc-card>
+                </section>
+            </inc-page>
+        </main>
+
+        <footer slot="footer" class="inc-footer-bar">
+            <div class="inc-footer-bar__menu">
+                <a class="inc-btn inc-btn--secondary" href="./reference.html">Copy CSS reference</a>
+                <a class="inc-btn inc-btn--primary" href="./specs/architecture/ui-kit/ARC-UIK-0002.md">Read the architecture</a>
+            </div>
+            <div class="inc-footer-bar__meta">Optional WC layer, same package, same design vocabulary. Open demo.html beside this page to compare the condensed custom-element markup with the CSS-first baseline.</div>
+        </footer>
+    </inc-app-shell>
+
+    <inc-dialog id="wc-dialog" label="Approval dialog" modal dismissible size="lg">
+        <div slot="title">Approve exception</div>
+        <div slot="body" class="wc-grid wc-grid--2">
+            <inc-validation-summary count="1" live="assertive">
+                <ul>
+                    <li slot="item"><a href="#dialog-rationale">Approval rationale is required.</a></li>
+                </ul>
+            </inc-validation-summary>
+            <inc-field label="Approval rationale" hint="Capture an audit-safe explanation" required>
+                <label slot="label" class="inc-form__label" for="dialog-rationale">Approval rationale</label>
+                <textarea slot="control" id="dialog-rationale" rows="4"></textarea>
+                <p slot="hint">Capture an audit-safe explanation.</p>
+            </inc-field>
+        </div>
+        <div slot="footer" class="wc-actions">
+            <button class="inc-btn inc-btn--outline-secondary" type="button" data-inc-dialog-close>Cancel</button>
+            <button class="inc-btn inc-btn--primary" type="button" data-inc-initial-focus>Approve exception</button>
+        </div>
+    </inc-dialog>
+
+    <inc-drawer id="wc-drawer" label="Assignment drawer" placement="end" dismissible>
+        <div slot="title">Assign review owner</div>
+        <div slot="body" class="wc-grid">
+            <inc-field label="Owner" hint="Choose the person responsible" required>
+                <label slot="label" class="inc-form__label" for="drawer-owner">Owner</label>
+                <select slot="control" id="drawer-owner">
+                    <option selected>AP Team</option>
+                    <option>Legal Review</option>
+                    <option>Compliance</option>
+                </select>
+                <p slot="hint">Choose the person responsible.</p>
+            </inc-field>
+            <inc-readonly-field label="Record" value="AP-2026-00142"></inc-readonly-field>
+        </div>
+        <div slot="footer" class="wc-actions">
+            <button class="inc-btn inc-btn--outline-secondary" type="button" data-inc-dialog-close>Cancel</button>
+            <button class="inc-btn inc-btn--primary" type="button" data-inc-initial-focus>Assign owner</button>
+        </div>
+    </inc-drawer>
+
+    <script type="module">
+        import { defineAll } from "./dist/web-components/index.js";
+
+        defineAll();
+
+        const dialog = document.getElementById("wc-dialog");
+        const drawer = document.getElementById("wc-drawer");
+
+        document.getElementById("open-dialog")?.addEventListener("click", () => {
+            dialog?.showModal?.();
+        });
+
+        document.getElementById("open-drawer")?.addEventListener("click", () => {
+            drawer?.show?.();
+        });
+
+        window.__wcReady = true;
+    </script>
+</body>
+</html>

@@ -23,6 +23,68 @@ a {
     margin: 1.5rem 0;
 }
 
+.demo-compare {
+    display: grid;
+    gap: 1rem;
+}
+
+.demo-compare--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.demo-compare__panel {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 1px solid #d7dde0;
+    border-radius: 0.75rem;
+    background: #fff;
+}
+
+.demo-compare__title {
+    margin: 0;
+}
+
+.demo-compare__copy {
+    margin: 0;
+    color: #617277;
+    font-size: 0.875rem;
+}
+
+.demo-swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 0.875rem;
+}
+
+.demo-swatch {
+    display: grid;
+    gap: 0.625rem;
+    min-height: 8rem;
+    padding: 0.875rem;
+    border: 1px solid #d7dde0;
+    border-radius: 0.75rem;
+    background: #fff;
+}
+
+.demo-swatch__token {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.demo-swatch__name {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.demo-swatch__value {
+    margin-top: auto;
+    font-size: 0.75rem;
+    color: #617277;
+}
+
 .demo-link-card {
     display: block;
     color: inherit;
@@ -199,6 +261,10 @@ a {
 @media (max-width: 767.98px) {
     .demo-table-toolbar {
         align-items: flex-start;
+    }
+
+    .demo-compare--2 {
+        grid-template-columns: 1fr;
     }
 
     .demo-drawer-stage {

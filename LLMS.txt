@@ -1,7 +1,7 @@
 Incursa UI Kit
 
 Short description:
-Reusable UI kit for data-heavy business applications. The public surface uses [`inc-*`](reference.html) classes and ships compiled CSS, optional vanilla-JS helpers, and SCSS source entrypoints.
+Reusable UI kit for data-heavy business applications. The public surface stays CSS-first through [`inc-*`](reference.html) classes, with optional vanilla-JS helpers, SCSS source entrypoints, and a layered `./web-components` entrypoint for browser-native components.
 
 Package identity:
 - npm package: `@incursa/ui-kit`
@@ -11,14 +11,17 @@ Package identity:
 Fast path:
 - Use [`dist/inc-design-language.css`](dist/inc-design-language.css) if the target app already has working HTML and mainly needs the visual language.
 - Use [`dist/inc-design-language.js`](dist/inc-design-language.js) only for stateful primitives such as menus, tabs, collapsible sections, auto-refresh widgets, the native dialog launch hook, and legacy modal/offcanvas shells.
+- Use [`web-components.html`](web-components.html) and the same-package `./web-components` entrypoint when you want declarative custom elements for the approved v1 component families.
 - Use [`src/inc-design-language.scss`](src/inc-design-language.scss) if the consumer needs to tune tokens, theme variables, density, or Bootstrap defaults.
 
 Primary files:
 - [`dist/inc-design-language.css`](dist/inc-design-language.css): compiled standalone CSS output.
 - [`dist/inc-design-language.js`](dist/inc-design-language.js): optional dependency-free helper for menus, tabs, collapsible sections, auto-refresh widgets, the native dialog launch hook, and legacy modal/offcanvas shells.
+- [`dist/web-components/index.js`](dist/web-components/index.js): optional custom-element entrypoint for the same-package Web Component layer.
 - [`src/inc-design-language.scss`](src/inc-design-language.scss): main SCSS entrypoint.
 - [`src/_inc-theme.scss`](src/_inc-theme.scss): brand-facing fonts, palette, semantic surfaces, and text colors.
 - [`src/_inc-tokens.scss`](src/_inc-tokens.scss): deeper token and Bootstrap-facing overrides.
+- [`web-components.html`](web-components.html): public landing page for the optional Web Component entrypoint and the CSS-first versus Web Component usage split.
 - [`reference.html`](reference.html): copy/paste catalog for standard controls, page-frame primitives, metric variants, and overlay shells.
 - [`specs/architecture/_index.md`](specs/architecture/_index.md): design-rationale layer for token boundaries, helper scope, and package intent.
 - [`specs/requirements/ui-kit/_index.md`](specs/requirements/ui-kit/_index.md): first-pass Spec Trace suite for the UI kit.
@@ -28,6 +31,8 @@ Primary files:
 - [`specs/verification/ui-kit/_index.md`](specs/verification/ui-kit/_index.md): auditable source-review, smoke-validation, and Playwright browser-automation baseline for the UI kit surface.
 - [`states.html`](states.html), [`forms-and-validation.html`](forms-and-validation.html), [`data-grid-advanced.html`](data-grid-advanced.html), [`overlay-workflows.html`](overlay-workflows.html): workflow-heavy composition patterns.
 - [`demo.html`](demo.html), [`work-queue.html`](work-queue.html), [`record-detail.html`](record-detail.html), [`native-patterns.html`](native-patterns.html): fuller page examples.
+- The v1 Web Component families are layouts and shells, navbar/tabs/user-menu, field/input-group/choice-group/readonly-field/validation-summary, state-panel/live-region/auto-refresh/theme-switcher, and disclosure/dialog/drawer.
+- Tables, utilities, filter/bulk/file workflows, permission banners, toasts, and compatibility overlay shells stay CSS-only or deferred in v1.
 
 Markdown links:
 - Use relative links for repo-local references in markdown, and keep the visible label code-formatted.
@@ -56,6 +61,7 @@ Core primitives:
 - Utilities: use [`inc-u-stack-*`](reference.html), [`inc-u-gap-*`](reference.html), [`inc-grid`](reference.html), [`inc-row`](reference.html), [`inc-col`](reference.html), [`inc-stack`](reference.html), and [`inc-flex-*`](reference.html) when composition needs a public helper class.
 - States and workflow: use [`inc-state-panel`](reference.html), [`inc-permission-banner`](reference.html), [`inc-toast-card`](reference.html), [`inc-timeline`](reference.html), [`inc-file-dropzone`](reference.html), [`inc-file-row`](reference.html), and [`inc-key-value`](reference.html).
 - Interaction: use [`data-inc-toggle="menu"`](src/inc-design-language.js), [`data-inc-toggle="tab"`](src/inc-design-language.js), and [`data-inc-toggle="collapse"`](src/inc-design-language.js) with [`data-inc-target="#target-id"`](src/inc-design-language.js) when you want the helper to wire behavior. Use [`data-inc-dismiss="modal"`](src/inc-design-language.js) / [`data-inc-dismiss="offcanvas"`](src/inc-design-language.js), [`data-inc-accordion`](src/inc-design-language.js), [`data-inc-backdrop-for`](src/inc-design-language.js), [`data-inc-initial-focus`](src/inc-design-language.js), [`data-inc-auto-refresh`](src/inc-design-language.js), and the [`data-inc-refresh-seconds`](src/inc-design-language.js), [`data-inc-refresh-label`](src/inc-design-language.js), [`data-inc-refresh-loading-label`](src/inc-design-language.js), [`data-inc-refresh-paused-label`](src/inc-design-language.js), [`data-inc-refresh-pause-action-label`](src/inc-design-language.js), and [`data-inc-refresh-resume-action-label`](src/inc-design-language.js) hooks when you need the rest of the helper contract. Use [`data-inc-native-dialog-open="dialog-id"`](src/inc-design-language.js) when you want the helper to open a native `<dialog>`.
+- Web Components: prefer the same-package entrypoint for layouts, navbar/tabs/user-menu, field/input wrappers, state/live-region/auto-refresh/theme switcher, and disclosure/dialog/drawer shells. Keep tables, utilities, filter/bulk/file workflows, and presentation-only atoms CSS-first in v1.
 - Native interaction: use [`details.inc-disclosure`](reference.html), [`details.inc-native-menu`](reference.html), and [`dialog.inc-native-dialog`](reference.html).
 - Status: use [`inc-badge--success|warning|danger|info`](reference.html).
 - Metrics: use [`inc-summary-overview`](reference.html) and [`inc-summary-block`](reference.html).
@@ -73,6 +79,7 @@ Packaging and build:
 - `npm pack` or `npm run package` produces a local installable tarball.
 - The compiled CSS already includes the Bootstrap layer it was built from, so consumers do not need Bootstrap CSS at runtime when using compiled assets.
 - The SCSS source path does require Bootstrap Sass at build time because it imports `bootstrap/scss/bootstrap`.
+- The Web Component layer ships as a layered entrypoint in the same package, not as a second package or separate design system.
 
 Guardrails:
 - Keep typography split: sans for UI text, mono for data.
@@ -80,6 +87,7 @@ Guardrails:
 - Avoid product-specific shell or background styles in this package.
 - Keep new components generic enough to reuse across admin/data apps.
 - Prefer native browser behavior first for disclosures and dialogs when it fits the product.
+- Keep the CSS-first class API canonical and treat the Web Component layer as additive, not a replacement.
 
 See also:
 - [`README.md`](README.md) for package usage, release flow, and repository structure.

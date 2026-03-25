@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" data-inc-theme-mode="system" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UI Kit Web Components Browser Fixture</title>
+    <link rel="stylesheet" href="../../../dist/inc-design-language.css">
+    <style>
+        :root {
+            color-scheme: light;
+        }
+
+        * {
+            animation: none !important;
+            transition: none !important;
+            caret-color: transparent !important;
+        }
+
+        body {
+            margin: 0;
+            background: var(--inc-surface-secondary);
+            color: var(--inc-text-primary);
+            font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .wc-test-root {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .wc-test-region {
+            border: 1px solid var(--inc-border-subtle);
+            border-radius: 0.5rem;
+            background: var(--inc-surface-primary);
+            overflow: clip;
+        }
+
+        .wc-test-region__header {
+            margin: 0;
+            padding: 0.625rem 0.75rem;
+            border-bottom: 1px solid var(--inc-border-subtle);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--inc-text-muted);
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .wc-test-region__body {
+            padding: 0.75rem;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .wc-test-region[data-test="forms-feedback-region"] {
+            position: relative;
+            z-index: 2;
+            overflow: visible;
+        }
+
+        .wc-inline-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="wc-test-root">
+        <section id="layout-snapshot" class="wc-test-region" data-test="layout-region">
+            <h2 class="wc-test-region__header">Layouts And Shells</h2>
+            <div class="wc-test-region__body" data-test="responsive-region">
+                <inc-app-shell id="wc-shell" variant="app" class="inc-app-shell inc-app-shell--app inc-app-shell--workspace inc-app-shell--dense inc-app-shell--collapsed" part="shell header main footer">
+                    <header id="wc-shell-header" slot="header">
+                        <div class="inc-page-header">
+                            <div class="inc-page-header__title">
+                                <h1 class="inc-heading inc-heading--h3">Web Components Fixture Shell</h1>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div id="wc-shell-body" slot="main" class="inc-app-shell__body">
+                        <aside class="inc-app-shell__sidebar">
+                            <strong>Queue</strong>
+                            <p class="inc-text inc-text--small inc-text--muted">Ops routing filters</p>
+                        </aside>
+                        <main id="wc-shell-content" class="inc-app-shell__content">
+                            <inc-page id="wc-page" dense class="inc-page inc-page--dense inc-page--detail inc-page--wide" part="page breadcrumbs body aside footer">
+                                <nav slot="breadcrumbs">
+                                    <ol class="inc-breadcrumb">
+                                        <li class="inc-breadcrumb__item"><a href="#">Home</a></li>
+                                        <li class="inc-breadcrumb__item active"><span>Fixture</span></li>
+                                    </ol>
+                                </nav>
+
+                                <inc-page-header id="wc-page-header" slot="header" class="inc-page-header inc-page-header--detail inc-page-header--dense" part="header title body actions">
+                                    <div slot="title">
+                                        <p class="inc-text inc-text--small">Record Review</p>
+                                        <h2 class="inc-heading inc-heading--h4">AP-2026-00142</h2>
+                                    </div>
+                                    <div slot="actions" class="wc-inline-stack">
+                                        <button class="inc-btn inc-btn--secondary inc-btn--sm" type="button">Pause</button>
+                                        <button class="inc-btn inc-btn--primary inc-btn--sm" type="button">Approve</button>
+                                    </div>
+                                </inc-page-header>
+
+                                <inc-section id="wc-section" slot="body" tone="info" class="inc-section inc-section--dense inc-section--tone-info" part="section header body footer actions">
+                                    <div slot="header" class="wc-inline-stack">
+                                        <h3 class="inc-heading inc-heading--h5">Summary Blocks</h3>
+                                        <span class="inc-badge inc-badge--soft-primary">Live</span>
+                                    </div>
+                                    <inc-summary-overview id="wc-summary" slot="body" columns="3" style="--inc-summary-columns: 3;">
+                                        <inc-summary-block tone="positive">
+                                            <div slot="header">Approved</div>
+                                            <div slot="body"><strong>$145,000</strong></div>
+                                        </inc-summary-block>
+                                        <inc-summary-block tone="warning">
+                                            <div slot="header">Needs Review</div>
+                                            <div slot="body"><strong>12</strong></div>
+                                        </inc-summary-block>
+                                        <inc-summary-block tone="danger">
+                                            <div slot="header">Rejected</div>
+                                            <div slot="body"><strong>2</strong></div>
+                                        </inc-summary-block>
+                                    </inc-summary-overview>
+                                </inc-section>
+
+                                <inc-card id="wc-card" slot="aside" tone="accent" elevated class="inc-card inc-card--elevated inc-card--tone-accent" part="card header body footer">
+                                    <div slot="header"><h3 class="inc-heading inc-heading--h6">Risk Flags</h3></div>
+                                    <div slot="body">No sanctions or duplicate checks failed.</div>
+                                    <div slot="footer">Updated 5 minutes ago</div>
+                                </inc-card>
+                            </inc-page>
+                        </main>
+                    </div>
+
+                    <inc-footer-bar id="wc-footer" slot="footer">
+                        <div slot="menu" class="wc-inline-stack">
+                            <button class="inc-btn inc-btn--secondary inc-btn--sm" type="button">Save Draft</button>
+                            <button class="inc-btn inc-btn--primary inc-btn--sm" type="button">Submit</button>
+                        </div>
+                        <div slot="meta">Static fixture footer</div>
+                    </inc-footer-bar>
+                </inc-app-shell>
+            </div>
+        </section>
+
+        <section class="wc-test-region" data-test="navigation-region">
+            <h2 class="wc-test-region__header">Navigation</h2>
+            <div class="wc-test-region__body">
+                <inc-navbar id="wc-navbar" app breakpoint="lg">
+                    <a slot="brand" href="#">Incursa</a>
+                    <button id="wc-navbar-toggle" slot="utilities" type="button" class="inc-btn inc-btn--secondary inc-btn--sm" data-inc-navbar-toggle>
+                        Toggle
+                    </button>
+                    <div slot="nav">
+                        <a class="nav-link active" href="#">Queue</a>
+                        <a class="nav-link" href="#">Approvals</a>
+                        <a class="nav-link" href="#">History</a>
+                    </div>
+                </inc-navbar>
+
+                <inc-tabs id="wc-tabs">
+                    <button id="wc-tab-overview" slot="tab" type="button">Overview</button>
+                    <button id="wc-tab-activity" slot="tab" type="button">Activity</button>
+                    <button id="wc-tab-audit" slot="tab" type="button">Audit</button>
+
+                    <section id="wc-panel-overview" slot="panel">Overview content.</section>
+                    <section id="wc-panel-activity" slot="panel">Activity content.</section>
+                    <section id="wc-panel-audit" slot="panel">Audit content.</section>
+                </inc-tabs>
+
+                <inc-user-menu id="wc-user-menu" label="User actions">
+                    <button id="wc-user-menu-trigger" slot="trigger" type="button">Sam McAravey</button>
+                    <div id="wc-user-menu-panel" slot="menu">
+                        <button id="wc-user-menu-item-profile" type="button" role="menuitem">Profile</button>
+                        <button id="wc-user-menu-item-preferences" type="button" role="menuitem">Preferences</button>
+                        <button id="wc-user-menu-item-signout" type="button" role="menuitem">Sign out</button>
+                    </div>
+                </inc-user-menu>
+            </div>
+        </section>
+
+        <section class="wc-test-region" data-test="forms-feedback-region">
+            <h2 class="wc-test-region__header">Forms, Feedback, And Theme</h2>
+            <div class="wc-test-region__body">
+                <inc-field id="wc-field" label="Invoice Number" hint="Use the external invoice identifier." required>
+                    <input slot="control" type="text" value="INV-000142">
+                </inc-field>
+
+                <inc-input-group id="wc-input-group" prefix="$" suffix="USD">
+                    <input slot="control" type="text" value="1280.45">
+                </inc-input-group>
+
+                <inc-choice-group id="wc-choice-group" legend="Route To" inline>
+                    <label slot="item"><input type="radio" name="route" checked> AP Team</label>
+                    <label slot="item"><input type="radio" name="route"> Legal</label>
+                </inc-choice-group>
+
+                <inc-readonly-field id="wc-readonly-field" label="Current Owner" value="AP Team"></inc-readonly-field>
+
+                <inc-validation-summary id="wc-validation-summary" count="2">
+                    <li slot="item"><a href="#invoice">Invoice number is required.</a></li>
+                    <li slot="item"><a href="#amount">Amount exceeds tolerance.</a></li>
+                </inc-validation-summary>
+
+                <inc-state-panel id="wc-state-panel" variant="warning" title="Review Required" body="Vendor profile is pending verification." status="!"></inc-state-panel>
+                <inc-live-region id="wc-live-region" politeness="polite"></inc-live-region>
+                <inc-auto-refresh id="wc-auto-refresh" paused seconds="180" label="Queue refresh in" loading-label="Refreshing queue"></inc-auto-refresh>
+                <inc-theme-switcher id="wc-theme-switcher" label="Appearance" heading="Choose appearance" variant="navbar"></inc-theme-switcher>
+            </div>
+        </section>
+
+        <section class="wc-test-region" data-test="overlay-region">
+            <h2 class="wc-test-region__header">Overlays And Disclosure</h2>
+            <div class="wc-test-region__body">
+                <inc-disclosure id="wc-disclosure" summary="Additional context">
+                    <p slot="content">This disclosure body confirms that light-DOM content projection is active.</p>
+                </inc-disclosure>
+
+                <div class="wc-inline-stack">
+                    <button id="open-dialog" class="inc-btn inc-btn--primary" type="button">Open Review Dialog</button>
+                    <button id="open-drawer" class="inc-btn inc-btn--secondary" type="button">Open Assignment Drawer</button>
+                </div>
+
+                <inc-dialog id="wc-dialog" label="Review Dialog" dismissible>
+                    <h3 slot="title">Confirm approval</h3>
+                    <div slot="body" class="wc-inline-stack">
+                        <button id="wc-dialog-primary" type="button" class="inc-btn inc-btn--primary" data-inc-initial-focus>Approve</button>
+                        <button id="wc-dialog-secondary" type="button" class="inc-btn inc-btn--secondary">Return</button>
+                    </div>
+                    <div slot="footer" class="wc-inline-stack">
+                        <button id="wc-dialog-close" type="button" class="inc-btn inc-btn--secondary" data-close-dialog>Close</button>
+                    </div>
+                </inc-dialog>
+
+                <inc-drawer id="wc-drawer" label="Assign Review" placement="end" dismissible>
+                    <h3 slot="title">Assign reviewer</h3>
+                    <div slot="body">Route this record to Legal for final review.</div>
+                    <div slot="footer" class="wc-inline-stack">
+                        <button id="wc-drawer-close" type="button" class="inc-btn inc-btn--secondary" data-close-drawer>Close</button>
+                    </div>
+                </inc-drawer>
+            </div>
+        </section>
+    </div>
+
+    <script type="module">
+        window.__incWcReady = false;
+        window.__incWcError = null;
+
+        window.addEventListener("error", (event) => {
+            if (!window.__incWcError) {
+                window.__incWcError = String(event.error?.stack || event.error || event.message || "Script error");
+            }
+        });
+
+        window.addEventListener("unhandledrejection", (event) => {
+            if (!window.__incWcError) {
+                window.__incWcError = String(event.reason?.stack || event.reason || "Unhandled rejection");
+            }
+        });
+
+        try {
+            const layoutModule = await import("../../../src/web-components/components/layout.js");
+            const overlaysModule = await import("../../../src/web-components/components/overlays.js");
+            const navigationModule = await import("../../../src/web-components/components/navigation.js");
+            const formsModule = await import("../../../src/web-components/components/forms.js");
+            const feedbackModule = await import("../../../src/web-components/components/feedback.js");
+
+            const namespace = window.IncWebComponents || {};
+
+            const defineLayoutComponents = layoutModule.defineLayoutComponents
+                || namespace.layout?.defineLayoutComponents;
+            const defineOverlayComponents = overlaysModule.defineOverlayComponents
+                || namespace.overlays?.defineOverlayComponents;
+            const defineNavigationComponents = navigationModule.defineNavigationComponents
+                || namespace.navigation?.defineNavigationComponents;
+            const defineFormsComponents = formsModule.registerFormsComponents
+                || formsModule.register
+                || namespace.forms?.register
+                || namespace.forms?.registerFormsComponents;
+            const defineFeedbackComponents = feedbackModule.defineFeedbackComponents
+                || namespace.feedback?.defineFeedbackComponents;
+
+            const registerIncWebComponents = () => {
+                defineLayoutComponents?.(customElements);
+                defineOverlayComponents?.(customElements);
+                defineNavigationComponents?.(customElements);
+                defineFormsComponents?.(customElements);
+                defineFeedbackComponents?.(customElements);
+
+                return [
+                    "inc-app-shell",
+                    "inc-page",
+                    "inc-page-header",
+                    "inc-section",
+                    "inc-card",
+                    "inc-summary-overview",
+                    "inc-summary-block",
+                    "inc-footer-bar",
+                    "inc-navbar",
+                    "inc-tabs",
+                    "inc-user-menu",
+                    "inc-field",
+                    "inc-input-group",
+                    "inc-choice-group",
+                    "inc-readonly-field",
+                    "inc-validation-summary",
+                    "inc-state-panel",
+                    "inc-live-region",
+                    "inc-auto-refresh",
+                    "inc-theme-switcher",
+                    "inc-disclosure",
+                    "inc-dialog",
+                    "inc-drawer",
+                ];
+            };
+
+            window.IncWebComponents = window.IncWebComponents || {};
+            window.IncWebComponents.registerIncWebComponents = registerIncWebComponents;
+            window.IncWebComponents.defineAll = registerIncWebComponents;
+
+            registerIncWebComponents();
+
+            const dialog = document.querySelector("#wc-dialog");
+            const drawer = document.querySelector("#wc-drawer");
+            const liveRegion = document.querySelector("#wc-live-region");
+
+            document.querySelector("#open-dialog")?.addEventListener("click", () => dialog?.showModal());
+            document.querySelector("#open-drawer")?.addEventListener("click", () => drawer?.show());
+            document.querySelector("[data-close-dialog]")?.addEventListener("click", () => dialog?.close("close-button"));
+            document.querySelector("[data-close-drawer]")?.addEventListener("click", () => drawer?.close("close-button"));
+
+            document.querySelector("#wc-user-menu")?.addEventListener("select", (event) => {
+                const value = event.detail?.value || "selection";
+                liveRegion?.announce(`Menu selection: ${value}`);
+            });
+
+            window.__incWcReady = true;
+        } catch (error) {
+            window.__incWcError = String(error?.stack || error);
+            console.error(error);
+        }
+    </script>
+</body>
+</html>

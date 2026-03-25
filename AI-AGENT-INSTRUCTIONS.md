@@ -9,6 +9,7 @@ Repository brand assets live under [`assets/brand/`](assets/brand). Prefer those
 - Prefer [`dist/inc-design-language.css`](dist/inc-design-language.css) if the target app already has working HTML and only needs the look.
 - Prefer [`src/inc-design-language.scss`](src/inc-design-language.scss) if you need to tune tokens, density, or Bootstrap defaults.
 - Prefer [`dist/inc-design-language.js`](dist/inc-design-language.js) only for stateful UI primitives such as menus, tabs, collapsible sections, modal/offcanvas shells, native dialog launch hooks, and auto-refresh widgets.
+- Prefer the optional [`web-components.html`](web-components.html) landing page and the same-package `./web-components` entrypoint when you need browser-native custom elements for the approved v1 families and want declarative slots, attributes, and DOM events from plain HTML.
 - Prefer [`reference.html`](reference.html) when you need copy/paste starter markup for a supported control or page-frame primitive before composing a full page.
 - Prefer [`states.html`](states.html), [`forms-and-validation.html`](forms-and-validation.html), and [`data-grid-advanced.html`](data-grid-advanced.html) when the target screen is workflow-heavy and you need realistic composition patterns, not isolated snippets.
 
@@ -48,6 +49,8 @@ Repository brand assets live under [`assets/brand/`](assets/brand). Prefer those
   Use [`data-inc-toggle="menu"`](src/inc-design-language.js), [`data-inc-toggle="tab"`](src/inc-design-language.js), and [`data-inc-toggle="collapse"`](src/inc-design-language.js) with [`data-inc-target="#target-id"`](src/inc-design-language.js) when you want the optional vanilla-JS helper to wire behavior. Use [`data-inc-toggle="modal"`](src/inc-design-language.js), [`data-inc-toggle="offcanvas"`](src/inc-design-language.js), [`data-inc-dismiss="modal"`](src/inc-design-language.js), [`data-inc-dismiss="offcanvas"`](src/inc-design-language.js), and [`data-inc-native-dialog-open`](src/inc-design-language.js) only when the helper-managed or launch-hook contract is the intended path.
 - Native interaction:
   Use [`details.inc-disclosure`](reference.html) for section stacks, [`details.inc-native-menu`](reference.html) for lightweight menus, and [`dialog.inc-native-dialog`](reference.html) for native modal surfaces.
+- Web Components:
+  Keep the CSS class surface canonical, use the optional layered entrypoint for the approved v1 component families, and prefer native HTML primitives when they already satisfy the semantic and interaction contract.
 - Status:
   Use [`inc-badge--success|warning|danger|info`](reference.html) for compact status signals.
 - Metrics:
@@ -68,6 +71,8 @@ Repository brand assets live under [`assets/brand/`](assets/brand). Prefer those
 - The repository is licensed under Apache 2.0.
 - The compiled [`dist/inc-design-language.css`](dist/inc-design-language.css) already includes the Bootstrap layer it was built from, so consumers do not need Bootstrap CSS at runtime when they use the compiled assets.
 - The source [`src/inc-design-language.scss`](src/inc-design-language.scss) does require Bootstrap Sass at build time because it imports `bootstrap/scss/bootstrap`.
+- The optional Web Component layer lives in the same package as a layered entrypoint so the CSS-first surface and browser-native surface stay aligned.
+- The Web Component source tree lives under [`src/web-components/`](src/web-components); keep consumer-facing guidance in [`web-components.html`](web-components.html) and maintainer notes alongside the runtime source tree.
 
 ## Guardrails
 
@@ -79,6 +84,7 @@ Repository brand assets live under [`assets/brand/`](assets/brand). Prefer those
 - If you add a new block, prefer names like [`inc-filter-bar`](reference.html), [`inc-stat-card`](reference.html), or [`inc-data-toolbar`](reference.html) over feature-specific names.
 - Keep border radius consistent across panels, tabs, tables, and cards unless there is a deliberate reason to differentiate them.
 - Prefer native browser behavior first for disclosures and dialogs when it fits the product; use the helper only when the Bootstrap-like component contract needs custom state handling.
+- Keep the CSS-first class API canonical and treat the Web Component layer as additive, not a replacement.
 
 ## Build
 

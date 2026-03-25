@@ -8,11 +8,41 @@
 [![Pages](https://github.com/incursa/ui-kit/actions/workflows/pages.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/pages.yml)
 [![npm publish](https://github.com/incursa/ui-kit/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/npm-publish.yml)
 
-This folder contains a distilled, reusable UI kit for data-heavy business applications. The goal is to keep the recurring visual patterns that define the UI language and expose them consistently through the [`inc-*`](reference.html) class surface.
+This folder contains a distilled, reusable UI kit for data-heavy business applications. The goal is to keep the recurring visual patterns that define the UI language and expose them consistently through the [`inc-*`](reference.html) class surface. The CSS classes remain the canonical public API; the optional Web Component layer adds a browser-native entrypoint without replacing the existing class-based usage model.
 
 ## Live Examples
 
 > Open the hosted examples and component reference: [https://incursa.github.io/ui-kit](https://incursa.github.io/ui-kit)
+
+For the plain HTML baseline, open [`demo.html`](demo.html). For the paired Web Component view, open [`web-components.html`](web-components.html). The two pages are meant to be compared side by side.
+
+## Optional Web Components
+
+Use the CSS classes by default. Use Web Components when you want the same design language from plain HTML, JavaScript, and slots rather than hand-wired class markup. Use native HTML primitives first when `<button>`, `<input>`, `<details>`, or `<dialog>` already satisfy the interaction and accessibility contract.
+
+Load the optional layered entrypoint from the same package:
+
+```html
+<script type="module">
+    import { defineAll } from "@incursa/ui-kit/web-components";
+
+    defineAll();
+</script>
+```
+
+If you prefer explicit registration control, import the same entrypoint in your module graph and call the exported registration helper from your own bootstrap code.
+
+The v1 Web Component scope covers:
+
+- layouts and shells: [`inc-app-shell`](reference.html), [`inc-page`](reference.html), [`inc-page-header`](reference.html), [`inc-section`](reference.html), [`inc-card`](reference.html), [`inc-summary-overview`](reference.html), [`inc-summary-block`](reference.html), [`inc-footer-bar`](reference.html)
+- navigation: [`inc-navbar`](reference.html), [`inc-tabs`](reference.html), [`inc-user-menu`](reference.html)
+- forms and inputs: [`inc-field`](reference.html), [`inc-input-group`](reference.html), [`inc-choice-group`](reference.html), [`inc-readonly-field`](reference.html), [`inc-validation-summary`](reference.html)
+- feedback and status: [`inc-state-panel`](reference.html), [`inc-live-region`](reference.html), [`inc-auto-refresh`](reference.html), [`inc-theme-switcher`](reference.html)
+- overlays and disclosures: [`inc-disclosure`](reference.html), [`inc-dialog`](reference.html), [`inc-drawer`](reference.html)
+
+The intentionally deferred surfaces stay CSS-first in v1, including tables and data presentation, filter and bulk toolbars, file workflows, permission banners, toasts, utility helpers, and the remaining compatibility overlay shells.
+
+For maintainers, treat the Web Component layer as an additive wrapper over the same design language: one package, one token system, one naming vocabulary, and the same helper behavior where it already exists.
 
 Licensed under Apache 2.0.
 
@@ -31,6 +61,7 @@ Licensed under Apache 2.0.
 - A small overlay/navigation layer for tabs, pagination, dropdown actions, native details/dialog patterns, and compatibility modals/offcanvas panels.
 - Opinionated app-shell pieces for navbar/topbar, breadcrumb/nav-triad, page-frame wrappers, footer-bar action clusters, sticky footer, user menu, and common two/three-column page layouts.
 - A public-surface standards layer for [`inc-`](reference.html) prefixing, BEM naming, and accessible interactive behavior.
+- An additive optional Web Component layer that keeps the CSS-first surface intact instead of creating a second design system.
 
 ## What was intentionally left out
 
@@ -59,6 +90,8 @@ Licensed under Apache 2.0.
   Compiled standalone CSS output.
 - [`dist/inc-design-language.js`](dist/inc-design-language.js)
   Optional vanilla-JS helper for menus, tabs, collapsible sections, modal/offcanvas shells, native dialog launch hooks, auto-refresh widgets with pause/resume controls, and light/dark/system theme switching with pluggable controls.
+- [`dist/web-components/`](dist/web-components)
+  Optional browser-native component runtime built from the same package and exposed through the `./web-components` entrypoint.
 - [`index.html`](index.html)
   Showcase hub for the included example pages.
 - [`demo.html`](demo.html)
@@ -73,6 +106,8 @@ Licensed under Apache 2.0.
   Modal and offcanvas workflow example with validation and assignment flows.
 - [`reference.html`](reference.html)
   Copy/paste catalog for the standard controls, page framing, metrics, lists, overlays, and markup patterns.
+- [`web-components.html`](web-components.html)
+  Public landing page for the optional Web Component entrypoint and the CSS-first versus Web Component usage split.
 - [`specs/requirements/ui-kit/`](specs/requirements/ui-kit)
   First-pass Spec Trace specification suite for the UI kit, including the gap log for unresolved questions.
 - [`specs/verification/ui-kit/`](specs/verification/ui-kit)
@@ -131,11 +166,19 @@ For titled sections that wrap tables, use [`inc-header-body--table-body`](refere
 - Alert and toast surfaces stay CSS/HTML-first unless the consuming app adds its own dismissal or lifecycle logic.
 - This package now includes an optional dependency-free helper at [`dist/inc-design-language.js`](dist/inc-design-language.js) for:
   user-menu dropdowns, tab switching, collapse/accordion toggles, legacy modal/offcanvas shells, native dialog launching, page auto-refresh countdown widgets, and theme switching controls.
-- The helper also exposes `window.IncTheme` and listens for `[data-inc-theme-mode]`, `[data-inc-theme-toggle]`, and `[data-inc-theme-select]` controls.
+- The helper also exposes `window.IncTheme` and listens for [`data-inc-theme-mode`](src/inc-design-language.js), [`data-inc-theme-toggle`](src/inc-design-language.js), and [`data-inc-theme-select`](src/inc-design-language.js) controls.
 - `window.IncTheme` also supports `createSwitcher(options)` and `mountSwitcher(target, options)` when you want to drop in the packaged switcher without hand-writing the markup.
 - This package also includes native-styled patterns for:
   [`details.inc-disclosure`](reference.html), [`details.inc-native-menu`](reference.html), [`dialog.inc-native-dialog`](reference.html), and [`dialog.inc-native-dialog--drawer`](reference.html).
 - If you prefer native HTML behavior where possible, use browser primitives like `<details>` and `<dialog>` for product-specific implementations. The helper exists for places where the design language is intentionally Bootstrap-like and needs matching interaction behavior.
+
+## Web Component usage
+
+- Use the CSS class surface when you already have the HTML structure and only need the design language.
+- Use the Web Component entrypoint when you want declarative slots, attributes, and DOM events around the approved v1 component families.
+- Use native HTML primitives when they already solve the interaction cleanly and keep the semantics simpler.
+- Keep tables, utilities, and other low-level atoms class-based until there is a clear component contract worth adding.
+- Treat the Web Component layer as a layered entrypoint in the same package, not as a separate design system.
 
 ## Use it quickly
 
@@ -143,11 +186,12 @@ If you just want the look in another app:
 
 1. Copy [`dist/inc-design-language.css`](dist/inc-design-language.css).
 2. If you need interactive tabs/menus/collapses or helper-managed overlays, also copy [`dist/inc-design-language.js`](dist/inc-design-language.js).
-3. Load the CSS after your reset or base stylesheet.
-4. Load the optional JS near the end of the page.
-5. Use the [`inc-*`](reference.html) classes shown in [`reference.html`](reference.html) for direct copy/paste control markup.
-6. Check [`states.html`](states.html), [`forms-and-validation.html`](forms-and-validation.html), [`data-grid-advanced.html`](data-grid-advanced.html), and [`overlay-workflows.html`](overlay-workflows.html) for the workflow-heavy patterns that do not read well as isolated snippets.
-7. Use [`demo.html`](demo.html), [`work-queue.html`](work-queue.html), [`record-detail.html`](record-detail.html), and [`native-patterns.html`](native-patterns.html) for fuller page composition.
+3. If you want browser-native custom elements, see [`web-components.html`](web-components.html) for the optional layered entrypoint.
+4. Load the CSS after your reset or base stylesheet.
+5. Load the optional JS near the end of the page.
+6. Use the [`inc-*`](reference.html) classes shown in [`reference.html`](reference.html) for direct copy/paste control markup, or use the matching custom elements from the Web Component layer when that better fits the page.
+7. Check [`states.html`](states.html), [`forms-and-validation.html`](forms-and-validation.html), [`data-grid-advanced.html`](data-grid-advanced.html), and [`overlay-workflows.html`](overlay-workflows.html) for the workflow-heavy patterns that do not read well as isolated snippets.
+8. Use [`demo.html`](demo.html), [`work-queue.html`](work-queue.html), [`record-detail.html`](record-detail.html), and [`native-patterns.html`](native-patterns.html) for fuller page composition.
 
 If you want the color mode to follow the saved user preference before first paint, add a tiny bootstrap script in the `<head>`:
 
@@ -252,7 +296,7 @@ or, if you want to own the theme variables:
 
 ## How It Fits Into A Razor Or ASP.NET Core App
 
-There are two supported ways to use it.
+There are three supported ways to use it.
 
 1. Use the compiled assets.
 
@@ -261,6 +305,7 @@ There are two supported ways to use it.
 - You do not need Bootstrap CSS at runtime because the compiled CSS already includes the Bootstrap layer it was built on.
 - You do not need Bootstrap JS unless your app separately uses Bootstrap's own JavaScript components.
 - If you want light/dark/system switching, keep `data-bs-theme` on the root element and let `window.IncTheme` persist the user's override or mount the packaged switcher into your layout.
+- If you want browser-native custom elements instead of helper wiring, import the same-package `./web-components` entrypoint and keep the CSS bundle in place.
 
 2. Use the SCSS source.
 
@@ -268,10 +313,17 @@ There are two supported ways to use it.
 - This path is for when you want to override theme variables or deeper Bootstrap-facing tokens.
 - In this mode you do need Bootstrap and Sass available at build time because the source imports `bootstrap/scss/bootstrap`.
 
+3. Use the optional Web Component layer.
+
+- Import the same-package `./web-components` entrypoint when you want browser-native custom elements for the supported v1 families.
+- Keep the CSS bundle in place because the custom elements are designed to sit on top of the same class and token vocabulary.
+- Prefer this layer for declarative shell components, and keep static atoms and tables on the CSS surface.
+
 Practical recommendation for a .NET Razor Pages or MVC app:
 
 - If you just want the finished look, copy or install the package and reference [`dist/inc-design-language.css`](dist/inc-design-language.css) from your layout.
 - Add [`dist/inc-design-language.js`](dist/inc-design-language.js) if you want the optional [`inc-*`](reference.html) menu/tab/collapse helper behavior or the bundled theme switcher helper.
+- Add the same-package `./web-components` entrypoint when you want declarative custom elements for the supported v1 component families.
 - Use the native `<details>` and `<dialog>` patterns when you want less JavaScript.
 - Use the SCSS source path only if you want this package to become part of your app's own asset build and theme pipeline.
 

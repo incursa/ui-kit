@@ -47,6 +47,7 @@
                             <a class="nav-link" href="./states.html">States</a>
                             <a class="nav-link" href="./forms-and-validation.html">Forms</a>
                             <a class="nav-link" href="./data-grid-advanced.html">Data Grid</a>
+                            <a class="nav-link" href="./web-components.html">Web Components</a>
                             <a class="nav-link" href="./reference.html">Reference</a>
                         </div>
                         <div class="inc-navbar__utilities">
@@ -92,6 +93,93 @@
                                 <p class="demo-eyebrow">Dashboard Pattern</p>
                                 <h1 class="inc-heading inc-heading--h1">Data-heavy home screen</h1>
                                 <p class="inc-text inc-text--regular inc-text--muted">Summary blocks, filter toolbar, alerts, tabs, tables, and a trimmed vertical list with normal breathing room.</p>
+                            </div>
+                        </section>
+
+                        <div class="demo-muted-panel">
+                            <div class="demo-section-header">
+                                <div>
+                                    <p class="demo-eyebrow">Optional Layer</p>
+                                    <h2 class="inc-heading inc-heading--h3">Browser-native Web Components are available</h2>
+                                </div>
+                                <a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="./web-components.html">Open showcase</a>
+                            </div>
+                            <p class="inc-text inc-text--regular inc-text--muted">This dashboard stays CSS-first and helper-driven. Use the dedicated Web Components page when you want the same design language in plain HTML and JavaScript.</p>
+                        </div>
+
+                        <section id="demo-comparison" class="demo-compare demo-compare--2">
+                            <article class="demo-compare__panel">
+                                <p class="demo-eyebrow">Plain HTML / CSS-first</p>
+                                <h2 class="demo-compare__title inc-heading inc-heading--h3">Direct class markup</h2>
+                                <p class="demo-compare__copy">This page keeps the HTML explicit: the structure, classes, and native table markup are all visible at a glance.</p>
+                                <pre class="demo-code"><code>&lt;section class="inc-card"&gt;
+  &lt;div class="inc-card__header"&gt;
+    &lt;h2 class="inc-card__title"&gt;Queue summary&lt;/h2&gt;
+  &lt;/div&gt;
+  &lt;div class="inc-card__body"&gt;
+    &lt;table class="inc-table inc-table--sm inc-table--data-table"&gt;
+      &lt;thead&gt;...&lt;/thead&gt;
+      &lt;tbody&gt;...&lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+                            </article>
+
+                            <article class="demo-compare__panel">
+                                <p class="demo-eyebrow">Web Components counterpart</p>
+                                <h2 class="demo-compare__title inc-heading inc-heading--h3">Same result, less wiring</h2>
+                                <p class="demo-compare__copy">The Web Component layer keeps the same visual language but moves the repeated wrapping into slots and attributes.</p>
+                                <pre class="demo-code"><code>&lt;inc-card&gt;
+  &lt;div slot="header" class="inc-card__header"&gt;
+    &lt;h2 class="inc-card__title"&gt;Queue summary&lt;/h2&gt;
+  &lt;/div&gt;
+  &lt;div slot="body"&gt;
+    &lt;table class="inc-table inc-table--sm inc-table--data-table"&gt;
+      &lt;thead&gt;...&lt;/thead&gt;
+      &lt;tbody&gt;...&lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/inc-card&gt;</code></pre>
+                            </article>
+                        </section>
+
+                        <section id="demo-palette" class="inc-card">
+                            <div class="inc-card__header">
+                                <h2 class="inc-card__title">Color Surfaces</h2>
+                            </div>
+                            <div class="inc-card__body">
+                                <div class="demo-swatch-grid">
+                                    <div class="demo-swatch" style="background: var(--bs-primary); color: #fff; border-color: transparent;">
+                                        <span class="demo-swatch__token">Primary</span>
+                                        <span class="demo-swatch__name">Action color</span>
+                                        <span class="demo-swatch__value">var(--bs-primary)</span>
+                                    </div>
+                                    <div class="demo-swatch" style="background: var(--bs-secondary); color: #fff; border-color: transparent;">
+                                        <span class="demo-swatch__token">Secondary</span>
+                                        <span class="demo-swatch__name">Muted action</span>
+                                        <span class="demo-swatch__value">var(--bs-secondary)</span>
+                                    </div>
+                                    <div class="demo-swatch" style="background: var(--bs-success); color: #fff; border-color: transparent;">
+                                        <span class="demo-swatch__token">Success</span>
+                                        <span class="demo-swatch__name">Positive state</span>
+                                        <span class="demo-swatch__value">var(--bs-success)</span>
+                                    </div>
+                                    <div class="demo-swatch" style="background: var(--bs-warning); color: #27363b; border-color: transparent;">
+                                        <span class="demo-swatch__token">Warning</span>
+                                        <span class="demo-swatch__name">Attention state</span>
+                                        <span class="demo-swatch__value">var(--bs-warning)</span>
+                                    </div>
+                                    <div class="demo-swatch" style="background: var(--bs-danger); color: #fff; border-color: transparent;">
+                                        <span class="demo-swatch__token">Danger</span>
+                                        <span class="demo-swatch__name">High-risk state</span>
+                                        <span class="demo-swatch__value">var(--bs-danger)</span>
+                                    </div>
+                                    <div class="demo-swatch" style="background: var(--inc-surface-secondary); color: var(--inc-text-primary);">
+                                        <span class="demo-swatch__token">Surface</span>
+                                        <span class="demo-swatch__name">Neutral panel</span>
+                                        <span class="demo-swatch__value">var(--inc-surface-secondary)</span>
+                                    </div>
+                                </div>
                             </div>
                         </section>
 
@@ -360,7 +448,7 @@
                     </div>
                 </main>
                 <footer class="inc-app-shell__footer inc-footer-bar">
-                    <div class="inc-footer-bar__meta">Dashboard example for the extracted Incursa design language.</div>
+                    <div class="inc-footer-bar__meta">Dashboard example for the extracted Incursa design language. Open web-components.html beside this page to compare the CSS-first baseline with the layered Web Components view.</div>
                 </footer>
             </div>
         </div>
