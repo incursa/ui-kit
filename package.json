@@ -49,6 +49,8 @@
     "build:css:min": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.min.css --style=compressed",
     "build:js": "node -e \"require('fs').copyFileSync('src/inc-design-language.js', 'dist/inc-design-language.js')\"",
     "build": "npm run build:css && npm run build:css:min && npm run build:js",
+    "test:browser:install": "playwright install chromium",
+    "test:browser": "playwright test",
     "smoke": "node scripts/verify-ui-kit.mjs",
     "verify": "npm run build && npm run smoke && npm pack --dry-run",
     "preversion": "npm run verify",
@@ -59,6 +61,7 @@
     "package": "npm run build && npm run smoke && npm run pack:tarball"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "bootstrap": "^5.3.3",
     "linkedom": "^0.18.12",
     "sass": "^1.93.2"

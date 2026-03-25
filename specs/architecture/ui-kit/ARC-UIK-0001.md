@@ -34,7 +34,7 @@ It is intentionally:
 - semantically grounded rather than runtime-heavy
 - designed for repeated composition across forms, tables, overlays, and workflow states
 
-The public surface is the `inc-*` class system plus the optional helper contract. The package does not try to be a full application framework.
+The public surface is the [`inc-*`](../../../reference.html) class system plus the optional helper contract. The package does not try to be a full application framework.
 
 ## Boundary Model
 
@@ -42,14 +42,14 @@ The package is split into a few explicit layers:
 
 1. Theme tokens establish the brand-facing color and typography values.
 2. Deeper tokens establish spacing, radius, shadow, z-index, and Bootstrap override values.
-3. The SCSS entrypoint composes the public `inc-*` class surface.
+3. The SCSS entrypoint composes the public [`inc-*`](../../../reference.html) class surface.
 4. The JS helper adds only narrow interaction glue where browser primitives are not enough.
 5. The example HTML files demonstrate the actual shipped surface.
 6. The `dist` files are the package-ready artifacts.
 
 Validation follows the same layered approach:
 
-- `SPEC-UIK-VAL` owns the shared summary, feedback, and validity-hook vocabulary.
+- [`SPEC-UIK-VAL`](../../requirements/ui-kit/SPEC-UIK-VAL.md) owns the shared summary, feedback, and validity-hook vocabulary.
 - the editable-control families own their own valid and invalid presentation rules.
 - the example pages show the shared hooks in context so the family split stays visible in shipped markup.
 
@@ -73,21 +73,21 @@ That separation keeps visual tuning and structural tuning from collapsing into a
 
 ## Public CSS Surface
 
-`src/inc-design-language.scss` is the source of truth for the public CSS surface.
+[`src/inc-design-language.scss`](../../../reference.html) is the source of truth for the public CSS surface.
 
 Rules for the public surface:
 
-- use the `inc-` prefix for every public class
+- use the [`inc-`](../../../reference.html) prefix for every public class
 - use BEM-style elements and modifiers
 - keep compatibility aliases only when they map to an existing canonical surface
-- keep utility helpers under `inc-u-`
-- avoid nested element names such as `inc-block__element__child`
+- keep utility helpers under [`inc-u-`](../../../reference.html)
+- avoid nested element names such as [`inc-block__element__child`](../../../reference.html)
 
-The shipped surface intentionally includes both canonical and compatibility forms where the naming history requires it. For example, `inc-page` and `inc-breadcrumb-body` are compatibility-aligned wrappers, not separate product concepts.
+The shipped surface intentionally includes both canonical and compatibility forms where the naming history requires it. For example, [`inc-page`](../../../reference.html) and [`inc-breadcrumb-body`](../../../reference.html) are compatibility-aligned wrappers, not separate product concepts.
 
 ## Optional JS Helper
 
-`src/inc-design-language.js` is a dependency-free progressive-enhancement helper.
+[`src/inc-design-language.js`](../../../reference.html) is a dependency-free progressive-enhancement helper.
 
 Its scope is intentionally narrow:
 
@@ -128,9 +128,9 @@ The scenario pages should show how those primitives combine into actual screens.
 
 The package is built around three shipped artifacts:
 
-- `dist/inc-design-language.css`
-- `dist/inc-design-language.min.css`
-- `dist/inc-design-language.js`
+- [`dist/inc-design-language.css`](../../../reference.html)
+- [`dist/inc-design-language.min.css`](../../../reference.html)
+- [`dist/inc-design-language.js`](../../../reference.html)
 
 The CSS files are built from the SCSS source and are the primary public payload.
 

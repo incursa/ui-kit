@@ -12,4 +12,5 @@ coverage/
 # Local preview artifacts
 *-check.png
 *.tmp
-
+playwright-report/
+test-results/

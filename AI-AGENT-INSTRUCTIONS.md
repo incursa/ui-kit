@@ -2,56 +2,63 @@
 
 Use this package as a reusable data-heavy UI baseline.
 
-Repository brand assets live under `assets/brand/`. Prefer those local files when adding logos, favicons, or README imagery.
+Repository brand assets live under [`assets/brand/`](assets/brand). Prefer those local files when adding logos, favicons, or README imagery.
 
 ## Fast path
 
-- Prefer `dist/inc-design-language.css` if the target app already has working HTML and only needs the look.
-- Prefer `src/inc-design-language.scss` if you need to tune tokens, density, or Bootstrap defaults.
-- Prefer `dist/inc-design-language.js` only for stateful UI primitives such as menus, tabs, collapsible sections, modal/offcanvas shells, native dialog launch hooks, and auto-refresh widgets.
-- Prefer `reference.html` when you need copy/paste starter markup for a supported control or page-frame primitive before composing a full page.
-- Prefer `states.html`, `forms-and-validation.html`, and `data-grid-advanced.html` when the target screen is workflow-heavy and you need realistic composition patterns, not isolated snippets.
+- Prefer [`dist/inc-design-language.css`](dist/inc-design-language.css) if the target app already has working HTML and only needs the look.
+- Prefer [`src/inc-design-language.scss`](src/inc-design-language.scss) if you need to tune tokens, density, or Bootstrap defaults.
+- Prefer [`dist/inc-design-language.js`](dist/inc-design-language.js) only for stateful UI primitives such as menus, tabs, collapsible sections, modal/offcanvas shells, native dialog launch hooks, and auto-refresh widgets.
+- Prefer [`reference.html`](reference.html) when you need copy/paste starter markup for a supported control or page-frame primitive before composing a full page.
+- Prefer [`states.html`](states.html), [`forms-and-validation.html`](forms-and-validation.html), and [`data-grid-advanced.html`](data-grid-advanced.html) when the target screen is workflow-heavy and you need realistic composition patterns, not isolated snippets.
+
+## Markdown links
+
+- Use relative links for repo-local references in markdown, and keep the visible label code-formatted, for example [`README.md`](README.md), [`SPEC-UIK-CNV`](specs/requirements/ui-kit/SPEC-UIK-CNV.md), or [`src/inc-design-language.scss`](src/inc-design-language.scss).
+- Use absolute URLs only for external documentation, hosted examples, package registry pages, or other non-repo targets.
+- When a reference has a clear local target, prefer linking it instead of leaving it as a plain code span.
+- Run `node scripts/linkify-markdown-docs.mjs --check` after markdown edits to confirm the repo-local reference policy still holds.
 
 ## Naming rules
 
-- Use the `inc-` prefix for all public classes.
+- Use the [`inc-`](reference.html) prefix for all public classes.
 - Keep the existing BEM pattern:
-  `inc-block`, `inc-block__element`, `inc-block--modifier`.
+  [`inc-block`](reference.html), [`inc-block__element`](reference.html), [`inc-block--modifier`](reference.html).
 
 ## Core primitives
 
 - Tables:
-  Start with `inc-table` and add cell modifiers such as `inc-table__cell--numeric`, `inc-table__cell--action`, `inc-table__cell--min`, and `inc-table__cell--expand`.
+  Start with [`inc-table`](reference.html) and add cell modifiers such as [`inc-table__cell--numeric`](reference.html), [`inc-table__cell--action`](reference.html), [`inc-table__cell--min`](reference.html), and [`inc-table__cell--expand`](reference.html).
 - Buttons:
-  Use `inc-btn` plus a semantic modifier such as `inc-btn--primary`, `inc-btn--secondary`, or `inc-btn--danger`.
-  Use `inc-btn--micro` for in-row or in-cell actions.
+  Use [`inc-btn`](reference.html) plus a semantic modifier such as [`inc-btn--primary`](reference.html), [`inc-btn--secondary`](reference.html), or [`inc-btn--danger`](reference.html).
+  Use [`inc-btn--micro`](reference.html) for in-row or in-cell actions.
 - Forms:
-  Use `inc-form--inline` for toolbar/filter layouts, wrap each label/control pair in `inc-form__field` or `inc-form__group`, and use `inc-input-group` for composed inputs.
-  Use `inc-form__hint`, `inc-form__feedback--error`, `inc-form__feedback--success`, and `inc-form__error-summary` for validation.
+  Use [`inc-form--inline`](reference.html) for toolbar/filter layouts, wrap each label/control pair in [`inc-form__field`](reference.html) or [`inc-form__group`](reference.html), and use [`inc-input-group`](reference.html) for composed inputs.
+  Use [`inc-form__hint`](reference.html), [`inc-form__feedback--error`](reference.html), [`inc-form__feedback--success`](reference.html), and [`inc-form__error-summary`](reference.html) for validation.
 - Filter bars:
-  Use `inc-filter-bar`, `inc-filter-chip`, and `inc-bulk-bar` for search-heavy or multi-select operator screens.
+  Use [`inc-filter-bar`](reference.html), [`inc-filter-chip`](reference.html), and [`inc-bulk-bar`](reference.html) for search-heavy or multi-select operator screens.
 - Cards and shells:
-  Use `inc-card` for plain cards and `inc-header-body inc-header-body--card` for titled sections with actions.
-  Use `inc-header-body--table-body` when the body contains a table and should keep section padding without adding extra bottom table margin.
+  Use [`inc-card`](reference.html) for plain cards and [`inc-header-body inc-header-body--card`](reference.html) for titled sections with actions.
+  Use [`inc-header-body--table-body`](reference.html) when the body contains a table and should keep section padding without adding extra bottom table margin.
 - App layout:
-  Use `inc-app-shell`, `inc-page`, `inc-breadcrumb-body`, `inc-footer-bar`, `inc-footer-bar__menu`, `inc-footer-bar__meta`, `inc-navbar`, `inc-breadcrumb`, `inc-nav-triad`, and `inc-sidebar-menu` when you need an opinionated application frame instead of isolated components.
+  Use [`inc-app-shell`](reference.html), [`inc-page`](reference.html), [`inc-breadcrumb-body`](reference.html), [`inc-footer-bar`](reference.html), [`inc-footer-bar__menu`](reference.html), [`inc-footer-bar__meta`](reference.html), [`inc-navbar`](reference.html), [`inc-breadcrumb`](reference.html), [`inc-nav-triad`](reference.html), and [`inc-sidebar-menu`](reference.html) when you need an opinionated application frame instead of isolated components.
 - States and workflow:
-  Use `inc-state-panel`, `inc-permission-banner`, `inc-toast-card`, `inc-timeline`, `inc-file-dropzone`, `inc-file-row`, and `inc-key-value` for non-happy-path and detail-heavy B2B flows.
+  Use [`inc-state-panel`](reference.html), [`inc-permission-banner`](reference.html), [`inc-toast-card`](reference.html), [`inc-timeline`](reference.html), [`inc-file-dropzone`](reference.html), [`inc-file-row`](reference.html), and [`inc-key-value`](reference.html) for non-happy-path and detail-heavy B2B flows.
 - Interaction:
-  Use `data-inc-toggle="menu"`, `data-inc-toggle="tab"`, and `data-inc-toggle="collapse"` with `data-inc-target="#target-id"` when you want the optional vanilla-JS helper to wire behavior. Use `data-inc-toggle="modal"`, `data-inc-toggle="offcanvas"`, `data-inc-dismiss="modal"`, `data-inc-dismiss="offcanvas"`, and `data-inc-native-dialog-open` only when the helper-managed or launch-hook contract is the intended path.
+  Use [`data-inc-toggle="menu"`](src/inc-design-language.js), [`data-inc-toggle="tab"`](src/inc-design-language.js), and [`data-inc-toggle="collapse"`](src/inc-design-language.js) with [`data-inc-target="#target-id"`](src/inc-design-language.js) when you want the optional vanilla-JS helper to wire behavior. Use [`data-inc-toggle="modal"`](src/inc-design-language.js), [`data-inc-toggle="offcanvas"`](src/inc-design-language.js), [`data-inc-dismiss="modal"`](src/inc-design-language.js), [`data-inc-dismiss="offcanvas"`](src/inc-design-language.js), and [`data-inc-native-dialog-open`](src/inc-design-language.js) only when the helper-managed or launch-hook contract is the intended path.
 - Native interaction:
-  Use `details.inc-disclosure` for section stacks, `details.inc-native-menu` for lightweight menus, and `dialog.inc-native-dialog` for native modal surfaces.
+  Use [`details.inc-disclosure`](reference.html) for section stacks, [`details.inc-native-menu`](reference.html) for lightweight menus, and [`dialog.inc-native-dialog`](reference.html) for native modal surfaces.
 - Status:
-  Use `inc-badge--success|warning|danger|info` for compact status signals.
+  Use [`inc-badge--success|warning|danger|info`](reference.html) for compact status signals.
 - Metrics:
-  Use `inc-summary-overview` and `inc-summary-block` for dashboard and header metrics.
+  Use [`inc-summary-overview`](reference.html) and [`inc-summary-block`](reference.html) for dashboard and header metrics.
 
 ## Customization order
 
-1. Change fonts and colors in `src/_inc-theme.scss`.
-2. Use `src/_inc-tokens.scss` only for deeper token or Bootstrap-level tuning.
+1. Change fonts and colors in [`src/_inc-theme.scss`](src/_inc-theme.scss).
+2. Use [`src/_inc-tokens.scss`](src/_inc-tokens.scss) only for deeper token or Bootstrap-level tuning.
 3. Rebuild the CSS.
-4. Only add new component rules after checking whether an existing `inc-*` block already fits.
+4. Only add new component rules after checking whether an existing [`inc-*`](reference.html) block already fits.
 
 ## Packaging
 
@@ -59,8 +66,8 @@ Repository brand assets live under `assets/brand/`. Prefer those local files whe
 - Use `npm run build` to rebuild distributables.
 - Use `npm pack` or `npm run package` to produce a local installable tarball.
 - The repository is licensed under Apache 2.0.
-- The compiled `dist/inc-design-language.css` already includes the Bootstrap layer it was built from, so consumers do not need Bootstrap CSS at runtime when they use the compiled assets.
-- The source `src/inc-design-language.scss` does require Bootstrap Sass at build time because it imports `bootstrap/scss/bootstrap`.
+- The compiled [`dist/inc-design-language.css`](dist/inc-design-language.css) already includes the Bootstrap layer it was built from, so consumers do not need Bootstrap CSS at runtime when they use the compiled assets.
+- The source [`src/inc-design-language.scss`](src/inc-design-language.scss) does require Bootstrap Sass at build time because it imports `bootstrap/scss/bootstrap`.
 
 ## Guardrails
 
@@ -69,7 +76,7 @@ Repository brand assets live under `assets/brand/`. Prefer those local files whe
 - Preserve explicit alignment classes for numeric table data.
 - Avoid adding product-specific shell/background styles to this package.
 - Keep new components generic enough to drop into another admin/data app.
-- If you add a new block, prefer names like `inc-filter-bar`, `inc-stat-card`, or `inc-data-toolbar` over feature-specific names.
+- If you add a new block, prefer names like [`inc-filter-bar`](reference.html), [`inc-stat-card`](reference.html), or [`inc-data-toolbar`](reference.html) over feature-specific names.
 - Keep border radius consistent across panels, tabs, tables, and cards unless there is a deliberate reason to differentiate them.
 - Prefer native browser behavior first for disclosures and dialogs when it fits the product; use the helper only when the Bootstrap-like component contract needs custom state handling.
 

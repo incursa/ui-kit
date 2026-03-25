@@ -59,8 +59,8 @@ npm run smoke
 The script checks:
 
 - required repository files
-- byte-for-byte equality between `src/inc-design-language.js` and `dist/inc-design-language.js`
-- presence of the selected public selectors in `dist/inc-design-language.css`
+- byte-for-byte equality between [`src/inc-design-language.js`](../../../reference.html) and [`dist/inc-design-language.js`](../../../reference.html)
+- presence of the selected public selectors in [`dist/inc-design-language.css`](../../../reference.html)
 - reference and workflow-page coverage for the newly documented page-frame, list, metric, overlay, shared-helper loading button, validation-hook, and spinner variants
 - basic size sanity for the compiled CSS outputs
 
@@ -70,9 +70,9 @@ The script checks:
 
 - `scripts/verify-ui-kit.mjs`
 - `package.json`
-- `dist/inc-design-language.css`
-- `dist/inc-design-language.min.css`
-- `dist/inc-design-language.js`
+- [`dist/inc-design-language.css`](../../../reference.html)
+- [`dist/inc-design-language.min.css`](../../../reference.html)
+- [`dist/inc-design-language.js`](../../../reference.html)
 - `reference.html`
 - `forms-and-validation.html`
 - `data-grid-advanced.html`

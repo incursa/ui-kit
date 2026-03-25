@@ -8,7 +8,7 @@
 [![Pages](https://github.com/incursa/ui-kit/actions/workflows/pages.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/pages.yml)
 [![npm publish](https://github.com/incursa/ui-kit/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/npm-publish.yml)
 
-This folder contains a distilled, reusable UI kit for data-heavy business applications. The goal is to keep the recurring visual patterns that define the UI language and expose them consistently through the `inc-*` class surface.
+This folder contains a distilled, reusable UI kit for data-heavy business applications. The goal is to keep the recurring visual patterns that define the UI language and expose them consistently through the [`inc-*`](reference.html) class surface.
 
 ## Live Examples
 
@@ -30,7 +30,7 @@ Licensed under Apache 2.0.
 - Contextual floating content for tooltip and popover shells anchored to a trigger.
 - A small overlay/navigation layer for tabs, pagination, dropdown actions, native details/dialog patterns, and compatibility modals/offcanvas panels.
 - Opinionated app-shell pieces for navbar/topbar, breadcrumb/nav-triad, page-frame wrappers, footer-bar action clusters, sticky footer, user menu, and common two/three-column page layouts.
-- A public-surface standards layer for `inc-` prefixing, BEM naming, and accessible interactive behavior.
+- A public-surface standards layer for [`inc-`](reference.html) prefixing, BEM naming, and accessible interactive behavior.
 
 ## What was intentionally left out
 
@@ -40,74 +40,74 @@ Licensed under Apache 2.0.
 
 ## Specification Baseline
 
-- First-pass Spec Trace suite: [specs/requirements/ui-kit/_index.md](./specs/requirements/ui-kit/_index.md)
-- Open requirement gaps and follow-up questions: [specs/requirements/ui-kit/REQUIREMENT-GAPS.md](./specs/requirements/ui-kit/REQUIREMENT-GAPS.md)
-- Architecture / design-rationale layer: [specs/architecture/_index.md](./specs/architecture/_index.md)
-- Verification baseline and smoke gate: [specs/verification/ui-kit/_index.md](./specs/verification/ui-kit/_index.md)
+- First-pass Spec Trace suite: [`specs/requirements/ui-kit/_index.md`](./specs/requirements/ui-kit/_index.md)
+- Open requirement gaps and follow-up questions: [`specs/requirements/ui-kit/REQUIREMENT-GAPS.md`](./specs/requirements/ui-kit/REQUIREMENT-GAPS.md)
+- Architecture / design-rationale layer: [`specs/architecture/_index.md`](./specs/architecture/_index.md)
+- Verification baseline and smoke gate: [`specs/verification/ui-kit/_index.md`](./specs/verification/ui-kit/_index.md)
 
 ## Files
 
-- `assets/brand/`
+- [`assets/brand/`](assets/brand)
   Repository brand assets for GitHub, docs, and future package-site usage.
-- `src/_inc-tokens.scss`
+- [`src/_inc-tokens.scss`](src/_inc-tokens.scss)
   Bootstrap-facing theme tokens and override variables.
-- `src/_inc-theme.scss`
+- [`src/_inc-theme.scss`](src/_inc-theme.scss)
   Dedicated brand-facing variables for fonts, palette, semantic surfaces, and text colors.
-- `src/inc-design-language.scss`
-  Main source entrypoint for the `inc-*` class surface.
-- `dist/inc-design-language.css`
+- [`src/inc-design-language.scss`](src/inc-design-language.scss)
+  Main source entrypoint for the [`inc-*`](reference.html) class surface.
+- [`dist/inc-design-language.css`](dist/inc-design-language.css)
   Compiled standalone CSS output.
-- `dist/inc-design-language.js`
+- [`dist/inc-design-language.js`](dist/inc-design-language.js)
   Optional vanilla-JS helper for menus, tabs, collapsible sections, modal/offcanvas shells, native dialog launch hooks, and auto-refresh widgets with pause/resume controls.
-- `index.html`
+- [`index.html`](index.html)
   Showcase hub for the included example pages.
-- `demo.html`
+- [`demo.html`](demo.html)
   Dashboard-style preview of the extracted patterns.
-- `work-queue.html`
+- [`work-queue.html`](work-queue.html)
   Sidebar and table-heavy queue example.
-- `record-detail.html`
+- [`record-detail.html`](record-detail.html)
   Three-column detail example with action rail.
-- `native-patterns.html`
+- [`native-patterns.html`](native-patterns.html)
   Native-first details/menu/dialog example.
-- `overlay-workflows.html`
+- [`overlay-workflows.html`](overlay-workflows.html)
   Modal and offcanvas workflow example with validation and assignment flows.
-- `reference.html`
+- [`reference.html`](reference.html)
   Copy/paste catalog for the standard controls, page framing, metrics, lists, overlays, and markup patterns.
-- `specs/requirements/ui-kit/`
+- [`specs/requirements/ui-kit/`](specs/requirements/ui-kit)
   First-pass Spec Trace specification suite for the UI kit, including the gap log for unresolved questions.
-- `specs/verification/ui-kit/`
+- [`specs/verification/ui-kit/`](specs/verification/ui-kit)
   Auditable verification baseline for the current UI kit public surface, including the repo-local smoke gate.
-- `states.html`
+- [`states.html`](states.html)
   Empty, no-results, loading, error, permission, timeline, file, and notification patterns.
-- `forms-and-validation.html`
+- [`forms-and-validation.html`](forms-and-validation.html)
   Validation, error-summary, filter-bar, chip, and read-only/edit form patterns.
-- `data-grid-advanced.html`
+- [`data-grid-advanced.html`](data-grid-advanced.html)
   Sticky-header table, bulk selection, row states, busy buttons, and side drawer pattern.
-- `showcase.css`
+- [`showcase.css`](showcase.css)
   Small demo-only helper stylesheet for the static examples.
-- `LLMS.txt`
-  Plain-text agent guidance in the emerging `llms.txt`-style format for packaged consumers and tooling.
-- `AI-AGENT-INSTRUCTIONS.md`
+- [`LLMS.txt`](LLMS.txt)
+  Plain-text agent guidance in the emerging [`llms.txt`](llms.txt)-style format for packaged consumers and tooling.
+- [`AI-AGENT-INSTRUCTIONS.md`](AI-AGENT-INSTRUCTIONS.md)
   Short operational guidance for an AI agent or another engineer.
 
 ## Naming
 
-The reusable public class surface uses the `inc-*` prefix.
+The reusable public class surface uses the [`inc-*`](reference.html) prefix.
 
 Examples:
 
-- `inc-table`
-- `inc-btn`
-- `inc-text`
-- `inc-heading`
-- `inc-data`
-- `inc-card`
-- `inc-header-body`
-- `inc-summary-block`
+- [`inc-table`](reference.html)
+- [`inc-btn`](reference.html)
+- [`inc-text`](reference.html)
+- [`inc-heading`](reference.html)
+- [`inc-data`](reference.html)
+- [`inc-card`](reference.html)
+- [`inc-header-body`](reference.html)
+- [`inc-summary-block`](reference.html)
 
-The BEM/modifier structure stays consistent across the package, for example `inc-table__cell--numeric` or `inc-btn--primary`.
+The BEM/modifier structure stays consistent across the package, for example [`inc-table__cell--numeric`](reference.html) or [`inc-btn--primary`](reference.html).
 
-For titled sections that wrap tables, use `inc-header-body--table-body` to keep body padding while removing extra bottom margin from nested table wrappers.
+For titled sections that wrap tables, use [`inc-header-body--table-body`](reference.html) to keep body padding while removing extra bottom margin from nested table wrappers.
 
 ## Design language summary
 
@@ -128,23 +128,23 @@ For titled sections that wrap tables, use `inc-header-body--table-body` to keep 
 - Stateful controls still need behavior:
   tabs, collapsible sections, menus/dropdowns, modal and offcanvas shells, and auto-refresh countdowns with pause/resume behavior.
 - Alert and toast surfaces stay CSS/HTML-first unless the consuming app adds its own dismissal or lifecycle logic.
-- This package now includes an optional dependency-free helper at `dist/inc-design-language.js` for:
+- This package now includes an optional dependency-free helper at [`dist/inc-design-language.js`](dist/inc-design-language.js) for:
   user-menu dropdowns, tab switching, collapse/accordion toggles, legacy modal/offcanvas shells, native dialog launching, and page auto-refresh countdown widgets.
 - This package also includes native-styled patterns for:
-  `details.inc-disclosure`, `details.inc-native-menu`, `dialog.inc-native-dialog`, and `dialog.inc-native-dialog--drawer`.
+  [`details.inc-disclosure`](reference.html), [`details.inc-native-menu`](reference.html), [`dialog.inc-native-dialog`](reference.html), and [`dialog.inc-native-dialog--drawer`](reference.html).
 - If you prefer native HTML behavior where possible, use browser primitives like `<details>` and `<dialog>` for product-specific implementations. The helper exists for places where the design language is intentionally Bootstrap-like and needs matching interaction behavior.
 
 ## Use it quickly
 
 If you just want the look in another app:
 
-1. Copy `dist/inc-design-language.css`.
-2. If you need interactive tabs/menus/collapses or helper-managed overlays, also copy `dist/inc-design-language.js`.
+1. Copy [`dist/inc-design-language.css`](dist/inc-design-language.css).
+2. If you need interactive tabs/menus/collapses or helper-managed overlays, also copy [`dist/inc-design-language.js`](dist/inc-design-language.js).
 3. Load the CSS after your reset or base stylesheet.
 4. Load the optional JS near the end of the page.
-5. Use the `inc-*` classes shown in `reference.html` for direct copy/paste control markup.
-6. Check `states.html`, `forms-and-validation.html`, `data-grid-advanced.html`, and `overlay-workflows.html` for the workflow-heavy patterns that do not read well as isolated snippets.
-7. Use `demo.html`, `work-queue.html`, `record-detail.html`, and `native-patterns.html` for fuller page composition.
+5. Use the [`inc-*`](reference.html) classes shown in [`reference.html`](reference.html) for direct copy/paste control markup.
+6. Check [`states.html`](states.html), [`forms-and-validation.html`](forms-and-validation.html), [`data-grid-advanced.html`](data-grid-advanced.html), and [`overlay-workflows.html`](overlay-workflows.html) for the workflow-heavy patterns that do not read well as isolated snippets.
+7. Use [`demo.html`](demo.html), [`work-queue.html`](work-queue.html), [`record-detail.html`](record-detail.html), and [`native-patterns.html`](native-patterns.html) for fuller page composition.
 
 ## Use it as a package
 
@@ -202,21 +202,21 @@ There are two supported ways to use it.
 
 1. Use the compiled assets.
 
-- Add `dist/inc-design-language.css` to your site and optionally `dist/inc-design-language.js`.
+- Add [`dist/inc-design-language.css`](dist/inc-design-language.css) to your site and optionally [`dist/inc-design-language.js`](dist/inc-design-language.js).
 - This is the simplest path.
 - You do not need Bootstrap CSS at runtime because the compiled CSS already includes the Bootstrap layer it was built on.
 - You do not need Bootstrap JS unless your app separately uses Bootstrap's own JavaScript components.
 
 2. Use the SCSS source.
 
-- Import `src/inc-design-language.scss` into your own Sass pipeline.
+- Import [`src/inc-design-language.scss`](src/inc-design-language.scss) into your own Sass pipeline.
 - This path is for when you want to override theme variables or deeper Bootstrap-facing tokens.
 - In this mode you do need Bootstrap and Sass available at build time because the source imports `bootstrap/scss/bootstrap`.
 
 Practical recommendation for a .NET Razor Pages or MVC app:
 
-- If you just want the finished look, copy or install the package and reference `dist/inc-design-language.css` from your layout.
-- Add `dist/inc-design-language.js` only if you want the optional `inc-*` menu/tab/collapse helper behavior.
+- If you just want the finished look, copy or install the package and reference [`dist/inc-design-language.css`](dist/inc-design-language.css) from your layout.
+- Add [`dist/inc-design-language.js`](dist/inc-design-language.js) only if you want the optional [`inc-*`](reference.html) menu/tab/collapse helper behavior.
 - Use the native `<details>` and `<dialog>` patterns when you want less JavaScript.
 - Use the SCSS source path only if you want this package to become part of your app's own asset build and theme pipeline.
 
@@ -224,11 +224,11 @@ Practical recommendation for a .NET Razor Pages or MVC app:
 
 This repository is set up for:
 
-- CI on pushes and pull requests via `.github/workflows/ci.yml`
-- GitHub Pages showcase deployment from `main` via `.github/workflows/pages.yml`
-- npm Trusted Publishing on `v*` tag pushes via `.github/workflows/npm-publish.yml`
-- Public release hygiene through `LICENSE`, `CHANGELOG.md`, `CONTRIBUTING.md`, and `RELEASING.md`
-- Brand assets in `assets/brand/` so README and future docs do not depend on external image hosting
+- CI on pushes and pull requests via [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
+- GitHub Pages showcase deployment from `main` via [`.github/workflows/pages.yml`](.github/workflows/pages.yml)
+- npm Trusted Publishing on `v*` tag pushes via [`.github/workflows/npm-publish.yml`](.github/workflows/npm-publish.yml)
+- Public release hygiene through `LICENSE`, [`CHANGELOG.md`](CHANGELOG.md), [`CONTRIBUTING.md`](CONTRIBUTING.md), and [`RELEASING.md`](RELEASING.md)
+- Brand assets in [`assets/brand/`](assets/brand) so README and future docs do not depend on external image hosting
 
 ## Release flow
 
@@ -244,17 +244,17 @@ For normal releases:
 "@
 ```
 
-Use `minor` or `major` when needed. The script verifies the repo state, bumps the version, runs the build, smoke, and package validation step, updates `CHANGELOG.md`, creates the release commit and tag, and pushes them. Pushing the tag publishes the package to npm automatically. If you need to retry a failed publish, rerun the original tag-triggered workflow run rather than dispatching a separate manual publish.
+Use `minor` or `major` when needed. The script verifies the repo state, bumps the version, runs the build, smoke, and package validation step, updates [`CHANGELOG.md`](CHANGELOG.md), creates the release commit and tag, and pushes them. Pushing the tag publishes the package to npm automatically. If you need to retry a failed publish, rerun the original tag-triggered workflow run rather than dispatching a separate manual publish.
 
 ## Use it as source
 
 If you want to keep editing it:
 
 1. Install Bootstrap 5.3 and Sass in the consuming project.
-2. Copy the `src/` folder.
-3. Import `src/inc-design-language.scss`.
-4. Edit `src/_inc-theme.scss` for the fonts and colors you want.
-5. Use `src/_inc-tokens.scss` only when you need deeper spacing, radius, shadow, or Bootstrap-level tuning.
+2. Copy the [`src/`](src) folder.
+3. Import [`src/inc-design-language.scss`](src/inc-design-language.scss).
+4. Edit [`src/_inc-theme.scss`](src/_inc-theme.scss) for the fonts and colors you want.
+5. Use [`src/_inc-tokens.scss`](src/_inc-tokens.scss) only when you need deeper spacing, radius, shadow, or Bootstrap-level tuning.
 
 Example:
 

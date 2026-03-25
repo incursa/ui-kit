@@ -29,6 +29,13 @@ const requiredFiles = [
     "specs/verification/ui-kit/_index.md",
     "specs/verification/ui-kit/VER-UIK-0001.md",
     "specs/verification/ui-kit/VER-UIK-0002.md",
+    "specs/verification/ui-kit/VER-UIK-0003.md",
+    "playwright.config.mjs",
+    "tests/browser/_helpers.mjs",
+    "tests/browser/auto-refresh.spec.mjs",
+    "tests/browser/native-dialog.spec.mjs",
+    "tests/browser/overlays.spec.mjs",
+    "tests/browser/tabs.spec.mjs",
 ];
 
 const cssSelectors = [

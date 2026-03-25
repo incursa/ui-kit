@@ -32,67 +32,67 @@ Interactive public surfaces MUST remain keyboard operable while preserving a vis
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
-  - `src/inc-design-language.js`
+  - [`src/inc-design-language.scss`](../../../reference.html)
+  - [`src/inc-design-language.js`](../../../reference.html)
   - `reference.html`
   - `demo.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-A11Y-0002 Keep form and control associations intact
 Form and control surfaces MUST preserve accessible names, label associations, and hint or feedback order.
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `forms-and-validation.html`
   - `overlay-workflows.html`
   - `record-detail.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-A11Y-0003 Announce shared status surfaces through semantics rather than styling alone
 Public surfaces that announce progress, loading, or workflow status MUST use an appropriate semantic or live-region pattern instead of relying on visual styling alone.
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
-  - `src/inc-design-language.js`
+  - [`src/inc-design-language.scss`](../../../reference.html)
+  - [`src/inc-design-language.js`](../../../reference.html)
   - `states.html`
   - `reference.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-A11Y-0004 Restore focus after overlay dismissal
 Overlay and disclosure surfaces MUST restore focus to the originating trigger when they are dismissed.
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.js`
+  - [`src/inc-design-language.js`](../../../reference.html)
   - `overlay-workflows.html`
   - `native-patterns.html`
   - `reference.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-A11Y-0005 Keep dense public surfaces usable on narrow screens
 Dense public surfaces SHOULD remain usable on narrow screens without requiring hover-only interaction.
 
 Trace:
   - Code Refs:
-    - `src/inc-design-language.scss`
+    - [`src/inc-design-language.scss`](../../../reference.html)
     - `demo.html`
     - `work-queue.html`
     - `data-grid-advanced.html`
   - Verified By:
-    - `VER-UIK-0001`
+    - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-A11Y-0006 Keep disabled controls perceivable and noninteractive
 Interactive public surfaces MUST keep disabled controls perceivable as disabled and noninteractive, whether the disabled state comes from native attributes or a helper-managed state hook.
 
 Trace:
   - Code Refs:
-    - `src/inc-design-language.scss`
+    - [`src/inc-design-language.scss`](../../../reference.html)
     - `reference.html`
     - `demo.html`
     - `forms-and-validation.html`
@@ -102,4 +102,4 @@ Trace:
     - `work-queue.html`
     - `data-grid-advanced.html`
   - Verified By:
-    - `VER-UIK-0001`
+    - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)

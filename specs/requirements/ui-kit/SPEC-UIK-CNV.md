@@ -32,7 +32,7 @@ Public control surfaces MUST express a stable base class plus explicit modifier 
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `reference.html`
   - `demo.html`
   - `forms-and-validation.html`
@@ -43,7 +43,7 @@ Trace:
   - `data-grid-advanced.html`
   - `native-patterns.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-CNV-0002 Reuse density modifier names
 Public control surfaces that ship compact sizes MUST reuse the `--sm`, `--lg`, and `--micro` modifier names across related controls.
@@ -53,7 +53,7 @@ Notes:
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `reference.html`
   - `demo.html`
   - `forms-and-validation.html`
@@ -63,14 +63,14 @@ Trace:
   - `record-detail.html`
   - `data-grid-advanced.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-CNV-0003 Reuse inline expansion modifiers
 Public control surfaces that need to grow inside inline compositions MUST reuse `--expand` as the flex-growth modifier.
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `reference.html`
   - `demo.html`
   - `forms-and-validation.html`
@@ -78,14 +78,14 @@ Trace:
   - `work-queue.html`
   - `data-grid-advanced.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-CNV-0004 Keep visual state hooks separate from native semantics
-Visual state hooks such as `is-loading`, `is-valid`, `is-invalid`, and `is-paused` MUST change presentation without changing the underlying native role, label association, or focus target.
+Visual state hooks such as [`is-loading`](../../../reference.html), [`is-valid`](../../../reference.html), [`is-invalid`](../../../reference.html), and [`is-paused`](../../../reference.html) MUST change presentation without changing the underlying native role, label association, or focus target.
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `reference.html`
   - `demo.html`
   - `forms-and-validation.html`
@@ -94,14 +94,14 @@ Trace:
   - `work-queue.html`
   - `data-grid-advanced.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-CNV-0005 Express control emphasis as modifiers
 The UI kit MUST express public control emphasis such as primary, secondary, warning, error, or outline treatment as explicit modifiers on the control surface rather than by changing the base block or the native element meaning.
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `reference.html`
   - `demo.html`
   - `forms-and-validation.html`
@@ -111,14 +111,14 @@ Trace:
   - `data-grid-advanced.html`
   - `native-patterns.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-CNV-0006 Allow mixed public surfaces
 Public surfaces MAY share a DOM node when the combined classes each remain independently meaningful.
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `reference.html`
   - `demo.html`
   - `forms-and-validation.html`
@@ -128,4 +128,4 @@ Trace:
   - `work-queue.html`
   - `data-grid-advanced.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)

@@ -20,9 +20,9 @@ Use `minor` or `major` instead of `patch` when needed.
 
 - verify you are on `main`
 - verify the working tree is clean
-- bump `package.json` and `package-lock.json`
+- bump [`package.json`](package.json) and [`package-lock.json`](package-lock.json)
 - run build, smoke, and package validation through the npm version flow
-- prepend the new section to `CHANGELOG.md`
+- prepend the new section to [`CHANGELOG.md`](CHANGELOG.md)
 - commit the release
 - create the matching Git tag
 - push `main` and the new tag to `origin`
@@ -37,18 +37,18 @@ Use `minor` or `major` instead of `patch` when needed.
 
 What the underlying npm scripts do:
 
-- `npm version <type>` bumps `package.json` and `package-lock.json`
+- `npm version <type>` bumps [`package.json`](package.json) and [`package-lock.json`](package-lock.json)
 - runs `preversion`, which rebuilds the package, runs the smoke gate, and verifies it with `npm pack --dry-run`
 - `npm run verify` performs the same build, smoke, and dry-run package validation without bumping the version
 - `npm run smoke` checks source/dist parity and public-surface coverage against the built artifacts
 - `npm run package` rebuilds, smokes, and produces the tarball
 - the PowerShell helper then commits and tags the release with the matching `v*` tag
 
-5. Pushing the `v*` tag triggers `.github/workflows/npm-publish.yml`, which publishes `@incursa/ui-kit` to npm via Trusted Publishing and creates the matching GitHub Release from the new `CHANGELOG.md` section.
+5. Pushing the `v*` tag triggers [`.github/workflows/npm-publish.yml`](.github/workflows/npm-publish.yml), which publishes `@incursa/ui-kit` to npm via Trusted Publishing and creates the matching GitHub Release from the new [`CHANGELOG.md`](CHANGELOG.md) section.
 
 If the publish job fails and you need to retry, rerun the original tag-triggered workflow run in GitHub Actions. Do not use a separate manual dispatch for publishing.
 
-The release description is generated from the version section you just added to `CHANGELOG.md`, and it appends links to the live example pages on GitHub Pages.
+The release description is generated from the version section you just added to [`CHANGELOG.md`](CHANGELOG.md), and it appends links to the live example pages on GitHub Pages.
 
 ## When to use patch, minor, or major
 

@@ -27,85 +27,85 @@ This specification covers form containers, field grouping, labels, helper text, 
 The UI kit separates form structure from the control widgets so the layout shell can stay stable even when specific inputs vary.
 
 ## REQ-UIK-FRM-0001 Provide dense form layout variants
-The UI kit MUST provide `inc-form`, `inc-form--inline`, `inc-form--wrap`, `inc-form--nowrap`, `inc-form--responsive`, and `inc-form--gap-xs`, `inc-form--gap-sm`, `inc-form--gap-md`, `inc-form--gap-lg`, and `inc-form--gap-xl` for arranging related controls while preserving control meaning and tab order during reflow.
+The UI kit MUST provide [`inc-form`](../../../reference.html), [`inc-form--inline`](../../../reference.html), [`inc-form--wrap`](../../../reference.html), [`inc-form--nowrap`](../../../reference.html), [`inc-form--responsive`](../../../reference.html), and [`inc-form--gap-xs`](../../../reference.html), [`inc-form--gap-sm`](../../../reference.html), [`inc-form--gap-md`](../../../reference.html), [`inc-form--gap-lg`](../../../reference.html), and [`inc-form--gap-xl`](../../../reference.html) for arranging related controls while preserving control meaning and tab order during reflow.
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `reference.html`
   - `forms-and-validation.html`
   - `demo.html`
   - `work-queue.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-FRM-0002 Provide grouped field containers
-The form shell MUST provide `inc-form__group`, `inc-form__field`, `inc-form__field--grow`, `inc-form__field--compact`, `inc-form__field--stack`, `inc-form__field--end`, `inc-form__fieldset`, and `inc-form__legend` for grouping related form content with fieldset and legend source-order association.
+The form shell MUST provide [`inc-form__group`](../../../reference.html), [`inc-form__field`](../../../reference.html), [`inc-form__field--grow`](../../../reference.html), [`inc-form__field--compact`](../../../reference.html), [`inc-form__field--stack`](../../../reference.html), [`inc-form__field--end`](../../../reference.html), [`inc-form__fieldset`](../../../reference.html), and [`inc-form__legend`](../../../reference.html) for grouping related form content with fieldset and legend source-order association.
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `reference.html`
   - `forms-and-validation.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-FRM-0003 Provide label and hint surfaces
-The form shell MUST provide `inc-form__label`, `inc-form__label--required`, `inc-form__text`, `inc-form__hint`, `inc-form-text`, `inc-form-text--small`, and `inc-form-text--help` for field labeling, guidance, and helper text while keeping required markers visual indicators rather than the only requiredness signal.
+The form shell MUST provide [`inc-form__label`](../../../reference.html), [`inc-form__label--required`](../../../reference.html), [`inc-form__text`](../../../reference.html), [`inc-form__hint`](../../../reference.html), [`inc-form-text`](../../../reference.html), [`inc-form-text--small`](../../../reference.html), and [`inc-form-text--help`](../../../reference.html) for field labeling, guidance, and helper text while keeping required markers visual indicators rather than the only requiredness signal.
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `reference.html`
   - `forms-and-validation.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-FRM-0004 Provide field alignment modifiers
-The form shell MUST provide `inc-form__field--grow`, `inc-form__field--compact`, `inc-form__field--stack`, and `inc-form__field--end` for field-level alignment that changes placement without obscuring labels or helper text.
+The form shell MUST provide [`inc-form__field--grow`](../../../reference.html), [`inc-form__field--compact`](../../../reference.html), [`inc-form__field--stack`](../../../reference.html), and [`inc-form__field--end`](../../../reference.html) for field-level alignment that changes placement without obscuring labels or helper text.
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `reference.html`
   - `forms-and-validation.html`
   - `demo.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-FRM-0005 Provide floating-label shells
-The form shell MUST provide `inc-form__floating` for floating-label layouts while keeping floating labels readable when a control contains user-entered content.
+The form shell MUST provide [`inc-form__floating`](../../../reference.html) for floating-label layouts while keeping floating labels readable when a control contains user-entered content.
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `reference.html`
   - `forms-and-validation.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-FRM-0006 Preserve accessible label and hint order
-The form shell MUST keep `inc-form__label`, `inc-form__hint`, `inc-form__text`, `inc-form__fieldset`, and `inc-form__legend` aligned with the controls they describe so the visual order matches the reading order and group names remain intelligible to assistive technologies.
+The form shell MUST keep [`inc-form__label`](../../../reference.html), [`inc-form__hint`](../../../reference.html), [`inc-form__text`](../../../reference.html), [`inc-form__fieldset`](../../../reference.html), and [`inc-form__legend`](../../../reference.html) aligned with the controls they describe so the visual order matches the reading order and group names remain intelligible to assistive technologies.
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `reference.html`
   - `forms-and-validation.html`
   - `overlay-workflows.html`
   - `native-patterns.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
 ## REQ-UIK-FRM-0007 Comply with shared naming, token, and accessibility rules
-Form layout surfaces MUST comply with `REQ-UIK-STD-0001`, `REQ-UIK-CNV-0001` through `REQ-UIK-CNV-0006`, `REQ-UIK-TOK-0002`, `REQ-UIK-TOK-0004`, `REQ-UIK-A11Y-0002`, and `REQ-UIK-A11Y-0006`.
+Form layout surfaces MUST comply with [`REQ-UIK-STD-0001`](SPEC-UIK-STD.md#req-uik-std-0001-use-stable-public-naming), [`REQ-UIK-CNV-0001`](SPEC-UIK-CNV.md#req-uik-cnv-0001-keep-control-surfaces-layered) through [`REQ-UIK-CNV-0006`](SPEC-UIK-CNV.md#req-uik-cnv-0006-allow-mixed-public-surfaces), [`REQ-UIK-TOK-0002`](SPEC-UIK-TOK.md#req-uik-tok-0002-expose-the-public-typography-token-family), [`REQ-UIK-TOK-0004`](SPEC-UIK-TOK.md#req-uik-tok-0004-expose-semantic-surface-border-and-text-tokens), [`REQ-UIK-A11Y-0002`](SPEC-UIK-A11Y.md#req-uik-a11y-0002-keep-form-and-control-associations-intact), and [`REQ-UIK-A11Y-0006`](SPEC-UIK-A11Y.md#req-uik-a11y-0006-keep-disabled-controls-perceivable-and-noninteractive).
 
 Trace:
 - Code Refs:
-  - `src/inc-design-language.scss`
+  - [`src/inc-design-language.scss`](../../../reference.html)
   - `reference.html`
   - `forms-and-validation.html`
   - `overlay-workflows.html`
   - `native-patterns.html`
 - Verified By:
-  - `VER-UIK-0001`
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
