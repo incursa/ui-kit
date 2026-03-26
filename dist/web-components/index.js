@@ -193,8 +193,13 @@ class IncTabsElement extends IncElement {
         this.syncSelected();
     }
     attributeChangedCallback(name) {
-        if (name === "variant") this.syncVariant();
-        else this.syncSelected();
+        if (!this.isConnected) return;
+        if (name === "variant") {
+            this.syncVariant();
+            return;
+        }
+        if (this._reflectingSelected) return;
+        this.syncSelected();
     }
     ensureLayout() {
         const nav = ensureNode(this, ".inc-tabs-nav", () => {
@@ -270,6 +275,7 @@ class IncTabsElement extends IncElement {
     activate(tab, options = {}) {
         if (!(tab instanceof HTMLElement)) return;
         const previous = this._tabs.find((item) => item.getAttribute("aria-selected") === "true") || null;
+        const nextSelected = tab.id || "";
         this._tabs.forEach((item, index) => {
             const active = item === tab;
             item.classList.toggle("active", active);
@@ -282,7 +288,14 @@ class IncTabsElement extends IncElement {
                 panel.classList.toggle("show", active);
             }
         });
-        this.setAttribute("selected", tab.id);
+        if (this.getAttribute("selected") !== nextSelected) {
+            this._reflectingSelected = true;
+            try {
+                this.setAttribute("selected", nextSelected);
+            } finally {
+                this._reflectingSelected = false;
+            }
+        }
         if (options.focus) tab.focus();
         if (options.emitEvents !== false) {
             this.emit("select", { previous: previous?.id || null, selected: tab.id, tab });
@@ -293,7 +306,9 @@ class IncTabsElement extends IncElement {
         const selected = this.getAttribute("selected");
         if (!selected || !this._tabs?.length) return;
         const next = this._tabs.find((tab) => tab.id === selected) || null;
-        if (next) this.activate(next, { emitEvents: false, focus: false });
+        const active = this._tabs.find((tab) => tab.getAttribute("aria-selected") === "true") || null;
+        if (!next || next === active) return;
+        this.activate(next, { emitEvents: false, focus: false });
     }
     syncVariant() {
         const variant = (this.getAttribute("variant") || "line").toLowerCase();
@@ -614,6 +629,7 @@ class IncThemeSwitcherElement extends IncElement {
             return;
         }
         if (name === "storage-key") themeRuntime.key = this.getAttribute("storage-key") || "inc-theme-mode";
+        if (!this.isConnected) return;
         this.syncFromTheme();
     }
     getMode() { return themeRuntime.mode; }
@@ -668,6 +684,7 @@ class IncThemeSwitcherElement extends IncElement {
         });
     }
     syncFromTheme() {
+        if (!this._details) return;
         this._details.classList.toggle("inc-native-menu--navbar", (this.getAttribute("variant") || "").toLowerCase() === "navbar");
         this._label.textContent = this.getAttribute("label") || "Theme";
         this._status.textContent = themeRuntime.mode === "system"

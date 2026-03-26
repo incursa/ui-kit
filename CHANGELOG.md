@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0
+
+- Added the packaged browser-native Web Components layer under `@incursa/ui-kit/web-components`, including layouts, navigation, forms, feedback, overlays, and theme controls.
+- Added paired showcase pages for the CSS-first and Web Components layers, with browser tests and dark-mode parity coverage.
+- Hardened the shared showcase styling and Web Components runtime so direct-file loading, dark mode, and attribute reflection stay stable.
+
 ## 1.0.1
 
 - Moved validity styling into the control-family requirements while keeping the shared validation vocabulary centralized.

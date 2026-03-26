@@ -1063,6 +1063,14 @@
 .inc-card {
     @extend .card;
 
+    --bs-card-bg: var(--inc-surface-primary);
+    --bs-card-color: var(--inc-text-primary);
+    --bs-card-title-color: var(--inc-text-primary);
+    --bs-card-subtitle-color: var(--inc-text-muted);
+    --bs-card-border-color: var(--inc-border-subtle);
+    --bs-card-cap-bg: var(--inc-surface-secondary);
+    --bs-card-cap-color: var(--inc-text-primary);
+
     &__header {
         @extend .card-header;
 
