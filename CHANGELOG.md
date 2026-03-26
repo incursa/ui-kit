@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+
+Added support for Web Components
+
 ## 1.1.0
 
 - Added the packaged browser-native Web Components layer under `@incursa/ui-kit/web-components`, including layouts, navigation, forms, feedback, overlays, and theme controls.
