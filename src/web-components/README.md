@@ -7,11 +7,24 @@ The CSS-first [`inc-*`](../../reference.html) class surface remains the canonica
 ## Public Entry Point
 
 - Package entrypoint: `@incursa/ui-kit/web-components`
+- Style entrypoint: `@incursa/ui-kit/web-components/style.css`
 - Built output: `dist/web-components/`
 - Package export: `./web-components` resolves to `dist/web-components/index.js`
+- Package export: `./web-components/style.css` resolves to `dist/web-components/style.css`
 - Module boundary: `src/web-components/package.json` sets this subtree to `type: module`
 
-Load this entrypoint only when the consuming app wants the custom elements. CSS-only consumers should not pay for the runtime.
+Load these entrypoints only when the consuming app wants the custom elements and their default look. CSS-only consumers should not pay for the runtime.
+
+Recommended browser usage:
+
+```html
+<link rel="stylesheet" href="/node_modules/@incursa/ui-kit/web-components/style.css">
+<script type="module">
+    import "@incursa/ui-kit/web-components";
+</script>
+```
+
+The runtime auto-defines the shipped elements on load. If a consumer needs explicit registry control, `registerIncWebComponents()` remains available.
 
 ## Runtime Rules
 

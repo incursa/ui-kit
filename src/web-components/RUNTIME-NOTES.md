@@ -15,6 +15,7 @@ The runtime defines the approved v1 host family set:
 ## Contract shape
 
 - CSS-first is still canonical. Components reuse existing `inc-*` class contracts.
+- Package consumers should pair `@incursa/ui-kit/web-components` with `@incursa/ui-kit/web-components/style.css` when they want the default look out of the box.
 - v1 stays light DOM first so current style selectors keep working.
 - Native primitives are used for disclosure/menu/dialog behavior where practical.
 - `index.js` is a thin bootstrap that registers family modules:

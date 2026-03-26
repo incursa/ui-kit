@@ -177,15 +177,14 @@
                 <section slot="body" id="wc-home" class="wc-showcase">
                     <inc-card class="inc-card inc-card--elevated" elevated>
                         <div slot="header" class="inc-card__header">
-                            <h2 class="inc-card__title">Load the entrypoint</h2>
+                            <h2 class="inc-card__title">Load the entrypoints</h2>
                         </div>
                         <div slot="body" class="wc-grid wc-grid--2">
                             <div>
-                                <p class="inc-text inc-text--regular">The package export is `@incursa/ui-kit/web-components`. Once the module loads, call `defineAll()` to register the shipped elements.</p>
-                                <pre class="wc-code"><code>&lt;script type="module"&gt;
-  import { defineAll } from "@incursa/ui-kit/web-components";
-
-  defineAll();
+                                <p class="inc-text inc-text--regular">The package export is `@incursa/ui-kit/web-components`. Pair it with `@incursa/ui-kit/web-components/style.css` for the default look, then import the runtime once to register the shipped elements.</p>
+                                <pre class="wc-code"><code>&lt;link rel="stylesheet" href="/node_modules/@incursa/ui-kit/web-components/style.css"&gt;
+&lt;script type="module"&gt;
+  import "@incursa/ui-kit/web-components";
 &lt;/script&gt;</code></pre>
                             </div>
                             <div>

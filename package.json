@@ -29,7 +29,11 @@
       "style": "./dist/inc-design-language.css",
       "sass": "./src/inc-design-language.scss"
     },
-    "./web-components": "./dist/web-components/index.js",
+    "./web-components": {
+      "default": "./dist/web-components/index.js",
+      "style": "./dist/web-components/style.css"
+    },
+    "./web-components/style.css": "./dist/web-components/style.css",
     "./dist/inc-design-language.css": "./dist/inc-design-language.css",
     "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",
     "./src/inc-design-language.scss": "./src/inc-design-language.scss",

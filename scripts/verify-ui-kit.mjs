@@ -14,6 +14,7 @@ const requiredFiles = [
     "src/inc-design-language.scss",
     "src/inc-design-language.js",
     "src/web-components/README.md",
+    "src/web-components/style.css",
     "dist/inc-design-language.css",
     "dist/inc-design-language.css.map",
     "dist/inc-design-language.min.css",
@@ -162,6 +163,7 @@ if (existsSync("src/web-components")) {
         "registry.js",
         "index.js",
         "README.md",
+        "style.css",
         "controllers/focus.js",
         "controllers/overlay.js",
         "controllers/selection.js",
@@ -184,6 +186,12 @@ if (existsSync("package.json") && existsSync("package-lock.json")) {
 
     ensure(packageJson.version === packageLock.version, "package.json and package-lock.json must declare the same version", failures);
     ensure(packageJson.version === packageLock.packages?.[""]?.version, "package-lock.json package root version must match package.json", failures);
+
+    const webComponentsExport = packageJson.exports?.["./web-components"];
+    ensure(webComponentsExport && typeof webComponentsExport === "object", "package.json must export ./web-components as a conditional entry", failures);
+    ensure(webComponentsExport?.default === "./dist/web-components/index.js", "package.json ./web-components default export must point to dist/web-components/index.js", failures);
+    ensure(webComponentsExport?.style === "./dist/web-components/style.css", "package.json ./web-components style export must point to dist/web-components/style.css", failures);
+    ensure(packageJson.exports?.["./web-components/style.css"] === "./dist/web-components/style.css", "package.json must export ./web-components/style.css", failures);
 }
 
 if (existsSync("src/inc-design-language.js") && existsSync("dist/inc-design-language.js")) {

@@ -8,7 +8,7 @@
 [![Pages](https://github.com/incursa/ui-kit/actions/workflows/pages.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/pages.yml)
 [![npm publish](https://github.com/incursa/ui-kit/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/npm-publish.yml)
 
-This folder contains a distilled, reusable UI kit for data-heavy business applications. The goal is to keep the recurring visual patterns that define the UI language and expose them consistently through the [`inc-*`](reference.html) class surface. The CSS classes remain the canonical public API; the optional Web Component layer adds a browser-native entrypoint without replacing the existing class-based usage model.
+This folder contains a distilled, reusable UI kit for data-heavy business applications. The goal is to keep the recurring visual patterns that define the UI language and expose them consistently through the [`inc-*`](reference.html) class surface. The CSS classes remain the canonical public API; the optional Web Component layer adds a browser-native entrypoint without replacing the existing class-based usage model. The Web Component layer also ships a companion stylesheet entrypoint so the default look is one import away.
 
 ## Live Examples
 
@@ -20,17 +20,16 @@ For the plain HTML baseline, open [`demo.html`](demo.html). For the paired Web C
 
 Use the CSS classes by default. Use Web Components when you want the same design language from plain HTML, JavaScript, and slots rather than hand-wired class markup. Use native HTML primitives first when `<button>`, `<input>`, `<details>`, or `<dialog>` already satisfy the interaction and accessibility contract.
 
-Load the optional layered entrypoint from the same package:
+Load the optional layered entrypoints from the same package:
 
 ```html
+<link rel="stylesheet" href="/node_modules/@incursa/ui-kit/web-components/style.css">
 <script type="module">
-    import { defineAll } from "@incursa/ui-kit/web-components";
-
-    defineAll();
+    import "@incursa/ui-kit/web-components";
 </script>
 ```
 
-If you prefer explicit registration control, import the same entrypoint in your module graph and call the exported registration helper from your own bootstrap code.
+The module auto-defines the shipped elements on load. If you prefer explicit registration control, import the same entrypoint in your module graph and call the exported registration helper from your own bootstrap code.
 
 The v1 Web Component scope covers:
 
@@ -248,7 +247,7 @@ or control the mode yourself:
 
 This repository is shaped as a normal npm package:
 
-- `main`, `style`, and `sass` entry points are set.
+- `main`, `style`, `sass`, and the layered `web-components/style.css` entry points are set.
 - `files` limits packaged output to the reusable source and dist assets.
 - `npm pack` produces a local tarball.
 - `publishConfig.access` is set for public scoped publishing.
@@ -281,10 +280,17 @@ If you publish it publicly:
 npm install @incursa/ui-kit
 ```
 
-Import either:
+Import the base CSS:
 
 ```js
 import "@incursa/ui-kit/dist/inc-design-language.css";
+```
+
+Or, for the browser-native layer, import the paired stylesheet and runtime:
+
+```js
+import "@incursa/ui-kit/web-components/style.css";
+import "@incursa/ui-kit/web-components";
 ```
 
 or, if you want to own the theme variables:
@@ -305,7 +311,7 @@ There are three supported ways to use it.
 - You do not need Bootstrap CSS at runtime because the compiled CSS already includes the Bootstrap layer it was built on.
 - You do not need Bootstrap JS unless your app separately uses Bootstrap's own JavaScript components.
 - If you want light/dark/system switching, keep `data-bs-theme` on the root element and let `window.IncTheme` persist the user's override or mount the packaged switcher into your layout.
-- If you want browser-native custom elements instead of helper wiring, import the same-package `./web-components` entrypoint and keep the CSS bundle in place.
+- If you want browser-native custom elements instead of helper wiring, import the same-package `./web-components` entrypoint and keep the CSS bundle in place. The companion stylesheet lives at `./web-components/style.css`.
 
 2. Use the SCSS source.
 
@@ -323,7 +329,7 @@ Practical recommendation for a .NET Razor Pages or MVC app:
 
 - If you just want the finished look, copy or install the package and reference [`dist/inc-design-language.css`](dist/inc-design-language.css) from your layout.
 - Add [`dist/inc-design-language.js`](dist/inc-design-language.js) if you want the optional [`inc-*`](reference.html) menu/tab/collapse helper behavior or the bundled theme switcher helper.
-- Add the same-package `./web-components` entrypoint when you want declarative custom elements for the supported v1 component families.
+- Add the same-package `./web-components` entrypoint when you want declarative custom elements for the supported v1 component families. Pair it with `./web-components/style.css` for the default look.
 - Use the native `<details>` and `<dialog>` patterns when you want less JavaScript.
 - Use the SCSS source path only if you want this package to become part of your app's own asset build and theme pipeline.
 
