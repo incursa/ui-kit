@@ -24098,7 +24098,7 @@ var resources_default = {
       kind: "guide",
       searchKind: "guide",
       summary: "Package identity, exports, and packaging surface from package.json.",
-      body: '{\n "title": "Package metadata",\n "summary": "Package identity, exports, and packaging surface from package.json.",\n "packageName": "@incursa/ui-kit",\n "version": "1.5.0",\n "license": "Apache-2.0",\n "repository": "git+https://github.com/incursa/ui-kit.git",\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "exports": {\n ".": {\n "default": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss"\n },\n "./web-components": {\n "default": "./dist/web-components/index.js",\n "style": "./dist/web-components/style.css"\n },\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "files": [\n "dist",\n "src",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "publishConfig": {\n "access": "public"\n },\n "main": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "notes": [\n "The package exposes both the CSS-first surface and the optional same-package web-components layer.",\n "The dist/ directory is the public build output root."\n ],\n "relatedUris": [\n "ui-kit://install",\n "ui-kit://update",\n "ui-kit://overview"\n ]\n}',
+      body: '{\n "title": "Package metadata",\n "summary": "Package identity, exports, and packaging surface from package.json.",\n "packageName": "@incursa/ui-kit",\n "version": "1.5.0",\n "license": "Apache-2.0",\n "repository": "git+https://github.com/incursa/ui-kit.git",\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "exports": {\n ".": {\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "default": "./dist/inc-design-language.js"\n },\n "./web-components": {\n "style": "./dist/web-components/style.css",\n "default": "./dist/web-components/index.js"\n },\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "files": [\n "dist",\n "src",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "publishConfig": {\n "access": "public"\n },\n "main": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "notes": [\n "The package exposes both the CSS-first surface and the optional same-package web-components layer.",\n "The dist/ directory is the public build output root."\n ],\n "relatedUris": [\n "ui-kit://install",\n "ui-kit://update",\n "ui-kit://overview"\n ]\n}',
       sourcePaths: [
         "package.json"
       ],
@@ -24115,7 +24115,7 @@ var resources_default = {
       group: "guides",
       priority: 90,
       includeInSearch: true,
-      searchText: 'Package metadata\nPackage identity, exports, and packaging surface from package.json.\n{\n "title": "Package metadata",\n "summary": "Package identity, exports, and packaging surface from package.json.",\n "packageName": "@incursa/ui-kit",\n "version": "1.5.0",\n "license": "Apache-2.0",\n "repository": "git+https://github.com/incursa/ui-kit.git",\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "exports": {\n ".": {\n "default": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss"\n },\n "./web-components": {\n "default": "./dist/web-components/index.js",\n "style": "./dist/web-components/style.css"\n },\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "files": [\n "dist",\n "src",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "publishConfig": {\n "access": "public"\n },\n "main": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "notes": [\n "The package exposes both the CSS-first surface and the optional same-package web-components layer.",\n "The dist/ directory is the public build output root."\n ],\n "relatedUris": [\n "ui-kit://install",\n "ui-kit://update",\n "ui-kit://overview"\n ]\n}\npackage metadata\npackage json\npackage.json'
+      searchText: 'Package metadata\nPackage identity, exports, and packaging surface from package.json.\n{\n "title": "Package metadata",\n "summary": "Package identity, exports, and packaging surface from package.json.",\n "packageName": "@incursa/ui-kit",\n "version": "1.5.0",\n "license": "Apache-2.0",\n "repository": "git+https://github.com/incursa/ui-kit.git",\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "exports": {\n ".": {\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "default": "./dist/inc-design-language.js"\n },\n "./web-components": {\n "style": "./dist/web-components/style.css",\n "default": "./dist/web-components/index.js"\n },\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "files": [\n "dist",\n "src",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "publishConfig": {\n "access": "public"\n },\n "main": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "notes": [\n "The package exposes both the CSS-first surface and the optional same-package web-components layer.",\n "The dist/ directory is the public build output root."\n ],\n "relatedUris": [\n "ui-kit://install",\n "ui-kit://update",\n "ui-kit://overview"\n ]\n}\npackage metadata\npackage json\npackage.json'
     },
     {
       uri: "ui-kit://release-notes/latest",
@@ -25710,13 +25710,13 @@ var resources_default = {
  "type": "commonjs",
  "exports": {
  ".": {
- "default": "./dist/inc-design-language.js",
  "style": "./dist/inc-design-language.css",
- "sass": "./src/inc-design-language.scss"
+ "sass": "./src/inc-design-language.scss",
+ "default": "./dist/inc-design-language.js"
  },
  "./web-components": {
- "default": "./dist/web-components/index.js",
- "style": "./dist/web-components/style.css"
+ "style": "./dist/web-components/style.css",
+ "default": "./dist/web-components/index.js"
  },
  "./web-components/style.css": "./dist/web-components/style.css",
  "./dist/inc-design-language.css": "./dist/inc-design-language.css",
@@ -25761,9 +25761,12 @@ var resources_default = {
  "bootstrap": "^5.3.3",
  "esbuild": "^0.27.4",
  "linkedom": "^0.18.12",
- "sass": "^1.93.2",
+ "sass": "^1.98.0",
  "wrangler": "^4.79.0",
  "zod": "^4.3.6"
+ },
+ "overrides": {
+ "picomatch": "4.0.4"
  },
  "publishConfig": {
  "access": "public"
@@ -25812,13 +25815,13 @@ Raw curated file content for package.json.
  "type": "commonjs",
  "exports": {
  ".": {
- "default": "./dist/inc-design-language.js",
  "style": "./dist/inc-design-language.css",
- "sass": "./src/inc-design-language.scss"
+ "sass": "./src/inc-design-language.scss",
+ "default": "./dist/inc-design-language.js"
  },
  "./web-components": {
- "default": "./dist/web-components/index.js",
- "style": "./dist/web-components/style.css"
+ "style": "./dist/web-components/style.css",
+ "default": "./dist/web-components/index.js"
  },
  "./web-components/style.css": "./dist/web-components/style.css",
  "./dist/inc-design-language.css": "./dist/inc-design-language.css",
@@ -25863,9 +25866,12 @@ Raw curated file content for package.json.
  "bootstrap": "^5.3.3",
  "esbuild": "^0.27.4",
  "linkedom": "^0.18.12",
- "sass": "^1.93.2",
+ "sass": "^1.98.0",
  "wrangler": "^4.79.0",
  "zod": "^4.3.6"
+ },
+ "overrides": {
+ "picomatch": "4.0.4"
  },
  "publishConfig": {
  "access": "public"
@@ -58087,13 +58093,13 @@ dist/inc-design-language.css`
     homepage: "https://github.com/incursa/ui-kit#readme",
     exports: {
       ".": {
-        default: "./dist/inc-design-language.js",
         style: "./dist/inc-design-language.css",
-        sass: "./src/inc-design-language.scss"
+        sass: "./src/inc-design-language.scss",
+        default: "./dist/inc-design-language.js"
       },
       "./web-components": {
-        default: "./dist/web-components/index.js",
-        style: "./dist/web-components/style.css"
+        style: "./dist/web-components/style.css",
+        default: "./dist/web-components/index.js"
       },
       "./web-components/style.css": "./dist/web-components/style.css",
       "./dist/inc-design-language.css": "./dist/inc-design-language.css",
@@ -58213,7 +58219,7 @@ var search_index_default = [
       "package json"
     ],
     priority: 90,
-    searchText: 'Package metadata\nPackage identity, exports, and packaging surface from package.json.\n{\n "title": "Package metadata",\n "summary": "Package identity, exports, and packaging surface from package.json.",\n "packageName": "@incursa/ui-kit",\n "version": "1.5.0",\n "license": "Apache-2.0",\n "repository": "git+https://github.com/incursa/ui-kit.git",\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "exports": {\n ".": {\n "default": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss"\n },\n "./web-components": {\n "default": "./dist/web-components/index.js",\n "style": "./dist/web-components/style.css"\n },\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "files": [\n "dist",\n "src",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "publishConfig": {\n "access": "public"\n },\n "main": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "notes": [\n "The package exposes both the CSS-first surface and the optional same-package web-components layer.",\n "The dist/ directory is the public build output root."\n ],\n "relatedUris": [\n "ui-kit://install",\n "ui-kit://update",\n "ui-kit://overview"\n ]\n}\npackage metadata\npackage json\npackage.json'
+    searchText: 'Package metadata\nPackage identity, exports, and packaging surface from package.json.\n{\n "title": "Package metadata",\n "summary": "Package identity, exports, and packaging surface from package.json.",\n "packageName": "@incursa/ui-kit",\n "version": "1.5.0",\n "license": "Apache-2.0",\n "repository": "git+https://github.com/incursa/ui-kit.git",\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "exports": {\n ".": {\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "default": "./dist/inc-design-language.js"\n },\n "./web-components": {\n "style": "./dist/web-components/style.css",\n "default": "./dist/web-components/index.js"\n },\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "files": [\n "dist",\n "src",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "publishConfig": {\n "access": "public"\n },\n "main": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "notes": [\n "The package exposes both the CSS-first surface and the optional same-package web-components layer.",\n "The dist/ directory is the public build output root."\n ],\n "relatedUris": [\n "ui-kit://install",\n "ui-kit://update",\n "ui-kit://overview"\n ]\n}\npackage metadata\npackage json\npackage.json'
   },
   {
     uri: "ui-kit://release-notes/latest",

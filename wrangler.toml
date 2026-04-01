@@ -1,3 +1,7 @@
 name = "incursa-ui-kit-mcp"
 main = "dist/mcp/worker.mjs"
 compatibility_date = "2026-04-01"
+
+[[routes]]
+pattern = "mcp.uikit.incursa.com"
+custom_domain = true

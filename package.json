@@ -25,13 +25,13 @@
   "type": "commonjs",
   "exports": {
     ".": {
-      "default": "./dist/inc-design-language.js",
       "style": "./dist/inc-design-language.css",
-      "sass": "./src/inc-design-language.scss"
+      "sass": "./src/inc-design-language.scss",
+      "default": "./dist/inc-design-language.js"
     },
     "./web-components": {
-      "default": "./dist/web-components/index.js",
-      "style": "./dist/web-components/style.css"
+      "style": "./dist/web-components/style.css",
+      "default": "./dist/web-components/index.js"
     },
     "./web-components/style.css": "./dist/web-components/style.css",
     "./dist/inc-design-language.css": "./dist/inc-design-language.css",
@@ -76,9 +76,12 @@
     "bootstrap": "^5.3.3",
     "esbuild": "^0.27.4",
     "linkedom": "^0.18.12",
-    "sass": "^1.93.2",
+    "sass": "^1.98.0",
     "wrangler": "^4.79.0",
     "zod": "^4.3.6"
+  },
+  "overrides": {
+    "picomatch": "4.0.4"
   },
   "publishConfig": {
     "access": "public"
