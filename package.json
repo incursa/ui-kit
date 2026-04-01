@@ -54,11 +54,15 @@
     "build:css:min": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.min.css --style=compressed",
     "build:js": "node -e \"require('fs').copyFileSync('src/inc-design-language.js', 'dist/inc-design-language.js')\"",
     "build:wc": "node scripts/build-web-components.mjs",
-    "build": "npm run build:css && npm run build:css:min && npm run build:js && npm run build:wc",
+    "build:mcp:manifests": "node scripts/generate-mcp.mjs",
+    "build:mcp": "node scripts/build-mcp.mjs",
+    "build": "npm run build:css && npm run build:css:min && npm run build:js && npm run build:wc && npm run build:mcp",
     "test:browser:install": "playwright install chromium",
     "test:browser": "playwright test",
+    "test:mcp": "node --test tests/mcp/transport.test.mjs tests/mcp/search.test.mjs tests/mcp/installation.test.mjs tests/mcp/markup.test.mjs tests/mcp/freshness.test.mjs",
     "smoke": "node scripts/verify-ui-kit.mjs",
-    "verify": "npm run build && npm run smoke && npm pack --dry-run",
+    "verify": "npm run smoke && npm run build && npm run test:mcp && npm pack --dry-run",
+    "deploy:mcp": "npm run build:mcp && wrangler deploy --config wrangler.toml",
     "preversion": "npm run verify",
     "release:patch": "node scripts/assert-changelog-version.mjs patch && npm version patch",
     "release:minor": "node scripts/assert-changelog-version.mjs minor && npm version minor",
@@ -67,10 +71,14 @@
     "package": "npm run build && npm run smoke && npm run pack:tarball"
   },
   "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@playwright/test": "^1.58.2",
     "bootstrap": "^5.3.3",
+    "esbuild": "^0.27.4",
     "linkedom": "^0.18.12",
-    "sass": "^1.93.2"
+    "sass": "^1.93.2",
+    "wrangler": "^4.79.0",
+    "zod": "^4.3.6"
   },
   "publishConfig": {
     "access": "public"

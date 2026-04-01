@@ -1,0 +1,26 @@
+{
+  "uri": "ui-kit://update",
+  "title": "Update",
+  "kind": "guide",
+  "searchKind": "install",
+  "summary": "Package-manager update commands and release-review guidance.",
+  "body": "Update @incursa/ui-kit with your package manager of choice.\n\nnpm: npm install @incursa/ui-kit@latest\npnpm: pnpm up @incursa/ui-kit\nyarn: yarn upgrade @incursa/ui-kit\n\nReview after upgrading:\n- Review the changelog and regenerated MCP manifests after each upgrade.\n- Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract.\n\nLatest recorded release notes:\n- Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.\n- Expanded browser coverage with a new reference-page spec and refreshed theme/layout snapshots.\n- Refreshed the showcase, reference, and agent guidance docs so the published surface stays aligned.",
+  "sourcePaths": [
+    "CHANGELOG.md",
+    "package.json"
+  ],
+  "mimeType": "text/markdown; charset=utf-8",
+  "aliases": [
+    "update",
+    "upgrade",
+    "latest"
+  ],
+  "relatedUris": [
+    "ui-kit://release-notes/latest",
+    "ui-kit://package-metadata"
+  ],
+  "group": "guides",
+  "priority": 108,
+  "includeInSearch": true,
+  "searchText": "Update\nPackage-manager update commands and release-review guidance.\nUpdate @incursa/ui-kit with your package manager of choice.\n\nnpm: npm install @incursa/ui-kit@latest\npnpm: pnpm up @incursa/ui-kit\nyarn: yarn upgrade @incursa/ui-kit\n\nReview after upgrading:\n- Review the changelog and regenerated MCP manifests after each upgrade.\n- Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract.\n\nLatest recorded release notes:\n- Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.\n- Expanded browser coverage with a new reference-page spec and refreshed theme/layout snapshots.\n- Refreshed the showcase, reference, and agent guidance docs so the published surface stays aligned.\nupdate\nupgrade\nlatest\nCHANGELOG.md\npackage.json"
+}

@@ -1,0 +1,25 @@
+{
+  "uri": "ui-kit://release-notes/latest",
+  "title": "Latest release notes",
+  "kind": "guide",
+  "searchKind": "guide",
+  "summary": "The latest recorded changelog entry.",
+  "body": "- Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.\n- Expanded browser coverage with a new reference-page spec and refreshed theme/layout snapshots.\n- Refreshed the showcase, reference, and agent guidance docs so the published surface stays aligned.",
+  "sourcePaths": [
+    "CHANGELOG.md"
+  ],
+  "mimeType": "text/markdown; charset=utf-8",
+  "aliases": [
+    "release notes",
+    "changelog",
+    "latest release"
+  ],
+  "relatedUris": [
+    "ui-kit://update",
+    "ui-kit://package-metadata"
+  ],
+  "group": "guides",
+  "priority": 95,
+  "includeInSearch": true,
+  "searchText": "Latest release notes\nThe latest recorded changelog entry.\n- Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.\n- Expanded browser coverage with a new reference-page spec and refreshed theme/layout snapshots.\n- Refreshed the showcase, reference, and agent guidance docs so the published surface stays aligned.\nrelease notes\nchangelog\nlatest release\nCHANGELOG.md"
+}

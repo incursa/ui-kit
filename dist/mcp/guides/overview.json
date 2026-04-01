@@ -1,0 +1,26 @@
+{
+  "uri": "ui-kit://overview",
+  "title": "Overview",
+  "kind": "guide",
+  "searchKind": "guide",
+  "summary": "Repository-level overview of the UI kit and its canonical public surface.",
+  "body": "[![CI](https://github.com/incursa/ui-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/ci.yml)\n[![Pages](https://github.com/incursa/ui-kit/actions/workflows/pages.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/pages.yml)\n[![npm publish](https://github.com/incursa/ui-kit/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/npm-publish.yml)\n\nThis folder contains a distilled, reusable UI kit for data-heavy business applications. The goal is to keep the recurring visual patterns that define the UI language and expose them consistently through the [`inc-*`](reference.html) class surface. The CSS classes remain the canonical public API; the optional Web Component layer adds a browser-native entrypoint without replacing the existing class-based usage model. The Web Component layer also ships a companion stylesheet entrypoint so the default look is one import away.\n\nIncursa UI Kit\n\nShort description:\nReusable UI kit for data-heavy business applications. Start from the highest-level public surface that already fits: raw HTML plus inc-* classes for existing markup and CSS-only families, the optional ./web-components entrypoint for supported v1 browser-native components when declarative markup is the better fit, and dist/inc-design-language.js only for helper-managed state.\n\nPackage identity:\n- npm package: @incursa/ui-kit\n- license: Apache-2.0\n- repository: https://github.com/incursa/ui-kit\n\nSurface selection:\n- Use dist/inc-design-language.css if the target app already has working HTML and mainly needs the visual language.",
+  "sourcePaths": [
+    "README.md",
+    "LLMS.txt"
+  ],
+  "mimeType": "text/markdown; charset=utf-8",
+  "aliases": [
+    "ui kit overview",
+    "overview"
+  ],
+  "relatedUris": [
+    "ui-kit://fast-path",
+    "ui-kit://install",
+    "ui-kit://guides/choose-css-vs-scss-vs-js-vs-web-components"
+  ],
+  "group": "guides",
+  "priority": 100,
+  "includeInSearch": true,
+  "searchText": "Overview\nRepository-level overview of the UI kit and its canonical public surface.\n[![CI](https://github.com/incursa/ui-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/ci.yml)\n[![Pages](https://github.com/incursa/ui-kit/actions/workflows/pages.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/pages.yml)\n[![npm publish](https://github.com/incursa/ui-kit/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/npm-publish.yml)\n\nThis folder contains a distilled, reusable UI kit for data-heavy business applications. The goal is to keep the recurring visual patterns that define the UI language and expose them consistently through the [`inc-*`](reference.html) class surface. The CSS classes remain the canonical public API; the optional Web Component layer adds a browser-native entrypoint without replacing the existing class-based usage model. The Web Component layer also ships a companion stylesheet entrypoint so the default look is one import away.\n\nIncursa UI Kit\n\nShort description:\nReusable UI kit for data-heavy business applications. Start from the highest-level public surface that already fits: raw HTML plus inc-* classes for existing markup and CSS-only families, the optional ./web-components entrypoint for supported v1 browser-native components when declarative markup is the better fit, and dist/inc-design-language.js only for helper-managed state.\n\nPackage identity:\n- npm package: @incursa/ui-kit\n- license: Apache-2.0\n- repository: https://github.com/incursa/ui-kit\n\nSurface selection:\n- Use dist/inc-design-language.css if the target app already has working HTML and mainly needs the visual language.\nui kit overview\noverview\nREADME.md\nLLMS.txt"
+}

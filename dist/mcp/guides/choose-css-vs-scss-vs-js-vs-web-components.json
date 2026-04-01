@@ -1,0 +1,20 @@
+{
+  "uri": "ui-kit://guides/choose-css-vs-scss-vs-js-vs-web-components",
+  "title": "Choose CSS vs SCSS vs JS vs web components",
+  "kind": "guide",
+  "searchKind": "guide",
+  "summary": "Decision tree for the package entrypoints and helper surfaces.",
+  "body": "Decision tree:\n- Existing HTML and mostly visual work: use the compiled CSS.\n- Token, density, or Bootstrap-default tuning: use the SCSS source entrypoint.\n- Stateful primitives like menus, tabs, collapses, auto-refresh, or dialog launch hooks: use the JS helper.\n- Approved v1 browser-native families: use the same-package web-components entrypoint.\n- Start with the highest-level public surface that already fits the job.\n- Prefer [`web-components.html`](web-components.html) and the same-package [`./web-components`](./web-components) entrypoint when you are building new UI from plain HTML/JS and the capability exists in the approved v1 component set.\n- Prefer [`dist/inc-design-language.css`](dist/inc-design-language.css) with raw HTML plus [`inc-*`](reference.html) classes when the markup already exists, the family is CSS-only, or you only need styling.\n- Use native `<button>`, `<input>`, `<details>`, and `<dialog>` before adding helper wiring or custom elements.\n- Drop into `src/*` or token files only when the public surface cannot express the needed layout or behavior.",
+  "sourcePaths": [
+    "README.md",
+    "LLMS.txt",
+    "AI-AGENT-INSTRUCTIONS.md"
+  ],
+  "mimeType": "text/markdown; charset=utf-8",
+  "aliases": [],
+  "relatedUris": [],
+  "group": "guides",
+  "priority": 80,
+  "includeInSearch": true,
+  "searchText": "Choose CSS vs SCSS vs JS vs web components\nDecision tree for the package entrypoints and helper surfaces.\nDecision tree:\n- Existing HTML and mostly visual work: use the compiled CSS.\n- Token, density, or Bootstrap-default tuning: use the SCSS source entrypoint.\n- Stateful primitives like menus, tabs, collapses, auto-refresh, or dialog launch hooks: use the JS helper.\n- Approved v1 browser-native families: use the same-package web-components entrypoint.\n- Start with the highest-level public surface that already fits the job.\n- Prefer [`web-components.html`](web-components.html) and the same-package [`./web-components`](./web-components) entrypoint when you are building new UI from plain HTML/JS and the capability exists in the approved v1 component set.\n- Prefer [`dist/inc-design-language.css`](dist/inc-design-language.css) with raw HTML plus [`inc-*`](reference.html) classes when the markup already exists, the family is CSS-only, or you only need styling.\n- Use native `<button>`, `<input>`, `<details>`, and `<dialog>` before adding helper wiring or custom elements.\n- Drop into `src/*` or token files only when the public surface cannot express the needed layout or behavior.\nREADME.md\nLLMS.txt\nAI-AGENT-INSTRUCTIONS.md"
+}

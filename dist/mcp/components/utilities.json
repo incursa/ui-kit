@@ -1,0 +1,28 @@
+{
+  "uri": "ui-kit://components/utilities",
+  "title": "Utilities",
+  "kind": "component",
+  "searchKind": "component",
+  "summary": "Spacing, gap, padding, and visibility helpers.",
+  "body": "Spacing, gap, padding, and visibility helpers.\n\nSpacing And Visibility Utilities\n\n inc-u-stack-sm\n Use the utility layer when you need a light spacing or visibility adjustment without pulling in Bootstrap utility classes.\n\n Secondary\n Primary\n\n This alert uses inc-u-hidden-mobile and disappears on smaller screens.\n Common helpers now include stack spacing, gap, padding, hidden/mobile-hidden/desktop-hidden, and visually hidden text.\n\n<div class=\"inc-u-stack-sm\">\n <span class=\"inc-badge inc-badge--info inc-badge--pill\">inc-u-stack-sm</span>\n <p class=\"inc-text inc-text--regular\">Light spacing without Bootstrap utilities.</p>\n <div class=\"demo-chip-row inc-u-gap-sm\">\n <button class=\"inc-btn inc-btn--secondary inc-btn--sm\" type=\"button\">Secondary</button>\n <button class=\"inc-btn inc-btn--primary inc-btn--sm\" type=\"button\">Primary</button>\n </div>\n</div>\n\n<div class=\"inc-alert inc-alert--info inc-u-hidden-mobile\">Hidden on smaller screens.</div>\n\nCanonical markup:\n\n```html\n<div class=\"inc-u-stack-sm\">\n <span class=\"inc-badge inc-badge--info inc-badge--pill\">inc-u-stack-sm</span>\n <p class=\"inc-text inc-text--regular\">Light spacing without Bootstrap utilities.</p>\n <div class=\"demo-chip-row inc-u-gap-sm\">\n <button class=\"inc-btn inc-btn--secondary inc-btn--sm\" type=\"button\">Secondary</button>\n <button class=\"inc-btn inc-btn--primary inc-btn--sm\" type=\"button\">Primary</button>\n </div>\n</div>\n\n<div class=\"inc-alert inc-alert--info inc-u-hidden-mobile\">Hidden on smaller screens.</div>\n```",
+  "sourcePaths": [
+    "reference.html"
+  ],
+  "mimeType": "text/markdown; charset=utf-8",
+  "aliases": [
+    "utility classes",
+    "spacing utilities",
+    "visibility utilities",
+    "utilities"
+  ],
+  "relatedUris": [
+    "ui-kit://components/layout"
+  ],
+  "group": "components",
+  "priority": 85,
+  "includeInSearch": true,
+  "canonicalMarkup": {
+    "default": "<div class=\"inc-u-stack-sm\">\n <span class=\"inc-badge inc-badge--info inc-badge--pill\">inc-u-stack-sm</span>\n <p class=\"inc-text inc-text--regular\">Light spacing without Bootstrap utilities.</p>\n <div class=\"demo-chip-row inc-u-gap-sm\">\n <button class=\"inc-btn inc-btn--secondary inc-btn--sm\" type=\"button\">Secondary</button>\n <button class=\"inc-btn inc-btn--primary inc-btn--sm\" type=\"button\">Primary</button>\n </div>\n</div>\n\n<div class=\"inc-alert inc-alert--info inc-u-hidden-mobile\">Hidden on smaller screens.</div>"
+  },
+  "searchText": "Utilities\nSpacing, gap, padding, and visibility helpers.\nSpacing, gap, padding, and visibility helpers.\n\nSpacing And Visibility Utilities\n\n inc-u-stack-sm\n Use the utility layer when you need a light spacing or visibility adjustment without pulling in Bootstrap utility classes.\n\n Secondary\n Primary\n\n This alert uses inc-u-hidden-mobile and disappears on smaller screens.\n Common helpers now include stack spacing, gap, padding, hidden/mobile-hidden/desktop-hidden, and visually hidden text.\n\n<div class=\"inc-u-stack-sm\">\n <span class=\"inc-badge inc-badge--info inc-badge--pill\">inc-u-stack-sm</span>\n <p class=\"inc-text inc-text--regular\">Light spacing without Bootstrap utilities.</p>\n <div class=\"demo-chip-row inc-u-gap-sm\">\n <button class=\"inc-btn inc-btn--secondary inc-btn--sm\" type=\"button\">Secondary</button>\n <button class=\"inc-btn inc-btn--primary inc-btn--sm\" type=\"button\">Primary</button>\n </div>\n</div>\n\n<div class=\"inc-alert inc-alert--info inc-u-hidden-mobile\">Hidden on smaller screens.</div>\n\nCanonical markup:\n\n```html\n<div class=\"inc-u-stack-sm\">\n <span class=\"inc-badge inc-badge--info inc-badge--pill\">inc-u-stack-sm</span>\n <p class=\"inc-text inc-text--regular\">Light spacing without Bootstrap utilities.</p>\n <div class=\"demo-chip-row inc-u-gap-sm\">\n <button class=\"inc-btn inc-btn--secondary inc-btn--sm\" type=\"button\">Secondary</button>\n <button class=\"inc-btn inc-btn--primary inc-btn--sm\" type=\"button\">Primary</button>\n </div>\n</div>\n\n<div class=\"inc-alert inc-alert--info inc-u-hidden-mobile\">Hidden on smaller screens.</div>\n```\n<div class=\"inc-u-stack-sm\">\n <span class=\"inc-badge inc-badge--info inc-badge--pill\">inc-u-stack-sm</span>\n <p class=\"inc-text inc-text--regular\">Light spacing without Bootstrap utilities.</p>\n <div class=\"demo-chip-row inc-u-gap-sm\">\n <button class=\"inc-btn inc-btn--secondary inc-btn--sm\" type=\"button\">Secondary</button>\n <button class=\"inc-btn inc-btn--primary inc-btn--sm\" type=\"button\">Primary</button>\n </div>\n</div>\n\n<div class=\"inc-alert inc-alert--info inc-u-hidden-mobile\">Hidden on smaller screens.</div>\nutility classes\nspacing utilities\nvisibility utilities\nutilities\nreference.html"
+}

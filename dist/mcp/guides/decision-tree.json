@@ -1,0 +1,28 @@
+{
+  "uri": "ui-kit://install/decision-tree",
+  "title": "Install decision tree",
+  "kind": "guide",
+  "searchKind": "install",
+  "summary": "Choose compiled CSS, SCSS, JS helper, or web-components based on the consumer scenario.",
+  "body": "Decision tree:\n- Existing HTML and mostly visual work: use the compiled CSS surface.\n- Token, density, or Bootstrap-default tuning: use the SCSS source entrypoint.\n- Stateful primitives like menus, tabs, collapses, auto-refresh, or dialog launch hooks: use the JS helper.\n- Approved v1 browser-native families: use the same-package web-components entrypoint.\n\nRelated entrypoints:\n- Compiled CSS: `dist/inc-design-language.css`\n- JS helper: `dist/inc-design-language.js`\n- Web components: `@incursa/ui-kit/web-components`\n- SCSS source: `src/inc-design-language.scss`",
+  "sourcePaths": [
+    "README.md",
+    "LLMS.txt",
+    "AI-AGENT-INSTRUCTIONS.md"
+  ],
+  "mimeType": "text/markdown; charset=utf-8",
+  "aliases": [
+    "install decision tree",
+    "decision tree",
+    "surface selection"
+  ],
+  "relatedUris": [
+    "ui-kit://install",
+    "ui-kit://fast-path",
+    "ui-kit://guides/choose-css-vs-scss-vs-js-vs-web-components"
+  ],
+  "group": "guides",
+  "priority": 109,
+  "includeInSearch": true,
+  "searchText": "Install decision tree\nChoose compiled CSS, SCSS, JS helper, or web-components based on the consumer scenario.\nDecision tree:\n- Existing HTML and mostly visual work: use the compiled CSS surface.\n- Token, density, or Bootstrap-default tuning: use the SCSS source entrypoint.\n- Stateful primitives like menus, tabs, collapses, auto-refresh, or dialog launch hooks: use the JS helper.\n- Approved v1 browser-native families: use the same-package web-components entrypoint.\n\nRelated entrypoints:\n- Compiled CSS: `dist/inc-design-language.css`\n- JS helper: `dist/inc-design-language.js`\n- Web components: `@incursa/ui-kit/web-components`\n- SCSS source: `src/inc-design-language.scss`\ninstall decision tree\ndecision tree\nsurface selection\nREADME.md\nLLMS.txt\nAI-AGENT-INSTRUCTIONS.md"
+}

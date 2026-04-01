@@ -1,5 +1,11 @@
-import { existsSync, readFileSync, statSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync } from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { parseHTML } from "linkedom";
+import { writeMcpArtifacts } from "./generate-mcp.mjs";
+
+const repoRoot = fileURLToPath(new URL("..", import.meta.url));
 
 const requiredFiles = [
     "CHANGELOG.md",
@@ -20,6 +26,25 @@ const requiredFiles = [
     "dist/inc-design-language.min.css",
     "dist/inc-design-language.min.css.map",
     "dist/inc-design-language.js",
+    "wrangler.toml",
+    "dist/mcp/worker.mjs",
+    "dist/mcp/resources.json",
+    "dist/mcp/search-index.json",
+    "dist/mcp/install.json",
+    "dist/mcp/update.json",
+    "dist/mcp/components/buttons.json",
+    "dist/mcp/components/forms.json",
+    "dist/mcp/components/tables.json",
+    "dist/mcp/components/layout.json",
+    "dist/mcp/patterns/reference.json",
+    "dist/mcp/patterns/forms-and-validation.json",
+    "dist/mcp/patterns/data-grid-advanced.json",
+    "dist/mcp/specs/public-surface.json",
+    "dist/mcp/specs/control-conventions.json",
+    "dist/mcp/guides/guardrails.json",
+    "dist/mcp/guides/customization-order.json",
+    "dist/mcp/ai/agent-instructions.json",
+    "dist/mcp/ai/llms-txt.json",
     "forms-and-validation.html",
     "data-grid-advanced.html",
     "states.html",
@@ -145,6 +170,76 @@ function hasLoadingHelperChild(element) {
     return hasDirectChildWithClass(element, "inc-spinner") || hasDirectChildWithClass(element, "inc-loading-dots");
 }
 
+function listJsonFiles(rootDir) {
+    const results = [];
+
+    function walk(currentDir) {
+        for (const entry of readdirSync(currentDir, { withFileTypes: true })) {
+            const absolutePath = path.join(currentDir, entry.name);
+
+            if (entry.isDirectory()) {
+                walk(absolutePath);
+                continue;
+            }
+
+            if (entry.isFile() && entry.name.endsWith(".json")) {
+                results.push(path.relative(rootDir, absolutePath).split(path.sep).join("/"));
+            }
+        }
+    }
+
+    walk(rootDir);
+    results.sort();
+    return results;
+}
+
+function compareFiles(leftRoot, rightRoot, files, failures) {
+    for (const relativePath of files) {
+        const leftFile = path.join(leftRoot, relativePath);
+        const rightFile = path.join(rightRoot, relativePath);
+
+        ensure(existsSync(leftFile), `Missing generated MCP manifest: ${leftFile}`, failures);
+        ensure(existsSync(rightFile), `Missing checked-in MCP manifest: ${rightFile}`, failures);
+
+        if (!existsSync(leftFile) || !existsSync(rightFile)) {
+            continue;
+        }
+
+        const leftContent = readFileSync(leftFile, "utf8");
+        const rightContent = readFileSync(rightFile, "utf8");
+        ensure(leftContent === rightContent, `MCP manifest drift detected for ${relativePath}`, failures);
+    }
+}
+
+function verifyMcpManifestFreshness(failures) {
+    const distMcpDir = path.join(repoRoot, "dist", "mcp");
+    ensure(existsSync(distMcpDir), "Missing dist/mcp directory", failures);
+
+    if (!existsSync(distMcpDir)) {
+        return;
+    }
+
+    const tempDir = mkdtempSync(path.join(os.tmpdir(), "incursa-ui-kit-mcp-"));
+
+    try {
+        writeMcpArtifacts({ repoRoot, outDir: tempDir });
+
+        const generatedFiles = listJsonFiles(tempDir);
+        const checkedInFiles = listJsonFiles(distMcpDir);
+
+        ensure(
+            JSON.stringify(generatedFiles) === JSON.stringify(checkedInFiles),
+            "dist/mcp JSON manifest file set must match the freshly generated manifest tree",
+            failures,
+        );
+
+        const sharedFiles = generatedFiles.filter((file) => checkedInFiles.includes(file));
+        compareFiles(tempDir, distMcpDir, sharedFiles, failures);
+    } finally {
+        rmSync(tempDir, { recursive: true, force: true });
+    }
+}
+
 const failures = [];
 
 for (const file of requiredFiles) {
@@ -267,6 +362,8 @@ if (existsSync("dist/inc-design-language.css") && existsSync("dist/inc-design-la
     ensure(minCssSize > 0, "dist/inc-design-language.min.css must not be empty", failures);
     ensure(minCssSize < cssSize, "dist/inc-design-language.min.css should be smaller than the expanded CSS output", failures);
 }
+
+verifyMcpManifestFreshness(failures);
 
 if (failures.length > 0) {
     console.error("UI kit smoke checks failed:");

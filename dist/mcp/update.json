@@ -1,0 +1,24 @@
+{
+  "title": "Update",
+  "summary": "Package-manager update commands and release-review guidance.",
+  "packageName": "@incursa/ui-kit",
+  "version": "1.5.0",
+  "commands": {
+    "npm": "npm install @incursa/ui-kit@latest",
+    "pnpm": "pnpm up @incursa/ui-kit",
+    "yarn": "yarn upgrade @incursa/ui-kit"
+  },
+  "verifyCommands": {
+    "npm": "npm run verify",
+    "packageVersion": "node -p \"require('./package.json').version\""
+  },
+  "notes": [
+    "Review the changelog and regenerated MCP manifests after each upgrade.",
+    "Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract."
+  ],
+  "latestReleaseNotes": "- Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.\n- Expanded browser coverage with a new reference-page spec and refreshed theme/layout snapshots.\n- Refreshed the showcase, reference, and agent guidance docs so the published surface stays aligned.",
+  "relatedUris": [
+    "ui-kit://release-notes/latest",
+    "ui-kit://package-metadata"
+  ]
+}

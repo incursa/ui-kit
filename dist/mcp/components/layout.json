@@ -1,0 +1,28 @@
+{
+  "uri": "ui-kit://components/layout",
+  "title": "Layout",
+  "kind": "component",
+  "searchKind": "component",
+  "summary": "Page framing, breadcrumbs, and shell wrappers.",
+  "body": "Page framing, breadcrumbs, and shell wrappers.\n\nPage Framing\n\n Examples\n Reference\n\n Breadcrumb body wrapper\n Use the canonical page wrapper when you want a breadcrumb strip and body stack without introducing another bespoke shell.\n\n Secondary action\n Primary action\n\n<div class=\"inc-page inc-breadcrumb-body\">\n <div class=\"inc-page__breadcrumbs inc-breadcrumb-body__breadcrumb\">\n <ol class=\"inc-breadcrumb\">\n <li class=\"inc-breadcrumb__item\"><a href=\"./index.html\">Examples</a></li>\n <li class=\"inc-breadcrumb__item active\"><span>Reference</span></li>\n </ol>\n </div>\n <div class=\"inc-page__body inc-breadcrumb-body__body\">\n <div class=\"inc-section-container demo-stack\">\n <section class=\"inc-page-header\">...</section>\n </div>\n </div>\n</div>\n\nCanonical markup:\n\n```html\n<div class=\"inc-page inc-breadcrumb-body\">\n <div class=\"inc-page__breadcrumbs inc-breadcrumb-body__breadcrumb\">\n <ol class=\"inc-breadcrumb\">\n <li class=\"inc-breadcrumb__item\"><a href=\"./index.html\">Examples</a></li>\n <li class=\"inc-breadcrumb__item active\"><span>Reference</span></li>\n </ol>\n </div>\n <div class=\"inc-page__body inc-breadcrumb-body__body\">\n <div class=\"inc-section-container demo-stack\">\n <section class=\"inc-page-header\">...</section>\n </div>\n </div>\n</div>\n```",
+  "sourcePaths": [
+    "reference.html"
+  ],
+  "mimeType": "text/markdown; charset=utf-8",
+  "aliases": [
+    "page framing",
+    "shell",
+    "breadcrumb body",
+    "layout"
+  ],
+  "relatedUris": [
+    "ui-kit://components/cards"
+  ],
+  "group": "components",
+  "priority": 85,
+  "includeInSearch": true,
+  "canonicalMarkup": {
+    "default": "<div class=\"inc-page inc-breadcrumb-body\">\n <div class=\"inc-page__breadcrumbs inc-breadcrumb-body__breadcrumb\">\n <ol class=\"inc-breadcrumb\">\n <li class=\"inc-breadcrumb__item\"><a href=\"./index.html\">Examples</a></li>\n <li class=\"inc-breadcrumb__item active\"><span>Reference</span></li>\n </ol>\n </div>\n <div class=\"inc-page__body inc-breadcrumb-body__body\">\n <div class=\"inc-section-container demo-stack\">\n <section class=\"inc-page-header\">...</section>\n </div>\n </div>\n</div>"
+  },
+  "searchText": "Layout\nPage framing, breadcrumbs, and shell wrappers.\nPage framing, breadcrumbs, and shell wrappers.\n\nPage Framing\n\n Examples\n Reference\n\n Breadcrumb body wrapper\n Use the canonical page wrapper when you want a breadcrumb strip and body stack without introducing another bespoke shell.\n\n Secondary action\n Primary action\n\n<div class=\"inc-page inc-breadcrumb-body\">\n <div class=\"inc-page__breadcrumbs inc-breadcrumb-body__breadcrumb\">\n <ol class=\"inc-breadcrumb\">\n <li class=\"inc-breadcrumb__item\"><a href=\"./index.html\">Examples</a></li>\n <li class=\"inc-breadcrumb__item active\"><span>Reference</span></li>\n </ol>\n </div>\n <div class=\"inc-page__body inc-breadcrumb-body__body\">\n <div class=\"inc-section-container demo-stack\">\n <section class=\"inc-page-header\">...</section>\n </div>\n </div>\n</div>\n\nCanonical markup:\n\n```html\n<div class=\"inc-page inc-breadcrumb-body\">\n <div class=\"inc-page__breadcrumbs inc-breadcrumb-body__breadcrumb\">\n <ol class=\"inc-breadcrumb\">\n <li class=\"inc-breadcrumb__item\"><a href=\"./index.html\">Examples</a></li>\n <li class=\"inc-breadcrumb__item active\"><span>Reference</span></li>\n </ol>\n </div>\n <div class=\"inc-page__body inc-breadcrumb-body__body\">\n <div class=\"inc-section-container demo-stack\">\n <section class=\"inc-page-header\">...</section>\n </div>\n </div>\n</div>\n```\n<div class=\"inc-page inc-breadcrumb-body\">\n <div class=\"inc-page__breadcrumbs inc-breadcrumb-body__breadcrumb\">\n <ol class=\"inc-breadcrumb\">\n <li class=\"inc-breadcrumb__item\"><a href=\"./index.html\">Examples</a></li>\n <li class=\"inc-breadcrumb__item active\"><span>Reference</span></li>\n </ol>\n </div>\n <div class=\"inc-page__body inc-breadcrumb-body__body\">\n <div class=\"inc-section-container demo-stack\">\n <section class=\"inc-page-header\">...</section>\n </div>\n </div>\n</div>\npage framing\nshell\nbreadcrumb body\nlayout\nreference.html"
+}

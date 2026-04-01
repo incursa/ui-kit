@@ -1,0 +1,36 @@
+{
+  "title": "Install",
+  "summary": "Install guidance for compiled CSS, SCSS, JS helper, and web-components entrypoints.",
+  "packageName": "@incursa/ui-kit",
+  "version": "1.5.0",
+  "installCommands": {
+    "npm": "npm install @incursa/ui-kit",
+    "pnpm": "pnpm add @incursa/ui-kit",
+    "yarn": "yarn add @incursa/ui-kit"
+  },
+  "updateCommands": {
+    "npm": "npm install @incursa/ui-kit@latest",
+    "pnpm": "pnpm up @incursa/ui-kit",
+    "yarn": "yarn upgrade @incursa/ui-kit"
+  },
+  "importExamples": {
+    "cssOnly": "import \"@incursa/ui-kit/dist/inc-design-language.css\";",
+    "jsHelper": "import \"@incursa/ui-kit/dist/inc-design-language.js\";",
+    "webComponents": "import \"@incursa/ui-kit/web-components/style.css\";\nimport \"@incursa/ui-kit/web-components\";",
+    "scss": "@import \"@incursa/ui-kit/src/inc-design-language\";"
+  },
+  "notes": [
+    "The compiled CSS already includes the Bootstrap layer it was built on.",
+    "The SCSS source path requires Bootstrap Sass at build time because it imports bootstrap/scss/bootstrap.",
+    "The same-package web-components entrypoint is additive and keeps the CSS-first surface intact.",
+    "Use the JS helper only for stateful primitives such as menus, tabs, collapsible sections, auto-refresh widgets, and dialog launch hooks."
+  ],
+  "decisionTree": "- Existing HTML and mostly visual work: use the compiled CSS surface.\n- Token, density, or Bootstrap-default tuning: use the SCSS source entrypoint.\n- Stateful primitives like menus, tabs, collapses, auto-refresh, or dialog launch hooks: use the JS helper.\n- Approved v1 browser-native families: use the same-package web-components entrypoint.",
+  "relatedUris": [
+    "ui-kit://overview",
+    "ui-kit://fast-path",
+    "ui-kit://install/decision-tree",
+    "ui-kit://guides/choose-css-vs-scss-vs-js-vs-web-components",
+    "ui-kit://guides/when-to-use-css-first"
+  ]
+}

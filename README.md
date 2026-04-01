@@ -339,6 +339,7 @@ This repository is set up for:
 
 - CI on pushes and pull requests via [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
 - GitHub Pages showcase deployment from `main` via [`.github/workflows/pages.yml`](.github/workflows/pages.yml)
+- Cloudflare Worker MCP deployment from `main` via [`.github/workflows/mcp-worker.yml`](.github/workflows/mcp-worker.yml)
 - npm Trusted Publishing on `v*` tag pushes via [`.github/workflows/npm-publish.yml`](.github/workflows/npm-publish.yml)
 - Public release hygiene through `LICENSE`, [`CHANGELOG.md`](CHANGELOG.md), [`CONTRIBUTING.md`](CONTRIBUTING.md), and [`RELEASING.md`](RELEASING.md)
 - Brand assets in [`assets/brand/`](assets/brand) so README and future docs do not depend on external image hosting
@@ -378,3 +379,40 @@ $inc-font-family-sans: "Aptos", "Segoe UI", sans-serif;
 
 @import "./src/inc-design-language";
 ```
+
+## MCP Worker
+
+The repository also ships a deterministic Cloudflare Worker that exposes the UI kit content through Model Context Protocol. The Worker is intentionally read-only and stateless:
+
+- `POST /mcp` serves the MCP JSON-RPC endpoint.
+- `GET /mcp` serves a small HTML index for browsing the generated manifest.
+- `GET /mcp/resource/*` serves a human-readable resource page for inspection.
+- Build-time manifests live under `dist/mcp/` and are regenerated from the repo docs, examples, specs, and package metadata.
+- The Worker does not call an LLM, crawl the web, or depend on a database.
+
+The local workflow is:
+
+```bash
+npm run build
+npm run test:mcp
+```
+
+`npm run build` regenerates the MCP manifests and bundles the Worker. `npm run verify` runs the full repo gate, including the MCP transport tests and the manifest smoke check.
+
+For local Worker development, use Wrangler against the generated bundle:
+
+```bash
+npm run build:mcp
+npx wrangler dev --config wrangler.toml
+```
+
+To refresh the generated manifests after changing docs or examples, rerun `npm run build:mcp` or the full `npm run build` pipeline.
+If you only need to refresh the JSON manifests before bundling, run `npm run build:mcp:manifests`.
+
+To deploy the Worker:
+
+```bash
+npm run deploy:mcp
+```
+
+The Cloudflare deploy workflow uses `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets and deploys the bundled Worker from `dist/mcp/worker.mjs`.

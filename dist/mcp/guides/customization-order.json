@@ -1,0 +1,20 @@
+{
+  "uri": "ui-kit://guides/customization-order",
+  "title": "Customization order",
+  "kind": "guide",
+  "searchKind": "guide",
+  "summary": "The supported order for theme, token, rebuild, and component-rule changes.",
+  "body": "Customization order:\n1. Change fonts and colors in src/_inc-theme.scss.\n2. Use src/_inc-tokens.scss only for deeper token or Bootstrap-level tuning.\n3. Rebuild the CSS.\n4. Only add new component rules after checking whether an existing inc-* block already fits.\n1. Change fonts and colors in [`src/_inc-theme.scss`](src/_inc-theme.scss).\n2. Use [`src/_inc-tokens.scss`](src/_inc-tokens.scss) only for deeper token or Bootstrap-level tuning.\n3. Rebuild the CSS.\n4. Only add new component rules after checking whether an existing [`inc-*`](reference.html) block already fits.",
+  "sourcePaths": [
+    "AI-AGENT-INSTRUCTIONS.md",
+    "LLMS.txt",
+    "README.md"
+  ],
+  "mimeType": "text/markdown; charset=utf-8",
+  "aliases": [],
+  "relatedUris": [],
+  "group": "guides",
+  "priority": 80,
+  "includeInSearch": true,
+  "searchText": "Customization order\nThe supported order for theme, token, rebuild, and component-rule changes.\nCustomization order:\n1. Change fonts and colors in src/_inc-theme.scss.\n2. Use src/_inc-tokens.scss only for deeper token or Bootstrap-level tuning.\n3. Rebuild the CSS.\n4. Only add new component rules after checking whether an existing inc-* block already fits.\n1. Change fonts and colors in [`src/_inc-theme.scss`](src/_inc-theme.scss).\n2. Use [`src/_inc-tokens.scss`](src/_inc-tokens.scss) only for deeper token or Bootstrap-level tuning.\n3. Rebuild the CSS.\n4. Only add new component rules after checking whether an existing [`inc-*`](reference.html) block already fits.\nAI-AGENT-INSTRUCTIONS.md\nLLMS.txt\nREADME.md"
+}

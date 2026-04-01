@@ -1,0 +1,20 @@
+{
+  "uri": "ui-kit://guides/guardrails",
+  "title": "Guardrails",
+  "kind": "guide",
+  "searchKind": "guide",
+  "summary": "Repository guardrails for naming, accessibility, and component scope.",
+  "body": "- Keep the typography stack split:\n sans for UI text, mono for data.\n- Preserve explicit alignment classes for numeric table data.\n- Avoid adding product-specific shell/background styles to this package.\n- Keep new components generic enough to drop into another admin/data app.\n- If you add a new block, prefer names like [`inc-filter-bar`](reference.html), [`inc-stat-card`](reference.html), or [`inc-data-toolbar`](reference.html) over feature-specific names.\n- Keep border radius consistent across panels, tabs, tables, and cards unless there is a deliberate reason to differentiate them.\n- Prefer native browser behavior first for disclosures and dialogs when it fits the product; use the helper only when the Bootstrap-like component contract needs custom state handling.\n- Keep the CSS-first class API canonical and treat the Web Component layer as additive, not a replacement.",
+  "sourcePaths": [
+    "AI-AGENT-INSTRUCTIONS.md",
+    "LLMS.txt",
+    "README.md"
+  ],
+  "mimeType": "text/markdown; charset=utf-8",
+  "aliases": [],
+  "relatedUris": [],
+  "group": "guides",
+  "priority": 80,
+  "includeInSearch": true,
+  "searchText": "Guardrails\nRepository guardrails for naming, accessibility, and component scope.\n- Keep the typography stack split:\n sans for UI text, mono for data.\n- Preserve explicit alignment classes for numeric table data.\n- Avoid adding product-specific shell/background styles to this package.\n- Keep new components generic enough to drop into another admin/data app.\n- If you add a new block, prefer names like [`inc-filter-bar`](reference.html), [`inc-stat-card`](reference.html), or [`inc-data-toolbar`](reference.html) over feature-specific names.\n- Keep border radius consistent across panels, tabs, tables, and cards unless there is a deliberate reason to differentiate them.\n- Prefer native browser behavior first for disclosures and dialogs when it fits the product; use the helper only when the Bootstrap-like component contract needs custom state handling.\n- Keep the CSS-first class API canonical and treat the Web Component layer as additive, not a replacement.\nAI-AGENT-INSTRUCTIONS.md\nLLMS.txt\nREADME.md"
+}
