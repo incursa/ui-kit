@@ -99,12 +99,21 @@
                         <div class="demo-muted-panel">
                             <div class="demo-section-header">
                                 <div>
-                                    <p class="demo-eyebrow">CSS First</p>
-                                    <h2 class="inc-heading inc-heading--h3">The class catalog stays authoritative</h2>
+                                    <p class="demo-eyebrow">Code View</p>
+                                    <h2 class="inc-heading inc-heading--h3">Web Components first, HTML + CSS on demand</h2>
                                 </div>
-                                <a class="inc-btn inc-btn--outline-secondary inc-btn--sm" href="./web-components.html">See optional Web Components</a>
+                                <nav class="inc-tabs-line demo-mode-switcher" aria-label="Reference code view">
+                                    <ul class="inc-tabs-nav" role="tablist">
+                                        <li>
+                                            <button class="inc-tab" type="button" role="tab" aria-selected="false" data-demo-code-mode="html">HTML + CSS</button>
+                                        </li>
+                                        <li>
+                                            <button class="inc-tab active" type="button" role="tab" aria-selected="true" data-demo-code-mode="wc">Web Components</button>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
-                            <p class="inc-text inc-text--regular inc-text--muted">Use this page for the canonical class-based markup. The Web Components layer mirrors the same vocabulary and slots, but it remains an additive entry point rather than a replacement for the CSS catalog.</p>
+                            <p class="inc-text inc-text--regular inc-text--muted">Web Components is the default code view on this page. Sections that are still CSS-first are labeled in the viewer so the page stays honest about what exists today.</p>
                         </div>
 
                         <section class="inc-card">
@@ -1187,10 +1196,10 @@
                 </main>
                 <footer class="inc-app-shell__footer inc-footer-bar">
                     <div class="inc-footer-bar__menu">
-                        <button class="inc-btn inc-btn--secondary inc-btn--sm" type="button">Copy snippet</button>
+                        <button class="inc-btn inc-btn--secondary inc-btn--sm" type="button" data-demo-copy-first-snippet>Copy snippet</button>
                         <button class="inc-btn inc-btn--primary inc-btn--sm" type="button">Open docs</button>
                     </div>
-                    <div class="inc-footer-bar__meta">Reference page for copy/paste HTML patterns. CSS remains the primary surface; Web Components are optional.</div>
+                    <div class="inc-footer-bar__meta">Reference page for copy/paste HTML patterns. Web Components are the default code view here, while the class catalog remains authoritative.</div>
                 </footer>
             </div>
         </div>
@@ -1261,6 +1270,386 @@
                     }
                 });
             });
+        })();
+
+        (() => {
+            const storageKey = "inc-reference-code-mode";
+            const modeLabels = {
+                html: "HTML + CSS",
+                wc: "Web Components",
+            };
+            const wcSnippets = {
+                "theme-switcher": `<div class="inc-theme-toggle" data-inc-theme-switcher>
+    <div class="inc-theme-toggle__label">
+        <p class="inc-theme-toggle__title">Appearance</p>
+        <p class="inc-theme-toggle__value" data-inc-theme-label>System</p>
+    </div>
+    <div class="inc-button-group inc-button-group--sm" role="group" aria-label="Theme mode">
+        <button class="inc-btn inc-btn--secondary" type="button" data-inc-theme-mode="light">Light</button>
+        <button class="inc-btn inc-btn--secondary" type="button" data-inc-theme-mode="dark">Dark</button>
+        <button class="inc-btn inc-btn--secondary" type="button" data-inc-theme-mode="system">System</button>
+    </div>
+    <button class="inc-btn inc-btn--outline-secondary inc-btn--sm" type="button" data-inc-theme-toggle>Cycle</button>
+</div>
+
+<inc-theme-switcher variant="navbar" block label="Theme" menu-label="Theme menu" heading="Choose appearance"></inc-theme-switcher>`,
+                "page-framing": `<inc-page wide>
+    <div slot="breadcrumbs" class="inc-page__breadcrumbs">
+        <ol class="inc-breadcrumb">
+            <li class="inc-breadcrumb__item"><a href="./index.html">Examples</a></li>
+            <li class="inc-breadcrumb__item active"><span>Reference</span></li>
+        </ol>
+    </div>
+    <inc-page-header slot="header">
+        <div slot="title">
+            <h3 class="inc-heading inc-heading--h3">Breadcrumb body wrapper</h3>
+            <p class="inc-text inc-text--regular inc-text--muted">Use the canonical page wrapper when you want a breadcrumb strip and body stack without introducing another bespoke shell.</p>
+        </div>
+        <div slot="actions">
+            <button class="inc-btn inc-btn--secondary inc-btn--sm" type="button">Secondary action</button>
+            <button class="inc-btn inc-btn--primary inc-btn--sm" type="button">Primary action</button>
+        </div>
+    </inc-page-header>
+</inc-page>`,
+                "cards-metrics-and-empty-states": `<inc-summary-overview columns="3">
+    <inc-summary-block>
+        <div slot="header">Total Revenue</div>
+        <div slot="body"><strong>$247,832</strong></div>
+    </inc-summary-block>
+    <inc-summary-block>
+        <div slot="header">Active Projects</div>
+        <div slot="body"><strong>12</strong></div>
+        <div slot="footer">In Progress</div>
+    </inc-summary-block>
+    <inc-summary-block>
+        <div slot="header">Exceptions</div>
+        <div slot="body"><strong>4</strong></div>
+    </inc-summary-block>
+</inc-summary-overview>
+
+<inc-state-panel variant="results" title="No saved views" body="Create a named filter set so your operators can reuse it across screens." status="+"></inc-state-panel>`,
+                "form-fields": `<inc-field required label="Text input">
+    <label slot="label" class="inc-form__label" for="ref-name">Text input</label>
+    <input slot="control" id="ref-name" class="inc-form__control" type="text" value="North Campus Expansion">
+</inc-field>
+
+<inc-input-group dense expand prefix="$">
+    <span slot="prefix" class="inc-input-group__text">$</span>
+    <input slot="control" class="inc-form__control" type="text" value="18240.22">
+</inc-input-group>
+
+<inc-choice-group legend="Approval route">
+    <legend slot="legend">Approval route</legend>
+    <div slot="item" class="inc-form__check">
+        <input id="route-fast" name="route" type="radio" checked>
+        <label for="route-fast">Fast approval</label>
+    </div>
+    <div slot="item" class="inc-form__check">
+        <input id="route-standard" name="route" type="radio">
+        <label for="route-standard">Standard approval</label>
+    </div>
+</inc-choice-group>
+
+<inc-validation-summary count="2" live="polite">
+    <ul>
+        <li slot="item"><a href="#ref-name">Project name is required.</a></li>
+        <li slot="item"><a href="#route-standard">Approval owner missing.</a></li>
+    </ul>
+</inc-validation-summary>
+
+<inc-readonly-field label="Record ID" value="AP-2026-00142">
+    <span slot="meta">Synced 8:13 AM</span>
+</inc-readonly-field>`,
+                tabs: `<inc-tabs selected="ref-folder-overview" variant="folder">
+    <button slot="tab" id="ref-folder-overview" type="button" class="inc-tab">Overview</button>
+    <button slot="tab" id="ref-folder-aging" type="button" class="inc-tab">Aging</button>
+    <section slot="panel" class="inc-tab-pane">Folder tab content.</section>
+    <section slot="panel" class="inc-tab-pane">Second folder tab content.</section>
+</inc-tabs>`,
+                "native-controls": `<inc-disclosure open>
+    <span slot="summary" class="demo-disclosure-title">
+        <span class="inc-disclosure__title">Billing summary</span>
+        <span class="inc-badge inc-badge--info inc-badge--pill">3 items</span>
+    </span>
+    <div slot="content">
+        <p class="inc-text inc-text--regular">Example disclosure body.</p>
+    </div>
+</inc-disclosure>
+
+<inc-user-menu label="Queue Actions" variant="block">
+    <span slot="trigger" class="inc-user-menu__avatar">AP</span>
+    <div slot="menu" role="menu">
+        <button type="button" role="menuitem">Export current view</button>
+        <button type="button" role="menuitem">Save filter preset</button>
+    </div>
+</inc-user-menu>
+
+<inc-dialog id="reference-dialog" label="Reference Dialog" modal dismissible size="lg">
+    <div slot="title">Reference Dialog</div>
+    <div slot="body">Native dialog example for copy/paste use.</div>
+    <div slot="footer">
+        <button class="inc-btn inc-btn--secondary" type="button" data-inc-dialog-close>Close</button>
+        <button class="inc-btn inc-btn--primary" type="button">Confirm</button>
+    </div>
+</inc-dialog>
+
+<inc-drawer id="reference-drawer" label="Reference Drawer" placement="end" dismissible>
+    <div slot="title">Reference Drawer</div>
+    <div slot="body">Native side sheet example for assignment and note-taking flows.</div>
+    <div slot="footer">
+        <button class="inc-btn inc-btn--outline-secondary" type="button" data-inc-dialog-close>Cancel</button>
+        <button class="inc-btn inc-btn--primary" type="button">Assign</button>
+    </div>
+</inc-drawer>`,
+                "validation-and-filter-toolbars": `<inc-validation-summary count="2" live="assertive">
+    <ul>
+        <li slot="item"><a href="#ref-contract">Contract number is required.</a></li>
+        <li slot="item"><a href="#ref-filter-search">Billing period must be selected.</a></li>
+    </ul>
+</inc-validation-summary>
+
+<inc-field label="Contract number" required invalid>
+    <label slot="label" class="inc-form__label inc-form__label--required" for="ref-contract">Contract number</label>
+    <input slot="control" id="ref-contract" class="inc-form__control is-invalid" type="text" aria-invalid="true">
+    <p slot="error" class="inc-form__feedback inc-form__feedback--error">Contract number is required.</p>
+</inc-field>
+
+<inc-field label="Search">
+    <label slot="label" class="inc-form__label" for="ref-filter-search">Search</label>
+    <input slot="control" id="ref-filter-search" class="inc-form__control inc-form__control--sm" type="text" value="North Campus">
+</inc-field>
+
+<inc-readonly-field label="Owner" value="AP Team"></inc-readonly-field>`,
+                "operational-states-and-feedback": `<inc-state-panel variant="results" title="No results matched" body="Distinct from the create-first empty state." status="?"></inc-state-panel>
+
+<inc-state-panel variant="error" title="Export failed" body="Use a proper failure surface, not just a muted paragraph." status="!"></inc-state-panel>
+
+<inc-live-region politeness="polite" atomic="true">View saved</inc-live-region>`,
+                "overlay-workflows": `<inc-dialog id="approval-dialog" label="Approve exception" modal dismissible size="lg">
+    <div slot="title">Approve exception</div>
+    <div slot="body">Include the validation summary and rationale field here.</div>
+    <div slot="footer">
+        <button class="inc-btn inc-btn--outline-secondary" type="button" data-inc-dialog-close>Cancel</button>
+        <button class="inc-btn inc-btn--primary" type="button" data-inc-initial-focus>Approve exception</button>
+    </div>
+</inc-dialog>
+
+<inc-drawer id="assignment-drawer" label="Assignment drawer" placement="end" dismissible>
+    <div slot="title">Assign review owner</div>
+    <div slot="body">
+        <inc-field label="Owner" required>
+            <label slot="label" class="inc-form__label" for="drawer-owner">Owner</label>
+            <select slot="control" id="drawer-owner">
+                <option selected>AP Team</option>
+                <option>Legal Review</option>
+                <option>Compliance</option>
+            </select>
+        </inc-field>
+    </div>
+    <div slot="footer">
+        <button class="inc-btn inc-btn--outline-secondary" type="button" data-inc-dialog-close>Cancel</button>
+        <button class="inc-btn inc-btn--primary" type="button" data-inc-initial-focus>Assign owner</button>
+    </div>
+</inc-drawer>`,
+                "auto-refresh-widget": `<inc-auto-refresh seconds="180" label="Queue refresh in" loading-label="Refreshing queue"></inc-auto-refresh>`,
+            };
+
+            const normalizeKey = (value) => String(value || "")
+                .toLowerCase()
+                .replace(/&/g, "and")
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-+|-+$/g, "");
+
+            const readStoredMode = () => {
+                try {
+                    const storedMode = window.localStorage.getItem(storageKey);
+                    if (storedMode === "html" || storedMode === "wc") {
+                        return storedMode;
+                    }
+                } catch {
+                    // Ignore storage restrictions in locked-down contexts.
+                }
+
+                return "wc";
+            };
+
+            const setStorageMode = (mode) => {
+                try {
+                    if (mode === "wc") {
+                        window.localStorage.removeItem(storageKey);
+                    } else {
+                        window.localStorage.setItem(storageKey, mode);
+                    }
+                } catch {
+                    // Ignore storage restrictions in locked-down contexts.
+                }
+            };
+
+            const copyToClipboard = async (text, button) => {
+                if (!text) {
+                    return;
+                }
+
+                try {
+                    await window.navigator.clipboard.writeText(text);
+                } catch {
+                    window.prompt("Copy snippet:", text);
+                }
+
+                if (!button) {
+                    return;
+                }
+
+                const originalLabel = button.getAttribute("data-demo-copy-label") || button.textContent || "Copy";
+                button.setAttribute("data-copied", "true");
+                button.textContent = "Copied";
+                window.setTimeout(() => {
+                    button.removeAttribute("data-copied");
+                    button.textContent = originalLabel;
+                }, 1200);
+            };
+
+            const renderLineNumbers = (text) => {
+                const lines = text.split("\n");
+                return lines.map((_, index) => String(index + 1)).join("\n");
+            };
+
+            const modeButtons = Array.from(document.querySelectorAll("[data-demo-code-mode]"));
+            const footerCopyButton = document.querySelector("[data-demo-copy-first-snippet]");
+            const viewers = [];
+            let currentMode = readStoredMode();
+
+            const syncModeButtons = () => {
+                modeButtons.forEach((button) => {
+                    const isActive = button.getAttribute("data-demo-code-mode") === currentMode;
+                    button.classList.toggle("active", isActive);
+                    button.setAttribute("aria-selected", isActive ? "true" : "false");
+                    button.tabIndex = isActive ? 0 : -1;
+                });
+            };
+
+            const renderViewer = (viewer) => {
+                const code = currentMode === "wc" && viewer.wcSnippet ? viewer.wcSnippet : viewer.htmlSnippet;
+                const note = currentMode === "wc" && !viewer.wcSnippet ? "CSS-first in v1" : "";
+
+                viewer.currentCode = code;
+                viewer.variantLabel.textContent = modeLabels[currentMode];
+                viewer.code.textContent = code;
+                viewer.gutter.textContent = renderLineNumbers(code);
+                viewer.note.hidden = !note;
+                viewer.note.textContent = note;
+                viewer.copyButton.setAttribute("data-demo-copy-label", "Copy");
+                viewer.copyButton.setAttribute("aria-label", "Copy code snippet");
+                viewer.copyButton.textContent = "Copy";
+                viewer.copyButton.disabled = !code;
+            };
+
+            const renderAllViewers = () => {
+                syncModeButtons();
+                viewers.forEach(renderViewer);
+                if (footerCopyButton instanceof HTMLButtonElement) {
+                    footerCopyButton.disabled = viewers.length === 0;
+                }
+            };
+
+            const setMode = (mode) => {
+                if (mode !== "html" && mode !== "wc") {
+                    return;
+                }
+
+                currentMode = mode;
+                setStorageMode(mode);
+                renderAllViewers();
+            };
+
+            modeButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    setMode(button.getAttribute("data-demo-code-mode") || "wc");
+                });
+            });
+
+            document.querySelectorAll("pre.demo-code").forEach((pre) => {
+                const codeElement = pre.querySelector("code");
+                const htmlSnippet = codeElement ? codeElement.textContent.replace(/\r\n/g, "\n").trimEnd() : "";
+                const title = pre.closest(".inc-card")?.querySelector(".inc-card__title")?.textContent?.trim() || "Snippet";
+                const key = normalizeKey(title);
+                const wcSnippet = wcSnippets[key] || "";
+
+                const viewer = document.createElement("details");
+                viewer.className = "demo-code demo-code-viewer";
+                viewer.dataset.demoCodeViewer = "";
+                viewer.dataset.demoCodeKey = key;
+                viewer.innerHTML = `
+                    <summary class="demo-code-viewer__header">
+                        <span class="demo-code-viewer__summary-copy">
+                            <span class="demo-code-viewer__variant"></span>
+                            <span class="demo-code-viewer__summary-text"></span>
+                            <span class="demo-code-viewer__chevron" aria-hidden="true"></span>
+                        </span>
+                        <button class="demo-code-viewer__copy" type="button"></button>
+                    </summary>
+                    <div class="demo-code-viewer__body">
+                        <pre class="demo-code-viewer__gutter" aria-hidden="true"></pre>
+                        <pre class="demo-code-viewer__source"><code></code></pre>
+                    </div>
+                    <p class="demo-code-viewer__note" hidden></p>
+                `;
+
+                const variantLabel = viewer.querySelector(".demo-code-viewer__variant");
+                const summaryText = viewer.querySelector(".demo-code-viewer__summary-text");
+                const chevron = viewer.querySelector(".demo-code-viewer__chevron");
+                const copyButton = viewer.querySelector(".demo-code-viewer__copy");
+                const gutter = viewer.querySelector(".demo-code-viewer__gutter");
+                const code = viewer.querySelector(".demo-code-viewer__source code");
+                const note = viewer.querySelector(".demo-code-viewer__note");
+
+                const entry = {
+                    htmlSnippet,
+                    wcSnippet,
+                    currentCode: htmlSnippet,
+                    variantLabel,
+                    copyButton,
+                    gutter,
+                    code,
+                    note,
+                    summaryText,
+                    chevron,
+                };
+
+                copyButton.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    copyToClipboard(entry.currentCode, copyButton);
+                });
+
+                const updateDisclosureState = () => {
+                    const isOpen = viewer.open;
+                    entry.summaryText.textContent = isOpen ? "Hide code" : "Show code";
+                    entry.chevron.setAttribute("data-open", isOpen ? "true" : "false");
+                };
+
+                viewer.addEventListener("toggle", () => {
+                    updateDisclosureState();
+                });
+
+                updateDisclosureState();
+                viewers.push(entry);
+                pre.replaceWith(viewer);
+            });
+
+            if (footerCopyButton instanceof HTMLButtonElement) {
+                footerCopyButton.setAttribute("data-demo-copy-label", "Copy snippet");
+                footerCopyButton.addEventListener("click", () => {
+                    const firstViewer = viewers[0];
+                    if (!firstViewer) {
+                        return;
+                    }
+
+                    copyToClipboard(firstViewer.currentCode, footerCopyButton);
+                });
+            }
+
+            renderAllViewers();
         })();
     </script>
 </body>

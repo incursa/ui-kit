@@ -59,6 +59,37 @@ test("system mode follows the browser preference", async ({ page }) => {
     await expect(root).toHaveAttribute("data-bs-theme", "light");
 });
 
+test("dark themed highlighted data grid rows keep readable text", async ({ page }) => {
+    await page.addInitScript(() => {
+        try {
+            window.localStorage.setItem("inc-theme-mode", "dark");
+        } catch {
+            // Ignore storage restrictions in the browser context.
+        }
+    });
+
+    await openPage(page, "data-grid-advanced.html");
+
+    const root = page.locator("html");
+    const highlightedRows = page.locator(
+        ".inc-table__row--selected, .inc-table__row--warning, .inc-table__row--danger, .inc-table__row--locked",
+    );
+
+    await expect(root).toHaveAttribute("data-bs-theme", "dark");
+    await expect(highlightedRows.first()).toBeVisible();
+
+    const rowColors = await highlightedRows.evaluateAll((rows) =>
+        rows.map((row) => {
+            const cell = row.querySelector(".inc-table__cell--data") || row.querySelector(".inc-table__cell") || row;
+            return window.getComputedStyle(cell).color;
+        }),
+    );
+
+    for (const color of rowColors) {
+        expect(color).not.toBe("rgb(18, 19, 22)");
+    }
+});
+
 test("mounted navbar switcher exposes radio semantics and restores focus on escape", async ({ page }) => {
     await page.addInitScript(() => {
         try {

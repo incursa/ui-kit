@@ -1,17 +1,18 @@
 Incursa UI Kit
 
 Short description:
-Reusable UI kit for data-heavy business applications. The public surface stays CSS-first through [`inc-*`](reference.html) classes, with optional vanilla-JS helpers, SCSS source entrypoints, and a layered `./web-components` entrypoint for browser-native components.
+Reusable UI kit for data-heavy business applications. Start from the highest-level public surface that already fits: raw HTML plus [`inc-*`](reference.html) classes for existing markup and CSS-only families, the optional [`./web-components`](./web-components) entrypoint for supported v1 browser-native components when declarative markup is the better fit, and [`dist/inc-design-language.js`](dist/inc-design-language.js) only for helper-managed state.
 
 Package identity:
 - npm package: `@incursa/ui-kit`
 - license: Apache-2.0
 - repository: https://github.com/incursa/ui-kit
 
-Fast path:
+Surface selection:
 - Use [`dist/inc-design-language.css`](dist/inc-design-language.css) if the target app already has working HTML and mainly needs the visual language.
+- Use [`web-components.html`](web-components.html) and the same-package [`./web-components`](./web-components) entrypoint when you are building from plain HTML/JS and the capability exists in the approved v1 component set.
+- Use raw HTML plus [`inc-*`](reference.html) classes when the markup already exists, the family is CSS-only, or the job is styling rather than composition.
 - Use [`dist/inc-design-language.js`](dist/inc-design-language.js) only for stateful primitives such as menus, tabs, collapsible sections, auto-refresh widgets, the native dialog launch hook, and legacy modal/offcanvas shells.
-- Use [`web-components.html`](web-components.html) and the same-package `./web-components` entrypoint when you want declarative custom elements for the approved v1 component families.
 - Use [`src/inc-design-language.scss`](src/inc-design-language.scss) if the consumer needs to tune tokens, theme variables, density, or Bootstrap defaults.
 
 Primary files:
@@ -32,6 +33,7 @@ Primary files:
 - [`states.html`](states.html), [`forms-and-validation.html`](forms-and-validation.html), [`data-grid-advanced.html`](data-grid-advanced.html), [`overlay-workflows.html`](overlay-workflows.html): workflow-heavy composition patterns.
 - [`demo.html`](demo.html), [`work-queue.html`](work-queue.html), [`record-detail.html`](record-detail.html), [`native-patterns.html`](native-patterns.html): fuller page examples.
 - The v1 Web Component families are layouts and shells, navbar/tabs/user-menu, field/input-group/choice-group/readonly-field/validation-summary, state-panel/live-region/auto-refresh/theme-switcher, and disclosure/dialog/drawer.
+- Prefer those browser-native components for supported v1 surfaces when the consumer wants declarative markup from plain HTML/JS; keep CSS-first HTML for surfaces that are intentionally outside the WC layer.
 - Tables, utilities, filter/bulk/file workflows, permission banners, toasts, and compatibility overlay shells stay CSS-only or deferred in v1.
 
 Markdown links:

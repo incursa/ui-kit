@@ -52,6 +52,7 @@
         .wc-grid {
             display: grid;
             gap: 1rem;
+            align-items: start;
         }
 
         .wc-grid--2 {
@@ -122,6 +123,29 @@
             display: flex;
             flex-wrap: wrap;
             gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        #wc-navbar {
+            flex-wrap: nowrap;
+        }
+
+        #wc-navbar .inc-navbar__nav {
+            flex: 1 1 auto;
+            min-width: 0;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: none;
+        }
+
+        #wc-navbar .inc-navbar__nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        #wc-navbar .inc-navbar__nav .nav-link,
+        #wc-navbar .inc-navbar__nav .inc-nav-link {
+            flex: 0 0 auto;
+            white-space: nowrap;
         }
 
         @media (max-width: 900px) {
@@ -138,12 +162,35 @@
             <inc-navbar id="wc-navbar" app breakpoint="lg">
                 <a slot="brand" class="inc-navbar__brand" href="#wc-home">Incursa</a>
                 <div slot="nav" class="inc-navbar__nav">
-                    <a class="nav-link active" href="#wc-home">Web Components</a>
-                    <a class="nav-link" href="./reference.html">CSS Reference</a>
-                    <a class="nav-link" href="./README.md">README</a>
+                    <a class="nav-link" href="./index.html">Examples</a>
+                    <a class="nav-link" href="./demo.html">Dashboard</a>
+                    <a class="nav-link" href="./work-queue.html">Work Queue</a>
+                    <a class="nav-link" href="./record-detail.html">Record Detail</a>
+                    <a class="nav-link" href="./native-patterns.html">Native Patterns</a>
+                    <a class="nav-link" href="./overlay-workflows.html">Overlays</a>
+                    <a class="nav-link" href="./states.html">States</a>
+                    <a class="nav-link" href="./forms-and-validation.html">Forms</a>
+                    <a class="nav-link" href="./data-grid-advanced.html">Data Grid</a>
+                    <a class="nav-link active" href="./web-components.html">Web Components</a>
+                    <a class="nav-link" href="./reference.html">Reference</a>
                 </div>
                 <div slot="utilities" class="inc-navbar__utilities">
                     <inc-theme-switcher id="wc-theme-switcher" variant="navbar" block label="Theme" menu-label="Theme menu" heading="Choose appearance"></inc-theme-switcher>
+                    <details class="inc-native-menu inc-native-menu--navbar">
+                        <summary class="inc-native-menu__summary">
+                            <span class="inc-user-menu__avatar">SM</span>
+                            <span class="inc-user-menu__meta">
+                                <span class="inc-user-menu__name">Sam McAravey</span>
+                                <span class="inc-user-menu__detail">Administrator</span>
+                            </span>
+                        </summary>
+                        <div class="inc-native-menu__panel">
+                            <div class="inc-native-menu__header">Signed in as Sam McAravey</div>
+                            <a class="inc-native-menu__item" href="#">Profile</a>
+                            <a class="inc-native-menu__item" href="#">Preferences</a>
+                            <a class="inc-native-menu__item" href="#">Sign out</a>
+                        </div>
+                    </details>
                 </div>
                 <div slot="collapse" class="inc-navbar__collapse">
                     <button id="wc-navbar-toggle" class="inc-navbar__toggler inc-btn inc-btn--outline-secondary inc-btn--sm" type="button" data-inc-navbar-toggle>
@@ -154,7 +201,8 @@
         </header>
 
         <main slot="main" class="inc-app-shell__main">
-            <inc-page id="wc-page" class="inc-page inc-page--wide" wide>
+            <div class="inc-section-container">
+            <inc-page id="wc-page" class="inc-page">
                 <div slot="breadcrumbs" class="inc-page__breadcrumbs">
                     <ol class="inc-breadcrumb">
                         <li class="inc-breadcrumb__item"><a href="#wc-home">Examples</a></li>
@@ -384,6 +432,7 @@
                     </inc-card>
                 </section>
             </inc-page>
+            </div>
         </main>
 
         <footer slot="footer" class="inc-footer-bar inc-app-shell__footer">
@@ -1193,18 +1242,19 @@ class IncDialogBaseElement extends IncElement {
         const dialog = ensureNode(this, "dialog.inc-native-dialog", () => {
             const node = document.createElement("dialog");
             node.className = "inc-native-dialog";
-            node.innerHTML = `<div class="inc-native-dialog__surface"><div class="inc-native-dialog__header"><h2 class="inc-native-dialog__title">${this.getAttribute("label") || "Dialog"}</h2><button type="button" class="inc-native-dialog__close" data-inc-dialog-close aria-label="Close dialog">×</button></div><div class="inc-native-dialog__body"></div><div class="inc-native-dialog__footer"></div></div>`;
+            node.innerHTML = `<div class="inc-native-dialog__surface"><div class="inc-native-dialog__header"><div class="inc-native-dialog__titles"><h2 class="inc-native-dialog__title">${this.getAttribute("label") || "Dialog"}</h2></div><button type="button" class="inc-native-dialog__close" data-inc-dialog-close aria-label="Close dialog">×</button></div><div class="inc-native-dialog__body"></div><div class="inc-native-dialog__footer"></div></div>`;
             this.append(node);
             return node;
         });
         dialog.classList.toggle("inc-native-dialog--drawer", drawerMode);
         this._dialog = dialog;
         this._header = dialog.querySelector(".inc-native-dialog__header");
+        this._titles = dialog.querySelector(".inc-native-dialog__titles");
         this._body = dialog.querySelector(".inc-native-dialog__body");
         this._footer = dialog.querySelector(".inc-native-dialog__footer");
         Array.from(this.children).filter((node) => node.getAttribute("slot") === "header" || node.getAttribute("slot") === "title").forEach((node) => {
             node.removeAttribute("slot");
-            this._header.append(node);
+            (this._titles || this._header).append(node);
         });
         Array.from(this.children).filter((node) => node.getAttribute("slot") === "body").forEach((node) => {
             node.removeAttribute("slot");

@@ -753,18 +753,19 @@ class IncDialogBaseElement extends IncElement {
         const dialog = ensureNode(this, "dialog.inc-native-dialog", () => {
             const node = document.createElement("dialog");
             node.className = "inc-native-dialog";
-            node.innerHTML = `<div class="inc-native-dialog__surface"><div class="inc-native-dialog__header"><h2 class="inc-native-dialog__title">${this.getAttribute("label") || "Dialog"}</h2><button type="button" class="inc-native-dialog__close" data-inc-dialog-close aria-label="Close dialog">×</button></div><div class="inc-native-dialog__body"></div><div class="inc-native-dialog__footer"></div></div>`;
+            node.innerHTML = `<div class="inc-native-dialog__surface"><div class="inc-native-dialog__header"><div class="inc-native-dialog__titles"><h2 class="inc-native-dialog__title">${this.getAttribute("label") || "Dialog"}</h2></div><button type="button" class="inc-native-dialog__close" data-inc-dialog-close aria-label="Close dialog">×</button></div><div class="inc-native-dialog__body"></div><div class="inc-native-dialog__footer"></div></div>`;
             this.append(node);
             return node;
         });
         dialog.classList.toggle("inc-native-dialog--drawer", drawerMode);
         this._dialog = dialog;
         this._header = dialog.querySelector(".inc-native-dialog__header");
+        this._titles = dialog.querySelector(".inc-native-dialog__titles");
         this._body = dialog.querySelector(".inc-native-dialog__body");
         this._footer = dialog.querySelector(".inc-native-dialog__footer");
         Array.from(this.children).filter((node) => node.getAttribute("slot") === "header" || node.getAttribute("slot") === "title").forEach((node) => {
             node.removeAttribute("slot");
-            this._header.append(node);
+            (this._titles || this._header).append(node);
         });
         Array.from(this.children).filter((node) => node.getAttribute("slot") === "body").forEach((node) => {
             node.removeAttribute("slot");

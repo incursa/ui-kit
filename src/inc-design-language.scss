@@ -18,6 +18,18 @@
     --inc-text-inverse-rgb: 255, 255, 255;
     --inc-text-link: var(--bs-link-color);
     --inc-text-link-hover: var(--bs-link-hover-color);
+    --inc-control-surface: var(--inc-surface-primary);
+    --inc-control-surface-text: var(--inc-text-primary);
+    --inc-control-surface-border: var(--inc-border-default);
+    --inc-surface-contrast: var(--bs-secondary);
+    --inc-surface-contrast-rgb: var(--bs-secondary-rgb);
+    --inc-surface-contrast-hover: #31384a;
+    --inc-surface-contrast-hover-rgb: 49, 56, 74;
+    --inc-surface-contrast-active: #2e3542;
+    --inc-surface-contrast-active-rgb: 46, 53, 66;
+    --inc-surface-contrast-text: var(--inc-text-inverse);
+    --inc-surface-contrast-text-rgb: var(--inc-text-inverse-rgb);
+    --inc-surface-contrast-border: var(--bs-secondary);
     --inc-surface-primary-rgb: var(--bs-body-bg-rgb);
     --inc-surface-secondary-rgb: var(--bs-secondary-bg-rgb);
     --inc-surface-muted-rgb: var(--bs-tertiary-bg-rgb);
@@ -25,6 +37,31 @@
     --inc-text-secondary-rgb: var(--bs-secondary-color-rgb);
     --inc-text-muted-rgb: var(--bs-tertiary-color-rgb);
     --inc-shadow-rgb: var(--bs-black-rgb);
+}
+
+[data-bs-theme="dark"] {
+    --inc-control-surface: var(--inc-surface-secondary);
+    --inc-control-surface-text: var(--inc-text-primary);
+    --inc-control-surface-border: var(--inc-border-default);
+    --inc-surface-contrast: var(--bs-gray-100);
+    --inc-surface-contrast-rgb: 253, 253, 253;
+    --inc-surface-contrast-hover: var(--bs-gray-200);
+    --inc-surface-contrast-hover-rgb: 246, 246, 246;
+    --inc-surface-contrast-active: var(--bs-gray-300);
+    --inc-surface-contrast-active-rgb: 241, 241, 241;
+    --inc-surface-contrast-text: var(--bs-dark);
+    --inc-surface-contrast-text-rgb: 18, 19, 22;
+    --inc-surface-contrast-border: var(--bs-gray-400);
+    --bs-success-bg-subtle: rgba(0, 151, 67, 0.18);
+    --bs-success-border-subtle: rgb(72, 171, 109);
+    --bs-form-valid-color: rgb(122, 214, 154);
+    --bs-form-valid-border-color: rgb(122, 214, 154);
+    --bs-danger-bg-subtle: rgba(209, 26, 42, 0.18);
+    --bs-danger-border-subtle: rgb(219, 89, 105);
+    --bs-form-invalid-color: rgb(248, 126, 143);
+    --bs-form-invalid-border-color: rgb(248, 126, 143);
+    --bs-warning-bg-subtle: rgba(200, 138, 0, 0.18);
+    --bs-warning-border-subtle: rgb(214, 160, 41);
 }
 
 // -----------------------------------------------------------------------------
@@ -417,6 +454,19 @@
 
     &--secondary {
         @extend .btn-secondary;
+        --bs-btn-color: var(--inc-surface-contrast-text);
+        --bs-btn-bg: var(--inc-surface-contrast);
+        --bs-btn-border-color: var(--inc-surface-contrast-border);
+        --bs-btn-hover-color: var(--inc-surface-contrast-text);
+        --bs-btn-hover-bg: var(--inc-surface-contrast-hover);
+        --bs-btn-hover-border-color: var(--inc-surface-contrast-border);
+        --bs-btn-focus-shadow-rgb: var(--inc-surface-contrast-rgb);
+        --bs-btn-active-color: var(--inc-surface-contrast-text);
+        --bs-btn-active-bg: var(--inc-surface-contrast-active);
+        --bs-btn-active-border-color: var(--inc-surface-contrast-border);
+        --bs-btn-disabled-color: var(--inc-surface-contrast-text);
+        --bs-btn-disabled-bg: var(--inc-surface-contrast);
+        --bs-btn-disabled-border-color: var(--inc-surface-contrast-border);
     }
 
     &--success {
@@ -459,6 +509,17 @@
 
     &--outline-secondary {
         @extend .btn-outline-secondary;
+        --bs-btn-color: var(--inc-text-primary);
+        --bs-btn-border-color: var(--inc-border-default);
+        --bs-btn-hover-color: var(--inc-text-primary);
+        --bs-btn-hover-bg: var(--inc-surface-secondary);
+        --bs-btn-hover-border-color: var(--inc-border-default);
+        --bs-btn-focus-shadow-rgb: var(--inc-surface-strong-rgb);
+        --bs-btn-active-color: var(--inc-text-primary);
+        --bs-btn-active-bg: var(--inc-surface-muted);
+        --bs-btn-active-border-color: var(--inc-border-default);
+        --bs-btn-disabled-color: var(--inc-text-muted);
+        --bs-btn-disabled-border-color: var(--inc-border-subtle);
     }
 
     &--outline-success {
@@ -631,6 +692,9 @@
 
     &__control {
         @extend .form-control;
+        color: var(--inc-control-surface-text);
+        background-color: var(--inc-control-surface);
+        border-color: var(--inc-control-surface-border);
 
         &--sm {
             @extend .form-control-sm;
@@ -666,6 +730,9 @@
 
     &__select {
         @extend .form-select;
+        color: var(--inc-control-surface-text);
+        background-color: var(--inc-control-surface);
+        border-color: var(--inc-control-surface-border);
 
         &--sm {
             @extend .form-select-sm;
@@ -724,7 +791,7 @@
         padding: 1rem 1rem 0.875rem;
         border: 1px solid var(--inc-border-subtle);
         border-radius: $inc-radius-md;
-        background: linear-gradient(180deg, rgba(var(--inc-surface-secondary-rgb), 0.72), var(--inc-surface-primary) 3rem);
+        background: var(--inc-surface-secondary);
     }
 
     &__legend {
@@ -732,6 +799,7 @@
         width: auto;
         margin: 0;
         padding: 0 0.375rem;
+        background-color: var(--inc-surface-secondary);
         color: var(--inc-text-primary);
         font-size: 0.8125rem;
         font-weight: 600;
@@ -971,9 +1039,10 @@
     justify-content: center;
     text-align: center;
     padding: $spacer * 2 $spacer * 1.5;
-    border: $border-width solid $gray-600;
+    border: $border-width solid var(--inc-border-subtle);
     border-radius: $inc-radius-panel;
-    background-color: $gray-100;
+    background-color: var(--inc-surface-secondary);
+    color: var(--inc-text-primary);
     min-height: 21.875rem;
 
     &__content {
@@ -984,7 +1053,7 @@
     &__icon {
         font-size: $font-size-base * 3.5;
         margin-bottom: $spacer * 1.5;
-        color: $gray-500;
+        color: var(--inc-text-muted);
     }
 
     &__form {
@@ -1393,7 +1462,7 @@
     &__header {
         padding: 1rem;
         border-bottom: 1px solid var(--bs-border-color);
-        background-color: var(--bs-light);
+        background-color: var(--inc-surface-secondary);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -2557,10 +2626,10 @@ details.inc-native-menu.inc-native-menu--navbar {
         align-items: center;
         justify-content: center;
         flex: 0 0 auto;
-        background-color: rgba($primary, 0.14);
-        color: $primary;
+        background-color: var(--bs-primary-bg-subtle);
+        color: var(--bs-primary-text-emphasis);
         font-size: 0.75rem;
-        font-weight: 600;
+        font-weight: 700;
         line-height: 1;
     }
 
@@ -2614,7 +2683,7 @@ details.inc-native-menu.inc-native-menu--block > .inc-native-menu__summary {
     justify-content: flex-start;
     min-height: 3rem;
     padding: 0.625rem 0.75rem;
-    background: linear-gradient(180deg, var(--inc-surface-primary), var(--inc-surface-secondary));
+    background-color: var(--inc-surface-secondary);
 }
 
 details.inc-native-menu.inc-native-menu--block > .inc-native-menu__panel {
@@ -4562,6 +4631,19 @@ body.inc-offcanvas-open {
         display: none;
     }
 
+    > .inc-spinner {
+        position: absolute;
+        inset: 50% auto auto 50%;
+        margin: -0.5rem 0 0 -0.5rem;
+        transform: none;
+    }
+
+    > .inc-loading-dots {
+        position: absolute;
+        inset: 50% auto auto 50%;
+        transform: translate(-50%, -50%);
+    }
+
     &::after {
         content: "";
         position: absolute;
@@ -4574,12 +4656,176 @@ body.inc-offcanvas-open {
         border-right-color: transparent;
         animation: inc-loading-spin 0.8s linear infinite;
     }
+}
 
-    > .inc-spinner,
-    > .inc-loading-dots {
-        position: absolute;
-        inset: 50% auto auto 50%;
-        transform: translate(-50%, -50%);
+[data-bs-theme="dark"] {
+    .form-control,
+    .inc-readonly-field,
+    .inc-form__control {
+        color: var(--inc-control-surface-text);
+        background-color: var(--inc-control-surface);
+        border-color: var(--inc-control-surface-border);
+    }
+
+    .form-control:focus,
+    .inc-readonly-field:focus,
+    .inc-form__control:focus {
+        color: var(--inc-control-surface-text);
+        background-color: var(--inc-control-surface);
+    }
+
+    .form-control::placeholder,
+    .inc-readonly-field::placeholder,
+    .inc-form__control::placeholder {
+        color: var(--bs-secondary-color);
+    }
+
+    .form-control::file-selector-button,
+    .inc-readonly-field::file-selector-button,
+    .inc-form__control::file-selector-button {
+        color: var(--inc-control-surface-text);
+        background-color: var(--inc-surface-muted);
+    }
+
+    .form-control:hover:not(:disabled):not([readonly])::file-selector-button,
+    .inc-readonly-field:hover:not(:disabled):not([readonly])::file-selector-button,
+    .inc-form__control:hover:not(:disabled):not([readonly])::file-selector-button {
+        background-color: var(--inc-surface-secondary);
+    }
+
+    .form-select,
+    .inc-form__select {
+        color: var(--inc-control-surface-text);
+        background-color: var(--inc-control-surface);
+        border-color: var(--inc-control-surface-border);
+    }
+
+    .form-select:focus,
+    .inc-form__select:focus {
+        color: var(--inc-control-surface-text);
+        background-color: var(--inc-control-surface);
+    }
+
+    .form-select:-moz-focusring,
+    .inc-form__select:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 var(--inc-control-surface-text);
+    }
+
+    .input-group-text,
+    .inc-input-group__text {
+        color: var(--inc-surface-contrast-text);
+        background-color: var(--inc-surface-contrast);
+        border-color: var(--inc-surface-contrast-border);
+    }
+
+    .inc-btn--secondary {
+        --bs-btn-color: var(--inc-surface-contrast-text);
+        --bs-btn-bg: var(--inc-surface-contrast);
+        --bs-btn-border-color: var(--inc-surface-contrast-border);
+        --bs-btn-hover-color: var(--inc-surface-contrast-text);
+        --bs-btn-hover-bg: var(--inc-surface-contrast-hover);
+        --bs-btn-hover-border-color: var(--inc-surface-contrast-border);
+        --bs-btn-focus-shadow-rgb: var(--inc-surface-contrast-rgb);
+        --bs-btn-active-color: var(--inc-surface-contrast-text);
+        --bs-btn-active-bg: var(--inc-surface-contrast-active);
+        --bs-btn-active-border-color: var(--inc-surface-contrast-border);
+        --bs-btn-disabled-color: var(--inc-surface-contrast-text);
+        --bs-btn-disabled-bg: var(--inc-surface-contrast);
+        --bs-btn-disabled-border-color: var(--inc-surface-contrast-border);
+    }
+
+    .inc-form__fieldset {
+        background: var(--inc-surface-secondary);
+    }
+
+    .inc-form__legend {
+        background-color: var(--inc-surface-secondary);
+    }
+
+    .inc-form__control.is-invalid,
+    .inc-form__control[aria-invalid="true"],
+    .inc-form__select.is-invalid {
+        border-color: var(--bs-form-invalid-border-color);
+    }
+
+    .inc-form__control.is-valid,
+    .inc-form__select.is-valid {
+        border-color: var(--bs-form-valid-border-color);
+    }
+
+    .was-validated .form-control:invalid,
+    .was-validated .inc-readonly-field:invalid,
+    .was-validated .inc-form__control:invalid,
+    .form-control.is-invalid,
+    .is-invalid.inc-readonly-field,
+    .form-control.inc-form--is-invalid,
+    .inc-form--is-invalid.inc-readonly-field,
+    .is-invalid.inc-form__control,
+    .inc-form__control.inc-form--is-invalid {
+        border-color: var(--bs-form-invalid-border-color);
+    }
+
+    .was-validated .form-select:invalid,
+    .was-validated .inc-form__select:invalid,
+    .form-select.is-invalid,
+    .form-select.inc-form--is-invalid,
+    .is-invalid.inc-form__select,
+    .inc-form__select.inc-form--is-invalid {
+        border-color: var(--bs-form-invalid-border-color);
+    }
+
+    .was-validated .form-control:invalid:focus,
+    .was-validated .inc-readonly-field:invalid:focus,
+    .was-validated .inc-form__control:invalid:focus,
+    .form-control.is-invalid:focus,
+    .is-invalid.inc-readonly-field:focus,
+    .form-control.inc-form--is-invalid:focus,
+    .inc-form--is-invalid.inc-readonly-field:focus,
+    .is-invalid.inc-form__control:focus,
+    .inc-form__control.inc-form--is-invalid:focus {
+        border-color: var(--bs-form-invalid-border-color);
+        box-shadow: var(--bs-box-shadow-inset), 0 0 0 0.25rem rgba(var(--bs-danger-rgb), 0.25);
+    }
+
+    .was-validated .form-select:invalid:focus,
+    .was-validated .inc-form__select:invalid:focus,
+    .form-select.is-invalid:focus,
+    .form-select.inc-form--is-invalid:focus,
+    .is-invalid.inc-form__select:focus,
+    .inc-form__select.inc-form--is-invalid:focus {
+        border-color: var(--bs-form-invalid-border-color);
+        box-shadow: var(--bs-box-shadow-inset), 0 0 0 0.25rem rgba(var(--bs-danger-rgb), 0.25);
+    }
+
+    .inc-table__row--selected,
+    .inc-table__row--warning,
+    .inc-table__row--danger {
+        --bs-table-color: var(--inc-text-primary);
+    }
+
+    .inc-table__row--locked {
+        --bs-table-color: var(--inc-text-secondary);
+    }
+
+    .inc-table__row--selected > *,
+    .inc-table__row--warning > *,
+    .inc-table__row--danger > * {
+        background: rgba(var(--bs-primary-rgb), 0.14) !important;
+        color: var(--inc-text-primary);
+    }
+
+    .inc-table__row--warning > * {
+        background: rgba(var(--bs-warning-rgb), 0.14) !important;
+    }
+
+    .inc-table__row--danger > * {
+        background: rgba(var(--bs-danger-rgb), 0.14) !important;
+    }
+
+    .inc-table__row--locked > * {
+        background: rgba(var(--bs-secondary-rgb), 0.22) !important;
+        color: var(--inc-text-secondary);
     }
 }
 

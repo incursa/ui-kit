@@ -4,12 +4,20 @@ Use this package as a reusable data-heavy UI baseline.
 
 Repository brand assets live under [`assets/brand/`](assets/brand). Prefer those local files when adding logos, favicons, or README imagery.
 
+## Surface selection
+
+- Start with the highest-level public surface that already fits the job.
+- Prefer [`web-components.html`](web-components.html) and the same-package [`./web-components`](./web-components) entrypoint when you are building new UI from plain HTML/JS and the capability exists in the approved v1 component set.
+- Prefer [`dist/inc-design-language.css`](dist/inc-design-language.css) with raw HTML plus [`inc-*`](reference.html) classes when the markup already exists, the family is CSS-only, or you only need styling.
+- Use native `<button>`, `<input>`, `<details>`, and `<dialog>` before adding helper wiring or custom elements.
+- Drop into `src/*` or token files only when the public surface cannot express the needed layout or behavior.
+
 ## Fast path
 
 - Prefer [`dist/inc-design-language.css`](dist/inc-design-language.css) if the target app already has working HTML and only needs the look.
 - Prefer [`src/inc-design-language.scss`](src/inc-design-language.scss) if you need to tune tokens, density, or Bootstrap defaults.
 - Prefer [`dist/inc-design-language.js`](dist/inc-design-language.js) only for stateful UI primitives such as menus, tabs, collapsible sections, modal/offcanvas shells, native dialog launch hooks, and auto-refresh widgets.
-- Prefer the optional [`web-components.html`](web-components.html) landing page and the same-package `./web-components` entrypoint when you need browser-native custom elements for the approved v1 families and want declarative slots, attributes, and DOM events from plain HTML.
+- Prefer the optional [`web-components.html`](web-components.html) landing page and the same-package [`./web-components`](./web-components) entrypoint when you want declarative browser-native components for the approved v1 families from plain HTML/JS.
 - Prefer [`reference.html`](reference.html) when you need copy/paste starter markup for a supported control or page-frame primitive before composing a full page.
 - Prefer [`states.html`](states.html), [`forms-and-validation.html`](forms-and-validation.html), and [`data-grid-advanced.html`](data-grid-advanced.html) when the target screen is workflow-heavy and you need realistic composition patterns, not isolated snippets.
 
@@ -50,7 +58,7 @@ Repository brand assets live under [`assets/brand/`](assets/brand). Prefer those
 - Native interaction:
   Use [`details.inc-disclosure`](reference.html) for section stacks, [`details.inc-native-menu`](reference.html) for lightweight menus, and [`dialog.inc-native-dialog`](reference.html) for native modal surfaces.
 - Web Components:
-  Keep the CSS class surface canonical, use the optional layered entrypoint for the approved v1 component families, and prefer native HTML primitives when they already satisfy the semantic and interaction contract.
+  Keep the CSS class surface canonical, use the optional layered entrypoint for the approved v1 component families when declarative markup is the better fit, and fall back to raw HTML/CSS for CSS-first surfaces or when the markup already exists.
 - Status:
   Use [`inc-badge--success|warning|danger|info`](reference.html) for compact status signals.
 - Metrics:
