@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.0
+
+- Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.
+- Expanded browser coverage with a new reference-page spec and refreshed theme/layout snapshots.
+- Refreshed the showcase, reference, and agent guidance docs so the published surface stays aligned.
+
 ## 1.2.0
 
 Added support for Web Components
