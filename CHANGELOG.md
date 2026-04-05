@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.0
+
+- Made the file workflow examples functional with shared browse, drag-drop, and removable file-row behavior.
+- Added dismissible and timeout-driven alert behavior, fixed close-button rendering, and tightened the auto-refresh controls and loading-button examples.
+- Improved dark-mode contrast across filter chips, review-grid row states, and related showcase surfaces, with expanded browser coverage and refreshed generated assets.
+
 ## 1.6.1
 
 - Published the expanded Web Components and visual hierarchy updates in a corrected follow-up after the failed v1.6.0 tag run.
