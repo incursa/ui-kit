@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.1
+
+- Published the expanded Web Components and visual hierarchy updates in a corrected follow-up after the failed v1.6.0 tag run.
+- Regenerated the MCP manifest outputs so release verification and published artifacts stay in sync.
+- Hardened the PowerShell release helper so failed native commands stop the release before any commit, tag, or push.
+
 ## 1.6.0
 
 - Added new Web Components for buttons, alerts, badges, spinners, empty states, list groups, and key-value layouts, and split the runtime into clearer component modules.
