@@ -1989,6 +1989,14 @@ var THEME_MODES = ["light", "dark", "system"];
 var DEFAULT_THEME_STORAGE_KEY = "inc-theme-mode";
 var BADGE_TONES = /* @__PURE__ */ new Set(["primary", "secondary", "success", "danger", "warning", "info"]);
 var SPINNER_VARIANTS = /* @__PURE__ */ new Set(["border", "grow"]);
+var AUTO_REFRESH_PAUSE_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+  <path d="M4 3h3v10H4zM9 3h3v10H9z"></path>
+</svg>`.trim();
+var AUTO_REFRESH_PLAY_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+  <path d="M4 3.5v9l8-4.5-8-4.5z"></path>
+</svg>`.trim();
 var HostElement3 = typeof HTMLElement === "undefined" ? class {
 } : HTMLElement;
 var themeSubscribers = /* @__PURE__ */ new Set();
@@ -2525,6 +2533,10 @@ var IncAutoRefresh = class extends HostElement3 {
       return;
     }
     this.innerHTML = `
+<button type="button" class="inc-auto-refresh__toggle inc-btn inc-btn--outline-secondary inc-btn--micro" part="toggle">
+  <span class="inc-auto-refresh__toggle-icon" aria-hidden="true"></span>
+  <span class="inc-auto-refresh__toggle-text"></span>
+</button>
 <span class="inc-auto-refresh__countdown" part="countdown">
   <span class="inc-auto-refresh__label" part="label"></span>
   <span class="inc-auto-refresh__value" part="value"></span>
@@ -2532,10 +2544,6 @@ var IncAutoRefresh = class extends HostElement3 {
 <span class="inc-auto-refresh__status" part="status" hidden>
   <span class="inc-auto-refresh__status-text"></span>
 </span>
-<button type="button" class="inc-auto-refresh__toggle inc-btn inc-btn--outline-secondary inc-btn--micro" part="toggle">
-  <span class="inc-auto-refresh__toggle-icon" aria-hidden="true"></span>
-  <span class="inc-auto-refresh__toggle-text"></span>
-</button>
         `.trim();
     this.#parts = this.#getParts();
   }
@@ -2547,6 +2555,7 @@ var IncAutoRefresh = class extends HostElement3 {
       status: this.querySelector(".inc-auto-refresh__status"),
       statusText: this.querySelector(".inc-auto-refresh__status-text"),
       toggle: this.querySelector(".inc-auto-refresh__toggle"),
+      toggleIcon: this.querySelector(".inc-auto-refresh__toggle-icon"),
       toggleText: this.querySelector(".inc-auto-refresh__toggle-text")
     };
   }
@@ -2668,6 +2677,9 @@ var IncAutoRefresh = class extends HostElement3 {
     this.#parts.toggle.setAttribute("aria-label", actionLabel);
     if (this.#parts.toggleText) {
       this.#parts.toggleText.textContent = actionLabel;
+    }
+    if (this.#parts.toggleIcon instanceof HTMLElement) {
+      this.#parts.toggleIcon.innerHTML = this.#isPaused ? AUTO_REFRESH_PLAY_ICON : AUTO_REFRESH_PAUSE_ICON;
     }
   }
   #stop() {
@@ -3028,6 +3040,10 @@ var BUTTON_VARIANTS = /* @__PURE__ */ new Set([
   "outline-info"
 ]);
 var BUTTON_SIZES = /* @__PURE__ */ new Set(["sm", "lg", "micro"]);
+var ALERT_DEFAULT_ROLE_BY_TONE = /* @__PURE__ */ new Map([
+  ["info", "status"],
+  ["secondary", "status"]
+]);
 var HostElement4 = typeof HTMLElement === "undefined" ? class {
 } : HTMLElement;
 function toBoolean(value, fallback = false) {
@@ -3035,6 +3051,10 @@ function toBoolean(value, fallback = false) {
     return fallback;
   }
   return !FALSE_TOKENS.has(String(value).toLowerCase());
+}
+function toPositiveInt2(value) {
+  const parsed = Number.parseInt(String(value ?? "").trim(), 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
 }
 function emit2(host, type, detail = {}, options = {}) {
   return host.dispatchEvent(new CustomEvent(type, {
@@ -3251,7 +3271,6 @@ var IncCloseButtonElement = class extends IncElement {
     return ["label", "variant"];
   }
   connectedCallback() {
-    addClass(this, "inc-close-button");
     this.sync();
   }
   attributeChangedCallback() {
@@ -3260,7 +3279,7 @@ var IncCloseButtonElement = class extends IncElement {
     }
   }
   sync() {
-    addClass(this, "inc-close-button");
+    this.classList.remove("inc-close-button", "inc-close-button--white");
     this.setAttribute("part", "close-button");
     const control = this.ensureControl();
     const variant = normalizeToken2(this.getAttribute("variant"));
@@ -3271,9 +3290,7 @@ var IncCloseButtonElement = class extends IncElement {
     }
     control.type = "button";
     control.setAttribute("aria-label", this.getAttribute("label") || "Close");
-    if (!control.childNodes.length) {
-      control.textContent = "\xD7";
-    }
+    control.textContent = "";
   }
   ensureControl() {
     const existing = this._control || this.querySelector(":scope > button.inc-close-button");
@@ -3296,7 +3313,7 @@ var IncCloseButtonElement = class extends IncElement {
 };
 var IncAlertElement = class extends IncElement {
   static get observedAttributes() {
-    return ["tone", "variant", "dismissible", "dismiss-label"];
+    return ["tone", "variant", "dismissible", "dismiss-label", "timeout"];
   }
   connectedCallback() {
     addClass(this, "inc-alert");
@@ -3304,6 +3321,7 @@ var IncAlertElement = class extends IncElement {
     this.sync();
   }
   disconnectedCallback() {
+    this.stopDismissTimer();
     if (this._boundClick) {
       this.removeEventListener("click", this._boundClick);
     }
@@ -3323,7 +3341,7 @@ var IncAlertElement = class extends IncElement {
         return;
       }
       event.preventDefault();
-      this.hide();
+      this.dismiss("manual");
     };
     this.addEventListener("click", this._boundClick);
   }
@@ -3341,12 +3359,24 @@ var IncAlertElement = class extends IncElement {
       this.removeDismissButton();
     }
     if (!this.hasAttribute("role")) {
-      this.setAttribute("role", resolvedTone === "info" || resolvedTone === "secondary" ? "status" : "alert");
+      this.setAttribute("role", ALERT_DEFAULT_ROLE_BY_TONE.get(resolvedTone) || "alert");
     }
     if (!this.hasAttribute("aria-live")) {
       this.setAttribute("aria-live", this.getAttribute("role") === "alert" ? "assertive" : "polite");
     }
     this.setAttribute("aria-atomic", "true");
+    const timeoutMs = toPositiveInt2(this.getAttribute("timeout"));
+    if (timeoutMs) {
+      this.ensureProgressBar();
+      if (!this.hidden && this.getAttribute("aria-hidden") !== "true") {
+        this.startDismissTimer(timeoutMs);
+      } else {
+        this.stopDismissTimer();
+      }
+    } else {
+      this.stopDismissTimer();
+      this.removeProgressBar();
+    }
   }
   ensureDismissButton() {
     let button = this.querySelector(":scope > [data-inc-alert-dismiss]");
@@ -3359,18 +3389,63 @@ var IncAlertElement = class extends IncElement {
     button.className = "inc-close-button";
     button.setAttribute("part", "dismiss");
     button.setAttribute("aria-label", this.getAttribute("dismiss-label") || "Dismiss alert");
-    if (!button.childNodes.length) {
-      button.textContent = "\xD7";
-    }
+    button.textContent = "";
     return button;
   }
   removeDismissButton() {
     this.querySelectorAll(":scope > [data-inc-alert-dismiss]").forEach((node) => node.remove());
   }
-  hide() {
+  ensureProgressBar() {
+    let progress = this.querySelector(":scope > .inc-alert__progress");
+    if (!progress) {
+      progress = document.createElement("div");
+      progress.className = "inc-alert__progress";
+      progress.setAttribute("part", "progress");
+      progress.setAttribute("aria-hidden", "true");
+      this.append(progress);
+    }
+    return progress;
+  }
+  removeProgressBar() {
+    this.querySelectorAll(":scope > .inc-alert__progress").forEach((node) => node.remove());
+  }
+  startDismissTimer(timeoutMs) {
+    const progress = this.ensureProgressBar();
+    this.stopDismissTimer();
+    this._dismissTimeoutMs = timeoutMs;
+    this._dismissStartedAt = performance.now();
+    const tick = (now) => {
+      if (this.hidden || this.getAttribute("aria-hidden") === "true") {
+        this.stopDismissTimer();
+        return;
+      }
+      const elapsed = Math.max(0, now - this._dismissStartedAt);
+      const remaining = Math.max(0, timeoutMs - elapsed);
+      const ratio = timeoutMs > 0 ? remaining / timeoutMs : 0;
+      progress.style.transform = `scaleX(${ratio})`;
+      if (remaining <= 0) {
+        this.dismiss("timeout");
+        return;
+      }
+      this._dismissFrame = window.requestAnimationFrame(tick);
+    };
+    progress.style.transform = "scaleX(1)";
+    this._dismissFrame = window.requestAnimationFrame(tick);
+  }
+  stopDismissTimer() {
+    if (this._dismissFrame) {
+      window.cancelAnimationFrame(this._dismissFrame);
+      this._dismissFrame = 0;
+    }
+  }
+  dismiss(reason = "manual") {
+    this.hide(reason);
+  }
+  hide(reason = "manual") {
+    this.stopDismissTimer();
     this.hidden = true;
     this.setAttribute("aria-hidden", "true");
-    this.emit("dismiss", { hidden: true });
+    this.emit("dismiss", { hidden: true, reason });
   }
 };
 var IncEmptyStateElement = class extends IncElement {

@@ -24,6 +24,10 @@ const BUTTON_VARIANTS = new Set([
     "outline-info",
 ]);
 const BUTTON_SIZES = new Set(["sm", "lg", "micro"]);
+const ALERT_DEFAULT_ROLE_BY_TONE = new Map([
+    ["info", "status"],
+    ["secondary", "status"],
+]);
 
 const HostElement = typeof HTMLElement === "undefined" ? class {} : HTMLElement;
 
@@ -33,6 +37,11 @@ function toBoolean(value, fallback = false) {
     }
 
     return !FALSE_TOKENS.has(String(value).toLowerCase());
+}
+
+function toPositiveInt(value) {
+    const parsed = Number.parseInt(String(value ?? "").trim(), 10);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
 }
 
 function emit(host, type, detail = {}, options = {}) {
@@ -292,7 +301,6 @@ export class IncCloseButtonElement extends IncElement {
     }
 
     connectedCallback() {
-        addClass(this, "inc-close-button");
         this.sync();
     }
 
@@ -303,7 +311,7 @@ export class IncCloseButtonElement extends IncElement {
     }
 
     sync() {
-        addClass(this, "inc-close-button");
+        this.classList.remove("inc-close-button", "inc-close-button--white");
         this.setAttribute("part", "close-button");
         const control = this.ensureControl();
         const variant = normalizeToken(this.getAttribute("variant"));
@@ -316,9 +324,7 @@ export class IncCloseButtonElement extends IncElement {
 
         control.type = "button";
         control.setAttribute("aria-label", this.getAttribute("label") || "Close");
-        if (!control.childNodes.length) {
-            control.textContent = "×";
-        }
+        control.textContent = "";
     }
 
     ensureControl() {
@@ -344,7 +350,7 @@ export class IncCloseButtonElement extends IncElement {
 
 export class IncAlertElement extends IncElement {
     static get observedAttributes() {
-        return ["tone", "variant", "dismissible", "dismiss-label"];
+        return ["tone", "variant", "dismissible", "dismiss-label", "timeout"];
     }
 
     connectedCallback() {
@@ -354,6 +360,7 @@ export class IncAlertElement extends IncElement {
     }
 
     disconnectedCallback() {
+        this.stopDismissTimer();
         if (this._boundClick) {
             this.removeEventListener("click", this._boundClick);
         }
@@ -377,7 +384,7 @@ export class IncAlertElement extends IncElement {
             }
 
             event.preventDefault();
-            this.hide();
+            this.dismiss("manual");
         };
 
         this.addEventListener("click", this._boundClick);
@@ -400,12 +407,25 @@ export class IncAlertElement extends IncElement {
         }
 
         if (!this.hasAttribute("role")) {
-            this.setAttribute("role", resolvedTone === "info" || resolvedTone === "secondary" ? "status" : "alert");
+            this.setAttribute("role", ALERT_DEFAULT_ROLE_BY_TONE.get(resolvedTone) || "alert");
         }
         if (!this.hasAttribute("aria-live")) {
             this.setAttribute("aria-live", this.getAttribute("role") === "alert" ? "assertive" : "polite");
         }
         this.setAttribute("aria-atomic", "true");
+
+        const timeoutMs = toPositiveInt(this.getAttribute("timeout"));
+        if (timeoutMs) {
+            this.ensureProgressBar();
+            if (!this.hidden && this.getAttribute("aria-hidden") !== "true") {
+                this.startDismissTimer(timeoutMs);
+            } else {
+                this.stopDismissTimer();
+            }
+        } else {
+            this.stopDismissTimer();
+            this.removeProgressBar();
+        }
     }
 
     ensureDismissButton() {
@@ -420,9 +440,7 @@ export class IncAlertElement extends IncElement {
         button.className = "inc-close-button";
         button.setAttribute("part", "dismiss");
         button.setAttribute("aria-label", this.getAttribute("dismiss-label") || "Dismiss alert");
-        if (!button.childNodes.length) {
-            button.textContent = "×";
-        }
+        button.textContent = "";
         return button;
     }
 
@@ -430,10 +448,68 @@ export class IncAlertElement extends IncElement {
         this.querySelectorAll(":scope > [data-inc-alert-dismiss]").forEach((node) => node.remove());
     }
 
-    hide() {
+    ensureProgressBar() {
+        let progress = this.querySelector(":scope > .inc-alert__progress");
+        if (!progress) {
+            progress = document.createElement("div");
+            progress.className = "inc-alert__progress";
+            progress.setAttribute("part", "progress");
+            progress.setAttribute("aria-hidden", "true");
+            this.append(progress);
+        }
+
+        return progress;
+    }
+
+    removeProgressBar() {
+        this.querySelectorAll(":scope > .inc-alert__progress").forEach((node) => node.remove());
+    }
+
+    startDismissTimer(timeoutMs) {
+        const progress = this.ensureProgressBar();
+        this.stopDismissTimer();
+        this._dismissTimeoutMs = timeoutMs;
+        this._dismissStartedAt = performance.now();
+
+        const tick = (now) => {
+            if (this.hidden || this.getAttribute("aria-hidden") === "true") {
+                this.stopDismissTimer();
+                return;
+            }
+
+            const elapsed = Math.max(0, now - this._dismissStartedAt);
+            const remaining = Math.max(0, timeoutMs - elapsed);
+            const ratio = timeoutMs > 0 ? remaining / timeoutMs : 0;
+            progress.style.transform = `scaleX(${ratio})`;
+
+            if (remaining <= 0) {
+                this.dismiss("timeout");
+                return;
+            }
+
+            this._dismissFrame = window.requestAnimationFrame(tick);
+        };
+
+        progress.style.transform = "scaleX(1)";
+        this._dismissFrame = window.requestAnimationFrame(tick);
+    }
+
+    stopDismissTimer() {
+        if (this._dismissFrame) {
+            window.cancelAnimationFrame(this._dismissFrame);
+            this._dismissFrame = 0;
+        }
+    }
+
+    dismiss(reason = "manual") {
+        this.hide(reason);
+    }
+
+    hide(reason = "manual") {
+        this.stopDismissTimer();
         this.hidden = true;
         this.setAttribute("aria-hidden", "true");
-        this.emit("dismiss", { hidden: true });
+        this.emit("dismiss", { hidden: true, reason });
     }
 }
 

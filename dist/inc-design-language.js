@@ -14,6 +14,12 @@
         nativeDialogOpen: "[data-inc-native-dialog-open]",
         autoRefresh: "[data-inc-auto-refresh]",
         autoRefreshToggle: '[data-inc-action="auto-refresh-toggle"]',
+        fileExample: "[data-inc-file-example]",
+        fileDropzone: "[data-inc-file-dropzone]",
+        fileInput: "[data-inc-file-input]",
+        fileBrowse: "[data-inc-file-browse]",
+        fileList: "[data-inc-file-list]",
+        fileRemove: '[data-inc-action="file-remove"]',
         modalToggle: '[data-inc-toggle="modal"]',
         modalDismiss: '[data-inc-dismiss="modal"]',
         offcanvasToggle: '[data-inc-toggle="offcanvas"]',
@@ -824,6 +830,298 @@
         return parsed;
     }
 
+    function formatFileExampleSize(bytes) {
+        if (!Number.isFinite(bytes) || bytes <= 0) {
+            return "0 B";
+        }
+
+        if (bytes < 1024) {
+            return `${bytes} B`;
+        }
+
+        const units = ["KB", "MB", "GB", "TB"];
+        let value = bytes / 1024;
+        let unitIndex = 0;
+
+        while (value >= 1024 && unitIndex < (units.length - 1)) {
+            value /= 1024;
+            unitIndex += 1;
+        }
+
+        const precision = value >= 10 ? 0 : 1;
+        return `${value.toFixed(precision)} ${units[unitIndex]}`;
+    }
+
+    function getFileExampleTypeLabel(file) {
+        if (!(file instanceof File)) {
+            return "File";
+        }
+
+        const extensionMatch = /\.([a-z0-9]+)$/i.exec(file.name || "");
+        if (extensionMatch?.[1]) {
+            return extensionMatch[1].toUpperCase();
+        }
+
+        if (typeof file.type === "string" && file.type.includes("/")) {
+            return file.type.split("/").at(-1)?.toUpperCase() || "File";
+        }
+
+        return "File";
+    }
+
+    function createFileExampleRow(file) {
+        const row = document.createElement("div");
+        const meta = document.createElement("div");
+        const name = document.createElement("p");
+        const detail = document.createElement("p");
+        const badge = document.createElement("span");
+        const actions = document.createElement("div");
+        const preview = document.createElement("a");
+        const remove = document.createElement("button");
+        const objectUrl = URL.createObjectURL(file);
+
+        row.className = "inc-file-row";
+        row._incFileExampleObjectUrl = objectUrl;
+
+        meta.className = "inc-file-row__meta";
+        name.className = "inc-file-row__name";
+        name.textContent = file.name || "untitled-file";
+        detail.className = "inc-file-row__detail";
+        detail.textContent = `${getFileExampleTypeLabel(file)} • ${formatFileExampleSize(file.size)} • selected just now`;
+        meta.append(name, detail);
+
+        badge.className = "inc-badge inc-badge--secondary inc-badge--pill";
+        badge.textContent = "Ready";
+
+        actions.className = "inc-file-row__actions";
+
+        preview.className = "inc-btn inc-btn--outline-secondary inc-btn--sm";
+        preview.href = objectUrl;
+        preview.target = "_blank";
+        preview.rel = "noreferrer";
+        preview.textContent = "Preview";
+
+        remove.type = "button";
+        remove.className = "inc-btn inc-btn--secondary inc-btn--sm";
+        remove.textContent = "Remove";
+        remove.setAttribute("data-inc-action", "file-remove");
+        remove.setAttribute("aria-label", `Remove ${file.name}`);
+
+        actions.append(preview, remove);
+        row.append(meta, badge, actions);
+        return row;
+    }
+
+    function revokeFileExampleRow(row) {
+        if (!(row instanceof HTMLElement)) {
+            return;
+        }
+
+        if (typeof row._incFileExampleObjectUrl === "string" && row._incFileExampleObjectUrl) {
+            URL.revokeObjectURL(row._incFileExampleObjectUrl);
+            row._incFileExampleObjectUrl = "";
+        }
+    }
+
+    function updateFileExampleEmptyState(controller) {
+        const { list } = controller.parts;
+        if (!(list instanceof HTMLElement)) {
+            return;
+        }
+
+        const rows = list.querySelectorAll(".inc-file-row");
+        let empty = list.querySelector("[data-inc-file-empty]");
+
+        if (rows.length > 0) {
+            if (empty instanceof HTMLElement) {
+                empty.hidden = true;
+            }
+            return;
+        }
+
+        if (!(empty instanceof HTMLElement)) {
+            empty = document.createElement("p");
+            empty.className = "inc-text inc-text--small inc-text--muted";
+            empty.setAttribute("data-inc-file-empty", "");
+            empty.textContent = controller.emptyText;
+            list.append(empty);
+        }
+
+        empty.hidden = false;
+    }
+
+    function appendFilesToExample(controller, files) {
+        const { list } = controller.parts;
+        if (!(list instanceof HTMLElement)) {
+            return;
+        }
+
+        const fileItems = Array.from(files || []).filter((file) => file instanceof File);
+        if (!fileItems.length) {
+            return;
+        }
+
+        fileItems.forEach((file) => {
+            list.append(createFileExampleRow(file));
+        });
+
+        updateFileExampleEmptyState(controller);
+    }
+
+    function dataTransferIncludesFiles(dataTransfer) {
+        if (!dataTransfer) {
+            return false;
+        }
+
+        if (dataTransfer.files?.length) {
+            return true;
+        }
+
+        return Array.from(dataTransfer.types || []).includes("Files");
+    }
+
+    function setFileDropzoneActiveState(controller, isActive) {
+        const { dropzone } = controller.parts;
+        if (!(dropzone instanceof HTMLElement)) {
+            return;
+        }
+
+        dropzone.classList.toggle("is-drag-over", Boolean(isActive));
+    }
+
+    function openFileExamplePicker(controller) {
+        const { input } = controller.parts;
+        if (!(input instanceof HTMLInputElement)) {
+            return;
+        }
+
+        input.click();
+    }
+
+    function initializeFileExamples() {
+        document.querySelectorAll(selectors.fileExample).forEach((root) => {
+            if (!(root instanceof HTMLElement) || root._incFileExampleInitialized) {
+                return;
+            }
+
+            const controller = {
+                root,
+                parts: {
+                    dropzone: root.querySelector(selectors.fileDropzone),
+                    input: root.querySelector(selectors.fileInput),
+                    browse: root.querySelector(selectors.fileBrowse),
+                    list: root.querySelector(selectors.fileList),
+                },
+                emptyText: root.getAttribute("data-inc-file-empty-text") || "No files selected yet.",
+                dragDepth: 0,
+            };
+
+            const { dropzone, input, browse, list } = controller.parts;
+            if (!(dropzone instanceof HTMLElement) || !(input instanceof HTMLInputElement) || !(list instanceof HTMLElement)) {
+                return;
+            }
+
+            root._incFileExampleInitialized = true;
+            root._incFileExampleController = controller;
+
+            dropzone.setAttribute("tabindex", dropzone.getAttribute("tabindex") || "0");
+            dropzone.setAttribute("role", dropzone.getAttribute("role") || "button");
+            dropzone.setAttribute("aria-label", dropzone.getAttribute("aria-label") || "Drop files here or browse for files");
+
+            const browseAction = (event) => {
+                event.preventDefault();
+                openFileExamplePicker(controller);
+            };
+
+            if (browse instanceof HTMLElement) {
+                browse.addEventListener("click", browseAction);
+            }
+
+            dropzone.addEventListener("click", (event) => {
+                if (event.target instanceof Element && event.target.closest("a, button, input, label")) {
+                    return;
+                }
+
+                openFileExamplePicker(controller);
+            });
+
+            dropzone.addEventListener("keydown", (event) => {
+                if (event.key !== "Enter" && event.key !== " ") {
+                    return;
+                }
+
+                event.preventDefault();
+                openFileExamplePicker(controller);
+            });
+
+            dropzone.addEventListener("dragenter", (event) => {
+                if (!dataTransferIncludesFiles(event.dataTransfer)) {
+                    return;
+                }
+
+                event.preventDefault();
+                controller.dragDepth += 1;
+                setFileDropzoneActiveState(controller, true);
+            });
+
+            dropzone.addEventListener("dragover", (event) => {
+                if (!dataTransferIncludesFiles(event.dataTransfer)) {
+                    return;
+                }
+
+                event.preventDefault();
+                if (event.dataTransfer) {
+                    event.dataTransfer.dropEffect = "copy";
+                }
+                setFileDropzoneActiveState(controller, true);
+            });
+
+            dropzone.addEventListener("dragleave", (event) => {
+                if (!dataTransferIncludesFiles(event.dataTransfer)) {
+                    return;
+                }
+
+                event.preventDefault();
+                controller.dragDepth = Math.max(0, controller.dragDepth - 1);
+
+                if (controller.dragDepth === 0 || !dropzone.contains(event.relatedTarget)) {
+                    setFileDropzoneActiveState(controller, false);
+                }
+            });
+
+            dropzone.addEventListener("drop", (event) => {
+                if (!dataTransferIncludesFiles(event.dataTransfer)) {
+                    return;
+                }
+
+                event.preventDefault();
+                controller.dragDepth = 0;
+                setFileDropzoneActiveState(controller, false);
+                appendFilesToExample(controller, event.dataTransfer?.files);
+            });
+
+            input.addEventListener("change", () => {
+                appendFilesToExample(controller, input.files);
+                input.value = "";
+            });
+
+            list.addEventListener("click", (event) => {
+                const removeButton = event.target.closest(selectors.fileRemove);
+                if (!removeButton) {
+                    return;
+                }
+
+                event.preventDefault();
+                const row = removeButton.closest(".inc-file-row");
+                revokeFileExampleRow(row);
+                row?.remove();
+                updateFileExampleEmptyState(controller);
+            });
+
+            updateFileExampleEmptyState(controller);
+        });
+    }
+
     function formatAutoRefreshRemaining(totalSeconds) {
         if (totalSeconds < 60) {
             return `${totalSeconds}s`;
@@ -834,14 +1132,36 @@
         return `${minutes}m ${seconds}s`;
     }
 
+    const AUTO_REFRESH_PAUSE_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+  <path d="M4 3h3v10H4zM9 3h3v10H9z"></path>
+</svg>`.trim();
+
+    const AUTO_REFRESH_PLAY_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+  <path d="M4 3.5v9l8-4.5-8-4.5z"></path>
+</svg>`.trim();
+
     function getAutoRefreshParts(root) {
+        const toggle = root.querySelector(".inc-auto-refresh__toggle");
+
+        if (toggle instanceof HTMLElement) {
+            if (!toggle.querySelector(".inc-auto-refresh__toggle-icon")) {
+                const icon = document.createElement("span");
+                icon.className = "inc-auto-refresh__toggle-icon";
+                icon.setAttribute("aria-hidden", "true");
+                toggle.prepend(icon);
+            }
+        }
+
         return {
             countdown: root.querySelector(".inc-auto-refresh__countdown"),
             label: root.querySelector(".inc-auto-refresh__label"),
             value: root.querySelector(".inc-auto-refresh__value"),
             status: root.querySelector(".inc-auto-refresh__status"),
             statusText: root.querySelector(".inc-auto-refresh__status-text"),
-            toggle: root.querySelector(".inc-auto-refresh__toggle"),
+            toggle,
+            toggleIcon: root.querySelector(".inc-auto-refresh__toggle-icon"),
             toggleText: root.querySelector(".inc-auto-refresh__toggle-text"),
         };
     }
@@ -860,6 +1180,10 @@
 
         if (parts.toggleText) {
             parts.toggleText.textContent = actionLabel;
+        }
+
+        if (parts.toggleIcon instanceof HTMLElement) {
+            parts.toggleIcon.innerHTML = isPaused ? AUTO_REFRESH_PLAY_ICON : AUTO_REFRESH_PAUSE_ICON;
         }
     }
 
@@ -1524,6 +1848,7 @@
         initializeMenus();
         initializeCollapses();
         initializeTabs();
+        initializeFileExamples();
         initializeAutoRefresh();
         attachEventHandlers();
     }

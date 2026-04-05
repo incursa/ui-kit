@@ -1,6 +1,23 @@
 import { expect, test } from "@playwright/test";
 import { openWebComponentsPage } from "./helpers.mjs";
 
+async function openWebComponentsWithTheme(page, mode) {
+    await page.addInitScript((themeMode) => {
+        try {
+            window.localStorage.setItem("inc-theme-mode", themeMode);
+        } catch {
+            // Ignore storage restrictions in locked-down contexts.
+        }
+
+        const root = document.documentElement;
+        root.setAttribute("data-inc-theme-mode", themeMode);
+        root.setAttribute("data-bs-theme", themeMode);
+        root.style.colorScheme = themeMode;
+    }, mode);
+
+    await openWebComponentsPage(page);
+}
+
 test("web components register and render expected light-DOM structure", async ({ page }) => {
     await openWebComponentsPage(page);
 
@@ -62,11 +79,19 @@ test("web components register and render expected light-DOM structure", async ({
     await expect(page.locator("#wc-button-loading .inc-button__control")).toHaveClass(/inc-btn--outline-secondary/);
     await expect(page.locator("#wc-button-loading .inc-button__control")).toHaveClass(/is-loading/);
     await expect(page.locator("#wc-button-loading .inc-button__control")).toHaveAttribute("aria-busy", "true");
+    await expect(page.locator("#wc-button-inline-loading .inc-button__control")).toContainText("Publishing");
+    await expect(page.locator("#wc-button-inline-loading .inc-spinner")).toHaveCount(1);
+    await expect(page.locator("#wc-button-inline-loading-secondary .inc-button__control")).toContainText("Refreshing");
+    await expect(page.locator("#wc-button-inline-loading-secondary .inc-spinner")).toHaveCount(1);
     await expect(page.locator("#wc-button-group")).toHaveClass(/inc-button-group--sm/);
     await expect(page.locator("#wc-button-group")).toHaveAttribute("aria-label", "Queue mode");
     await expect(page.locator("#wc-button-toolbar")).toHaveAttribute("role", "toolbar");
+    await expect(page.locator("#wc-close-button")).not.toHaveClass(/inc-close-button/);
     await expect(page.locator("#wc-close-button button")).toHaveClass(/inc-close-button/);
     await expect(page.locator("#wc-close-button button")).toHaveAttribute("aria-label", "Dismiss panel");
+    await expect(page.locator("#wc-alert-success")).toHaveClass(/inc-alert--success/);
+    await expect(page.locator("#wc-alert-success")).toHaveClass(/inc-alert--dismissible/);
+    await expect(page.locator("#wc-alert-success [part='progress']")).toHaveCount(1);
     await expect(page.locator("#wc-alert-warning")).toHaveClass(/inc-alert--warning/);
     await expect(page.locator("#wc-alert-warning")).toHaveClass(/inc-alert--dismissible/);
     await expect(page.locator("#wc-empty-state")).toHaveClass(/inc-empty-state/);
@@ -119,6 +144,27 @@ test("collection shells region is visually stable", async ({ page }) => {
     await openWebComponentsPage(page);
 
     await expect(page.locator("#wc-collection-card")).toHaveScreenshot("wc-collection-shells-region.png", {
+        animations: "disabled",
+        caret: "hide",
+    });
+});
+
+test("web components dark mode keeps action and feedback regions readable", async ({ page }) => {
+    await openWebComponentsWithTheme(page, "dark");
+
+    await expect(page.locator("html")).toHaveAttribute("data-bs-theme", "dark");
+
+    await expect(page.locator("[data-test='atoms-region']")).toHaveScreenshot("wc-atoms-region-dark.png", {
+        animations: "disabled",
+        caret: "hide",
+    });
+
+    await expect(page.locator("[data-test='actions-region']")).toHaveScreenshot("wc-actions-region-dark.png", {
+        animations: "disabled",
+        caret: "hide",
+    });
+
+    await expect(page.locator("[data-test='forms-feedback-region']")).toHaveScreenshot("wc-forms-feedback-region-dark.png", {
         animations: "disabled",
         caret: "hide",
     });

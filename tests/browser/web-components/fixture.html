@@ -243,6 +243,16 @@
                                 <inc-button id="wc-button-secondary" tone="secondary" size="sm">Save Draft</inc-button>
                                 <inc-button id="wc-button-loading" tone="outline-secondary" loading label="Saving approval">Saving</inc-button>
                             </div>
+                            <div class="wc-actions">
+                                <inc-button id="wc-button-inline-loading" tone="primary" size="sm" label="Publishing approval">
+                                    <span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"></span>
+                                    <span>Publishing</span>
+                                </inc-button>
+                                <inc-button id="wc-button-inline-loading-secondary" variant="outline-secondary" size="sm" label="Refreshing queue">
+                                    <span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"></span>
+                                    <span>Refreshing</span>
+                                </inc-button>
+                            </div>
                             <inc-button-group id="wc-button-group" size="sm" label="Queue mode">
                                 <inc-button tone="secondary">Light</inc-button>
                                 <inc-button tone="secondary">Dark</inc-button>
@@ -256,6 +266,7 @@
                         </div>
                         <div class="inc-stack inc-stack--gap-sm">
                             <p class="wc-note">Alerts and empty-state shells keep the repeated runtime scaffolding declarative.</p>
+                            <inc-alert id="wc-alert-success" tone="success" dismissible dismiss-label="Dismiss success" timeout="5000">Success alert text.</inc-alert>
                             <inc-alert id="wc-alert-info" tone="info">Information alert text.</inc-alert>
                             <inc-alert id="wc-alert-warning" tone="warning" dismissible dismiss-label="Dismiss warning">Warning alert text.</inc-alert>
                             <inc-empty-state id="wc-empty-state">

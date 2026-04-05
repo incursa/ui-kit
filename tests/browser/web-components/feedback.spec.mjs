@@ -11,9 +11,14 @@ test("state panel, badge/spinner atoms, live region, and auto-refresh surfaces r
     const spinner = page.locator("#wc-spinner-border");
     const growSpinner = page.locator("#wc-spinner-grow");
     const loadingButton = page.locator("#wc-button-loading .inc-button__control");
+    const inlineLoadingButton = page.locator("#wc-button-inline-loading .inc-button__control");
+    const inlineLoadingSecondaryButton = page.locator("#wc-button-inline-loading-secondary .inc-button__control");
+    const successAlert = page.locator("#wc-alert-success");
     const warningAlert = page.locator("#wc-alert-warning");
     const emptyState = page.locator("#wc-empty-state");
     const toggle = autoRefresh.locator(".inc-auto-refresh__toggle");
+    const toggleIcon = autoRefresh.locator(".inc-auto-refresh__toggle-icon");
+    const countdown = autoRefresh.locator(".inc-auto-refresh__countdown");
 
     await expect(statePanel).toHaveClass(/inc-state-panel/);
     await expect(statePanel).toHaveClass(/inc-state-panel--warning/);
@@ -43,6 +48,14 @@ test("state panel, badge/spinner atoms, live region, and auto-refresh surfaces r
     await expect(loadingButton).toHaveClass(/is-loading/);
     await expect(loadingButton).toHaveAttribute("aria-busy", "true");
     await expect(loadingButton.locator("[data-inc-button-spinner]")).toHaveCount(1);
+    await expect(inlineLoadingButton).toContainText("Publishing");
+    await expect(inlineLoadingButton.locator(".inc-spinner")).toHaveCount(1);
+    await expect(inlineLoadingSecondaryButton).toContainText("Refreshing");
+    await expect(inlineLoadingSecondaryButton.locator(".inc-spinner")).toHaveCount(1);
+
+    await expect(successAlert).toHaveClass(/inc-alert--success/);
+    await expect(successAlert.locator("[data-inc-alert-dismiss]")).toHaveAttribute("aria-label", "Dismiss success");
+    await expect(successAlert.locator("[part='progress']")).toHaveCount(1);
 
     await expect(warningAlert).toHaveClass(/inc-alert--warning/);
     await expect(warningAlert).toHaveClass(/inc-alert--dismissible/);
@@ -50,6 +63,15 @@ test("state panel, badge/spinner atoms, live region, and auto-refresh surfaces r
     await warningAlert.locator("[data-inc-alert-dismiss]").click();
     await expect(warningAlert).toHaveAttribute("aria-hidden", "true");
     await expect(warningAlert).toBeHidden();
+
+    const timeoutReason = successAlert.evaluate((element) => new Promise((resolve) => {
+        element.addEventListener("dismiss", (event) => resolve(event.detail.reason), { once: true });
+        element.setAttribute("timeout", "120");
+    }));
+    await expect(successAlert.locator("[part='progress']")).toBeVisible();
+    await expect(successAlert).toBeHidden({ timeout: 1000 });
+    expect(await timeoutReason).toBe("timeout");
+    await expect(successAlert).toHaveAttribute("aria-hidden", "true");
 
     await expect(emptyState).toHaveClass(/inc-empty-state/);
     await expect(emptyState).toContainText("No saved views");
@@ -65,12 +87,19 @@ test("state panel, badge/spinner atoms, live region, and auto-refresh surfaces r
     await expect(autoRefresh).toHaveAttribute("aria-busy", "false");
     await expect(toggle).toHaveAttribute("aria-pressed", "true");
     await expect(toggle).toHaveAttribute("aria-label", "Resume");
+    await expect(toggleIcon).toBeVisible();
     await expect(toggle).toHaveText("Resume");
+
+    const pausedBoxes = await Promise.all([toggle.boundingBox(), countdown.boundingBox()]);
+    expect(pausedBoxes[0]).not.toBeNull();
+    expect(pausedBoxes[1]).not.toBeNull();
+    expect(pausedBoxes[0].x).toBeLessThan(pausedBoxes[1].x);
 
     await toggle.click();
 
     await expect(autoRefresh).not.toHaveClass(/is-paused/);
     await expect(toggle).toHaveAttribute("aria-pressed", "false");
     await expect(toggle).toHaveAttribute("aria-label", "Pause");
+    await expect(toggleIcon).toBeVisible();
     await expect(toggle).toHaveText("Pause");
 });

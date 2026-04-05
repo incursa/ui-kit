@@ -207,6 +207,14 @@
                                              data-inc-refresh-seconds="300"
                                              data-inc-refresh-label="Queue refresh in"
                                              data-inc-refresh-loading-label="Refreshing queue">
+                                            <button class="inc-btn inc-btn--secondary inc-btn--micro inc-auto-refresh__toggle"
+                                                    type="button"
+                                                    data-inc-action="auto-refresh-toggle"
+                                                    aria-label="Pause"
+                                                    aria-pressed="false">
+                                                <span class="inc-auto-refresh__toggle-icon" aria-hidden="true"></span>
+                                                <span class="inc-auto-refresh__toggle-text">Pause</span>
+                                            </button>
                                             <span class="inc-auto-refresh__countdown">
                                                 <span class="inc-auto-refresh__label">Queue refresh in</span>
                                                 <span class="inc-auto-refresh__value">300s</span>
@@ -217,13 +225,6 @@
                                                 </span>
                                                 <span class="inc-auto-refresh__status-text">Refreshing queue</span>
                                             </span>
-                                            <button class="inc-btn inc-btn--secondary inc-btn--micro inc-auto-refresh__toggle"
-                                                    type="button"
-                                                    data-inc-action="auto-refresh-toggle"
-                                                    aria-label="Pause"
-                                                    aria-pressed="false">
-                                                <span class="inc-auto-refresh__toggle-text">Pause</span>
-                                            </button>
                                         </div>
                                     </div>
                                     <div class="inc-live-region" aria-live="polite" aria-atomic="true">
@@ -312,16 +313,17 @@
                                 <div class="inc-card__header">
                                     <h2 class="inc-card__title">Files and Documents</h2>
                                 </div>
-                                <div class="inc-card__body inc-stack inc-stack--gap-md">
-                                    <div class="inc-file-dropzone">
+                                <div id="states-file-workflow-example" class="inc-card__body inc-stack inc-stack--gap-md" data-inc-file-example>
+                                    <input id="states-file-workflow-input" class="inc-u-visually-hidden" type="file" multiple data-inc-file-input>
+                                    <div class="inc-file-dropzone" data-inc-file-dropzone aria-describedby="states-file-workflow-list">
                                         <div class="inc-file-dropzone__content">
                                             <h3 class="inc-file-dropzone__title">Drop waivers or billing support here</h3>
                                             <p class="inc-file-dropzone__text">Use this for document-centric flows where operators collect several files before submission.</p>
                                         </div>
-                                        <a class="inc-btn inc-btn--primary" href="#">Browse Files</a>
+                                        <button class="inc-btn inc-btn--primary" type="button" data-inc-file-browse>Browse Files</button>
                                     </div>
 
-                                    <div class="inc-file-list">
+                                    <div id="states-file-workflow-list" class="inc-file-list" data-inc-file-list>
                                         <div class="inc-file-row">
                                             <div class="inc-file-row__meta">
                                                 <p class="inc-file-row__name">conditional-waiver-march.pdf</p>

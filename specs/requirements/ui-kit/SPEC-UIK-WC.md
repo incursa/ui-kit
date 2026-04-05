@@ -240,7 +240,7 @@ The action/detail shells MUST stay thin and native-first:
 
 - `inc-button` MUST wrap a real `<button>` or `<a>` element and standardize the existing `inc-btn` tone, size, and loading classes.
 - `inc-close-button` MUST wrap a real `<button>` element and keep the close affordance native.
-- `inc-alert` MAY provide a simple dismissible mode, but it MUST not become a separate toast/lifecycle system.
+- `inc-alert` MAY provide simple dismissible and timeout-driven dismissal modes, but it MUST not become a separate toast/lifecycle system.
 - `inc-empty-state`, `inc-list-group`, and `inc-key-value*` MUST remain light DOM shells that project into the existing CSS vocabulary.
 
 #### Contract matrix
@@ -251,7 +251,7 @@ The action/detail shells MUST stay thin and native-first:
 | `<inc-button-group>` | `size`, `label` | none | none | `default` | `role="group"`; `inc-button-group--*` modifiers | Group multiple buttons and expose a stable accessible label | V1 |
 | `<inc-button-toolbar>` | `label`, `orientation` | none | none | `default` | `role="toolbar"`; `aria-orientation` when vertical | Provide a labeled action rail without a bespoke toolbar system | V1 |
 | `<inc-close-button>` | `label`, `variant` | native `click` | none | `default` | inner control `part="control"`; `inc-close-button--white` modifier | Keep the close affordance as a real button with a default accessible label | V1 |
-| `<inc-alert>` | `tone`, `variant`, `dismissible`, `dismiss-label` | `dismiss` | `hide()` | `default` | host `part="alert"` and dismiss control `part="dismiss"` | Standardize alert tones and optional dismissal without introducing toast orchestration | V1 |
+| `<inc-alert>` | `tone`, `variant`, `dismissible`, `dismiss-label`, `timeout` | `dismiss` | `hide()`, `dismiss()` | `default` | host `part="alert"`, dismiss control `part="dismiss"`, timed progress `part="progress"` | Standardize alert tones plus optional dismiss and timeout behavior without introducing toast orchestration | V1 |
 | `<inc-empty-state>` | none | none | none | `icon`, `actions`, `default` | `part="empty-state content icon body actions"` | Standardize the repeated icon/body/actions empty-state structure | V1 |
 | `<inc-list-group>` | `flush`, `numbered`, `dense`, `interactive`, `label` | native child `click` events | none | `item`, `default` | `role="list"`; `inc-list-group--*` modifiers | Preserve list semantics while standardizing action rows and numbered lists | V1 |
 | `<inc-key-value-grid>` | `columns`, `dense` | none | none | `item`, `default` | inline grid sizing via `columns`; dense gap adjustments | Keep description-list grids declarative and easy to repeat | V1 |
@@ -260,7 +260,7 @@ The action/detail shells MUST stay thin and native-first:
 #### Acceptance criteria
 
 - Action hosts must wrap or project native controls rather than reimplementing button semantics.
-- Alert dismissal, close buttons, and loading states must stay thin and observable in the DOM.
+- Alert dismissal, optional timeout progress, close buttons, and loading states must stay thin and observable in the DOM.
 - Empty-state, list-group, and key/value hosts must keep the current `inc-*` class vocabulary recognizable to CSS-first consumers.
 - These shells must stay small enough that tables, vertical lists, and other larger data wrappers can still be deferred.
 

@@ -2,6 +2,14 @@ const THEME_MODES = ["light", "dark", "system"];
 const DEFAULT_THEME_STORAGE_KEY = "inc-theme-mode";
 const BADGE_TONES = new Set(["primary", "secondary", "success", "danger", "warning", "info"]);
 const SPINNER_VARIANTS = new Set(["border", "grow"]);
+const AUTO_REFRESH_PAUSE_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+  <path d="M4 3h3v10H4zM9 3h3v10H9z"></path>
+</svg>`.trim();
+const AUTO_REFRESH_PLAY_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+  <path d="M4 3.5v9l8-4.5-8-4.5z"></path>
+</svg>`.trim();
 const HostElement = typeof HTMLElement === "undefined" ? class {} : HTMLElement;
 const themeSubscribers = new Set();
 
@@ -677,6 +685,10 @@ export class IncAutoRefresh extends HostElement {
         }
 
         this.innerHTML = `
+<button type="button" class="inc-auto-refresh__toggle inc-btn inc-btn--outline-secondary inc-btn--micro" part="toggle">
+  <span class="inc-auto-refresh__toggle-icon" aria-hidden="true"></span>
+  <span class="inc-auto-refresh__toggle-text"></span>
+</button>
 <span class="inc-auto-refresh__countdown" part="countdown">
   <span class="inc-auto-refresh__label" part="label"></span>
   <span class="inc-auto-refresh__value" part="value"></span>
@@ -684,10 +696,6 @@ export class IncAutoRefresh extends HostElement {
 <span class="inc-auto-refresh__status" part="status" hidden>
   <span class="inc-auto-refresh__status-text"></span>
 </span>
-<button type="button" class="inc-auto-refresh__toggle inc-btn inc-btn--outline-secondary inc-btn--micro" part="toggle">
-  <span class="inc-auto-refresh__toggle-icon" aria-hidden="true"></span>
-  <span class="inc-auto-refresh__toggle-text"></span>
-</button>
         `.trim();
 
         this.#parts = this.#getParts();
@@ -701,6 +709,7 @@ export class IncAutoRefresh extends HostElement {
             status: this.querySelector(".inc-auto-refresh__status"),
             statusText: this.querySelector(".inc-auto-refresh__status-text"),
             toggle: this.querySelector(".inc-auto-refresh__toggle"),
+            toggleIcon: this.querySelector(".inc-auto-refresh__toggle-icon"),
             toggleText: this.querySelector(".inc-auto-refresh__toggle-text"),
         };
     }
@@ -860,6 +869,10 @@ export class IncAutoRefresh extends HostElement {
 
         if (this.#parts.toggleText) {
             this.#parts.toggleText.textContent = actionLabel;
+        }
+
+        if (this.#parts.toggleIcon instanceof HTMLElement) {
+            this.#parts.toggleIcon.innerHTML = this.#isPaused ? AUTO_REFRESH_PLAY_ICON : AUTO_REFRESH_PAUSE_ICON;
         }
     }
 

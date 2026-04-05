@@ -4,7 +4,7 @@
   "kind": "guide",
   "searchKind": "guide",
   "summary": "The latest recorded changelog entry.",
-  "body": "- Added new Web Components for buttons, alerts, badges, spinners, empty states, list groups, and key-value layouts, and split the runtime into clearer component modules.\n- Refined the visual hierarchy across cards, tabs, alerts, outline buttons, empty states, validation surfaces, and the auto-refresh control with subtle surfaced styling.\n- Expanded browser/reference coverage and refreshed the generated package, MCP assets, and runtime documentation to match the new component surface.",
+  "body": "- Published the expanded Web Components and visual hierarchy updates in a corrected follow-up after the failed v1.6.0 tag run.\n- Regenerated the MCP manifest outputs so release verification and published artifacts stay in sync.\n- Hardened the PowerShell release helper so failed native commands stop the release before any commit, tag, or push.",
   "sourcePaths": [
     "CHANGELOG.md"
   ],
@@ -21,5 +21,5 @@
   "group": "guides",
   "priority": 95,
   "includeInSearch": true,
-  "searchText": "Latest release notes\nThe latest recorded changelog entry.\n- Added new Web Components for buttons, alerts, badges, spinners, empty states, list groups, and key-value layouts, and split the runtime into clearer component modules.\n- Refined the visual hierarchy across cards, tabs, alerts, outline buttons, empty states, validation surfaces, and the auto-refresh control with subtle surfaced styling.\n- Expanded browser/reference coverage and refreshed the generated package, MCP assets, and runtime documentation to match the new component surface.\nrelease notes\nchangelog\nlatest release\nCHANGELOG.md"
+  "searchText": "Latest release notes\nThe latest recorded changelog entry.\n- Published the expanded Web Components and visual hierarchy updates in a corrected follow-up after the failed v1.6.0 tag run.\n- Regenerated the MCP manifest outputs so release verification and published artifacts stay in sync.\n- Hardened the PowerShell release helper so failed native commands stop the release before any commit, tag, or push.\nrelease notes\nchangelog\nlatest release\nCHANGELOG.md"
 }

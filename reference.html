@@ -229,6 +229,10 @@
                                         <button class="inc-btn inc-btn--primary is-loading" type="button">Publishing<span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"></span></button>
                                         <button class="inc-btn inc-btn--secondary is-loading" type="button">Refreshing<span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"></span></button>
                                     </div>
+                                    <div class="demo-chip-row">
+                                        <button class="inc-btn inc-btn--primary" type="button" aria-busy="true"><span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"></span><span>Publishing</span></button>
+                                        <button class="inc-btn inc-btn--outline-secondary" type="button" aria-busy="true"><span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"></span><span>Refreshing</span></button>
+                                    </div>
                                 </div>
 <pre class="demo-code"><code>&lt;button class="inc-btn inc-btn--primary" type="button"&gt;Primary&lt;/button&gt;
 &lt;button class="inc-btn inc-btn--secondary" type="button"&gt;Secondary&lt;/button&gt;
@@ -244,7 +248,10 @@
 &lt;/div&gt;
 
 &lt;button class="inc-btn inc-btn--primary is-loading" type="button"&gt;Publishing&lt;span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"&gt;&lt;/span&gt;&lt;/button&gt;
-&lt;button class="inc-btn inc-btn--secondary is-loading" type="button"&gt;Refreshing&lt;span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"&gt;&lt;/span&gt;&lt;/button&gt;</code></pre>
+&lt;button class="inc-btn inc-btn--secondary is-loading" type="button"&gt;Refreshing&lt;span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"&gt;&lt;/span&gt;&lt;/button&gt;
+
+&lt;button class="inc-btn inc-btn--primary" type="button" aria-busy="true"&gt;&lt;span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"&gt;&lt;/span&gt;&lt;span&gt;Publishing&lt;/span&gt;&lt;/button&gt;
+&lt;button class="inc-btn inc-btn--outline-secondary" type="button" aria-busy="true"&gt;&lt;span class="inc-spinner inc-spinner--border inc-spinner--border--sm" aria-hidden="true"&gt;&lt;/span&gt;&lt;span&gt;Refreshing&lt;/span&gt;&lt;/button&gt;</code></pre>
                             </div>
                         </section>
 
@@ -260,6 +267,7 @@
                                         <span class="inc-badge inc-badge--danger inc-badge--pill">Rejected</span>
                                         <span class="inc-badge inc-badge--info inc-badge--pill">Imported</span>
                                     </div>
+                                    <div class="inc-alert inc-alert--success">Success alert text.</div>
                                     <div class="inc-alert inc-alert--info">Information alert text.</div>
                                     <div class="inc-alert inc-alert--warning">Warning alert text.</div>
                                     <div class="inc-alert inc-alert--danger">Danger alert text.</div>
@@ -269,6 +277,7 @@
 &lt;span class="inc-badge inc-badge--danger inc-badge--pill"&gt;Rejected&lt;/span&gt;
 &lt;span class="inc-badge inc-badge--info inc-badge--pill"&gt;Imported&lt;/span&gt;
 
+&lt;div class="inc-alert inc-alert--success"&gt;Success alert text.&lt;/div&gt;
 &lt;div class="inc-alert inc-alert--info"&gt;Information alert text.&lt;/div&gt;
 &lt;div class="inc-alert inc-alert--warning"&gt;Warning alert text.&lt;/div&gt;
 &lt;div class="inc-alert inc-alert--danger"&gt;Danger alert text.&lt;/div&gt;</code></pre>
@@ -1096,12 +1105,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="inc-file-dropzone">
-                                        <div class="inc-file-dropzone__content">
-                                            <h3 class="inc-file-dropzone__title">Drop documents here</h3>
-                                            <p class="inc-file-dropzone__text">For review workflows with waiver or attachment requirements.</p>
+                                    <div id="ref-file-workflow-example" class="inc-stack inc-stack--gap-md" data-inc-file-example>
+                                        <input id="ref-file-workflow-input" class="inc-u-visually-hidden" type="file" multiple data-inc-file-input>
+                                        <div class="inc-file-dropzone" data-inc-file-dropzone aria-describedby="ref-file-workflow-list">
+                                            <div class="inc-file-dropzone__content">
+                                                <h3 class="inc-file-dropzone__title">Drop documents here</h3>
+                                                <p class="inc-file-dropzone__text">For review workflows with waiver or attachment requirements.</p>
+                                            </div>
+                                            <button class="inc-btn inc-btn--primary" type="button" data-inc-file-browse>Browse Files</button>
                                         </div>
-                                        <button class="inc-btn inc-btn--primary" type="button">Browse Files</button>
+                                        <div id="ref-file-workflow-list" class="inc-file-list" data-inc-file-list>
+                                            <p class="inc-text inc-text--small inc-text--muted" data-inc-file-empty>No files selected yet.</p>
+                                        </div>
                                     </div>
                                     <div class="inc-bulk-bar">
                                         <div class="inc-bulk-bar__meta">
@@ -1140,6 +1155,14 @@
                                          data-inc-refresh-seconds="180"
                                          data-inc-refresh-label="Queue refresh in"
                                          data-inc-refresh-loading-label="Refreshing queue">
+                                        <button class="inc-btn inc-btn--secondary inc-btn--micro inc-auto-refresh__toggle"
+                                                type="button"
+                                                data-inc-action="auto-refresh-toggle"
+                                                aria-label="Pause"
+                                                aria-pressed="false">
+                                            <span class="inc-auto-refresh__toggle-icon" aria-hidden="true"></span>
+                                            <span class="inc-auto-refresh__toggle-text">Pause</span>
+                                        </button>
                                         <span class="inc-auto-refresh__countdown">
                                             <span class="inc-auto-refresh__label">Queue refresh in</span>
                                             <span class="inc-auto-refresh__value">180s</span>
@@ -1151,13 +1174,6 @@
                                             </span>
                                             <span class="inc-auto-refresh__status-text">Refreshing queue</span>
                                         </span>
-                                        <button class="inc-btn inc-btn--secondary inc-btn--micro inc-auto-refresh__toggle"
-                                                type="button"
-                                                data-inc-action="auto-refresh-toggle"
-                                                aria-label="Pause"
-                                                aria-pressed="false">
-                                            <span class="inc-auto-refresh__toggle-text">Pause</span>
-                                        </button>
                                     </div>
                                 </div>
 <pre class="demo-code"><code>&lt;div class="inc-auto-refresh"
@@ -1165,6 +1181,14 @@
      data-inc-refresh-seconds="30"
      data-inc-refresh-label="Refresh in"
      data-inc-refresh-loading-label="Refreshing"&gt;
+    &lt;button class="inc-btn inc-btn--secondary inc-btn--micro inc-auto-refresh__toggle"
+            type="button"
+            data-inc-action="auto-refresh-toggle"
+            aria-label="Pause"
+            aria-pressed="false"&gt;
+        &lt;span class="inc-auto-refresh__toggle-icon" aria-hidden="true"&gt;&lt;/span&gt;
+        &lt;span class="inc-auto-refresh__toggle-text"&gt;Pause&lt;/span&gt;
+    &lt;/button&gt;
     &lt;span class="inc-auto-refresh__countdown"&gt;
         &lt;span class="inc-auto-refresh__label"&gt;Refresh in&lt;/span&gt;
         &lt;span class="inc-auto-refresh__value"&gt;30s&lt;/span&gt;
@@ -1176,13 +1200,6 @@
         &lt;/span&gt;
         &lt;span class="inc-auto-refresh__status-text"&gt;Refreshing&lt;/span&gt;
     &lt;/span&gt;
-    &lt;button class="inc-btn inc-btn--secondary inc-btn--micro inc-auto-refresh__toggle"
-            type="button"
-            data-inc-action="auto-refresh-toggle"
-            aria-label="Pause"
-            aria-pressed="false"&gt;
-        &lt;span class="inc-auto-refresh__toggle-text"&gt;Pause&lt;/span&gt;
-    &lt;/button&gt;
 &lt;/div&gt;
 
 &lt;div class="inc-auto-refresh inc-auto-refresh--inline"

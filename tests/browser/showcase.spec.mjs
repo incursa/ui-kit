@@ -72,6 +72,10 @@ async function openPageWithTheme(page, relativePath, mode) {
     await openPage(page, relativePath);
 }
 
+async function openStatesWithTheme(page, mode) {
+    await openPageWithTheme(page, "states.html", mode);
+}
+
 test("demo showcase presents the CSS-first baseline and palette", async ({ page }) => {
     await openPage(page, "demo.html");
 
@@ -206,6 +210,101 @@ test("demo showcase dark mode keeps comparison panels and swatches readable", as
 
     swatchContrasts.forEach((ratio) => {
         expect(ratio).toBeGreaterThanOrEqual(3);
+    });
+});
+
+test("data grid showcase keeps review badges and secondary actions visually distinct", async ({ page }) => {
+    await openPage(page, "data-grid-advanced.html");
+
+    const bulkBar = page.locator(".inc-bulk-bar").first();
+    const warningBadge = bulkBar.locator(".inc-badge--warning").first();
+    const secondaryAction = bulkBar.locator(".inc-btn--secondary").first();
+    const outlineAction = bulkBar.locator(".inc-btn--outline-secondary").first();
+
+    await expect(bulkBar).toBeVisible();
+    await expect(warningBadge).toBeVisible();
+    await expect(secondaryAction).toBeVisible();
+    await expect(outlineAction).toBeVisible();
+    await expect(bulkBar).toHaveScreenshot("data-grid-bulk-bar.png", {
+        animations: "disabled",
+    });
+});
+
+test("data grid showcase dark mode keeps row states visually distinct", async ({ page }) => {
+    await openPageWithTheme(page, "data-grid-advanced.html", "dark");
+
+    const root = page.locator("html");
+    const reviewGridCard = page.locator("article.inc-card").filter({ hasText: "Review Queue Grid" });
+
+    await expect(root).toHaveAttribute("data-bs-theme", "dark");
+    await expect(reviewGridCard).toBeVisible();
+    await expect(reviewGridCard).toHaveScreenshot("data-grid-review-queue-dark.png", {
+        animations: "disabled",
+    });
+});
+
+test("states showcase dark mode keeps operational controls readable", async ({ page }) => {
+    await openStatesWithTheme(page, "dark");
+
+    const root = page.locator("html");
+    const loadingErrorGrid = page.locator("section.demo-layout-grid").nth(1);
+    const feedbackCard = page.locator("article.inc-card").filter({ hasText: "Toasts and Side Feedback" });
+    const filesCard = page.locator("article.inc-card").filter({ hasText: "Files and Documents" });
+    const feedbackToggle = feedbackCard.locator('[data-inc-action="auto-refresh-toggle"]');
+
+    await expect(root).toHaveAttribute("data-bs-theme", "dark");
+    await expect(loadingErrorGrid).toBeVisible();
+    await expect(feedbackCard).toBeVisible();
+    await expect(filesCard).toBeVisible();
+    await feedbackToggle.click();
+    await feedbackCard.locator(".inc-auto-refresh").evaluate((rootNode) => {
+        rootNode.classList.add("is-paused");
+        rootNode.classList.remove("is-loading");
+        rootNode.setAttribute("aria-busy", "false");
+
+        const toggle = rootNode.querySelector('[data-inc-action="auto-refresh-toggle"]');
+        const toggleText = rootNode.querySelector(".inc-auto-refresh__toggle-text");
+        const label = rootNode.querySelector(".inc-auto-refresh__label");
+        const value = rootNode.querySelector(".inc-auto-refresh__value");
+        const countdown = rootNode.querySelector(".inc-auto-refresh__countdown");
+        const status = rootNode.querySelector(".inc-auto-refresh__status");
+
+        toggle?.setAttribute("aria-pressed", "true");
+        toggle?.setAttribute("aria-label", "Resume");
+
+        if (toggleText) {
+            toggleText.textContent = "Resume";
+        }
+
+        if (label) {
+            label.textContent = "Paused at";
+        }
+
+        if (value) {
+            value.textContent = "5m 0s";
+        }
+
+        if (countdown) {
+            countdown.hidden = false;
+        }
+
+        if (status) {
+            status.hidden = true;
+        }
+    });
+
+    await expect(loadingErrorGrid).toHaveScreenshot("states-loading-error-dark.png", {
+        animations: "disabled",
+    });
+
+    await expect(feedbackCard).toHaveScreenshot("states-feedback-card-dark.png", {
+        animations: "disabled",
+        maxDiffPixels: 200,
+    });
+
+    await expect(filesCard).toHaveScreenshot("states-files-card-dark.png", {
+        animations: "disabled",
+        maxDiffPixels: 500,
     });
 });
 
