@@ -4,7 +4,7 @@
   "kind": "guide",
   "searchKind": "guide",
   "summary": "The latest recorded changelog entry.",
-  "body": "- Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.\n- Expanded browser coverage with a new reference-page spec and refreshed theme/layout snapshots.\n- Refreshed the showcase, reference, and agent guidance docs so the published surface stays aligned.",
+  "body": "- Added new Web Components for buttons, alerts, badges, spinners, empty states, list groups, and key-value layouts, and split the runtime into clearer component modules.\n- Refined the visual hierarchy across cards, tabs, alerts, outline buttons, empty states, validation surfaces, and the auto-refresh control with subtle surfaced styling.\n- Expanded browser/reference coverage and refreshed the generated package, MCP assets, and runtime documentation to match the new component surface.",
   "sourcePaths": [
     "CHANGELOG.md"
   ],
@@ -21,5 +21,5 @@
   "group": "guides",
   "priority": 95,
   "includeInSearch": true,
-  "searchText": "Latest release notes\nThe latest recorded changelog entry.\n- Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.\n- Expanded browser coverage with a new reference-page spec and refreshed theme/layout snapshots.\n- Refreshed the showcase, reference, and agent guidance docs so the published surface stays aligned.\nrelease notes\nchangelog\nlatest release\nCHANGELOG.md"
+  "searchText": "Latest release notes\nThe latest recorded changelog entry.\n- Added new Web Components for buttons, alerts, badges, spinners, empty states, list groups, and key-value layouts, and split the runtime into clearer component modules.\n- Refined the visual hierarchy across cards, tabs, alerts, outline buttons, empty states, validation surfaces, and the auto-refresh control with subtle surfaced styling.\n- Expanded browser/reference coverage and refreshed the generated package, MCP assets, and runtime documentation to match the new component surface.\nrelease notes\nchangelog\nlatest release\nCHANGELOG.md"
 }
