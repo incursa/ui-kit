@@ -1,4 +1,5 @@
-import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { build } from "esbuild";
+import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -13,13 +14,30 @@ if (!existsSync(sourceDir)) {
     process.exit(0);
 }
 
-rmSync(targetDir, { force: true, recursive: true });
+try {
+    rmSync(targetDir, { force: true, recursive: true });
+} catch {
+    if (existsSync(targetDir)) {
+        for (const entry of readdirSync(targetDir, { withFileTypes: true })) {
+            rmSync(path.join(targetDir, entry.name), { force: true, recursive: true });
+        }
+    }
+}
+
 mkdirSync(path.dirname(targetDir), { recursive: true });
 cpSync(sourceDir, targetDir, { recursive: true });
 
+await build({
+    bundle: true,
+    entryPoints: [path.join(sourceDir, "index.js")],
+    format: "esm",
+    platform: "browser",
+    outfile: path.join(targetDir, "index.js"),
+    write: true,
+});
+
 if (existsSync(showcaseHtmlPath)) {
-    const bundlePath = path.join(targetDir, "index.js");
-    const bundle = readFileSync(bundlePath, "utf8").trimEnd();
+    const bundle = readFileSync(path.join(targetDir, "index.js"), "utf8").trimEnd();
     const showcaseHtml = readFileSync(showcaseHtmlPath, "utf8");
     const startMarker = "/* INC_WC_BUNDLE_START */";
     const endMarker = "/* INC_WC_BUNDLE_END */";
@@ -41,4 +59,4 @@ if (existsSync(showcaseHtmlPath)) {
     writeFileSync(showcaseHtmlPath, updatedHtml);
 }
 
-console.log("build:wc copied src/web-components to dist/web-components.");
+console.log("build:wc bundled src/web-components to dist/web-components.");

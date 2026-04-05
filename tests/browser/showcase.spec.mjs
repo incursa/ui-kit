@@ -77,6 +77,9 @@ test("demo showcase presents the CSS-first baseline and palette", async ({ page 
 
     const comparison = page.locator("#demo-comparison");
     const palette = page.locator("#demo-palette");
+    const summaryOverview = page.locator(".inc-summary-overview").first();
+    const dashboardCards = page.locator(".inc-grid.inc-grid--cols-2").first();
+    const tabsFolder = page.locator(".inc-tabs-folder").first();
 
     await expect(page.getByRole("heading", { name: "Data-heavy home screen" })).toBeVisible();
     await expect(comparison).toContainText("Plain HTML / CSS-first");
@@ -89,12 +92,27 @@ test("demo showcase presents the CSS-first baseline and palette", async ({ page 
     await expect(comparison).toHaveScreenshot("demo-comparison.png", {
         animations: "disabled",
     });
+
+    await expect(summaryOverview).toHaveScreenshot("demo-summary-overview.png", {
+        animations: "disabled",
+    });
+
+    await expect(dashboardCards).toHaveScreenshot("demo-card-grid.png", {
+        animations: "disabled",
+    });
+
+    await expect(tabsFolder).toHaveScreenshot("demo-tabs-folder.png", {
+        animations: "disabled",
+    });
 });
 
 test("demo showcase dark mode keeps comparison panels and swatches readable", async ({ page }) => {
     await openPageWithTheme(page, "demo.html", "dark");
 
     const comparison = page.locator("#demo-comparison");
+    const summaryOverview = page.locator(".inc-summary-overview").first();
+    const dashboardCards = page.locator(".inc-grid.inc-grid--cols-2").first();
+    const tabsFolder = page.locator(".inc-tabs-folder").first();
     await expect(page.locator("html")).toHaveAttribute("data-bs-theme", "dark");
 
     const panelBackground = await comparison.locator(".demo-compare__panel").first().evaluate((node) => (
@@ -113,6 +131,18 @@ test("demo showcase dark mode keeps comparison panels and swatches readable", as
     expect(contrastRatio(demoCopyForeground, demoCopyBackground)).toBeGreaterThanOrEqual(4);
 
     await expect(comparison).toHaveScreenshot("demo-comparison-dark.png", {
+        animations: "disabled",
+    });
+
+    await expect(summaryOverview).toHaveScreenshot("demo-summary-overview-dark.png", {
+        animations: "disabled",
+    });
+
+    await expect(dashboardCards).toHaveScreenshot("demo-card-grid-dark.png", {
+        animations: "disabled",
+    });
+
+    await expect(tabsFolder).toHaveScreenshot("demo-tabs-folder-dark.png", {
         animations: "disabled",
     });
 
@@ -191,8 +221,18 @@ test("web components showcase presents the layered counterpart and shared vocabu
     await expect(page.locator("inc-tabs#wc-tabs")).toBeVisible();
     await expect(page.locator("table.inc-table").first()).toBeVisible();
     await expect(page.locator(".demo-swatch")).toHaveCount(4);
+    await expect(page.locator("#wc-atomic-controls")).toBeVisible();
+    await expect(page.locator("#wc-action-shells")).toBeVisible();
+    await expect(page.locator("#wc-collection-shells")).toBeVisible();
+    await expect(page.locator("#wc-button-primary")).toBeVisible();
+    await expect(page.locator("#wc-alert-warning")).toBeVisible();
+    await expect(page.locator("#wc-empty-state")).toBeVisible();
+    await expect(page.locator("#wc-list-group")).toBeVisible();
+    await expect(page.locator("#wc-key-value-grid")).toBeVisible();
+    await expect(page.locator("#wc-badge-success")).toBeVisible();
+    await expect(page.locator("#wc-spinner-border")).toBeVisible();
     await expect(page.locator("#wc-data-presentation")).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Tables, colors, and buttons stay CSS-first" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Tables, colors, and low-level presentation stay CSS-first" })).toBeVisible();
 
     await expect(comparison).toHaveScreenshot("wc-comparison.png", {
         animations: "disabled",

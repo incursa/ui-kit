@@ -56,6 +56,11 @@ const specResources = resources.filter((resource) => resource.group === "specs")
 const exampleResources = resources.filter((resource) => resource.group === "examples");
 const fileResources = resources.filter((resource) => resource.group === "files");
 const guideResources = resources.filter((resource) => resource.group === "guides" || resource.group === "ai");
+const defaultPathPrefix = "/ui-kit";
+
+type WorkerEnv = {
+  MCP_PATH_PREFIX?: string;
+};
 
 function normalizeText(value: string) {
   return String(value ?? "")
@@ -128,7 +133,58 @@ function lookupResource(uri: string) {
   return resource;
 }
 
-function renderDocsIndexHtml() {
+function joinPathPrefix(basePathPrefix: string, pathname: string) {
+  return basePathPrefix ? `${basePathPrefix}${pathname}` : pathname;
+}
+
+function normalizeConfiguredPathPrefix(value: string | undefined) {
+  if (value === undefined) {
+    return defaultPathPrefix;
+  }
+
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return "";
+  }
+
+  const stripped = trimmed.replace(/^\/+|\/+$/g, "");
+  return stripped ? `/${stripped}` : "";
+}
+
+function stripPathPrefix(pathname: string, configuredPathPrefix: string) {
+  if (configuredPathPrefix === "") {
+    return pathname;
+  }
+
+  if (pathname === configuredPathPrefix) {
+    return "/";
+  }
+
+  if (pathname.startsWith(`${configuredPathPrefix}/`)) {
+    return pathname.slice(configuredPathPrefix.length);
+  }
+
+  return pathname;
+}
+
+function resolvePathPrefix(env?: WorkerEnv) {
+  return normalizeConfiguredPathPrefix(env?.MCP_PATH_PREFIX);
+}
+
+function normalizeIncomingRequest(request: Request, configuredPathPrefix: string) {
+  const url = new URL(request.url);
+  const { pathname } = url;
+  const hasPathPrefix = configuredPathPrefix !== "" && (pathname === configuredPathPrefix || pathname.startsWith(`${configuredPathPrefix}/`));
+
+  url.pathname = stripPathPrefix(pathname, configuredPathPrefix);
+
+  return {
+    url,
+    basePathPrefix: hasPathPrefix ? configuredPathPrefix : "",
+  };
+}
+
+function renderDocsIndexHtml(basePathPrefix = "") {
   const groups = [
     ["Guides", guideResources],
     ["Components", componentResources],
@@ -146,7 +202,7 @@ function renderDocsIndexHtml() {
         .map(
           (resource) => `
             <li>
-              <a href="/mcp/resource/${encodeURIComponent(resource.uri)}">${escapeHtml(resource.title)}</a>
+              <a href="${joinPathPrefix(basePathPrefix, `/mcp/resource/${encodeURIComponent(resource.uri)}`)}">${escapeHtml(resource.title)}</a>
               <div class="meta">${escapeHtml(resource.summary)}</div>
             </li>
           `,
@@ -184,14 +240,14 @@ function renderDocsIndexHtml() {
   <body>
     <main>
       <h1>Incursa UI Kit MCP</h1>
-      <p class="intro">Deterministic, stateless Model Context Protocol surface for the UI kit. POST to <code>/mcp</code> for protocol traffic or open a resource page below.</p>
+      <p class="intro">Deterministic, stateless Model Context Protocol surface for the UI kit. POST to the MCP endpoint for protocol traffic or open a resource page below.</p>
       ${groupHtml}
     </main>
   </body>
 </html>`;
 }
 
-function renderResourcePage(resource: ResourceRecord) {
+function renderResourcePage(resource: ResourceRecord, basePathPrefix = "") {
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -212,7 +268,7 @@ function renderResourcePage(resource: ResourceRecord) {
   </head>
   <body>
     <main>
-      <p><a href="/mcp">Back to index</a></p>
+      <p><a href="${joinPathPrefix(basePathPrefix, "/mcp")}">Back to index</a></p>
       <div class="card">
         <h1>${escapeHtml(resource.title)}</h1>
         <p class="meta">${escapeHtml(resource.uri)}</p>
@@ -725,11 +781,11 @@ async function handleMcpRequest(request: Request) {
 }
 
 function isResourcePath(pathname: string) {
-  return pathname === "/mcp" || pathname === "/";
+  return pathname === "/mcp" || pathname === "/mcp/" || pathname === "/";
 }
 
 function findResourceForRequest(url: URL) {
-  if (url.pathname === "/mcp" || url.pathname === "/") {
+  if (isResourcePath(url.pathname)) {
     return null;
   }
 
@@ -753,15 +809,16 @@ function findResourceForRequest(url: URL) {
   return lookupResource(decodedUri);
 }
 
-export async function fetch(request: Request): Promise<Response> {
-  const url = new URL(request.url);
+export async function fetch(request: Request, env?: WorkerEnv): Promise<Response> {
+  const configuredPathPrefix = resolvePathPrefix(env);
+  const { url, basePathPrefix } = normalizeIncomingRequest(request, configuredPathPrefix);
 
   if (request.method === "POST" && url.pathname === "/mcp") {
     return handleMcpRequest(request);
   }
 
   if (request.method === "GET" && isResourcePath(url.pathname)) {
-    return new Response(renderDocsIndexHtml(), {
+    return new Response(renderDocsIndexHtml(basePathPrefix), {
       headers: {
         "content-type": "text/html; charset=utf-8",
       },
@@ -772,7 +829,7 @@ export async function fetch(request: Request): Promise<Response> {
     try {
       const resource = findResourceForRequest(url);
       if (resource) {
-        return new Response(renderResourcePage(resource), {
+        return new Response(renderResourcePage(resource, basePathPrefix), {
           headers: {
             "content-type": "text/html; charset=utf-8",
           },

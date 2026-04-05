@@ -215,6 +215,90 @@
             </div>
         </section>
 
+        <section class="wc-test-region" data-test="atoms-region">
+            <h2 class="wc-test-region__header">Atoms And Status</h2>
+            <div class="wc-test-region__body">
+                <div class="wc-inline-stack">
+                    <inc-badge id="wc-badge-default">Draft</inc-badge>
+                    <inc-badge id="wc-badge-success" tone="success" pill>Approved</inc-badge>
+                    <inc-badge id="wc-badge-warning" tone="warning">Pending</inc-badge>
+                </div>
+                <div class="wc-inline-stack">
+                    <inc-spinner id="wc-spinner-border" label="Loading queue"></inc-spinner>
+                    <inc-spinner id="wc-spinner-grow" variant="grow" tone="primary" size="sm" label="Refreshing"></inc-spinner>
+                </div>
+            </div>
+        </section>
+
+        <section class="wc-test-region" data-test="actions-region">
+            <h2 class="wc-test-region__header">Actions, Alerts, And Collection Hosts</h2>
+            <div class="wc-test-region__body">
+                <inc-card id="wc-actions-card" class="inc-card">
+                    <div slot="header"><h3 class="inc-heading inc-heading--h5">Buttons and empty state shells</h3></div>
+                    <div slot="body" class="wc-grid wc-grid--2">
+                        <div class="inc-stack inc-stack--gap-sm">
+                            <p class="wc-note">Button hosts wrap native controls and standardize tone, size, and loading defaults.</p>
+                            <div class="wc-actions">
+                                <inc-button id="wc-button-primary" tone="primary">Approve</inc-button>
+                                <inc-button id="wc-button-secondary" tone="secondary" size="sm">Save Draft</inc-button>
+                                <inc-button id="wc-button-loading" tone="outline-secondary" loading label="Saving approval">Saving</inc-button>
+                            </div>
+                            <inc-button-group id="wc-button-group" size="sm" label="Queue mode">
+                                <inc-button tone="secondary">Light</inc-button>
+                                <inc-button tone="secondary">Dark</inc-button>
+                                <inc-button tone="secondary">System</inc-button>
+                            </inc-button-group>
+                            <inc-button-toolbar id="wc-button-toolbar" label="Quick actions">
+                                <inc-button tone="secondary" size="sm">Refresh</inc-button>
+                                <inc-button tone="primary" size="sm">Export</inc-button>
+                                <inc-close-button id="wc-close-button" label="Dismiss panel"></inc-close-button>
+                            </inc-button-toolbar>
+                        </div>
+                        <div class="inc-stack inc-stack--gap-sm">
+                            <p class="wc-note">Alerts and empty-state shells keep the repeated runtime scaffolding declarative.</p>
+                            <inc-alert id="wc-alert-info" tone="info">Information alert text.</inc-alert>
+                            <inc-alert id="wc-alert-warning" tone="warning" dismissible dismiss-label="Dismiss warning">Warning alert text.</inc-alert>
+                            <inc-empty-state id="wc-empty-state">
+                                <span slot="icon">+</span>
+                                <h3 class="inc-heading inc-heading--h3">No saved views</h3>
+                                <p class="inc-text inc-text--regular inc-text--muted">Create a named filter set so your operators can reuse it across screens.</p>
+                                <div slot="actions" class="wc-actions">
+                                    <inc-button tone="secondary" size="sm">Dismiss</inc-button>
+                                    <inc-button tone="primary" size="sm">Create View</inc-button>
+                                </div>
+                            </inc-empty-state>
+                        </div>
+                    </div>
+                </inc-card>
+
+                <inc-card id="wc-collection-card" class="inc-card">
+                    <div slot="header"><h3 class="inc-heading inc-heading--h5">List groups and key values</h3></div>
+                    <div slot="body" class="wc-grid wc-grid--2">
+                        <div class="inc-stack inc-stack--gap-sm">
+                            <p class="wc-note">List-group hosts standardize repeated action row markup without changing list semantics.</p>
+                            <inc-list-group id="wc-list-group" label="Saved views">
+                                <a slot="item" href="#">Needs review</a>
+                                <a slot="item" href="#">March closeout</a>
+                                <a slot="item" href="#">Projects missing billing period</a>
+                            </inc-list-group>
+                            <inc-list-group id="wc-numbered-list-group" numbered label="Review steps">
+                                <li slot="item">First review pass</li>
+                                <li slot="item">Secondary approval</li>
+                                <li slot="item">Final export</li>
+                            </inc-list-group>
+                        </div>
+                        <div class="inc-stack inc-stack--gap-sm">
+                            <p class="wc-note">Key-value hosts standardize the repeated description-list pair pattern.</p>
+                            <inc-key-value-grid id="wc-key-value-grid" columns="2">
+                                <inc-key-value id="wc-key-value-record" label="Record Id" value="AP-2026-00142" meta="Synced 8:13 AM" card></inc-key-value>
+                                <inc-key-value id="wc-key-value-amount" label="Current request" value="$18,240.22" card></inc-key-value>
+                            </inc-key-value-grid>
+                        </div>
+                    </div>
+                </inc-card>
+            </div>
+        </section>
+
         <section class="wc-test-region" data-test="overlay-region">
             <h2 class="wc-test-region__header">Overlays And Disclosure</h2>
             <div class="wc-test-region__body">
@@ -271,6 +355,7 @@
             const navigationModule = await import("../../../src/web-components/components/navigation.js");
             const formsModule = await import("../../../src/web-components/components/forms.js");
             const feedbackModule = await import("../../../src/web-components/components/feedback.js");
+            const entrypointModule = await import("../../../src/web-components/index.js");
 
             const namespace = window.IncWebComponents || {};
 
@@ -286,6 +371,8 @@
                 || namespace.forms?.registerFormsComponents;
             const defineFeedbackComponents = feedbackModule.defineFeedbackComponents
                 || namespace.feedback?.defineFeedbackComponents;
+            const defineEntryPointComponents = entrypointModule.defineAll
+                || namespace.defineAll;
 
             const registerIncWebComponents = () => {
                 defineLayoutComponents?.(customElements);
@@ -293,6 +380,7 @@
                 defineNavigationComponents?.(customElements);
                 defineFormsComponents?.(customElements);
                 defineFeedbackComponents?.(customElements);
+                defineEntryPointComponents?.(customElements);
 
                 return [
                     "inc-app-shell",
@@ -300,6 +388,12 @@
                     "inc-page-header",
                     "inc-section",
                     "inc-card",
+                    "inc-button",
+                    "inc-button-group",
+                    "inc-button-toolbar",
+                    "inc-close-button",
+                    "inc-alert",
+                    "inc-empty-state",
                     "inc-summary-overview",
                     "inc-summary-block",
                     "inc-footer-bar",
@@ -311,6 +405,8 @@
                     "inc-choice-group",
                     "inc-readonly-field",
                     "inc-validation-summary",
+                    "inc-badge",
+                    "inc-spinner",
                     "inc-state-panel",
                     "inc-live-region",
                     "inc-auto-refresh",
@@ -318,6 +414,9 @@
                     "inc-disclosure",
                     "inc-dialog",
                     "inc-drawer",
+                    "inc-list-group",
+                    "inc-key-value-grid",
+                    "inc-key-value",
                 ];
             };
 

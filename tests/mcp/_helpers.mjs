@@ -11,7 +11,7 @@ export async function getWorkerModule() {
     return workerModulePromise;
 }
 
-export async function callWorker(pathname, { method = "GET", body, headers = {} } = {}) {
+export async function callWorker(pathname, { method = "GET", body, headers = {}, env } = {}) {
     const { fetch } = await getWorkerModule();
     const response = await fetch(
         new Request(`https://example.com${pathname}`, {
@@ -22,6 +22,7 @@ export async function callWorker(pathname, { method = "GET", body, headers = {} 
             },
             body,
         }),
+        env,
     );
 
     const text = await response.text();
@@ -40,7 +41,7 @@ export async function callWorker(pathname, { method = "GET", body, headers = {} 
     };
 }
 
-export async function callJsonRpc(method, params, { id = 1, pathname = "/mcp", headers = {} } = {}) {
+export async function callJsonRpc(method, params, { id = 1, pathname = "/mcp", headers = {}, env } = {}) {
     return callWorker(pathname, {
         method: "POST",
         headers: {
@@ -54,5 +55,6 @@ export async function callJsonRpc(method, params, { id = 1, pathname = "/mcp", h
             method,
             params,
         }),
+        env,
     });
 }

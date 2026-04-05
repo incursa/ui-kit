@@ -33,8 +33,39 @@ test("GET /mcp and resource pages render the human-readable docs surface", async
     assert.equal(index.response.status, 200);
     assert.equal(resource.response.status, 200);
     assert.match(index.text, /Incursa UI Kit MCP/);
+    assert.match(index.text, /href="\/mcp\/resource\//);
     assert.match(resource.text, /ui-kit:\/\/overview/);
     assert.match(resource.text, /Overview/);
+    assert.match(resource.text, /href="\/mcp"/);
+});
+
+test("prefixed /ui-kit requests route to the same MCP surface", async () => {
+    const index = await callWorker("/ui-kit/mcp");
+    const resource = await callWorker(`/ui-kit/mcp/resource/${encodeURIComponent("ui-kit://overview")}`);
+    const { response, parsed } = await callJsonRpc("initialize", createInitializeParams(), { id: 10, pathname: "/ui-kit/mcp" });
+
+    assert.equal(index.response.status, 200);
+    assert.equal(resource.response.status, 200);
+    assert.equal(response.status, 200);
+    assert.equal(parsed.result.serverInfo.name, "incursa-ui-kit-mcp");
+    assert.match(index.text, /Incursa UI Kit MCP/);
+    assert.match(index.text, /href="\/ui-kit\/mcp\/resource\//);
+    assert.match(resource.text, /ui-kit:\/\/overview/);
+    assert.match(resource.text, /href="\/ui-kit\/mcp"/);
+});
+
+test("MCP path prefix can be configured through the worker env", async () => {
+    const env = { MCP_PATH_PREFIX: "/custom-mcp" };
+    const index = await callWorker("/custom-mcp/mcp", { env });
+    const resource = await callWorker(`/custom-mcp/mcp/resource/${encodeURIComponent("ui-kit://overview")}`, { env });
+    const { response, parsed } = await callJsonRpc("initialize", createInitializeParams(), { id: 11, pathname: "/custom-mcp/mcp", env });
+
+    assert.equal(index.response.status, 200);
+    assert.equal(resource.response.status, 200);
+    assert.equal(response.status, 200);
+    assert.equal(parsed.result.serverInfo.name, "incursa-ui-kit-mcp");
+    assert.match(index.text, /href="\/custom-mcp\/mcp\/resource\//);
+    assert.match(resource.text, /href="\/custom-mcp\/mcp"/);
 });
 
 test("resources list exposes the generated manifest surface and templates", async () => {

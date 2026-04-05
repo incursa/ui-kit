@@ -45,6 +45,8 @@ The runtime auto-defines the shipped elements on load. If a consumer needs expli
   The `IncElement` base class, including reflected attribute/property wiring and slot helpers.
 - [`registry.js`](registry.js)
   Idempotent registration helpers and the `IncWebComponents.registry` namespace.
+- [`components/dom-helpers.js`](components/dom-helpers.js)
+  Shared DOM helpers used by the action and collection modules.
 - [`controllers/focus.js`](controllers/focus.js)
   Shared focus utilities for focus trapping, focus restoration, and focusable-element discovery.
 - [`controllers/selection.js`](controllers/selection.js)
@@ -60,11 +62,15 @@ The runtime auto-defines the shipped elements on load. If a consumer needs expli
 - [`components/forms.js`](components/forms.js)
   Field wrappers, input groups, choice groups, read-only fields, and validation summary custom elements.
 - [`components/feedback.js`](components/feedback.js)
-  State panel, live-region, auto-refresh, and theme-switcher custom elements.
+  State panel, live-region, auto-refresh, badge, spinner, and theme-switcher custom elements.
+- [`components/actions.js`](components/actions.js)
+  Button, button-group, button-toolbar, close-button, alert, and empty-state custom elements.
+- [`components/collections.js`](components/collections.js)
+  List-group, key-value-grid, and key-value custom elements.
 - [`components/overlays.js`](components/overlays.js)
   Disclosure, dialog, and drawer custom elements.
 - [`index.js`](index.js)
-  Additive package bootstrap that registers the shipped families and exposes the public namespace.
+  Thin package bootstrap that imports the family modules, registers the shipped families, and exposes the public namespace.
 
 As more families land, keep them in this same shape: small shared controllers plus family modules that register their public elements through the registry.
 
@@ -75,9 +81,9 @@ The Web Component layer should mirror the current CSS kit, not reinterpret it.
 - Layout primitives should stay composable and slot-driven.
 - Form wrappers should keep native controls native.
 - Navigation components should reflect keyboard and focus state in the DOM.
-- Feedback and status shells should announce state accessibly.
+- Feedback and status shells should announce state accessibly, badge/spinner atoms should standardize the common tone and loading defaults, and action/detail plus collection hosts should keep buttons, alerts, list groups, and description-list pairs declarative without inventing a second styling vocabulary.
 - Overlays should prefer native `<details>` and `<dialog>` behavior when that satisfies the contract.
-- Tables, data presentation, utility atoms, and other presentation-only surfaces should remain CSS-first until the component contract is explicit and worth the runtime cost.
+- Tables, data presentation, utility atoms, and the remaining presentation-only surfaces should remain CSS-first until the component contract is explicit and worth the runtime cost.
 
 ## Maintenance Notes
 

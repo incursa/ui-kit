@@ -90,11 +90,12 @@ The Web Component requirements MUST label which current CSS families remain CSS-
 | Layouts and shells | `inc-app-shell`, `inc-page`, `inc-breadcrumb-body`, `inc-page-header`, `inc-section-container`, `inc-card`, `inc-summary-overview`, `inc-summary-block`, `inc-footer-bar` | `inc-app-shell`, `inc-page`, `inc-page-header`, `inc-section`, `inc-card`, `inc-summary-overview`, `inc-summary-block`, `inc-footer-bar` | V1 | Slot-heavy light DOM wrappers; keep grid and spacing utilities CSS-only. |
 | Navigation | `inc-navbar`, `inc-nav-triad`, `inc-breadcrumb`, `inc-sidebar-menu`, `inc-user-menu`, `inc-nav*`, `inc-pagination`, `inc-native-menu`, `inc-dropdown` | `inc-navbar`, `inc-tabs`, `inc-user-menu` | Mixed | Tabs, navbar collapse, and user menus need behavior; breadcrumb, pagination, sidebar menus, native menus, and dropdowns stay CSS-first or deferred. |
 | Forms and inputs | `inc-form`, `inc-form__*`, `inc-input-group`, `inc-readonly-field`, `inc-form__error-summary`, `inc-filter-bar`, `inc-filter-chip`, `inc-file-dropzone`, `inc-file-list`, `inc-file-row` | `inc-field`, `inc-input-group`, `inc-choice-group`, `inc-readonly-field`, `inc-validation-summary` | Mixed | Wrapper-based composites around native controls; filter, file, and bulk surfaces stay CSS-first or deferred in v1. |
-| Feedback and status | `inc-alert`, `inc-badge`, `inc-state-panel`, `inc-permission-banner`, `inc-toast`, `inc-spinner`, `inc-progress`, `inc-meter`, `inc-live-region`, `inc-auto-refresh`, `inc-loading*`, `inc-skeleton` | `inc-state-panel`, `inc-live-region`, `inc-auto-refresh`, `inc-theme-switcher` | Mixed | Stateful shells become components; permission banners, toasts, and atomics stay CSS-first or deferred. |
+| Feedback and status | `inc-badge`, `inc-state-panel`, `inc-permission-banner`, `inc-toast`, `inc-spinner`, `inc-progress`, `inc-meter`, `inc-live-region`, `inc-auto-refresh`, `inc-loading*`, `inc-skeleton` | `inc-state-panel`, `inc-live-region`, `inc-auto-refresh`, `inc-theme-switcher`, `inc-badge`, `inc-spinner` | Mixed | Stateful shells become components; badge and spinner hosts become standardized atomic controls; permission banners and toasts stay CSS-first or deferred. |
+| Actions and detail shells | `inc-btn`, `inc-button-group`, `inc-button-toolbar`, `inc-close-button`, `inc-alert`, `inc-empty-state`, `inc-list-group`, `inc-key-value-grid`, `inc-key-value` | `inc-button`, `inc-button-group`, `inc-button-toolbar`, `inc-close-button`, `inc-alert`, `inc-empty-state`, `inc-list-group`, `inc-key-value-grid`, `inc-key-value` | V1 | Thin native wrappers and light-DOM shells standardize repeated actions, alerts, empty states, list groups, and description-list pairs without inventing a second styling vocabulary. |
 | Overlays and disclosures | `inc-disclosure`, `inc-accordion`, `inc-collapse`, `inc-native-dialog`, `inc-modal`, `inc-offcanvas`, `inc-tooltip`, `inc-popover`, `inc-drawer` | `inc-disclosure`, `inc-dialog`, `inc-drawer` | Mixed | Native `<dialog>` and `<details>` are preferred; accordion/collapse, popover, tooltip, modal, offcanvas, and contextual menu helpers remain deferred or compatibility-only. |
-| Tables and data presentation | `inc-table`, `inc-table-responsive`, `inc-table-container`, `inc-key-value-grid`, `inc-key-value`, `inc-list-group`, `inc-vertical-list`, `inc-timeline`, `inc-bulk-bar` | None in v1 | Deferred | These surfaces stay CSS-first in v1; a later pass can define a bounded component contract. |
+| Tables and data presentation | `inc-table`, `inc-table-responsive`, `inc-table-container`, `inc-vertical-list`, `inc-timeline`, `inc-bulk-bar` | None in v1 | Deferred | These surfaces stay CSS-first in v1; a later pass can define a bounded component contract for the remaining table-like patterns. |
 | Theme controls and color mode | `inc-theme-switcher`, `inc-theme-toggle`, `data-inc-theme-*` | `inc-theme-switcher` | V1 | Reuse the existing `IncTheme` helper contract and root theme attributes. |
-| CSS-only primitives | `inc-text*`, `inc-heading*`, `inc-data*`, `inc-u-*`, `inc-grid`, `inc-row`, `inc-col`, `inc-stack`, `inc-flex-*`, `inc-btn`, `inc-button-group`, `inc-button-toolbar`, `inc-close-button`, `inc-badge`, `inc-alert`, `inc-spinner`, `inc-progress`, `inc-meter`, `inc-loading*`, `inc-skeleton` | None | CSS-only | These stay class-based in v1 by design. |
+| CSS-only primitives | `inc-text*`, `inc-heading*`, `inc-data*`, `inc-u-*`, `inc-grid`, `inc-row`, `inc-col`, `inc-stack`, `inc-flex-*`, `inc-btn`, `inc-progress`, `inc-meter`, `inc-loading*`, `inc-skeleton` | None | CSS-only | These stay class-based in v1 by design. |
 
 ## Layouts And Shells
 
@@ -199,15 +200,15 @@ The following forms and input-related surfaces are deferred from v1:
 
 ## Feedback And Status
 
-### REQ-UIK-WC-0040 Provide stateful feedback shells and live status surfaces
+### REQ-UIK-WC-0040 Provide stateful feedback shells, atomic status controls, and live status surfaces
 
 The Web Component layer MUST cover feedback surfaces that need runtime state or status announcements.
 
-The v1 feedback surface MUST cover `inc-state-panel`, `inc-live-region`, `inc-auto-refresh`, and `inc-theme-switcher`.
+The v1 feedback surface MUST cover `inc-state-panel`, `inc-live-region`, `inc-auto-refresh`, `inc-theme-switcher`, `inc-badge`, and `inc-spinner`.
 
 `inc-permission-banner` and `inc-toast` are deferred from v1.
 
-Atomic presentation helpers such as `inc-alert`, `inc-badge`, `inc-spinner`, `inc-progress`, `inc-meter`, `inc-loading`, `inc-loading-dots`, and `inc-skeleton` MUST remain CSS-only in v1.
+Atomic presentation helpers such as `inc-progress`, `inc-meter`, `inc-loading`, `inc-loading-dots`, and `inc-skeleton` MUST remain CSS-only in v1.
 
 #### Contract matrix
 
@@ -216,13 +217,52 @@ Atomic presentation helpers such as `inc-alert`, `inc-badge`, `inc-spinner`, `in
 | `<inc-state-panel>` | `tone`, `variant`, `title`, `body`, `status`, `open` | `slotchange` | none | `icon`, `title`, `body`, `actions`, `default` | `part="panel icon title body actions"` | Keep state text and iconography slotted and visible | V1 |
 | `<inc-live-region>` | `politeness`, `atomic`, `busy` | none | `announce(message)` | `default` | `part="region"` | Maintain a live announcement node for status updates | V1 |
 | `<inc-auto-refresh>` | `seconds`, `label`, `loading-label`, `paused-label`, `pause-action-label`, `resume-action-label`, `paused` | `pause`, `resume`, `refresh`, `tick`, `statechange` | `pause()`, `resume()`, `toggle()`, `refresh()` | `countdown`, `status`, `toggle`, `default` | `part="countdown label value status toggle"` | Keep countdown, pause/resume, and visibility-change behavior synchronized | V1 |
+| `<inc-badge>` | `tone`, `variant`, `pill` | none | none | `default` | Host class modifiers only: `inc-badge`, `inc-badge--tone`, `inc-badge--pill` | Light-DOM status chip with stable tone defaults and pill styling | V1 |
+| `<inc-spinner>` | `variant`, `tone`, `size`, `label` | none | none | none | Host class modifiers only: `inc-spinner`, `inc-spinner--variant`, `inc-spinner--variant--sm`, `inc-spinner--variant--tone` | Self-contained loading indicator; `label` controls accessible status semantics | V1 |
 
 #### Acceptance criteria
 
 - State and status surfaces must expose observable DOM state, not styling alone.
 - Auto-refresh must preserve the current helper behavior, including pause/resume and status transitions.
 - Live-region surfaces must announce changes accessibly instead of relying on visual cues.
-- Presentation-only atoms must stay CSS-only and remain usable without the Web Component runtime.
+- Badge and spinner hosts must provide a small declarative contract for tone, size, and accessible loading labels without requiring app-specific class recipes.
+- Other presentation-only atoms must stay CSS-only and remain usable without the Web Component runtime.
+
+## Actions And Detail Shells
+
+### REQ-UIK-WC-0045 Provide lightweight action and detail shells
+
+The Web Component layer MUST provide small, declarative wrappers for repeated action, alert, empty-state, list, and key/value markup.
+
+The v1 action/detail surface MUST cover `inc-button`, `inc-button-group`, `inc-button-toolbar`, `inc-close-button`, `inc-alert`, `inc-empty-state`, `inc-list-group`, `inc-key-value-grid`, and `inc-key-value`.
+
+The action/detail shells MUST stay thin and native-first:
+
+- `inc-button` MUST wrap a real `<button>` or `<a>` element and standardize the existing `inc-btn` tone, size, and loading classes.
+- `inc-close-button` MUST wrap a real `<button>` element and keep the close affordance native.
+- `inc-alert` MAY provide a simple dismissible mode, but it MUST not become a separate toast/lifecycle system.
+- `inc-empty-state`, `inc-list-group`, and `inc-key-value*` MUST remain light DOM shells that project into the existing CSS vocabulary.
+
+#### Contract matrix
+
+| Tag | Inputs | Events | Methods | Slots | Parts / custom properties | Lifecycle and state | V1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `<inc-button>` | `tone`, `variant`, `size`, `loading`, `href`, `type`, `disabled`, `label`, `target`, `rel`, `download` | native `click` | none | `default` | inner control `part="control"`; existing `inc-btn` modifier classes | Wrap a real button or anchor and mirror loading/disabled state | V1 |
+| `<inc-button-group>` | `size`, `label` | none | none | `default` | `role="group"`; `inc-button-group--*` modifiers | Group multiple buttons and expose a stable accessible label | V1 |
+| `<inc-button-toolbar>` | `label`, `orientation` | none | none | `default` | `role="toolbar"`; `aria-orientation` when vertical | Provide a labeled action rail without a bespoke toolbar system | V1 |
+| `<inc-close-button>` | `label`, `variant` | native `click` | none | `default` | inner control `part="control"`; `inc-close-button--white` modifier | Keep the close affordance as a real button with a default accessible label | V1 |
+| `<inc-alert>` | `tone`, `variant`, `dismissible`, `dismiss-label` | `dismiss` | `hide()` | `default` | host `part="alert"` and dismiss control `part="dismiss"` | Standardize alert tones and optional dismissal without introducing toast orchestration | V1 |
+| `<inc-empty-state>` | none | none | none | `icon`, `actions`, `default` | `part="empty-state content icon body actions"` | Standardize the repeated icon/body/actions empty-state structure | V1 |
+| `<inc-list-group>` | `flush`, `numbered`, `dense`, `interactive`, `label` | native child `click` events | none | `item`, `default` | `role="list"`; `inc-list-group--*` modifiers | Preserve list semantics while standardizing action rows and numbered lists | V1 |
+| `<inc-key-value-grid>` | `columns`, `dense` | none | none | `item`, `default` | inline grid sizing via `columns`; dense gap adjustments | Keep description-list grids declarative and easy to repeat | V1 |
+| `<inc-key-value>` | `label`, `value`, `meta`, `inline`, `dense`, `card`, `variant` | none | none | `label`, `value`, `meta`, `default` | inner `label/value/meta` parts and `inc-key-value--*` modifiers | Keep the label/value/meta pair readable and slot-friendly | V1 |
+
+#### Acceptance criteria
+
+- Action hosts must wrap or project native controls rather than reimplementing button semantics.
+- Alert dismissal, close buttons, and loading states must stay thin and observable in the DOM.
+- Empty-state, list-group, and key/value hosts must keep the current `inc-*` class vocabulary recognizable to CSS-first consumers.
+- These shells must stay small enough that tables, vertical lists, and other larger data wrappers can still be deferred.
 
 ## Overlays, Dialogs, Drawers, And Popovers
 
@@ -254,20 +294,17 @@ Legacy modal/offcanvas shells MAY remain available as compatibility surfaces, bu
 
 ## Tables And Data Presentation
 
-### REQ-UIK-WC-0060 Keep repeated data presentation surfaces CSS-only in v1
+### REQ-UIK-WC-0060 Keep larger table-like data presentation surfaces CSS-only in v1
 
 The Web Component layer MUST keep the recurring table and data presentation surfaces CSS-only in v1.
 
-The current table, list, vertical-list, key-value, timeline, bulk-bar, filter-bar, and file-review surfaces are deferred to a later pass that can define a bounded component contract.
+The current table, vertical-list, timeline, bulk-bar, filter-bar, and file-review surfaces are deferred to a later pass that can define a bounded component contract.
 
 #### Contract matrix
 
 | Tag | Inputs | Events | Methods | Slots | Parts / custom properties | Lifecycle and state | V1 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `<inc-table>` | `dense`, `striped`, `sticky-header`, `responsive`, `row-state`, `selectable` | none in v1 | none in v1 | `caption`, `head`, `body`, `foot`, `toolbar`, `default` | none in v1 | Keep native `<table>` semantics untouched | Deferred |
-| `<inc-key-value-grid>` | `columns`, `dense` | none in v1 | none in v1 | `item`, `default` | none in v1 | Preserve description-list semantics and layout | Deferred |
-| `<inc-key-value>` | `label`, `value`, `inline`, `dense` | none in v1 | none in v1 | `label`, `value`, `meta`, `default` | none in v1 | Keep the current key/value pair language visible | Deferred |
-| `<inc-list-group>` | `flush`, `numbered`, `dense`, `interactive` | none in v1 | none in v1 | `item`, `default` | none in v1 | Preserve list semantics and optional action rows | Deferred |
 | `<inc-vertical-list>` | `compact`, `trim`, `inset` | none in v1 | none in v1 | `item`, `default` | none in v1 | Keep the stacked list layout thin and composable | Deferred |
 | `<inc-timeline>` | `dense`, `reverse`, `status` | none in v1 | none in v1 | `item`, `default` | none in v1 | Keep timeline entries slotted and readable | Deferred |
 | `<inc-bulk-bar>` | `count`, `label`, `sticky`, `selected` | none in v1 | none in v1 | `meta`, `actions`, `default` | none in v1 | Preserve the selected-count and action cluster for grid workflows | Deferred |
@@ -275,7 +312,7 @@ The current table, list, vertical-list, key-value, timeline, bulk-bar, filter-ba
 #### Acceptance criteria
 
 - The Web Component layer must not turn tables into a bespoke grid engine.
-- Native semantics for table, list, and description-list content must remain intact.
+- Native semantics for table and other larger data content must remain intact.
 - The responsive wrapper behavior must stay explicit and not hide content from assistive technology.
 - Bulk selection and row-state presentation must remain available without requiring app-specific markup conventions.
 
@@ -312,7 +349,7 @@ The following families MUST remain CSS-only in v1:
 
 - typography and text helpers: `inc-text*`, `inc-heading*`, `inc-data*`
 - utilities and layout primitives: `inc-u-*`, `inc-grid`, `inc-row`, `inc-col`, `inc-stack`, `inc-flex-*`
-- atomic action and status atoms: `inc-btn`, `inc-button-group`, `inc-button-toolbar`, `inc-close-button`, `inc-badge`, `inc-alert`, `inc-spinner`, `inc-progress`, `inc-meter`, `inc-loading`, `inc-loading-dots`, `inc-skeleton`
+- atomic presentation helpers that stay CSS-only: `inc-btn`, `inc-progress`, `inc-meter`, `inc-loading`, `inc-loading-dots`, `inc-skeleton`
 
 The following surfaces are deferred from v1:
 
@@ -331,7 +368,6 @@ The following surfaces are deferred from v1:
 - `inc-pagination`
 - `inc-sidebar-menu`
 - `inc-nav-triad`
-- `inc-section`
 - advanced data-grid behaviors such as sorting, resizing, virtualization, and asynchronous data orchestration
 - any future form-associated custom element model beyond the wrapper-based composites in this spec
 

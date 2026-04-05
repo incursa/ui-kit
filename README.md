@@ -36,10 +36,11 @@ The v1 Web Component scope covers:
 - layouts and shells: [`inc-app-shell`](reference.html), [`inc-page`](reference.html), [`inc-page-header`](reference.html), [`inc-section`](reference.html), [`inc-card`](reference.html), [`inc-summary-overview`](reference.html), [`inc-summary-block`](reference.html), [`inc-footer-bar`](reference.html)
 - navigation: [`inc-navbar`](reference.html), [`inc-tabs`](reference.html), [`inc-user-menu`](reference.html)
 - forms and inputs: [`inc-field`](reference.html), [`inc-input-group`](reference.html), [`inc-choice-group`](reference.html), [`inc-readonly-field`](reference.html), [`inc-validation-summary`](reference.html)
-- feedback and status: [`inc-state-panel`](reference.html), [`inc-live-region`](reference.html), [`inc-auto-refresh`](reference.html), [`inc-theme-switcher`](reference.html)
+- feedback and status: [`inc-state-panel`](reference.html), [`inc-live-region`](reference.html), [`inc-auto-refresh`](reference.html), [`inc-theme-switcher`](reference.html), [`inc-badge`](reference.html), [`inc-spinner`](reference.html)
+- actions and detail shells: [`inc-button`](reference.html), [`inc-button-group`](reference.html), [`inc-button-toolbar`](reference.html), [`inc-close-button`](reference.html), [`inc-alert`](reference.html), [`inc-empty-state`](reference.html), [`inc-list-group`](reference.html), [`inc-key-value-grid`](reference.html), [`inc-key-value`](reference.html)
 - overlays and disclosures: [`inc-disclosure`](reference.html), [`inc-dialog`](reference.html), [`inc-drawer`](reference.html)
 
-The intentionally deferred surfaces stay CSS-first in v1, including tables and data presentation, filter and bulk toolbars, file workflows, permission banners, toasts, utility helpers, and the remaining compatibility overlay shells.
+The intentionally deferred surfaces stay CSS-first in v1, including tables and the remaining data presentation surfaces, filter and bulk toolbars, file workflows, permission banners, toasts, utility helpers, and the remaining compatibility overlay shells.
 
 For maintainers, treat the Web Component layer as an additive wrapper over the same design language: one package, one token system, one naming vocabulary, and the same helper behavior where it already exists.
 
@@ -159,10 +160,10 @@ For titled sections that wrap tables, use [`inc-header-body--table-body`](refere
 
 ## CSS-only vs JS-assisted
 
-- CSS-only/native behavior is enough for layout, cards, tables, buttons, alerts, form fields, badges, breadcrumbs, sticky footer, and most surface styling.
+- CSS-only/native behavior is enough for layout, cards, tables, breadcrumbs, sticky footer, and most surface styling.
 - Stateful controls still need behavior:
   tabs, collapsible sections, menus/dropdowns, modal and offcanvas shells, and auto-refresh countdowns with pause/resume behavior.
-- Alert and toast surfaces stay CSS/HTML-first unless the consuming app adds its own dismissal or lifecycle logic.
+- Alert and toast surfaces can stay CSS/HTML-first when the app only needs static messaging; use the Web Component host when you want standardized tone or optional dismissal behavior.
 - This package now includes an optional dependency-free helper at [`dist/inc-design-language.js`](dist/inc-design-language.js) for:
   user-menu dropdowns, tab switching, collapse/accordion toggles, legacy modal/offcanvas shells, native dialog launching, page auto-refresh countdown widgets, and theme switching controls.
 - The helper also exposes `window.IncTheme` and listens for [`data-inc-theme-mode`](src/inc-design-language.js), [`data-inc-theme-toggle`](src/inc-design-language.js), and [`data-inc-theme-select`](src/inc-design-language.js) controls.
@@ -176,7 +177,7 @@ For titled sections that wrap tables, use [`inc-header-body--table-body`](refere
 - Use the CSS class surface when you already have the HTML structure and only need the design language.
 - Use the Web Component entrypoint when you want declarative slots, attributes, and DOM events around the approved v1 component families.
 - Use native HTML primitives when they already solve the interaction cleanly and keep the semantics simpler.
-- Keep tables, utilities, and other low-level atoms class-based until there is a clear component contract worth adding.
+- Keep tables, utilities, and the remaining low-value atoms class-based until there is a clear component contract worth adding.
 - Treat the Web Component layer as a layered entrypoint in the same package, not as a separate design system.
 
 ## Use it quickly
@@ -323,7 +324,7 @@ There are three supported ways to use it.
 
 - Import the same-package `./web-components` entrypoint when you want browser-native custom elements for the supported v1 families.
 - Keep the CSS bundle in place because the custom elements are designed to sit on top of the same class and token vocabulary.
-- Prefer this layer for declarative shell components, and keep static atoms and tables on the CSS surface.
+- Prefer this layer for declarative shell components, standardized atomic controls, and repeated action/detail or collection hosts, and keep static tables plus the remaining low-value atoms on the CSS surface.
 
 Practical recommendation for a .NET Razor Pages or MVC app:
 
@@ -387,6 +388,7 @@ The repository also ships a deterministic Cloudflare Worker that exposes the UI 
 - `POST /mcp` serves the MCP JSON-RPC endpoint.
 - `GET /mcp` serves a small HTML index for browsing the generated manifest.
 - `GET /mcp/resource/*` serves a human-readable resource page for inspection.
+- The Worker also tolerates a leading path prefix from a load balancer and keeps the rendered links under the configured `MCP_PATH_PREFIX` value.
 - Build-time manifests live under `dist/mcp/` and are regenerated from the repo docs, examples, specs, and package metadata.
 - The Worker does not call an LLM, crawl the web, or depend on a database.
 

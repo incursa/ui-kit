@@ -1,5 +1,7 @@
 const THEME_MODES = ["light", "dark", "system"];
 const DEFAULT_THEME_STORAGE_KEY = "inc-theme-mode";
+const BADGE_TONES = new Set(["primary", "secondary", "success", "danger", "warning", "info"]);
+const SPINNER_VARIANTS = new Set(["border", "grow"]);
 const HostElement = typeof HTMLElement === "undefined" ? class {} : HTMLElement;
 const themeSubscribers = new Set();
 
@@ -30,6 +32,10 @@ function toBooleanAttribute(value) {
 function toPositiveInt(value) {
     const parsed = Number.parseInt(value || "", 10);
     return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+}
+
+function normalizeToken(value) {
+    return String(value ?? "").trim().toLowerCase();
 }
 
 function getSystemTheme() {
@@ -281,6 +287,59 @@ export class IncStatePanel extends HostElement {
     }
 }
 
+export class IncBadgeElement extends HostElement {
+    static observedAttributes = ["tone", "variant", "pill"];
+
+    connectedCallback() {
+        this.classList.add("inc-badge");
+        this.#sync();
+    }
+
+    attributeChangedCallback() {
+        this.#sync();
+    }
+
+    get tone() {
+        return this.getAttribute("tone") || this.getAttribute("variant") || "";
+    }
+
+    set tone(value) {
+        if (value == null || value === "") {
+            this.removeAttribute("tone");
+            return;
+        }
+
+        this.setAttribute("tone", String(value));
+    }
+
+    get pill() {
+        return this.hasAttribute("pill");
+    }
+
+    set pill(value) {
+        if (value) {
+            this.setAttribute("pill", "");
+        } else {
+            this.removeAttribute("pill");
+        }
+    }
+
+    #sync() {
+        this.classList.add("inc-badge");
+        BADGE_TONES.forEach((tone) => this.classList.remove(`inc-badge--${tone}`));
+        this.classList.remove("inc-badge--pill");
+
+        const tone = normalizeToken(this.tone);
+        if (BADGE_TONES.has(tone)) {
+            this.classList.add(`inc-badge--${tone}`);
+        }
+
+        if (this.pill) {
+            this.classList.add("inc-badge--pill");
+        }
+    }
+}
+
 export class IncLiveRegion extends HostElement {
     static observedAttributes = ["politeness", "atomic", "busy"];
 
@@ -353,6 +412,107 @@ export class IncLiveRegion extends HostElement {
         this.setAttribute("aria-live", politeness);
         this.setAttribute("aria-atomic", isAtomic ? "true" : "false");
         this.setAttribute("aria-busy", isBusy ? "true" : "false");
+    }
+}
+
+export class IncSpinnerElement extends HostElement {
+    static observedAttributes = ["variant", "tone", "size", "label"];
+
+    connectedCallback() {
+        this.#sync();
+    }
+
+    attributeChangedCallback() {
+        this.#sync();
+    }
+
+    get variant() {
+        return this.getAttribute("variant") || "";
+    }
+
+    set variant(value) {
+        if (value == null || value === "") {
+            this.removeAttribute("variant");
+            return;
+        }
+
+        this.setAttribute("variant", String(value));
+    }
+
+    get tone() {
+        return this.getAttribute("tone") || "";
+    }
+
+    set tone(value) {
+        if (value == null || value === "") {
+            this.removeAttribute("tone");
+            return;
+        }
+
+        this.setAttribute("tone", String(value));
+    }
+
+    get size() {
+        return this.getAttribute("size") || "";
+    }
+
+    set size(value) {
+        if (value == null || value === "") {
+            this.removeAttribute("size");
+            return;
+        }
+
+        this.setAttribute("size", String(value));
+    }
+
+    get label() {
+        return this.getAttribute("label") || "";
+    }
+
+    set label(value) {
+        if (value == null || value === "") {
+            this.removeAttribute("label");
+            return;
+        }
+
+        this.setAttribute("label", String(value));
+    }
+
+    #sync() {
+        this.classList.add("inc-spinner");
+
+        SPINNER_VARIANTS.forEach((variant) => {
+            this.classList.remove(`inc-spinner--${variant}`);
+            this.classList.remove(`inc-spinner--${variant}--sm`);
+            BADGE_TONES.forEach((tone) => this.classList.remove(`inc-spinner--${variant}--${tone}`));
+        });
+
+        const variant = normalizeToken(this.variant) || "border";
+        const resolvedVariant = SPINNER_VARIANTS.has(variant) ? variant : "border";
+        this.classList.add(`inc-spinner--${resolvedVariant}`);
+
+        if (normalizeToken(this.size) === "sm") {
+            this.classList.add(`inc-spinner--${resolvedVariant}--sm`);
+        }
+
+        const tone = normalizeToken(this.tone);
+        if (BADGE_TONES.has(tone)) {
+            this.classList.add(`inc-spinner--${resolvedVariant}--${tone}`);
+        }
+
+        const label = this.label.trim();
+        if (label) {
+            this.removeAttribute("aria-hidden");
+            this.setAttribute("role", "status");
+            this.setAttribute("aria-live", "polite");
+            this.setAttribute("aria-label", label);
+            return;
+        }
+
+        this.setAttribute("aria-hidden", "true");
+        this.removeAttribute("role");
+        this.removeAttribute("aria-live");
+        this.removeAttribute("aria-label");
     }
 }
 
@@ -525,6 +685,7 @@ export class IncAutoRefresh extends HostElement {
   <span class="inc-auto-refresh__status-text"></span>
 </span>
 <button type="button" class="inc-auto-refresh__toggle inc-btn inc-btn--outline-secondary inc-btn--micro" part="toggle">
+  <span class="inc-auto-refresh__toggle-icon" aria-hidden="true"></span>
   <span class="inc-auto-refresh__toggle-text"></span>
 </button>
         `.trim();
@@ -1041,8 +1202,10 @@ export class IncThemeSwitcher extends HostElement {
 }
 
 export const feedbackDefinitions = [
+    ["inc-badge", IncBadgeElement],
     ["inc-state-panel", IncStatePanel],
     ["inc-live-region", IncLiveRegion],
+    ["inc-spinner", IncSpinnerElement],
     ["inc-auto-refresh", IncAutoRefresh],
     ["inc-theme-switcher", IncThemeSwitcher],
 ];
@@ -1065,6 +1228,8 @@ if (typeof globalThis !== "undefined") {
         defineFeedbackComponents,
         feedbackDefinitions,
         components: {
+            IncBadgeElement,
+            IncSpinnerElement,
             IncStatePanel,
             IncLiveRegion,
             IncAutoRefresh,
