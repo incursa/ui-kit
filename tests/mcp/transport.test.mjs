@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import { callJsonRpc, callWorker } from "./_helpers.mjs";
 
 const protocolVersion = "2025-11-25";
+const packageVersion = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")).version;
 
 function createInitializeParams() {
     return {
@@ -23,7 +25,7 @@ test("initialize returns the MCP server metadata", async () => {
     assert.equal(parsed.id, 1);
     assert.equal(parsed.result.protocolVersion, protocolVersion);
     assert.equal(parsed.result.serverInfo.name, "incursa-ui-kit-mcp");
-    assert.equal(parsed.result.serverInfo.version, "1.5.0");
+    assert.equal(parsed.result.serverInfo.version, packageVersion);
 });
 
 test("GET /mcp and resource pages render the human-readable docs surface", async () => {
