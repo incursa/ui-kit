@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.0
+
+- Added new Web Components for buttons, alerts, badges, spinners, empty states, list groups, and key-value layouts, and split the runtime into clearer component modules.
+- Refined the visual hierarchy across cards, tabs, alerts, outline buttons, empty states, validation surfaces, and the auto-refresh control with subtle surfaced styling.
+- Expanded browser/reference coverage and refreshed the generated package, MCP assets, and runtime documentation to match the new component surface.
+
 ## 1.5.0
 
 - Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.
