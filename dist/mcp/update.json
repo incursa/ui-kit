@@ -2,7 +2,7 @@
   "title": "Update",
   "summary": "Package-manager update commands and release-review guidance.",
   "packageName": "@incursa/ui-kit",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "commands": {
     "npm": "npm install @incursa/ui-kit@latest",
     "pnpm": "pnpm up @incursa/ui-kit",
@@ -16,7 +16,7 @@
     "Review the changelog and regenerated MCP manifests after each upgrade.",
     "Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract."
   ],
-  "latestReleaseNotes": "- Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.\n- Expanded browser coverage with a new reference-page spec and refreshed theme/layout snapshots.\n- Refreshed the showcase, reference, and agent guidance docs so the published surface stays aligned.",
+  "latestReleaseNotes": "- Added new Web Components for buttons, alerts, badges, spinners, empty states, list groups, and key-value layouts, and split the runtime into clearer component modules.\n- Refined the visual hierarchy across cards, tabs, alerts, outline buttons, empty states, validation surfaces, and the auto-refresh control with subtle surfaced styling.\n- Expanded browser/reference coverage and refreshed the generated package, MCP assets, and runtime documentation to match the new component surface.",
   "relatedUris": [
     "ui-kit://release-notes/latest",
     "ui-kit://package-metadata"

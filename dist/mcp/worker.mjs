@@ -23979,7 +23979,7 @@ data:
 // dist/mcp/resources.json
 var resources_default = {
   packageName: "@incursa/ui-kit",
-  packageVersion: "1.5.0",
+  packageVersion: "1.6.0",
   resources: [
     {
       uri: "ui-kit://overview",
@@ -24072,7 +24072,7 @@ var resources_default = {
       kind: "guide",
       searchKind: "install",
       summary: "Package-manager update commands and release-review guidance.",
-      body: "Update @incursa/ui-kit with your package manager of choice.\n\nnpm: npm install @incursa/ui-kit@latest\npnpm: pnpm up @incursa/ui-kit\nyarn: yarn upgrade @incursa/ui-kit\n\nReview after upgrading:\n- Review the changelog and regenerated MCP manifests after each upgrade.\n- Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract.\n\nLatest recorded release notes:\n- Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.\n- Expanded browser coverage with a new reference-page spec and refreshed theme/layout snapshots.\n- Refreshed the showcase, reference, and agent guidance docs so the published surface stays aligned.",
+      body: "Update @incursa/ui-kit with your package manager of choice.\n\nnpm: npm install @incursa/ui-kit@latest\npnpm: pnpm up @incursa/ui-kit\nyarn: yarn upgrade @incursa/ui-kit\n\nReview after upgrading:\n- Review the changelog and regenerated MCP manifests after each upgrade.\n- Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract.\n\nLatest recorded release notes:\n- Added new Web Components for buttons, alerts, badges, spinners, empty states, list groups, and key-value layouts, and split the runtime into clearer component modules.\n- Refined the visual hierarchy across cards, tabs, alerts, outline buttons, empty states, validation surfaces, and the auto-refresh control with subtle surfaced styling.\n- Expanded browser/reference coverage and refreshed the generated package, MCP assets, and runtime documentation to match the new component surface.",
       sourcePaths: [
         "CHANGELOG.md",
         "package.json"
@@ -24090,7 +24090,7 @@ var resources_default = {
       group: "guides",
       priority: 108,
       includeInSearch: true,
-      searchText: "Update\nPackage-manager update commands and release-review guidance.\nUpdate @incursa/ui-kit with your package manager of choice.\n\nnpm: npm install @incursa/ui-kit@latest\npnpm: pnpm up @incursa/ui-kit\nyarn: yarn upgrade @incursa/ui-kit\n\nReview after upgrading:\n- Review the changelog and regenerated MCP manifests after each upgrade.\n- Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract.\n\nLatest recorded release notes:\n- Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.\n- Expanded browser coverage with a new reference-page spec and refreshed theme/layout snapshots.\n- Refreshed the showcase, reference, and agent guidance docs so the published surface stays aligned.\nupdate\nupgrade\nlatest\nCHANGELOG.md\npackage.json"
+      searchText: "Update\nPackage-manager update commands and release-review guidance.\nUpdate @incursa/ui-kit with your package manager of choice.\n\nnpm: npm install @incursa/ui-kit@latest\npnpm: pnpm up @incursa/ui-kit\nyarn: yarn upgrade @incursa/ui-kit\n\nReview after upgrading:\n- Review the changelog and regenerated MCP manifests after each upgrade.\n- Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract.\n\nLatest recorded release notes:\n- Added new Web Components for buttons, alerts, badges, spinners, empty states, list groups, and key-value layouts, and split the runtime into clearer component modules.\n- Refined the visual hierarchy across cards, tabs, alerts, outline buttons, empty states, validation surfaces, and the auto-refresh control with subtle surfaced styling.\n- Expanded browser/reference coverage and refreshed the generated package, MCP assets, and runtime documentation to match the new component surface.\nupdate\nupgrade\nlatest\nCHANGELOG.md\npackage.json"
     },
     {
       uri: "ui-kit://package-metadata",
@@ -24098,7 +24098,7 @@ var resources_default = {
       kind: "guide",
       searchKind: "guide",
       summary: "Package identity, exports, and packaging surface from package.json.",
-      body: '{\n "title": "Package metadata",\n "summary": "Package identity, exports, and packaging surface from package.json.",\n "packageName": "@incursa/ui-kit",\n "version": "1.5.0",\n "license": "Apache-2.0",\n "repository": "git+https://github.com/incursa/ui-kit.git",\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "exports": {\n ".": {\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "default": "./dist/inc-design-language.js"\n },\n "./web-components": {\n "style": "./dist/web-components/style.css",\n "default": "./dist/web-components/index.js"\n },\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "files": [\n "dist",\n "src",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "publishConfig": {\n "access": "public"\n },\n "main": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "notes": [\n "The package exposes both the CSS-first surface and the optional same-package web-components layer.",\n "The dist/ directory is the public build output root."\n ],\n "relatedUris": [\n "ui-kit://install",\n "ui-kit://update",\n "ui-kit://overview"\n ]\n}',
+      body: '{\n "title": "Package metadata",\n "summary": "Package identity, exports, and packaging surface from package.json.",\n "packageName": "@incursa/ui-kit",\n "version": "1.6.0",\n "license": "Apache-2.0",\n "repository": "git+https://github.com/incursa/ui-kit.git",\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "exports": {\n ".": {\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "default": "./dist/inc-design-language.js"\n },\n "./web-components": {\n "style": "./dist/web-components/style.css",\n "default": "./dist/web-components/index.js"\n },\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "files": [\n "dist",\n "src",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "publishConfig": {\n "access": "public"\n },\n "main": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "notes": [\n "The package exposes both the CSS-first surface and the optional same-package web-components layer.",\n "The dist/ directory is the public build output root."\n ],\n "relatedUris": [\n "ui-kit://install",\n "ui-kit://update",\n "ui-kit://overview"\n ]\n}',
       sourcePaths: [
         "package.json"
       ],
@@ -24115,7 +24115,7 @@ var resources_default = {
       group: "guides",
       priority: 90,
       includeInSearch: true,
-      searchText: 'Package metadata\nPackage identity, exports, and packaging surface from package.json.\n{\n "title": "Package metadata",\n "summary": "Package identity, exports, and packaging surface from package.json.",\n "packageName": "@incursa/ui-kit",\n "version": "1.5.0",\n "license": "Apache-2.0",\n "repository": "git+https://github.com/incursa/ui-kit.git",\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "exports": {\n ".": {\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "default": "./dist/inc-design-language.js"\n },\n "./web-components": {\n "style": "./dist/web-components/style.css",\n "default": "./dist/web-components/index.js"\n },\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "files": [\n "dist",\n "src",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "publishConfig": {\n "access": "public"\n },\n "main": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "notes": [\n "The package exposes both the CSS-first surface and the optional same-package web-components layer.",\n "The dist/ directory is the public build output root."\n ],\n "relatedUris": [\n "ui-kit://install",\n "ui-kit://update",\n "ui-kit://overview"\n ]\n}\npackage metadata\npackage json\npackage.json'
+      searchText: 'Package metadata\nPackage identity, exports, and packaging surface from package.json.\n{\n "title": "Package metadata",\n "summary": "Package identity, exports, and packaging surface from package.json.",\n "packageName": "@incursa/ui-kit",\n "version": "1.6.0",\n "license": "Apache-2.0",\n "repository": "git+https://github.com/incursa/ui-kit.git",\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "exports": {\n ".": {\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "default": "./dist/inc-design-language.js"\n },\n "./web-components": {\n "style": "./dist/web-components/style.css",\n "default": "./dist/web-components/index.js"\n },\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "files": [\n "dist",\n "src",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "publishConfig": {\n "access": "public"\n },\n "main": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "notes": [\n "The package exposes both the CSS-first surface and the optional same-package web-components layer.",\n "The dist/ directory is the public build output root."\n ],\n "relatedUris": [\n "ui-kit://install",\n "ui-kit://update",\n "ui-kit://overview"\n ]\n}\npackage metadata\npackage json\npackage.json'
     },
     {
       uri: "ui-kit://release-notes/latest",
@@ -25685,7 +25685,7 @@ var resources_default = {
       summary: "Raw curated file content for package.json.",
       body: `{
  "name": "@incursa/ui-kit",
- "version": "1.5.0",
+ "version": "1.6.0",
  "private": false,
  "description": "Reusable UI kit for data-heavy business applications.",
  "keywords": [
@@ -25790,7 +25790,7 @@ var resources_default = {
 Raw curated file content for package.json.
 {
  "name": "@incursa/ui-kit",
- "version": "1.5.0",
+ "version": "1.6.0",
  "private": false,
  "description": "Reusable UI kit for data-heavy business applications.",
  "keywords": [
@@ -58341,7 +58341,7 @@ dist/inc-design-language.css`
     title: "Install",
     summary: "Install guidance for compiled CSS, SCSS, JS helper, and web-components entrypoints.",
     packageName: "@incursa/ui-kit",
-    version: "1.5.0",
+    version: "1.6.0",
     installCommands: {
       npm: "npm install @incursa/ui-kit",
       pnpm: "pnpm add @incursa/ui-kit",
@@ -58377,7 +58377,7 @@ dist/inc-design-language.css`
     title: "Update",
     summary: "Package-manager update commands and release-review guidance.",
     packageName: "@incursa/ui-kit",
-    version: "1.5.0",
+    version: "1.6.0",
     commands: {
       npm: "npm install @incursa/ui-kit@latest",
       pnpm: "pnpm up @incursa/ui-kit",
@@ -58391,7 +58391,7 @@ dist/inc-design-language.css`
       "Review the changelog and regenerated MCP manifests after each upgrade.",
       "Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract."
     ],
-    latestReleaseNotes: "- Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.\n- Expanded browser coverage with a new reference-page spec and refreshed theme/layout snapshots.\n- Refreshed the showcase, reference, and agent guidance docs so the published surface stays aligned.",
+    latestReleaseNotes: "- Added new Web Components for buttons, alerts, badges, spinners, empty states, list groups, and key-value layouts, and split the runtime into clearer component modules.\n- Refined the visual hierarchy across cards, tabs, alerts, outline buttons, empty states, validation surfaces, and the auto-refresh control with subtle surfaced styling.\n- Expanded browser/reference coverage and refreshed the generated package, MCP assets, and runtime documentation to match the new component surface.",
     relatedUris: [
       "ui-kit://release-notes/latest",
       "ui-kit://package-metadata"
@@ -58401,7 +58401,7 @@ dist/inc-design-language.css`
     title: "Package metadata",
     summary: "Package identity, exports, and packaging surface from package.json.",
     packageName: "@incursa/ui-kit",
-    version: "1.5.0",
+    version: "1.6.0",
     license: "Apache-2.0",
     repository: "git+https://github.com/incursa/ui-kit.git",
     homepage: "https://github.com/incursa/ui-kit#readme",
@@ -58518,7 +58518,7 @@ var search_index_default = [
       "latest"
     ],
     priority: 108,
-    searchText: "Update\nPackage-manager update commands and release-review guidance.\nUpdate @incursa/ui-kit with your package manager of choice.\n\nnpm: npm install @incursa/ui-kit@latest\npnpm: pnpm up @incursa/ui-kit\nyarn: yarn upgrade @incursa/ui-kit\n\nReview after upgrading:\n- Review the changelog and regenerated MCP manifests after each upgrade.\n- Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract.\n\nLatest recorded release notes:\n- Refactored the shared source, published bundles, and Web Components entrypoints to improve readability and maintainability.\n- Expanded browser coverage with a new reference-page spec and refreshed theme/layout snapshots.\n- Refreshed the showcase, reference, and agent guidance docs so the published surface stays aligned.\nupdate\nupgrade\nlatest\nCHANGELOG.md\npackage.json"
+    searchText: "Update\nPackage-manager update commands and release-review guidance.\nUpdate @incursa/ui-kit with your package manager of choice.\n\nnpm: npm install @incursa/ui-kit@latest\npnpm: pnpm up @incursa/ui-kit\nyarn: yarn upgrade @incursa/ui-kit\n\nReview after upgrading:\n- Review the changelog and regenerated MCP manifests after each upgrade.\n- Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract.\n\nLatest recorded release notes:\n- Added new Web Components for buttons, alerts, badges, spinners, empty states, list groups, and key-value layouts, and split the runtime into clearer component modules.\n- Refined the visual hierarchy across cards, tabs, alerts, outline buttons, empty states, validation surfaces, and the auto-refresh control with subtle surfaced styling.\n- Expanded browser/reference coverage and refreshed the generated package, MCP assets, and runtime documentation to match the new component surface.\nupdate\nupgrade\nlatest\nCHANGELOG.md\npackage.json"
   },
   {
     uri: "ui-kit://package-metadata",
@@ -58533,7 +58533,7 @@ var search_index_default = [
       "package json"
     ],
     priority: 90,
-    searchText: 'Package metadata\nPackage identity, exports, and packaging surface from package.json.\n{\n "title": "Package metadata",\n "summary": "Package identity, exports, and packaging surface from package.json.",\n "packageName": "@incursa/ui-kit",\n "version": "1.5.0",\n "license": "Apache-2.0",\n "repository": "git+https://github.com/incursa/ui-kit.git",\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "exports": {\n ".": {\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "default": "./dist/inc-design-language.js"\n },\n "./web-components": {\n "style": "./dist/web-components/style.css",\n "default": "./dist/web-components/index.js"\n },\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "files": [\n "dist",\n "src",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "publishConfig": {\n "access": "public"\n },\n "main": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "notes": [\n "The package exposes both the CSS-first surface and the optional same-package web-components layer.",\n "The dist/ directory is the public build output root."\n ],\n "relatedUris": [\n "ui-kit://install",\n "ui-kit://update",\n "ui-kit://overview"\n ]\n}\npackage metadata\npackage json\npackage.json'
+    searchText: 'Package metadata\nPackage identity, exports, and packaging surface from package.json.\n{\n "title": "Package metadata",\n "summary": "Package identity, exports, and packaging surface from package.json.",\n "packageName": "@incursa/ui-kit",\n "version": "1.6.0",\n "license": "Apache-2.0",\n "repository": "git+https://github.com/incursa/ui-kit.git",\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "exports": {\n ".": {\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "default": "./dist/inc-design-language.js"\n },\n "./web-components": {\n "style": "./dist/web-components/style.css",\n "default": "./dist/web-components/index.js"\n },\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "files": [\n "dist",\n "src",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "publishConfig": {\n "access": "public"\n },\n "main": "./dist/inc-design-language.js",\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "notes": [\n "The package exposes both the CSS-first surface and the optional same-package web-components layer.",\n "The dist/ directory is the public build output root."\n ],\n "relatedUris": [\n "ui-kit://install",\n "ui-kit://update",\n "ui-kit://overview"\n ]\n}\npackage metadata\npackage json\npackage.json'
   },
   {
     uri: "ui-kit://release-notes/latest",
