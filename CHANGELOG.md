@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.0
+
+- Added the D3-backed inc-sparkline Web Component for compact line, area, and bar trend evidence in dense metric and table surfaces.
+- Added sparkline parsing/path helpers, D3 runtime dependencies, CSS custom properties, parts, examples, and ProtocolLab-oriented benchmark history documentation.
+- Expanded browser coverage, smoke checks, generated package assets, and MCP manifests for the new sparkline surface.
+
 ## 1.8.0
 
 - Added a semantic Incursa icon layer with Lucide-backed defaults, a public @incursa/ui-kit/icons entrypoint, and a global renderer override for consumers.
