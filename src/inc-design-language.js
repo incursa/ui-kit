@@ -1,3 +1,8 @@
+import {
+    replaceIconContents,
+    upgradeIconPlaceholders,
+} from "./icons/index.js";
+
 (function () {
     "use strict";
 
@@ -12,6 +17,7 @@
         themeLabel: "[data-inc-theme-label]",
         themeSwitcher: "[data-inc-theme-switcher], details.inc-theme-switcher",
         nativeDialogOpen: "[data-inc-native-dialog-open]",
+        icon: "[data-inc-icon]",
         autoRefresh: "[data-inc-auto-refresh]",
         autoRefreshToggle: '[data-inc-action="auto-refresh-toggle"]',
         fileExample: "[data-inc-file-example]",
@@ -1132,16 +1138,6 @@
         return `${minutes}m ${seconds}s`;
     }
 
-    const AUTO_REFRESH_PAUSE_ICON = `
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-  <path d="M4 3h3v10H4zM9 3h3v10H9z"></path>
-</svg>`.trim();
-
-    const AUTO_REFRESH_PLAY_ICON = `
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-  <path d="M4 3.5v9l8-4.5-8-4.5z"></path>
-</svg>`.trim();
-
     function getAutoRefreshParts(root) {
         const toggle = root.querySelector(".inc-auto-refresh__toggle");
 
@@ -1183,7 +1179,11 @@
         }
 
         if (parts.toggleIcon instanceof HTMLElement) {
-            parts.toggleIcon.innerHTML = isPaused ? AUTO_REFRESH_PLAY_ICON : AUTO_REFRESH_PAUSE_ICON;
+            replaceIconContents(parts.toggleIcon, isPaused ? "play" : "pause", {
+                className: "inc-icon",
+                decorative: true,
+                size: 16,
+            });
         }
     }
 
@@ -1848,6 +1848,7 @@
         initializeMenus();
         initializeCollapses();
         initializeTabs();
+        upgradeIconPlaceholders(document);
         initializeFileExamples();
         initializeAutoRefresh();
         attachEventHandlers();

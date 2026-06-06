@@ -19,6 +19,8 @@ const requiredFiles = [
     "src/_inc-tokens.scss",
     "src/inc-design-language.scss",
     "src/inc-design-language.js",
+    "src/icons/index.js",
+    "src/icons/package.json",
     "src/web-components/README.md",
     "src/web-components/style.css",
     "dist/inc-design-language.css",
@@ -26,7 +28,10 @@ const requiredFiles = [
     "dist/inc-design-language.min.css",
     "dist/inc-design-language.min.css.map",
     "dist/inc-design-language.js",
+    "dist/icons/index.js",
+    "dist/icons/package.json",
     "wrangler.toml",
+    "scripts/build-icons.mjs",
     "dist/mcp/worker.mjs",
     "dist/mcp/resources.json",
     "dist/mcp/search-index.json",
@@ -281,19 +286,27 @@ if (existsSync("package.json") && existsSync("package-lock.json")) {
 
     ensure(packageJson.version === packageLock.version, "package.json and package-lock.json must declare the same version", failures);
     ensure(packageJson.version === packageLock.packages?.[""]?.version, "package-lock.json package root version must match package.json", failures);
+    ensure(packageJson.dependencies?.lucide, "package.json must declare lucide as a runtime dependency for default icons", failures);
 
     const webComponentsExport = packageJson.exports?.["./web-components"];
     ensure(webComponentsExport && typeof webComponentsExport === "object", "package.json must export ./web-components as a conditional entry", failures);
     ensure(webComponentsExport?.default === "./dist/web-components/index.js", "package.json ./web-components default export must point to dist/web-components/index.js", failures);
     ensure(webComponentsExport?.style === "./dist/web-components/style.css", "package.json ./web-components style export must point to dist/web-components/style.css", failures);
     ensure(packageJson.exports?.["./web-components/style.css"] === "./dist/web-components/style.css", "package.json must export ./web-components/style.css", failures);
+
+    const iconsExport = packageJson.exports?.["./icons"];
+    ensure(iconsExport && typeof iconsExport === "object", "package.json must export ./icons as a conditional entry", failures);
+    ensure(iconsExport?.default === "./dist/icons/index.js", "package.json ./icons default export must point to dist/icons/index.js", failures);
 }
 
 if (existsSync("src/inc-design-language.js") && existsSync("dist/inc-design-language.js")) {
-    const sourceJs = readFileSync("src/inc-design-language.js");
-    const distJs = readFileSync("dist/inc-design-language.js");
+    const sourceJs = readUtf8("src/inc-design-language.js");
+    const distJs = readUtf8("dist/inc-design-language.js");
 
-    ensure(Buffer.compare(sourceJs, distJs) === 0, "dist/inc-design-language.js must exactly match src/inc-design-language.js", failures);
+    ensure(sourceJs.includes("upgradeIconPlaceholders"), "src/inc-design-language.js must initialize semantic icon placeholders", failures);
+    ensure(distJs.includes("data-inc-icon"), "dist/inc-design-language.js must include the bundled semantic icon runtime", failures);
+    ensure(distJs.includes("IncWebComponents"), "dist/inc-design-language.js must expose the shared IncWebComponents namespace", failures);
+    ensure(!distJs.includes("AUTO_REFRESH_PAUSE_ICON"), "dist/inc-design-language.js must not use the legacy auto-refresh SVG constants", failures);
 }
 
 if (existsSync("dist/inc-design-language.css")) {

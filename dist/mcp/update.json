@@ -2,7 +2,7 @@
   "title": "Update",
   "summary": "Package-manager update commands and release-review guidance.",
   "packageName": "@incursa/ui-kit",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "commands": {
     "npm": "npm install @incursa/ui-kit@latest",
     "pnpm": "pnpm up @incursa/ui-kit",
@@ -16,7 +16,7 @@
     "Review the changelog and regenerated MCP manifests after each upgrade.",
     "Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract."
   ],
-  "latestReleaseNotes": "- Published the expanded Web Components and visual hierarchy updates in a corrected follow-up after the failed v1.6.0 tag run.\n- Regenerated the MCP manifest outputs so release verification and published artifacts stay in sync.\n- Hardened the PowerShell release helper so failed native commands stop the release before any commit, tag, or push.",
+  "latestReleaseNotes": "- Made the file workflow examples functional with shared browse, drag-drop, and removable file-row behavior.\n- Added dismissible and timeout-driven alert behavior, fixed close-button rendering, and tightened the auto-refresh controls and loading-button examples.\n- Improved dark-mode contrast across filter chips, review-grid row states, and related showcase surfaces, with expanded browser coverage and refreshed generated assets.",
   "relatedUris": [
     "ui-kit://release-notes/latest",
     "ui-kit://package-metadata"

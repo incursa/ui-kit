@@ -326,6 +326,22 @@ There are three supported ways to use it.
 - Keep the CSS bundle in place because the custom elements are designed to sit on top of the same class and token vocabulary.
 - Prefer this layer for declarative shell components, standardized atomic controls, and repeated action/detail or collection hosts, and keep static tables plus the remaining low-value atoms on the CSS surface.
 
+### Icons
+
+Incursa components use semantic icon names instead of Lucide component names. The default renderer maps names such as `info`, `help`, `success`, `warning`, `error`, `upload`, `document`, `download`, `settings`, and `external-link` to bundled Lucide SVGs.
+
+Use `data-inc-icon="warning"` in CSS-first markup loaded with `dist/inc-design-language.js`, or use component attributes such as `<inc-alert tone="warning">` and `<inc-button icon="download">Download</inc-button>` in the Web Component layer. Decorative package icons are rendered with `aria-hidden="true"`; icon-only controls still need an accessible label.
+
+Consumers can replace the global renderer without depending on Lucide names:
+
+```js
+import { setIconRenderer } from "@incursa/ui-kit/icons";
+
+setIconRenderer((name, options) => {
+  // Return an SVG/HTMLElement or an SVG string for the semantic Incursa name.
+});
+```
+
 Practical recommendation for a .NET Razor Pages or MVC app:
 
 - If you just want the finished look, copy or install the package and reference [`dist/inc-design-language.css`](dist/inc-design-language.css) from your layout.

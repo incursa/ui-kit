@@ -1,15 +1,30 @@
+import {
+    incIconNames,
+    normalizeIconName,
+    replaceIconContents,
+} from "../../icons/index.js";
+
 const THEME_MODES = ["light", "dark", "system"];
 const DEFAULT_THEME_STORAGE_KEY = "inc-theme-mode";
 const BADGE_TONES = new Set(["primary", "secondary", "success", "danger", "warning", "info"]);
 const SPINNER_VARIANTS = new Set(["border", "grow"]);
-const AUTO_REFRESH_PAUSE_ICON = `
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-  <path d="M4 3h3v10H4zM9 3h3v10H9z"></path>
-</svg>`.trim();
-const AUTO_REFRESH_PLAY_ICON = `
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-  <path d="M4 3.5v9l8-4.5-8-4.5z"></path>
-</svg>`.trim();
+const ICON_NAME_SET = new Set(incIconNames);
+const STATE_ICON_BY_VARIANT = new Map([
+    ["empty", "empty"],
+    ["results", "no-results"],
+    ["loading", "loading"],
+    ["error", "error"],
+    ["danger", "error"],
+    ["warning", "warning"],
+    ["success", "success"],
+    ["info", "info"],
+]);
+const STATE_ICON_BY_STATUS = new Map([
+    ["+", "empty"],
+    ["?", "no-results"],
+    ["!", "error"],
+    ["...", "loading"],
+]);
 const HostElement = typeof HTMLElement === "undefined" ? class {} : HTMLElement;
 const themeSubscribers = new Set();
 
@@ -44,6 +59,33 @@ function toPositiveInt(value) {
 
 function normalizeToken(value) {
     return String(value ?? "").trim().toLowerCase();
+}
+
+function resolveStateIconName(icon, status, variant) {
+    const explicitIcon = normalizeIconName(icon);
+    if (explicitIcon) {
+        return explicitIcon;
+    }
+
+    const normalizedStatus = normalizeIconName(status);
+    if (STATE_ICON_BY_STATUS.has(String(status || "").trim())) {
+        return STATE_ICON_BY_STATUS.get(String(status || "").trim());
+    }
+
+    if (ICON_NAME_SET.has(normalizedStatus)) {
+        return normalizedStatus;
+    }
+
+    return STATE_ICON_BY_VARIANT.get(normalizeToken(variant)) || "info";
+}
+
+function renderDecorativeIcon(container, name, size = 18) {
+    replaceIconContents(container, name, {
+        className: "inc-icon",
+        decorative: true,
+        size,
+    });
+    container.hidden = false;
 }
 
 function getSystemTheme() {
@@ -206,7 +248,7 @@ function formatRemaining(totalSeconds) {
 }
 
 export class IncStatePanel extends HostElement {
-    static observedAttributes = ["tone", "variant", "title", "body", "status", "open"];
+    static observedAttributes = ["tone", "variant", "title", "body", "status", "icon", "open"];
 
     #fallback = null;
     #appliedVariantClass = "";
@@ -246,6 +288,7 @@ export class IncStatePanel extends HostElement {
         actions.className = "inc-state-panel__actions";
 
         icon.setAttribute("part", "icon");
+        icon.setAttribute("aria-hidden", "true");
         title.setAttribute("part", "title");
         body.setAttribute("part", "body");
         actions.setAttribute("part", "actions");
@@ -282,11 +325,19 @@ export class IncStatePanel extends HostElement {
         const title = this.getAttribute("title") || "";
         const body = this.getAttribute("body") || "";
         const status = this.getAttribute("status") || "";
+        const iconName = resolveStateIconName(this.getAttribute("icon"), status, nextVariant);
 
         this.#fallback.title.textContent = title;
         this.#fallback.body.textContent = body;
-        this.#fallback.icon.textContent = status;
-        this.#fallback.icon.hidden = !status;
+        if (iconName === "none") {
+            this.#fallback.icon.replaceChildren();
+            this.#fallback.icon.hidden = true;
+        } else if (ICON_NAME_SET.has(iconName)) {
+            renderDecorativeIcon(this.#fallback.icon, iconName, 22);
+        } else {
+            this.#fallback.icon.textContent = status;
+            this.#fallback.icon.hidden = !status;
+        }
         this.#fallback.actions.hidden = true;
     }
 
@@ -872,7 +923,7 @@ export class IncAutoRefresh extends HostElement {
         }
 
         if (this.#parts.toggleIcon instanceof HTMLElement) {
-            this.#parts.toggleIcon.innerHTML = this.#isPaused ? AUTO_REFRESH_PLAY_ICON : AUTO_REFRESH_PAUSE_ICON;
+            renderDecorativeIcon(this.#parts.toggleIcon, this.#isPaused ? "play" : "pause", 16);
         }
     }
 

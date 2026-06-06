@@ -473,7 +473,7 @@
                                     </section>
                                     <div class="inc-empty-state">
                                         <div class="inc-empty-state__content">
-                                            <div class="inc-empty-state__icon">+</div>
+                                            <div class="inc-empty-state__icon" data-inc-icon="empty" aria-hidden="true"></div>
                                             <h3 class="inc-heading inc-heading--h3">No saved views</h3>
                                             <p class="inc-text inc-text--regular inc-text--muted">Create a named filter set so your operators can reuse it across screens.</p>
                                             <div class="inc-empty-state__actions">
@@ -512,7 +512,7 @@
 
 &lt;div class="inc-empty-state"&gt;
     &lt;div class="inc-empty-state__content"&gt;
-        &lt;div class="inc-empty-state__icon"&gt;+&lt;/div&gt;
+        &lt;div class="inc-empty-state__icon" data-inc-icon="empty" aria-hidden="true"&gt;&lt;/div&gt;
         &lt;h3 class="inc-heading inc-heading--h3"&gt;No saved views&lt;/h3&gt;
         &lt;p class="inc-text inc-text--regular inc-text--muted"&gt;Create a named filter set...&lt;/p&gt;
         &lt;div class="inc-empty-state__actions"&gt;
@@ -1024,7 +1024,7 @@
                                     <div class="demo-layout-grid demo-layout-grid--2">
                                         <div class="inc-state-panel inc-state-panel--results">
                                             <div class="inc-state-panel__head">
-                                                <div class="inc-state-panel__icon">?</div>
+                                                <div class="inc-state-panel__icon" data-inc-icon="no-results" aria-hidden="true"></div>
                                                 <div>
                                                     <h3 class="inc-state-panel__title">No results matched</h3>
                                                     <p class="inc-state-panel__body">Distinct from the create-first empty state.</p>
@@ -1033,7 +1033,7 @@
                                         </div>
                                         <div class="inc-state-panel inc-state-panel--error">
                                             <div class="inc-state-panel__head">
-                                                <div class="inc-state-panel__icon">!</div>
+                                                <div class="inc-state-panel__icon" data-inc-icon="error" aria-hidden="true"></div>
                                                 <div>
                                                     <h3 class="inc-state-panel__title">Export failed</h3>
                                                     <p class="inc-state-panel__body">Use a proper failure surface, not just a muted paragraph.</p>
@@ -1042,7 +1042,7 @@
                                         </div>
                                     </div>
                                     <div class="inc-permission-banner">
-                                        <div class="inc-permission-banner__icon">#</div>
+                                        <div class="inc-permission-banner__icon" data-inc-icon="permission" aria-hidden="true"></div>
                                         <div>
                                             <h3 class="inc-permission-banner__title">Finance Manager role required</h3>
                                             <p class="inc-permission-banner__text">Show when an action is visible but intentionally unavailable.</p>
@@ -1050,7 +1050,7 @@
                                     </div>
                                     <div class="inc-toast-stack">
                                         <div class="inc-toast-card">
-                                            <div class="inc-toast-card__icon">i</div>
+                                            <div class="inc-toast-card__icon" data-inc-icon="success" aria-hidden="true"></div>
                                             <div>
                                                 <h3 class="inc-toast-card__title">View saved</h3>
                                                 <p class="inc-toast-card__text">Use for asynchronous success or background-status messages.</p>
@@ -1062,7 +1062,7 @@
 &lt;div class="inc-state-panel inc-state-panel--error"&gt;...&lt;/div&gt;
 
 &lt;div class="inc-permission-banner"&gt;
-    &lt;div class="inc-permission-banner__icon"&gt;#&lt;/div&gt;
+    &lt;div class="inc-permission-banner__icon" data-inc-icon="permission" aria-hidden="true"&gt;&lt;/div&gt;
     &lt;div&gt;...&lt;/div&gt;
 &lt;/div&gt;
 
@@ -1344,7 +1344,7 @@
     </inc-summary-block>
 </inc-summary-overview>
 
-<inc-state-panel variant="results" title="No saved views" body="Create a named filter set so your operators can reuse it across screens." status="+"></inc-state-panel>`,
+<inc-state-panel variant="results" icon="empty" title="No saved views" body="Create a named filter set so your operators can reuse it across screens."></inc-state-panel>`,
                 "form-fields": `<inc-field required label="Text input">
     <label slot="label" class="inc-form__label" for="ref-name">Text input</label>
     <input slot="control" id="ref-name" class="inc-form__control" type="text" value="North Campus Expansion">
@@ -1437,9 +1437,9 @@
 </inc-field>
 
 <inc-readonly-field label="Owner" value="AP Team"></inc-readonly-field>`,
-                "operational-states-and-feedback": `<inc-state-panel variant="results" title="No results matched" body="Distinct from the create-first empty state." status="?"></inc-state-panel>
+                "operational-states-and-feedback": `<inc-state-panel variant="results" icon="no-results" title="No results matched" body="Distinct from the create-first empty state."></inc-state-panel>
 
-<inc-state-panel variant="error" title="Export failed" body="Use a proper failure surface, not just a muted paragraph." status="!"></inc-state-panel>
+<inc-state-panel variant="error" icon="error" title="Export failed" body="Use a proper failure surface, not just a muted paragraph."></inc-state-panel>
 
 <inc-live-region politeness="polite" atomic="true">View saved</inc-live-region>`,
                 "overlay-workflows": `<inc-dialog id="approval-dialog" label="Approve exception" modal dismissible size="lg">

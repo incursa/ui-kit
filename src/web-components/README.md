@@ -8,9 +8,11 @@ The CSS-first [`inc-*`](../../reference.html) class surface remains the canonica
 
 - Package entrypoint: `@incursa/ui-kit/web-components`
 - Style entrypoint: `@incursa/ui-kit/web-components/style.css`
+- Icon entrypoint: `@incursa/ui-kit/icons`
 - Built output: `dist/web-components/`
 - Package export: `./web-components` resolves to `dist/web-components/index.js`
 - Package export: `./web-components/style.css` resolves to `dist/web-components/style.css`
+- Package export: `./icons` resolves to `dist/icons/index.js`
 - Module boundary: `src/web-components/package.json` sets this subtree to `type: module`
 
 Load these entrypoints only when the consuming app wants the custom elements and their default look. CSS-only consumers should not pay for the runtime.
@@ -45,6 +47,8 @@ The runtime auto-defines the shipped elements on load. If a consumer needs expli
   The `IncElement` base class, including reflected attribute/property wiring and slot helpers.
 - [`registry.js`](registry.js)
   Idempotent registration helpers and the `IncWebComponents.registry` namespace.
+- [`../icons/index.js`](../icons/index.js)
+  Semantic Incursa icon names, default Lucide-backed rendering, and the global renderer override used by component fallbacks.
 - [`components/dom-helpers.js`](components/dom-helpers.js)
   Shared DOM helpers used by the action and collection modules.
 - [`controllers/focus.js`](controllers/focus.js)

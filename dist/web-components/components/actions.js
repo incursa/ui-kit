@@ -1,4 +1,8 @@
 import {
+    normalizeIconName,
+    replaceIconContents,
+} from "../../icons/index.js";
+import {
     addClass,
     ensureNode,
     moveChildNodes,
@@ -28,6 +32,14 @@ const ALERT_DEFAULT_ROLE_BY_TONE = new Map([
     ["info", "status"],
     ["secondary", "status"],
 ]);
+const ALERT_ICON_BY_TONE = new Map([
+    ["success", "success"],
+    ["danger", "error"],
+    ["warning", "warning"],
+    ["info", "info"],
+    ["secondary", "info"],
+    ["primary", "info"],
+]);
 
 const HostElement = typeof HTMLElement === "undefined" ? class {} : HTMLElement;
 
@@ -53,6 +65,29 @@ function emit(host, type, detail = {}, options = {}) {
     }));
 }
 
+function getDirectIconSlot(host) {
+    return Array.from(host.children || []).find((node) => (
+        node instanceof HTMLElement
+        && node.getAttribute("slot") === "icon"
+    )) || null;
+}
+
+function hasConsumerIcon(container) {
+    return Array.from(container.children || []).some((node) => (
+        node instanceof HTMLElement
+        && !node.hasAttribute("data-inc-generated-icon")
+    ));
+}
+
+function renderDecorativeIcon(container, name, options = {}) {
+    replaceIconContents(container, name, {
+        className: "inc-icon",
+        decorative: true,
+        size: options.size || 16,
+    });
+    container.hidden = false;
+}
+
 class IncElement extends HostElement {
     emit(type, detail = {}, options = {}) {
         return emit(this, type, detail, options);
@@ -61,7 +96,7 @@ class IncElement extends HostElement {
 
 export class IncButtonElement extends IncElement {
     static get observedAttributes() {
-        return ["tone", "variant", "size", "loading", "href", "type", "disabled", "label", "target", "rel", "download"];
+        return ["tone", "variant", "size", "loading", "href", "type", "disabled", "label", "target", "rel", "download", "icon"];
     }
 
     connectedCallback() {
@@ -166,6 +201,8 @@ export class IncButtonElement extends IncElement {
             this.removeLoadingSpinner(control);
         }
 
+        this.syncIcon(control);
+
         const label = this.getAttribute("label");
         if (label) {
             control.setAttribute("aria-label", label);
@@ -219,6 +256,53 @@ export class IncButtonElement extends IncElement {
         }
 
         control.querySelectorAll(":scope > [data-inc-button-spinner]").forEach((node) => node.remove());
+    }
+
+    syncIcon(control) {
+        if (!(control instanceof HTMLElement)) {
+            return;
+        }
+
+        const explicitIcon = normalizeIconName(this.getAttribute("icon"));
+        const inferredIcon = this.getAttribute("download") != null
+            ? "download"
+            : this.getAttribute("target") === "_blank"
+                ? "external-link"
+                : "";
+        const iconName = explicitIcon || inferredIcon;
+        let icon = control.querySelector(":scope > [data-inc-button-icon]");
+        const slotted = getDirectIconSlot(control);
+
+        if (!icon && (iconName || slotted)) {
+            icon = document.createElement("span");
+            icon.className = "inc-btn__icon";
+            icon.setAttribute("data-inc-button-icon", "true");
+            icon.setAttribute("aria-hidden", "true");
+            control.prepend(icon);
+        }
+
+        if (!(icon instanceof HTMLElement)) {
+            return;
+        }
+
+        if (slotted) {
+            slotted.removeAttribute("slot");
+            icon.replaceChildren(slotted);
+            icon.hidden = false;
+            return;
+        }
+
+        if (hasConsumerIcon(icon)) {
+            icon.hidden = false;
+            return;
+        }
+
+        if (iconName && iconName !== "none") {
+            renderDecorativeIcon(icon, iconName, { size: 16 });
+            return;
+        }
+
+        icon.remove();
     }
 }
 
@@ -350,7 +434,7 @@ export class IncCloseButtonElement extends IncElement {
 
 export class IncAlertElement extends IncElement {
     static get observedAttributes() {
-        return ["tone", "variant", "dismissible", "dismiss-label", "timeout"];
+        return ["tone", "variant", "dismissible", "dismiss-label", "timeout", "icon"];
     }
 
     connectedCallback() {
@@ -398,6 +482,7 @@ export class IncAlertElement extends IncElement {
         const tone = normalizeToken(this.getAttribute("tone") || this.getAttribute("variant")) || "info";
         const resolvedTone = BADGE_TONES.has(tone) ? tone : "info";
         this.classList.add(`inc-alert--${resolvedTone}`);
+        this.syncIcon(resolvedTone);
 
         if (toBoolean(this.getAttribute("dismissible"))) {
             this.classList.add("inc-alert--dismissible");
@@ -465,6 +550,44 @@ export class IncAlertElement extends IncElement {
         this.querySelectorAll(":scope > .inc-alert__progress").forEach((node) => node.remove());
     }
 
+    syncIcon(tone) {
+        const explicitIcon = normalizeIconName(this.getAttribute("icon"));
+        const iconName = explicitIcon || ALERT_ICON_BY_TONE.get(tone) || "info";
+        let icon = this.querySelector(":scope > .inc-alert__icon");
+        const slotted = getDirectIconSlot(this);
+
+        if (!icon && (iconName !== "none" || slotted)) {
+            icon = document.createElement("span");
+            icon.className = "inc-alert__icon";
+            icon.setAttribute("part", "icon");
+            icon.setAttribute("aria-hidden", "true");
+            this.prepend(icon);
+        }
+
+        if (!(icon instanceof HTMLElement)) {
+            return;
+        }
+
+        if (slotted) {
+            slotted.removeAttribute("slot");
+            icon.replaceChildren(slotted);
+            icon.hidden = false;
+            return;
+        }
+
+        if (hasConsumerIcon(icon)) {
+            icon.hidden = false;
+            return;
+        }
+
+        if (iconName === "none") {
+            icon.remove();
+            return;
+        }
+
+        renderDecorativeIcon(icon, iconName, { size: 18 });
+    }
+
     startDismissTimer(timeoutMs) {
         const progress = this.ensureProgressBar();
         this.stopDismissTimer();
@@ -514,9 +637,19 @@ export class IncAlertElement extends IncElement {
 }
 
 export class IncEmptyStateElement extends IncElement {
+    static get observedAttributes() {
+        return ["icon"];
+    }
+
     connectedCallback() {
         addClass(this, "inc-empty-state");
         this.sync();
+    }
+
+    attributeChangedCallback() {
+        if (this.isConnected) {
+            this.sync();
+        }
     }
 
     sync() {
@@ -572,6 +705,20 @@ export class IncEmptyStateElement extends IncElement {
 
             body.append(node);
         });
+
+        if (hasConsumerIcon(icon)) {
+            icon.hidden = false;
+            return;
+        }
+
+        const iconName = normalizeIconName(this.getAttribute("icon")) || "empty";
+        if (iconName === "none") {
+            icon.replaceChildren();
+            icon.hidden = true;
+            return;
+        }
+
+        renderDecorativeIcon(icon, iconName, { size: 34 });
     }
 }
 

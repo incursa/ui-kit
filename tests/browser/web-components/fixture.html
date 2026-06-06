@@ -208,7 +208,7 @@
                     <li slot="item"><a href="#amount">Amount exceeds tolerance.</a></li>
                 </inc-validation-summary>
 
-                <inc-state-panel id="wc-state-panel" variant="warning" title="Review Required" body="Vendor profile is pending verification." status="!"></inc-state-panel>
+                <inc-state-panel id="wc-state-panel" variant="warning" icon="warning" title="Review Required" body="Vendor profile is pending verification."></inc-state-panel>
                 <inc-live-region id="wc-live-region" politeness="polite"></inc-live-region>
                 <inc-auto-refresh id="wc-auto-refresh" paused seconds="180" label="Queue refresh in" loading-label="Refreshing queue"></inc-auto-refresh>
                 <inc-theme-switcher id="wc-theme-switcher" label="Appearance" heading="Choose appearance" variant="navbar"></inc-theme-switcher>
@@ -269,8 +269,7 @@
                             <inc-alert id="wc-alert-success" tone="success" dismissible dismiss-label="Dismiss success" timeout="5000">Success alert text.</inc-alert>
                             <inc-alert id="wc-alert-info" tone="info">Information alert text.</inc-alert>
                             <inc-alert id="wc-alert-warning" tone="warning" dismissible dismiss-label="Dismiss warning">Warning alert text.</inc-alert>
-                            <inc-empty-state id="wc-empty-state">
-                                <span slot="icon">+</span>
+                            <inc-empty-state id="wc-empty-state" icon="empty">
                                 <h3 class="inc-heading inc-heading--h3">No saved views</h3>
                                 <p class="inc-text inc-text--regular inc-text--muted">Create a named filter set so your operators can reuse it across screens.</p>
                                 <div slot="actions" class="wc-actions">
@@ -344,6 +343,13 @@
         </section>
     </div>
 
+    <script type="importmap">
+        {
+            "imports": {
+                "lucide/": "/node_modules/lucide/"
+            }
+        }
+    </script>
     <script type="module">
         window.__incWcReady = false;
         window.__incWcError = null;

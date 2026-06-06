@@ -4,7 +4,7 @@
   "kind": "guide",
   "searchKind": "guide",
   "summary": "The latest recorded changelog entry.",
-  "body": "- Published the expanded Web Components and visual hierarchy updates in a corrected follow-up after the failed v1.6.0 tag run.\n- Regenerated the MCP manifest outputs so release verification and published artifacts stay in sync.\n- Hardened the PowerShell release helper so failed native commands stop the release before any commit, tag, or push.",
+  "body": "- Made the file workflow examples functional with shared browse, drag-drop, and removable file-row behavior.\n- Added dismissible and timeout-driven alert behavior, fixed close-button rendering, and tightened the auto-refresh controls and loading-button examples.\n- Improved dark-mode contrast across filter chips, review-grid row states, and related showcase surfaces, with expanded browser coverage and refreshed generated assets.",
   "sourcePaths": [
     "CHANGELOG.md"
   ],
@@ -21,5 +21,5 @@
   "group": "guides",
   "priority": 95,
   "includeInSearch": true,
-  "searchText": "Latest release notes\nThe latest recorded changelog entry.\n- Published the expanded Web Components and visual hierarchy updates in a corrected follow-up after the failed v1.6.0 tag run.\n- Regenerated the MCP manifest outputs so release verification and published artifacts stay in sync.\n- Hardened the PowerShell release helper so failed native commands stop the release before any commit, tag, or push.\nrelease notes\nchangelog\nlatest release\nCHANGELOG.md"
+  "searchText": "Latest release notes\nThe latest recorded changelog entry.\n- Made the file workflow examples functional with shared browse, drag-drop, and removable file-row behavior.\n- Added dismissible and timeout-driven alert behavior, fixed close-button rendering, and tightened the auto-refresh controls and loading-button examples.\n- Improved dark-mode contrast across filter chips, review-grid row states, and related showcase surfaces, with expanded browser coverage and refreshed generated assets.\nrelease notes\nchangelog\nlatest release\nCHANGELOG.md"
 }
