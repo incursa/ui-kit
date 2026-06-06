@@ -7,6 +7,7 @@ import "./components/forms.js";
 import "./components/feedback.js";
 import "./components/actions.js";
 import "./components/collections.js";
+import "./components/visualizations.js";
 import "./components/overlays.js";
 
 const namespace = globalThis.IncWebComponents || (globalThis.IncWebComponents = {});
@@ -51,6 +52,7 @@ function getComponentEntries() {
     addEntries(entryMap, namespace.feedback?.feedbackDefinitions);
     addEntries(entryMap, namespace.actions?.actionDefinitions);
     addEntries(entryMap, namespace.collections?.collectionDefinitions);
+    addEntries(entryMap, namespace.visualizations?.visualizationDefinitions);
 
     addEntry(entryMap, "inc-disclosure", namespace.overlays?.IncDisclosureElement);
     addEntry(entryMap, "inc-dialog", namespace.overlays?.IncDialogElement);
@@ -86,6 +88,12 @@ namespace.registerIncWebComponents = registerIncWebComponents;
 syncNamespace();
 
 defineAll();
+
+export {
+    buildSparklinePath,
+    normalizeSparklineExtent,
+    parseSparklinePoints,
+} from "./components/visualizations.js";
 
 export {
     defineAll,

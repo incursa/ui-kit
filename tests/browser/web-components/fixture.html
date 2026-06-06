@@ -230,6 +230,19 @@
             </div>
         </section>
 
+        <section class="wc-test-region" data-test="sparkline-region">
+            <h2 class="wc-test-region__header">Sparklines</h2>
+            <div class="wc-test-region__body">
+                <div class="wc-inline-stack">
+                    <inc-sparkline id="wc-sparkline-values" values="12,15,14,20,18" width="120" height="28" aria-label="Numeric values sparkline"></inc-sparkline>
+                    <inc-sparkline id="wc-sparkline-empty" values="bad,data" width="96" height="24" empty-label="No data" aria-label="Empty sparkline"></inc-sparkline>
+                    <inc-sparkline id="wc-sparkline-flat" values="7,7,7,7" width="96" height="24" tone="muted" curve="step" show-last-marker aria-label="Flat sparkline"></inc-sparkline>
+                    <inc-sparkline id="wc-sparkline-reference" values="-3,-1,2,1,4" width="120" height="28" tone="positive" reference-value="0" show-min-max aria-label="Reference sparkline"></inc-sparkline>
+                    <inc-sparkline id="wc-sparkline-property" width="120" height="28" variant="area" tone="accent" curve="monotone" show-last-marker aria-label="Property points sparkline"></inc-sparkline>
+                </div>
+            </div>
+        </section>
+
         <section class="wc-test-region" data-test="actions-region">
             <h2 class="wc-test-region__header">Actions, Alerts, And Collection Hosts</h2>
             <div class="wc-test-region__body">
@@ -346,6 +359,16 @@
     <script type="importmap">
         {
             "imports": {
+                "d3-array": "/node_modules/d3-array/src/index.js",
+                "d3-color": "/node_modules/d3-color/src/index.js",
+                "d3-format": "/node_modules/d3-format/src/index.js",
+                "d3-interpolate": "/node_modules/d3-interpolate/src/index.js",
+                "d3-path": "/node_modules/d3-path/src/index.js",
+                "d3-scale": "/node_modules/d3-scale/src/index.js",
+                "d3-shape": "/node_modules/d3-shape/src/index.js",
+                "d3-time": "/node_modules/d3-time/src/index.js",
+                "d3-time-format": "/node_modules/d3-time-format/src/index.js",
+                "internmap": "/node_modules/internmap/src/index.js",
                 "lucide/": "/node_modules/lucide/"
             }
         }
@@ -372,6 +395,7 @@
             const navigationModule = await import("../../../src/web-components/components/navigation.js");
             const formsModule = await import("../../../src/web-components/components/forms.js");
             const feedbackModule = await import("../../../src/web-components/components/feedback.js");
+            const visualizationsModule = await import("../../../src/web-components/components/visualizations.js");
             const entrypointModule = await import("../../../src/web-components/index.js");
 
             const namespace = window.IncWebComponents || {};
@@ -388,6 +412,8 @@
                 || namespace.forms?.registerFormsComponents;
             const defineFeedbackComponents = feedbackModule.defineFeedbackComponents
                 || namespace.feedback?.defineFeedbackComponents;
+            const defineVisualizationComponents = visualizationsModule.defineVisualizationComponents
+                || namespace.visualizations?.defineVisualizationComponents;
             const defineEntryPointComponents = entrypointModule.defineAll
                 || namespace.defineAll;
 
@@ -397,6 +423,7 @@
                 defineNavigationComponents?.(customElements);
                 defineFormsComponents?.(customElements);
                 defineFeedbackComponents?.(customElements);
+                defineVisualizationComponents?.(customElements);
                 defineEntryPointComponents?.(customElements);
 
                 return [
@@ -434,6 +461,7 @@
                     "inc-list-group",
                     "inc-key-value-grid",
                     "inc-key-value",
+                    "inc-sparkline",
                 ];
             };
 
@@ -446,6 +474,16 @@
             const dialog = document.querySelector("#wc-dialog");
             const drawer = document.querySelector("#wc-drawer");
             const liveRegion = document.querySelector("#wc-live-region");
+            const propertySparkline = document.querySelector("#wc-sparkline-property");
+
+            if (propertySparkline) {
+                propertySparkline.points = [
+                    { x: "2026-06-01", y: 1200 },
+                    { x: "2026-06-02", y: 1350 },
+                    { x: "2026-06-03", y: 1280 },
+                    { x: "2026-06-04", y: 1480 },
+                ];
+            }
 
             document.querySelector("#open-dialog")?.addEventListener("click", () => dialog?.showModal());
             document.querySelector("#open-drawer")?.addEventListener("click", () => drawer?.show());

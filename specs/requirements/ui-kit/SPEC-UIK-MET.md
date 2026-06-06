@@ -20,7 +20,7 @@ Define the surfaces used for dashboard metrics, read-only detail values, and com
 
 ## Scope
 
-This specification covers summary blocks, overview layouts, key-value detail surfaces, badges, progress indicators, and meter surfaces.
+This specification covers summary blocks, overview layouts, key-value detail surfaces, badges, progress indicators, meter surfaces, and compact sparkline trend evidence.
 
 ## Context
 
@@ -91,6 +91,20 @@ Trace:
     - `data-grid-advanced.html`
     - `overlay-workflows.html`
     - `work-queue.html`
+- Verified By:
+  - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
+
+## REQ-UIK-MET-0007 Provide compact sparkline trends
+The metrics surface MUST provide [`inc-sparkline`](../../../reference.html) for compact trend evidence next to current values, deltas, and comparison labels without introducing a full charting surface.
+
+The sparkline surface MUST support simple numeric values, timestamped points, line and area rendering, quiet empty states, marker/reference affordances, and semantic tone variants that can be themed through CSS custom properties.
+
+Trace:
+  - Code Refs:
+    - [`src/inc-design-language.scss`](../../../reference.html)
+    - [`src/web-components/components/visualizations.js`](../../../src/web-components/components/visualizations.js)
+    - `reference.html`
+    - `web-components.html`
 - Verified By:
   - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 

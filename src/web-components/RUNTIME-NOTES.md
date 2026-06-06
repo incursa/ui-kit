@@ -12,6 +12,7 @@ The runtime defines the approved v1 host family set:
 - feedback and status: `inc-state-panel`, `inc-live-region`, `inc-auto-refresh`, `inc-theme-switcher`, `inc-badge`, `inc-spinner`
 - actions and detail shells: `inc-button`, `inc-button-group`, `inc-button-toolbar`, `inc-close-button`, `inc-alert`, `inc-empty-state`
 - collections: `inc-list-group`, `inc-key-value-grid`, `inc-key-value`
+- data visualization: `inc-sparkline`
 - overlays: `inc-disclosure`, `inc-dialog`, `inc-drawer`
 
 ## Contract shape
@@ -28,6 +29,7 @@ The runtime defines the approved v1 host family set:
   - `components/feedback.js`
   - `components/actions.js`
   - `components/collections.js`
+  - `components/visualizations.js`
   - `components/overlays.js`
 - Public registration API is idempotent:
   - `window.IncWebComponents.defineAll()`

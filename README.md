@@ -38,6 +38,7 @@ The v1 Web Component scope covers:
 - forms and inputs: [`inc-field`](reference.html), [`inc-input-group`](reference.html), [`inc-choice-group`](reference.html), [`inc-readonly-field`](reference.html), [`inc-validation-summary`](reference.html)
 - feedback and status: [`inc-state-panel`](reference.html), [`inc-live-region`](reference.html), [`inc-auto-refresh`](reference.html), [`inc-theme-switcher`](reference.html), [`inc-badge`](reference.html), [`inc-spinner`](reference.html)
 - actions and detail shells: [`inc-button`](reference.html), [`inc-button-group`](reference.html), [`inc-button-toolbar`](reference.html), [`inc-close-button`](reference.html), [`inc-alert`](reference.html), [`inc-empty-state`](reference.html), [`inc-list-group`](reference.html), [`inc-key-value-grid`](reference.html), [`inc-key-value`](reference.html)
+- data visualization: [`inc-sparkline`](reference.html)
 - overlays and disclosures: [`inc-disclosure`](reference.html), [`inc-dialog`](reference.html), [`inc-drawer`](reference.html)
 
 The intentionally deferred surfaces stay CSS-first in v1, including tables and the remaining data presentation surfaces, filter and bulk toolbars, file workflows, permission banners, toasts, utility helpers, and the remaining compatibility overlay shells.
@@ -348,6 +349,7 @@ Practical recommendation for a .NET Razor Pages or MVC app:
 - Add [`dist/inc-design-language.js`](dist/inc-design-language.js) if you want the optional [`inc-*`](reference.html) menu/tab/collapse helper behavior or the bundled theme switcher helper.
 - Add the same-package `./web-components` entrypoint when you want declarative custom elements for the supported v1 component families. Pair it with `./web-components/style.css` for the default look.
 - Use the native `<details>` and `<dialog>` patterns when you want less JavaScript.
+- Use `<inc-sparkline>` for compact trend evidence beside surrounding metric text. It accepts `values="5120,5400,5310"` for static pages or a `points` property with `{ x, y }` objects for timestamped data.
 - Use the SCSS source path only if you want this package to become part of your app's own asset build and theme pipeline.
 
 ## GitHub repository

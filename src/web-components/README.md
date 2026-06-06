@@ -71,6 +71,8 @@ The runtime auto-defines the shipped elements on load. If a consumer needs expli
   Button, button-group, button-toolbar, close-button, alert, and empty-state custom elements.
 - [`components/collections.js`](components/collections.js)
   List-group, key-value-grid, and key-value custom elements.
+- [`components/visualizations.js`](components/visualizations.js)
+  D3-backed sparkline custom element and small path/data helpers.
 - [`components/overlays.js`](components/overlays.js)
   Disclosure, dialog, and drawer custom elements.
 - [`index.js`](index.js)
@@ -86,6 +88,7 @@ The Web Component layer should mirror the current CSS kit, not reinterpret it.
 - Form wrappers should keep native controls native.
 - Navigation components should reflect keyboard and focus state in the DOM.
 - Feedback and status shells should announce state accessibly, badge/spinner atoms should standardize the common tone and loading defaults, and action/detail plus collection hosts should keep buttons, alerts, list groups, and description-list pairs declarative without inventing a second styling vocabulary.
+- Visualization components should stay compact, accessible, and evidence-supporting. Use D3 for geometry and scales, not DOM mutation.
 - Overlays should prefer native `<details>` and `<dialog>` behavior when that satisfies the contract.
 - Tables, data presentation, utility atoms, and the remaining presentation-only surfaces should remain CSS-first until the component contract is explicit and worth the runtime cost.
 

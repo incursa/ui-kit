@@ -60,6 +60,7 @@ test("web components register and render expected light-DOM structure", async ({
             "inc-list-group",
             "inc-key-value-grid",
             "inc-key-value",
+            "inc-sparkline",
         ];
 
         return required.every((name) => customElements.get(name));
@@ -107,6 +108,7 @@ test("web components register and render expected light-DOM structure", async ({
     await expect(page.locator("#wc-spinner-border")).toHaveClass(/inc-spinner--border/);
     await expect(page.locator("#wc-spinner-border")).toHaveAttribute("role", "status");
     await expect(page.locator("#wc-spinner-border")).toHaveAttribute("aria-label", "Loading queue");
+    await expect(page.locator("#wc-sparkline-values")).toHaveClass(/inc-sparkline--line/);
 
     const summaryColumns = await page.locator("#wc-summary").evaluate((host) => host.style.getPropertyValue("--inc-summary-columns").trim());
     expect(summaryColumns).toBe("3");

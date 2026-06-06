@@ -581,6 +581,84 @@
 
                         <section class="inc-card">
                             <div class="inc-card__header">
+                                <h2 class="inc-card__title">Sparklines</h2>
+                            </div>
+                            <div class="inc-card__body demo-reference-grid">
+                                <div class="demo-preview demo-stack">
+                                    <div class="demo-layout-grid demo-layout-grid--2">
+                                        <div class="inc-u-stack-xs">
+                                            <label class="inc-form__label">Simple numeric values</label>
+                                            <inc-sparkline values="12,15,14,20,18" width="120" height="28" aria-label="Five point numeric trend"></inc-sparkline>
+                                        </div>
+                                        <div class="inc-u-stack-xs">
+                                            <label class="inc-form__label">Timestamped benchmark history</label>
+                                            <inc-sparkline points='[{"x":"2026-06-01","y":1200},{"x":"2026-06-02","y":1350},{"x":"2026-06-03","y":1280},{"x":"2026-06-04","y":1480}]' width="120" height="28" variant="area" tone="accent" curve="monotone" aria-label="Timestamped benchmark history"></inc-sparkline>
+                                        </div>
+                                        <div class="inc-u-stack-xs">
+                                            <label class="inc-form__label">Current value marker</label>
+                                            <inc-sparkline values="5120,5400,5310,5600,5510" height="28" width="120" tone="accent" show-last-marker aria-label="Recent requests per second trend for Incursa HTTP/3 on HTTP plaintext"></inc-sparkline>
+                                        </div>
+                                        <div class="inc-u-stack-xs">
+                                            <label class="inc-form__label">Reference line</label>
+                                            <inc-sparkline values="-3,-1,2,1,4" height="28" width="120" tone="positive" reference-value="0" show-min-max aria-label="Mixed positive and negative delta trend"></inc-sparkline>
+                                        </div>
+                                    </div>
+                                    <div class="demo-chip-row">
+                                        <inc-sparkline values="4,5,7,8,10" height="24" width="96" tone="positive" aria-label="Positive trend"></inc-sparkline>
+                                        <inc-sparkline values="10,8,7,5,4" height="24" width="96" tone="negative" aria-label="Negative trend"></inc-sparkline>
+                                        <inc-sparkline values="7,7,7,7" height="24" width="96" tone="muted" curve="step" show-last-marker aria-label="Flat muted trend"></inc-sparkline>
+                                        <inc-sparkline values="" height="24" width="96" empty-label="No data" aria-label="Empty sparkline example"></inc-sparkline>
+                                    </div>
+                                    <div class="inc-table-responsive">
+                                        <table class="inc-table inc-table--sm inc-table--data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="inc-table__header">Benchmark</th>
+                                                    <th class="inc-table__header inc-table__header--right">Current</th>
+                                                    <th class="inc-table__header">History</th>
+                                                    <th class="inc-table__header">Delta</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="inc-table__cell">HTTP/3 plaintext</td>
+                                                    <td class="inc-table__cell inc-table__cell--numeric">5,510 rps</td>
+                                                    <td class="inc-table__cell">
+                                                        <inc-sparkline values="5120,5400,5310,5600,5510" height="28" width="120" tone="accent" show-last-marker aria-label="Recent requests per second trend for Incursa HTTP/3 on HTTP plaintext"></inc-sparkline>
+                                                    </td>
+                                                    <td class="inc-table__cell"><span class="inc-badge inc-badge--success inc-badge--pill">+3.1%</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+<pre class="demo-code"><code>&lt;inc-sparkline values="12,15,14,20,18" width="120" height="28" aria-label="Five point numeric trend"&gt;&lt;/inc-sparkline&gt;
+
+&lt;inc-sparkline
+  points='[{"x":"2026-06-01","y":1200},{"x":"2026-06-02","y":1350}]'
+  width="120"
+  height="28"
+  variant="area"
+  tone="accent"
+  curve="monotone"
+  aria-label="Timestamped benchmark history"&gt;
+&lt;/inc-sparkline&gt;
+
+&lt;inc-sparkline
+  values="5120,5400,5310,5600,5510"
+  height="28"
+  width="120"
+  tone="accent"
+  show-last-marker
+  aria-label="Recent requests per second trend for Incursa HTTP/3 on HTTP plaintext"&gt;
+&lt;/inc-sparkline&gt;
+
+&lt;inc-sparkline values="-3,-1,2,1,4" reference-value="0" show-min-max aria-label="Mixed positive and negative delta trend"&gt;&lt;/inc-sparkline&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section class="inc-card">
+                            <div class="inc-card__header">
                                 <h2 class="inc-card__title">Tables And Lists</h2>
                             </div>
                             <div class="inc-card__body demo-reference-grid">
@@ -1278,6 +1356,7 @@
     </dialog>
 
     <script src="./dist/inc-design-language.js"></script>
+    <script type="module" src="./dist/web-components/index.js"></script>
     <script>
         (() => {
             document.querySelectorAll("dialog.inc-native-dialog").forEach((dialog) => {
@@ -1469,6 +1548,26 @@
     </div>
 </inc-drawer>`,
                 "auto-refresh-widget": `<inc-auto-refresh seconds="180" label="Queue refresh in" loading-label="Refreshing queue"></inc-auto-refresh>`,
+                sparklines: `<inc-sparkline values="12,15,14,20,18" width="120" height="28" aria-label="Five point numeric trend"></inc-sparkline>
+
+<inc-sparkline
+  points='[{"x":"2026-06-01","y":1200},{"x":"2026-06-02","y":1350}]'
+  width="120"
+  height="28"
+  variant="area"
+  tone="accent"
+  curve="monotone"
+  aria-label="Timestamped benchmark history">
+</inc-sparkline>
+
+<inc-sparkline
+  values="5120,5400,5310,5600,5510"
+  height="28"
+  width="120"
+  tone="accent"
+  show-last-marker
+  aria-label="Recent requests per second trend for Incursa HTTP/3 on HTTP plaintext">
+</inc-sparkline>`,
             };
 
             const normalizeKey = (value) => String(value || "")

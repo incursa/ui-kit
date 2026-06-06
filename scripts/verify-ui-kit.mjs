@@ -78,6 +78,7 @@ const requiredFiles = [
     "tests/browser/web-components/theme.spec.mjs",
     "tests/browser/web-components/responsive.spec.mjs",
     "tests/browser/web-components/feedback.spec.mjs",
+    "tests/browser/web-components/sparkline.spec.mjs",
 ];
 
 const cssSelectors = [
@@ -102,6 +103,9 @@ const cssSelectors = [
     ".inc-spinner",
     ".inc-spinner--grow",
     ".inc-spinner--grow--sm",
+    ".inc-sparkline",
+    ".inc-sparkline__line",
+    ".inc-sparkline__reference",
     ".inc-btn.is-loading",
     ":has(> .inc-spinner)",
     ".inc-form__control.is-invalid",
@@ -129,6 +133,8 @@ const referenceMarkers = [
     'class="inc-btn inc-btn--primary is-loading"',
     'class="inc-spinner inc-spinner--border inc-spinner--border--sm"',
     'class="inc-spinner inc-spinner--grow inc-spinner--grow--sm inc-spinner--grow--primary"',
+    '<inc-sparkline',
+    'values="5120,5400,5310,5600,5510"',
     'aria-invalid="true"',
 ];
 
@@ -272,6 +278,7 @@ if (existsSync("src/web-components")) {
         "components/navigation.js",
         "components/forms.js",
         "components/overlays.js",
+        "components/visualizations.js",
     ];
 
     for (const file of webComponentFiles) {
@@ -287,6 +294,9 @@ if (existsSync("package.json") && existsSync("package-lock.json")) {
     ensure(packageJson.version === packageLock.version, "package.json and package-lock.json must declare the same version", failures);
     ensure(packageJson.version === packageLock.packages?.[""]?.version, "package-lock.json package root version must match package.json", failures);
     ensure(packageJson.dependencies?.lucide, "package.json must declare lucide as a runtime dependency for default icons", failures);
+    ensure(packageJson.dependencies?.["d3-array"], "package.json must declare d3-array for sparkline data extents", failures);
+    ensure(packageJson.dependencies?.["d3-scale"], "package.json must declare d3-scale for sparkline coordinate scales", failures);
+    ensure(packageJson.dependencies?.["d3-shape"], "package.json must declare d3-shape for sparkline path generation", failures);
 
     const webComponentsExport = packageJson.exports?.["./web-components"];
     ensure(webComponentsExport && typeof webComponentsExport === "object", "package.json must export ./web-components as a conditional entry", failures);

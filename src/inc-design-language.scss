@@ -3394,6 +3394,100 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
     }
 }
 
+.inc-sparkline {
+    --inc-sparkline-stroke: var(--inc-text-secondary);
+    --inc-sparkline-fill: rgba(var(--inc-text-secondary-rgb), 0.12);
+    --inc-sparkline-marker: var(--inc-sparkline-stroke);
+    --inc-sparkline-reference: rgba(var(--inc-text-muted-rgb), 0.68);
+    --inc-sparkline-muted: rgba(var(--inc-text-muted-rgb), 0.54);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--inc-sparkline-width, 7.5rem);
+    block-size: var(--inc-sparkline-height, 2rem);
+    min-inline-size: 1rem;
+    min-block-size: 1rem;
+    vertical-align: middle;
+    color: var(--inc-sparkline-stroke);
+    contain: paint;
+
+    &--tone-positive {
+        --inc-sparkline-stroke: var(--bs-success);
+        --inc-sparkline-fill: rgba(var(--bs-success-rgb), 0.16);
+        --inc-sparkline-marker: var(--bs-success-text-emphasis);
+    }
+
+    &--tone-negative {
+        --inc-sparkline-stroke: var(--bs-danger);
+        --inc-sparkline-fill: rgba(var(--bs-danger-rgb), 0.14);
+        --inc-sparkline-marker: var(--bs-danger-text-emphasis);
+    }
+
+    &--tone-muted {
+        --inc-sparkline-stroke: var(--inc-text-muted);
+        --inc-sparkline-fill: rgba(var(--inc-text-muted-rgb), 0.1);
+        --inc-sparkline-marker: var(--inc-text-secondary);
+    }
+
+    &--tone-accent {
+        --inc-sparkline-stroke: var(--bs-primary);
+        --inc-sparkline-fill: rgba(var(--bs-primary-rgb), 0.14);
+        --inc-sparkline-marker: var(--bs-primary);
+    }
+
+    &__svg {
+        display: block;
+        inline-size: 100%;
+        block-size: 100%;
+        overflow: visible;
+    }
+
+    &__line,
+    &__empty-line {
+        fill: none;
+        stroke: var(--inc-sparkline-stroke);
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    &__area {
+        fill: var(--inc-sparkline-fill);
+        stroke: none;
+    }
+
+    &__bar {
+        fill: var(--inc-sparkline-stroke);
+        opacity: 0.82;
+    }
+
+    &__marker {
+        fill: var(--inc-sparkline-marker);
+        stroke: var(--inc-surface-primary);
+        stroke-width: 1.5;
+    }
+
+    &__reference {
+        stroke: var(--inc-sparkline-reference);
+        stroke-width: 1;
+        stroke-dasharray: 3 3;
+    }
+
+    &__empty-line {
+        stroke: var(--inc-sparkline-muted);
+        stroke-dasharray: 2 4;
+    }
+
+    &__empty {
+        fill: var(--inc-text-muted);
+        font-family: $font-family-sans-serif;
+        font-size: 0.625rem;
+        font-weight: 600;
+        letter-spacing: 0;
+        pointer-events: none;
+    }
+}
+
 .inc-alert-container {
     @extend .container-xxl;
     position: relative;

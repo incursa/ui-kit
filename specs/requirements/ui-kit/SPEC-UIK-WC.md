@@ -92,6 +92,7 @@ The Web Component requirements MUST label which current CSS families remain CSS-
 | Forms and inputs | `inc-form`, `inc-form__*`, `inc-input-group`, `inc-readonly-field`, `inc-form__error-summary`, `inc-filter-bar`, `inc-filter-chip`, `inc-file-dropzone`, `inc-file-list`, `inc-file-row` | `inc-field`, `inc-input-group`, `inc-choice-group`, `inc-readonly-field`, `inc-validation-summary` | Mixed | Wrapper-based composites around native controls; filter, file, and bulk surfaces stay CSS-first or deferred in v1. |
 | Feedback and status | `inc-badge`, `inc-state-panel`, `inc-permission-banner`, `inc-toast`, `inc-spinner`, `inc-progress`, `inc-meter`, `inc-live-region`, `inc-auto-refresh`, `inc-loading*`, `inc-skeleton` | `inc-state-panel`, `inc-live-region`, `inc-auto-refresh`, `inc-theme-switcher`, `inc-badge`, `inc-spinner` | Mixed | Stateful shells become components; badge and spinner hosts become standardized atomic controls; permission banners and toasts stay CSS-first or deferred. |
 | Actions and detail shells | `inc-btn`, `inc-button-group`, `inc-button-toolbar`, `inc-close-button`, `inc-alert`, `inc-empty-state`, `inc-list-group`, `inc-key-value-grid`, `inc-key-value` | `inc-button`, `inc-button-group`, `inc-button-toolbar`, `inc-close-button`, `inc-alert`, `inc-empty-state`, `inc-list-group`, `inc-key-value-grid`, `inc-key-value` | V1 | Thin native wrappers and light-DOM shells standardize repeated actions, alerts, empty states, list groups, and description-list pairs without inventing a second styling vocabulary. |
+| Data visualization | `inc-sparkline` | `inc-sparkline` | V1 | D3-backed SVG trend evidence for dense metrics and tables; keep full charts out of scope. |
 | Overlays and disclosures | `inc-disclosure`, `inc-accordion`, `inc-collapse`, `inc-native-dialog`, `inc-modal`, `inc-offcanvas`, `inc-tooltip`, `inc-popover`, `inc-drawer` | `inc-disclosure`, `inc-dialog`, `inc-drawer` | Mixed | Native `<dialog>` and `<details>` are preferred; accordion/collapse, popover, tooltip, modal, offcanvas, and contextual menu helpers remain deferred or compatibility-only. |
 | Tables and data presentation | `inc-table`, `inc-table-responsive`, `inc-table-container`, `inc-vertical-list`, `inc-timeline`, `inc-bulk-bar` | None in v1 | Deferred | These surfaces stay CSS-first in v1; a later pass can define a bounded component contract for the remaining table-like patterns. |
 | Theme controls and color mode | `inc-theme-switcher`, `inc-theme-toggle`, `data-inc-theme-*` | `inc-theme-switcher` | V1 | Reuse the existing `IncTheme` helper contract and root theme attributes. |
@@ -263,6 +264,32 @@ The action/detail shells MUST stay thin and native-first:
 - Alert dismissal, optional timeout progress, close buttons, and loading states must stay thin and observable in the DOM.
 - Empty-state, list-group, and key/value hosts must keep the current `inc-*` class vocabulary recognizable to CSS-first consumers.
 - These shells must stay small enough that tables, vertical lists, and other larger data wrappers can still be deferred.
+
+## Data Visualization
+
+### REQ-UIK-WC-0048 Provide compact sparkline trend components
+
+The Web Component layer MUST provide a reusable `inc-sparkline` element for compact trend evidence beside surrounding metric text.
+
+The sparkline component MUST:
+
+- accept simple `values` attributes and JavaScript `points` arrays
+- render inline SVG through component-owned markup
+- expose stable parts for `svg`, `line`, `area`, `marker`, `reference`, and `empty`
+- handle empty, malformed, single-point, flat-line, negative, and mixed-sign data without throwing
+- keep labels out of the graphic by default while exposing `<title>` and `<desc>` metadata for assistive technology
+
+#### Contract matrix
+
+| Tag | Inputs | Events | Methods | Slots | Parts / custom properties | Lifecycle and state | V1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `<inc-sparkline>` | `values`, `points`, `width`, `height`, `variant`, `tone`, `curve`, `show-last-marker`, `show-min-max`, `reference-value`, `empty-label`, `aria-label` | none | none | none | `part="svg line area marker reference empty"`; `--inc-sparkline-stroke`, `--inc-sparkline-fill`, `--inc-sparkline-marker`, `--inc-sparkline-reference`, `--inc-sparkline-muted` | Re-render on attribute/property changes; malformed data falls back to empty state | V1 |
+
+#### Acceptance criteria
+
+- The component must use D3 for scale and path generation, not for DOM mutation.
+- The component must stay quiet and table-safe with stable dimensions from attributes or defaults.
+- Surrounding product text must remain responsible for current values, deltas, and decisions; the sparkline is evidence-supporting.
 
 ## Overlays, Dialogs, Drawers, And Popovers
 
