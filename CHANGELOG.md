@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.8.0
+
+- Added a semantic Incursa icon layer with Lucide-backed defaults, a public @incursa/ui-kit/icons entrypoint, and a global renderer override for consumers.
+- Added default semantic icons to alerts, empty states, state panels, buttons, and auto-refresh controls while keeping decorative icons hidden from assistive technology.
+- Replaced placeholder glyphs across the showcase and refreshed generated package, MCP, and browser snapshot artifacts for the new icon standard.
+
 ## 1.7.0
 
 - Made the file workflow examples functional with shared browse, drag-drop, and removable file-row behavior.
