@@ -2,7 +2,7 @@
   "title": "Update",
   "summary": "Package-manager update commands and release-review guidance.",
   "packageName": "@incursa/ui-kit",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "commands": {
     "npm": "npm install @incursa/ui-kit@latest",
     "pnpm": "pnpm up @incursa/ui-kit",
@@ -16,7 +16,7 @@
     "Review the changelog and regenerated MCP manifests after each upgrade.",
     "Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract."
   ],
-  "latestReleaseNotes": "- Made the file workflow examples functional with shared browse, drag-drop, and removable file-row behavior.\n- Added dismissible and timeout-driven alert behavior, fixed close-button rendering, and tightened the auto-refresh controls and loading-button examples.\n- Improved dark-mode contrast across filter chips, review-grid row states, and related showcase surfaces, with expanded browser coverage and refreshed generated assets.",
+  "latestReleaseNotes": "- Added a semantic Incursa icon layer with Lucide-backed defaults, a public @incursa/ui-kit/icons entrypoint, and a global renderer override for consumers.\n- Added default semantic icons to alerts, empty states, state panels, buttons, and auto-refresh controls while keeping decorative icons hidden from assistive technology.\n- Replaced placeholder glyphs across the showcase and refreshed generated package, MCP, and browser snapshot artifacts for the new icon standard.",
   "relatedUris": [
     "ui-kit://release-notes/latest",
     "ui-kit://package-metadata"
