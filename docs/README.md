@@ -6,6 +6,8 @@ title: "Documentation"
 
 These docs are the consumer-facing map for `@incursa/ui-kit`. They are intentionally Markdown-first so they can become the source material for a future documentation site without inventing a second documentation system today.
 
+The source repository owns these pages. The mirrored copy in `incursa-docs` is generated from this tree and should not be edited directly.
+
 ## Start Here
 
 - `docs/getting-started.md`: choose the right package surface and install it.
@@ -31,8 +33,12 @@ These docs are the consumer-facing map for `@incursa/ui-kit`. They are intention
 | Contributor agreement automation | `CONTRIBUTOR-AGREEMENT.md`, `.github/workflows/contributor-agreement.yml`, `docs/contributor-agreement-automation.md` |
 | AI and MCP catalog inputs | `LLMS.txt`, `AI-AGENT-INSTRUCTIONS.md`, `scripts/generate-mcp.mjs` |
 
+## Mirrored Docs
+
+When these source pages are synced, the generated copy lands under `incursa-docs/src/content/docs/open-source/ui-kit/`. Update the source tree here and let the mirror regenerate.
+
 ## Hosted Examples
 
-The GitHub Pages showcase remains the easiest way to browse the current visual surface: https://incursa.github.io/ui-kit
+The GitHub Pages showcase remains the easiest way to browse the visual surface: https://incursa.github.io/ui-kit
 
 Use these Markdown docs when you need repository-local context, contribution guidance, or a future-docs-site source that is easier to review than generated HTML.

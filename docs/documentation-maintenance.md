@@ -6,6 +6,8 @@ title: "Documentation Maintenance"
 
 The docs should stay useful without becoming a second implementation to maintain. Prefer durable maps, source links, and generated catalog inputs over duplicated API tables.
 
+These pages are source-authored in this repository. The mirrored copy in `incursa-docs` is generated and should not be edited by hand.
+
 ## Update Matrix
 
 | Change | Update |

@@ -74,6 +74,17 @@ Run the markdown policy check after docs edits:
 npm run docs:check
 ```
 
+Rebuild generated package outputs:
+
+```bash
+npm run build:icons
+npm run build:css
+npm run build:css:min
+npm run build:js
+npm run build:wc
+npm run build:mcp
+```
+
 Rebuild package outputs:
 
 ```bash
@@ -107,7 +118,7 @@ npm pack
 
 ## Preview And Browser Validation
 
-There is no Storybook project in this repository. Use the static HTML examples and Playwright browser tests.
+There is no Storybook project or `npm run preview` script in this repository. Use the static HTML examples and Playwright browser tests.
 
 Open the local examples directly in a browser when checking layout or copy/paste markup:
 
@@ -175,7 +186,7 @@ Maintainer readiness observations:
 - The CSS-first surface, optional helper runtime, optional Web Components, icons, MCP worker, and static examples have clear repository boundaries.
 - The local smoke gate checks required files, package metadata, source/dist parity, MCP freshness, and HTML marker coverage.
 - The browser suite covers helper behavior, static showcase pages, and Web Component rendering and interaction flows.
-- The docs spine now exists under [`docs/`](README.md), with command-oriented pages for consumers and maintainers.
+- The docs spine exists under [`docs/`](README.md), with command-oriented pages for consumers and maintainers.
 
 ## Known Gaps And Cleanup Needs
 
@@ -184,7 +195,7 @@ Maintainer readiness observations:
 - `CODEOWNERS` is not present. Add one only after ownership and review routing are agreed.
 - The open-source audit expects `NOTICE.md`, while the package ships [`NOTICE`](../NOTICE). Keep the package file name unless the release policy changes.
 - The audit script does not recognize [`npm-publish.yml`](../.github/workflows/npm-publish.yml) as a release workflow name. Treat that as an audit-tool naming mismatch unless the workflow itself changes.
-- [`specs/README.md`](../specs) is not present. The current spec indexes live under [`specs/architecture/_index.md`](../specs/architecture/_index.md), [`specs/requirements/ui-kit/_index.md`](../specs/requirements/ui-kit/_index.md), and [`specs/verification/ui-kit/_index.md`](../specs/verification/ui-kit/_index.md).
+- [`specs/README.md`](../specs) is not present. The spec indexes live under [`specs/architecture/_index.md`](../specs/architecture/_index.md), [`specs/requirements/ui-kit/_index.md`](../specs/requirements/ui-kit/_index.md), and [`specs/verification/ui-kit/_index.md`](../specs/verification/ui-kit/_index.md).
 - `npm install` reports dependency audit findings. Triage with `npm audit` before a release and avoid `npm audit fix --force` unless the resulting breaking updates are reviewed.
 - The Web Component build emits non-fatal esbuild warnings for `module.exports` compatibility guards inside ESM source files. Clean those guards up only after confirming no supported consumer path relies on them.
 - GitHub Pages, Cloudflare Worker deployment, npm Trusted Publishing, branch protection, CLA status requirements, and vulnerability reporting settings require external verification. Local checks do not prove those settings.

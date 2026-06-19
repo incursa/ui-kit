@@ -8,7 +8,16 @@
 [![Pages](https://github.com/incursa/ui-kit/actions/workflows/pages.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/pages.yml)
 [![npm publish](https://github.com/incursa/ui-kit/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/incursa/ui-kit/actions/workflows/npm-publish.yml)
 
-This folder contains a distilled, reusable UI kit for data-heavy business applications. The goal is to keep the recurring visual patterns that define the UI language and expose them consistently through the [`inc-*`](reference.html) class surface. The CSS classes remain the canonical public API; the optional Web Component layer adds a browser-native entrypoint without replacing the existing class-based usage model. The Web Component layer also ships a companion stylesheet entrypoint so the default look is one import away.
+This repository packages a reusable UI kit for data-heavy business applications. It is for Incursa applications, Razor or ASP.NET Core screens, static HTML examples, and plain JavaScript consumers that need the Incursa design language without adopting a separate component framework. The goal is to keep the recurring visual patterns that define the UI language and expose them consistently through the [`inc-*`](reference.html) class surface. The CSS classes remain the canonical public API; the optional Web Component layer adds a browser-native entrypoint without replacing the existing class-based usage model. The Web Component layer also ships a companion stylesheet entrypoint so the default look is one import away.
+
+## Boundaries
+
+- [`package.json`](package.json) defines the npm package identity, scripts, exports, and release metadata.
+- [`src/`](src) owns the source CSS, Sass, helper runtime, Web Component runtime, and icons.
+- [`dist/`](dist) is generated output and should stay aligned with the source package surface.
+- [`docs/`](docs) is the Markdown-first consumer and maintainer documentation tree for this repo.
+- [`specs/`](specs) holds the Incursa requirement, architecture, and verification material that describes the public surface.
+- `incursa-docs` receives mirrored copies of these source docs; do not edit the mirrored output there.
 
 ## Documentation
 
@@ -18,6 +27,7 @@ This folder contains a distilled, reusable UI kit for data-heavy business applic
 - Use [`docs/style-control.md`](docs/style-control.md) before overriding fonts, colors, density, or Bootstrap-facing tokens.
 - Use [`docs/maintainer-readiness.md`](docs/maintainer-readiness.md) for package boundaries, local validation, preview, release, and readiness notes.
 - Use [`docs/documentation-maintenance.md`](docs/documentation-maintenance.md) when changing docs, examples, specs, package exports, or generated MCP resources.
+- These Markdown files are source-authored here and mirrored into `incursa-docs`; update this repository, not the mirrored output.
 
 ## Live Examples
 
@@ -121,7 +131,7 @@ Licensed under Apache 2.0.
 - [`specs/requirements/ui-kit/`](specs/requirements/ui-kit)
   First-pass Spec Trace specification suite for the UI kit, including the gap log for unresolved questions.
 - [`specs/verification/ui-kit/`](specs/verification/ui-kit)
-  Auditable verification baseline for the current UI kit public surface, including the repo-local smoke gate.
+  Auditable verification baseline for the UI kit public surface, including the repo-local smoke gate.
 - [`states.html`](states.html)
   Empty, no-results, loading, error, permission, timeline, file, and notification patterns.
 - [`forms-and-validation.html`](forms-and-validation.html)
@@ -162,10 +172,10 @@ For titled sections that wrap tables, use [`inc-header-body--table-body`](refere
 - Accent: indigo is the primary brand/action color, with amber used as a brighter warning/highlight accent.
 - Status communication: success/warning/error use pale backgrounds with darker foreground and border colors instead of pure solid fills.
 - Tables first: headers are high-contrast, numeric alignment is explicit, and responsive table wrappers are part of the default system.
-- Shell aware: the package now includes app-shell, breadcrumb, nav-triad, navbar, footer-bar, and user-menu primitives so page layout is part of the language, not an afterthought.
+- Shell aware: the package includes app-shell, breadcrumb, nav-triad, navbar, footer-bar, and user-menu primitives so page layout is part of the language, not an afterthought.
 - Layout aware: sidebar menus, inline form fields, and multi-column page examples are included so common admin-page composition is demonstrated directly.
-- Workflow aware: validation, filter bars, bulk action bars, audit timelines, and file-review surfaces are part of the package now because those patterns recur constantly in B2B products.
-- Native capable: the package now also includes styled `<details>` disclosures, a native summary-based menu, and `<dialog>` surfaces for both centered modals and drawer-style side sheets so you can choose browser primitives when they fit better than helper-managed components.
+- Workflow aware: validation, filter bars, bulk action bars, audit timelines, and file-review surfaces are part of the package because those patterns recur constantly in B2B products.
+- Native capable: the package also includes styled `<details>` disclosures, a native summary-based menu, and `<dialog>` surfaces for both centered modals and drawer-style side sheets so you can choose browser primitives when they fit better than helper-managed components.
 - Color mode: `data-bs-theme` is the global light/dark activation hook, and the bundled `IncTheme` helper can persist light, dark, or system mode from a small control surface.
 
 ## CSS-only vs JS-assisted
@@ -174,7 +184,7 @@ For titled sections that wrap tables, use [`inc-header-body--table-body`](refere
 - Stateful controls still need behavior:
   tabs, collapsible sections, menus/dropdowns, modal and offcanvas shells, and auto-refresh countdowns with pause/resume behavior.
 - Alert and toast surfaces can stay CSS/HTML-first when the app only needs static messaging; use the Web Component host when you want standardized tone or optional dismissal behavior.
-- This package now includes an optional dependency-free helper at [`dist/inc-design-language.js`](dist/inc-design-language.js) for:
+- This package includes an optional dependency-free helper at [`dist/inc-design-language.js`](dist/inc-design-language.js) for:
   user-menu dropdowns, tab switching, collapse/accordion toggles, legacy modal/offcanvas shells, native dialog launching, page auto-refresh countdown widgets, and theme switching controls.
 - The helper also exposes `window.IncTheme` and listens for [`data-inc-theme-mode`](src/inc-design-language.js), [`data-inc-theme-toggle`](src/inc-design-language.js), and [`data-inc-theme-select`](src/inc-design-language.js) controls.
 - `window.IncTheme` also supports `createSwitcher(options)` and `mountSwitcher(target, options)` when you want to drop in the packaged switcher without hand-writing the markup.
@@ -371,6 +381,16 @@ This repository is set up for:
 - npm Trusted Publishing on `v*` tag pushes via [`.github/workflows/npm-publish.yml`](.github/workflows/npm-publish.yml)
 - Public release hygiene through `LICENSE`, `NOTICE`, [`CHANGELOG.md`](CHANGELOG.md), [`CONTRIBUTING.md`](CONTRIBUTING.md), [`SECURITY.md`](SECURITY.md), [`SUPPORT.md`](SUPPORT.md), and [`RELEASING.md`](RELEASING.md)
 - Brand assets in [`assets/brand/`](assets/brand) so README and future docs do not depend on external image hosting
+
+## Security
+
+Do not commit secrets, local auth state, private transcripts, or customer data. See [`SECURITY.md`](SECURITY.md) for the reporting path and supported versions.
+
+## Known Gaps
+
+- The repository does not use Storybook. Static HTML pages and Playwright tests are the preview and regression surfaces.
+- The [`docs/`](docs) tree is the source-authored documentation layer. Mirrored output in `incursa-docs` is generated and should not be edited directly.
+- Some lower-value utility and presentation surfaces remain CSS-first by design until there is a stronger runtime contract worth adding.
 
 ## Release flow
 
