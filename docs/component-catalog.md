@@ -1,3 +1,7 @@
+---
+title: "Component Catalog"
+---
+
 # Component Catalog
 
 This catalog is a navigation layer, not the complete API reference. The maintained details live in the HTML examples, source modules, specs, and generated MCP manifests. This keeps the docs useful without copying every selector, attribute, and event into another stale list.

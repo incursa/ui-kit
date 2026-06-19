@@ -1,3 +1,7 @@
+---
+title: "Documentation Maintenance"
+---
+
 # Documentation Maintenance
 
 The docs should stay useful without becoming a second implementation to maintain. Prefer durable maps, source links, and generated catalog inputs over duplicated API tables.

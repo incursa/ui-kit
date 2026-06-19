@@ -1,3 +1,7 @@
+---
+title: "Documentation"
+---
+
 # Documentation
 
 These docs are the consumer-facing map for `@incursa/ui-kit`. They are intentionally Markdown-first so they can become the source material for a future documentation site without inventing a second documentation system today.

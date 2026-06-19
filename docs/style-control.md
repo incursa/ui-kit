@@ -1,3 +1,7 @@
+---
+title: "Controlled Styles And Tokens"
+---
+
 # Controlled Styles And Tokens
 
 The package exposes controlled style layers so consumers can get the Incursa look quickly, tune it deliberately, and avoid private one-off overrides.

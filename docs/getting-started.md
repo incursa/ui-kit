@@ -1,3 +1,7 @@
+---
+title: "Getting Started"
+---
+
 # Getting Started
 
 Incursa UI Kit is a reusable UI package for data-heavy business applications. It gives you a CSS-first design language, optional JavaScript helpers, optional browser-native Web Components, icons, examples, and generated MCP resources from one npm package.

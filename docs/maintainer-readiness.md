@@ -1,3 +1,7 @@
+---
+title: "Maintainer Readiness"
+---
+
 # Maintainer Readiness
 
 This page is the maintainer-facing operating map for `@incursa/ui-kit`. It explains what must stay true before a package or documentation change is ready to publish.

@@ -1,0 +1,8 @@
+{
+  "slug": "ui-kit",
+  "title": "Incursa UI Kit",
+  "section": "open-source",
+  "sourcePath": "docs",
+  "targetPath": "src/content/docs/open-source/ui-kit",
+  "publish": true
+}
