@@ -39,15 +39,15 @@ Explain how the optional Web Component layer satisfies the approved parity scope
 
 This architecture covers the component base model, naming and registry strategy, light DOM versus Shadow DOM policy, reuse of existing tokens and helper logic, package entrypoints, and the docs and verification impacts of the new layer.
 
-It does not redefine the product boundary. The product boundary is fixed by [SPEC-UIK-WC](../../requirements/ui-kit/SPEC-UIK-WC.md).
+It does not redefine the product boundary. The product boundary is fixed by [`SPEC-UIK-WC`](../../requirements/ui-kit/SPEC-UIK-WC.md).
 
 ## Decision Summary
 
 - Keep the current CSS kit canonical.
 - Ship the Web Component layer in the same package, not a second package.
 - Use open Shadow DOM selectively for shell and interaction-heavy widgets.
-- Keep wrapper-first form and data surfaces light DOM so they can continue to reuse the current `inc-*` styling hooks directly.
-- Reuse the current `inc-*` naming vocabulary and the existing token system.
+- Keep wrapper-first form and data surfaces light DOM so they can continue to reuse the current [`inc-*`](../../../reference.html) styling hooks directly.
+- Reuse the current [`inc-*`](../../../reference.html) naming vocabulary and the existing token system.
 - Refactor shared helper behavior into internal utilities that both entrypoints can consume.
 - Keep the Web Component runtime opt-in through a layered entrypoint.
 
@@ -140,7 +140,7 @@ Reserved part names for any future shadowed component:
 
 ## Naming And Registry Strategy
 
-Use the `inc-` prefix for all public custom elements.
+Use the [`inc-`](../../../reference.html) prefix for all public custom elements.
 
 Naming rules:
 
@@ -151,28 +151,28 @@ Naming rules:
 
 Recommended v1 tag family:
 
-- `inc-app-shell`
-- `inc-page`
-- `inc-page-header`
-- `inc-card`
-- `inc-summary-overview`
-- `inc-summary-block`
-- `inc-footer-bar`
-- `inc-navbar`
-- `inc-tabs`
-- `inc-user-menu`
-- `inc-field`
-- `inc-input-group`
-- `inc-choice-group`
-- `inc-readonly-field`
-- `inc-validation-summary`
-- `inc-state-panel`
-- `inc-live-region`
-- `inc-auto-refresh`
-- `inc-theme-switcher`
-- `inc-dialog`
-- `inc-drawer`
-- `inc-disclosure`
+- [`inc-app-shell`](../../../reference.html)
+- [`inc-page`](../../../reference.html)
+- [`inc-page-header`](../../../reference.html)
+- [`inc-card`](../../../reference.html)
+- [`inc-summary-overview`](../../../reference.html)
+- [`inc-summary-block`](../../../reference.html)
+- [`inc-footer-bar`](../../../reference.html)
+- [`inc-navbar`](../../../reference.html)
+- [`inc-tabs`](../../../reference.html)
+- [`inc-user-menu`](../../../reference.html)
+- [`inc-field`](../../../reference.html)
+- [`inc-input-group`](../../../reference.html)
+- [`inc-choice-group`](../../../reference.html)
+- [`inc-readonly-field`](../../../reference.html)
+- [`inc-validation-summary`](../../../reference.html)
+- [`inc-state-panel`](../../../reference.html)
+- [`inc-live-region`](../../../reference.html)
+- [`inc-auto-refresh`](../../../reference.html)
+- [`inc-theme-switcher`](../../../reference.html)
+- [`inc-dialog`](../../../reference.html)
+- [`inc-drawer`](../../../reference.html)
+- [`inc-disclosure`](../../../reference.html)
 
 Registration strategy:
 
@@ -190,7 +190,7 @@ The styling rule is simple: reuse the existing design language before adding any
 
 The Web Component layer should:
 
-- consume the current `--inc-*` token family
+- consume the current [`--inc-*`](../../../reference.html) token family
 - continue to rely on Bootstrap-derived `--bs-*` variables where the CSS kit already does
 - emit the current BEM-style class structure in light DOM where that makes the existing styles apply naturally
 - for shadowed components, expose the same semantics through CSS parts and custom properties instead of inventing a second theme system
@@ -198,8 +198,8 @@ The Web Component layer should:
 
 Component-local custom properties should follow the same prefix and naming discipline:
 
-- `--inc-<component>-<token>`
-- for example `--inc-dialog-width`, `--inc-drawer-width`, `--inc-tabs-gap`, `--inc-field-gap`
+- [`--inc-<component>-<token>`](../../../reference.html)
+- for example [`--inc-dialog-width`](../../../reference.html), [`--inc-drawer-width`](../../../reference.html), [`--inc-tabs-gap`](../../../reference.html), [`--inc-field-gap`](../../../reference.html)
 
 CSS parts are only needed on the shadowed v1 widgets. The reserved names above are the public part vocabulary for those components, not a new design language.
 
@@ -289,21 +289,21 @@ These are wrapper components, with the shell-heavy ones allowed to use open Shad
 
 Recommended public tags:
 
-- `inc-app-shell`
-- `inc-page`
-- `inc-page-header`
-- `inc-card`
-- `inc-summary-overview`
-- `inc-summary-block`
-- `inc-footer-bar`
+- [`inc-app-shell`](../../../reference.html)
+- [`inc-page`](../../../reference.html)
+- [`inc-page-header`](../../../reference.html)
+- [`inc-card`](../../../reference.html)
+- [`inc-summary-overview`](../../../reference.html)
+- [`inc-summary-block`](../../../reference.html)
+- [`inc-footer-bar`](../../../reference.html)
 
 Contract notes:
 
 - use named slots for structural regions such as header, breadcrumbs, body, actions, and footer
 - avoid hard-coded templates that prevent composition
 - keep the host semantic and the content composable
-- prefer light DOM for page-level wrappers such as `inc-page`, `inc-page-header`, `inc-summary-overview`, `inc-summary-block`, and `inc-footer-bar`
-- allow open Shadow DOM for the shell surfaces where a stable internal scaffold improves implementation safety, especially `inc-app-shell` and `inc-card`
+- prefer light DOM for page-level wrappers such as [`inc-page`](../../../reference.html), [`inc-page-header`](../../../reference.html), [`inc-summary-overview`](../../../reference.html), [`inc-summary-block`](../../../reference.html), and [`inc-footer-bar`](../../../reference.html)
+- allow open Shadow DOM for the shell surfaces where a stable internal scaffold improves implementation safety, especially [`inc-app-shell`](../../../reference.html) and [`inc-card`](../../../reference.html)
 
 The goal is to preserve the current shell vocabulary in a browser-native wrapper, not to invent a new page framework.
 
@@ -313,22 +313,22 @@ Navigation needs a mix of wrapper behavior and interaction management.
 
 Recommended public tags:
 
-- `inc-navbar`
-- `inc-tabs`
-- `inc-user-menu`
+- [`inc-navbar`](../../../reference.html)
+- [`inc-tabs`](../../../reference.html)
+- [`inc-user-menu`](../../../reference.html)
 
 Contract notes:
 
-- `inc-navbar` stays a light DOM shell with slots for brand, nav, utilities, and collapse content
-- `inc-tabs` owns roving focus, selection state, and panel activation
-- `inc-user-menu` owns menu toggling, keyboard dismissal, and focus restoration
+- [`inc-navbar`](../../../reference.html) stays a light DOM shell with slots for brand, nav, utilities, and collapse content
+- [`inc-tabs`](../../../reference.html) owns roving focus, selection state, and panel activation
+- [`inc-user-menu`](../../../reference.html) owns menu toggling, keyboard dismissal, and focus restoration
 - use the existing active and selected state vocabulary rather than introducing new status terms
 
-`inc-tabs` is a strong open-Shadow-DOM candidate because it benefits from a stable internal tablist/panel structure.
+[`inc-tabs`](../../../reference.html) is a strong open-Shadow-DOM candidate because it benefits from a stable internal tablist/panel structure.
 
-`inc-navbar` can also use open Shadow DOM if the responsive shell needs a stable internal collapse scaffold.
+[`inc-navbar`](../../../reference.html) can also use open Shadow DOM if the responsive shell needs a stable internal collapse scaffold.
 
-`inc-user-menu` can stay light DOM as long as it continues to preserve the current focus and dismissal behavior.
+[`inc-user-menu`](../../../reference.html) can stay light DOM as long as it continues to preserve the current focus and dismissal behavior.
 
 ### Forms And Inputs
 
@@ -336,11 +336,11 @@ Forms in v1 should remain native-first and wrapper-driven.
 
 Recommended public tags:
 
-- `inc-field`
-- `inc-input-group`
-- `inc-choice-group`
-- `inc-readonly-field`
-- `inc-validation-summary`
+- [`inc-field`](../../../reference.html)
+- [`inc-input-group`](../../../reference.html)
+- [`inc-choice-group`](../../../reference.html)
+- [`inc-readonly-field`](../../../reference.html)
+- [`inc-validation-summary`](../../../reference.html)
 
 Contract notes:
 
@@ -358,17 +358,17 @@ These surfaces should stay simple and accessible.
 
 Recommended public tags:
 
-- `inc-state-panel`
-- `inc-live-region`
-- `inc-auto-refresh`
-- `inc-theme-switcher`
+- [`inc-state-panel`](../../../reference.html)
+- [`inc-live-region`](../../../reference.html)
+- [`inc-auto-refresh`](../../../reference.html)
+- [`inc-theme-switcher`](../../../reference.html)
 
 Contract notes:
 
-- `inc-state-panel` uses slots for icon, title, body, and actions and can stay light DOM
-- `inc-live-region` is a semantic announcement wrapper, not just a styled container, and should stay light DOM
-- `inc-auto-refresh` owns countdown and pause/resume behavior and can stay light DOM unless a later pass proves it needs a shadowed scaffold
-- `inc-theme-switcher` owns color-mode state and keeps the current root theme contract in sync; it is the best feedback/status candidate for open Shadow DOM because it benefits from a stable summary/panel layout
+- [`inc-state-panel`](../../../reference.html) uses slots for icon, title, body, and actions and can stay light DOM
+- [`inc-live-region`](../../../reference.html) is a semantic announcement wrapper, not just a styled container, and should stay light DOM
+- [`inc-auto-refresh`](../../../reference.html) owns countdown and pause/resume behavior and can stay light DOM unless a later pass proves it needs a shadowed scaffold
+- [`inc-theme-switcher`](../../../reference.html) owns color-mode state and keeps the current root theme contract in sync; it is the best feedback/status candidate for open Shadow DOM because it benefits from a stable summary/panel layout
 
 Pure visual atoms such as alerts, badges, spinners, progress, meter, and loading dots remain CSS-only in v1.
 
@@ -378,9 +378,9 @@ These surfaces should be native-backed whenever possible.
 
 Recommended public tags:
 
-- `inc-dialog`
-- `inc-drawer`
-- `inc-disclosure`
+- [`inc-dialog`](../../../reference.html)
+- [`inc-drawer`](../../../reference.html)
+- [`inc-disclosure`](../../../reference.html)
 
 Contract notes:
 
@@ -388,7 +388,7 @@ Contract notes:
 - expose `open`, `close`, `toggle`, and `cancel` behaviors through DOM-native events where possible
 - preserve focus restoration and dismissal semantics
 - use slots for title, body, footer, and close actions
-- prefer open Shadow DOM for `inc-dialog` and `inc-drawer` because the internal scaffold and focus handling are easier to keep stable behind a native-backed surface
+- prefer open Shadow DOM for [`inc-dialog`](../../../reference.html) and [`inc-drawer`](../../../reference.html) because the internal scaffold and focus handling are easier to keep stable behind a native-backed surface
 
 Tooltip and popover remain deferred until their interaction model is explicit enough to justify a public component contract.
 
@@ -406,7 +406,7 @@ Theme control is the only utility-like surface that should become a v1 Web Compo
 
 Recommended public tag:
 
-- `inc-theme-switcher`
+- [`inc-theme-switcher`](../../../reference.html)
 
 Everything else in the utility family remains CSS-only in v1:
 

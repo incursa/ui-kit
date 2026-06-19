@@ -2,7 +2,7 @@
   "title": "Update",
   "summary": "Package-manager update commands and release-review guidance.",
   "packageName": "@incursa/ui-kit",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "commands": {
     "npm": "npm install @incursa/ui-kit@latest",
     "pnpm": "pnpm up @incursa/ui-kit",
@@ -16,7 +16,7 @@
     "Review the changelog and regenerated MCP manifests after each upgrade.",
     "Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract."
   ],
-  "latestReleaseNotes": "- Added a semantic Incursa icon layer with Lucide-backed defaults, a public @incursa/ui-kit/icons entrypoint, and a global renderer override for consumers.\n- Added default semantic icons to alerts, empty states, state panels, buttons, and auto-refresh controls while keeping decorative icons hidden from assistive technology.\n- Replaced placeholder glyphs across the showcase and refreshed generated package, MCP, and browser snapshot artifacts for the new icon standard.",
+  "latestReleaseNotes": "- Added the D3-backed inc-sparkline Web Component for compact line, area, and bar trend evidence in dense metric and table surfaces.\n- Added sparkline parsing/path helpers, D3 runtime dependencies, CSS custom properties, parts, examples, and ProtocolLab-oriented benchmark history documentation.\n- Expanded browser coverage, smoke checks, generated package assets, and MCP manifests for the new sparkline surface.",
   "relatedUris": [
     "ui-kit://release-notes/latest",
     "ui-kit://package-metadata"

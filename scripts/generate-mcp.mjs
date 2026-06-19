@@ -456,6 +456,13 @@ function buildMcpCatalog({ repoRoot: customRepoRoot = repoRoot } = {}) {
   const llms = readText("LLMS.txt", customRepoRoot);
   const aiInstructions = readText("AI-AGENT-INSTRUCTIONS.md", customRepoRoot);
   const changelog = readText("CHANGELOG.md", customRepoRoot);
+  const docsIndex = readText(path.join("docs", "README.md"), customRepoRoot);
+  const docsGettingStarted = readText(path.join("docs", "getting-started.md"), customRepoRoot);
+  const docsComponentCatalog = readText(path.join("docs", "component-catalog.md"), customRepoRoot);
+  const docsStyleControl = readText(path.join("docs", "style-control.md"), customRepoRoot);
+  const docsMaintainerReadiness = readText(path.join("docs", "maintainer-readiness.md"), customRepoRoot);
+  const docsMaintenance = readText(path.join("docs", "documentation-maintenance.md"), customRepoRoot);
+  const docsContributorAgreementAutomation = readText(path.join("docs", "contributor-agreement-automation.md"), customRepoRoot);
   const referenceHtml = readText("reference.html", customRepoRoot);
   const webComponentsHtml = readText("web-components.html", customRepoRoot);
   const formsPage = readText("forms-and-validation.html", customRepoRoot);
@@ -711,6 +718,69 @@ function buildMcpCatalog({ repoRoot: customRepoRoot = repoRoot } = {}) {
       sourcePaths: ["AI-AGENT-INSTRUCTIONS.md", "LLMS.txt", "README.md"],
       aliases: ["guardrails", "naming rules", "scope guardrails"],
       priority: 91,
+    },
+    {
+      uri: "ui-kit://guides/docs-index",
+      title: "Documentation index",
+      summary: "Consumer-facing documentation map for the UI kit.",
+      body: markdownToText(docsIndex),
+      sourcePaths: ["docs/README.md"],
+      aliases: ["docs", "documentation", "documentation index"],
+      priority: 97,
+    },
+    {
+      uri: "ui-kit://guides/getting-started",
+      title: "Getting started",
+      summary: "Install and choose the right package surface.",
+      body: markdownToText(docsGettingStarted),
+      sourcePaths: ["docs/getting-started.md", "package.json"],
+      aliases: ["getting started", "install guide", "consumer guide"],
+      priority: 106,
+    },
+    {
+      uri: "ui-kit://guides/component-catalog",
+      title: "Component catalog",
+      summary: "Navigation map for component families, examples, source modules, specs, and generated catalog entries.",
+      body: markdownToText(docsComponentCatalog),
+      sourcePaths: ["docs/component-catalog.md", "reference.html", "web-components.html"],
+      aliases: ["component catalog", "components", "component docs"],
+      priority: 104,
+    },
+    {
+      uri: "ui-kit://guides/style-control",
+      title: "Controlled styles and tokens",
+      summary: "Controlled style layers, token order, theme hooks, density, and state guidance.",
+      body: markdownToText(docsStyleControl),
+      sourcePaths: ["docs/style-control.md", "src/_inc-theme.scss", "src/_inc-tokens.scss", "src/inc-design-language.scss"],
+      aliases: ["controlled styles", "tokens", "style control", "theme"],
+      priority: 103,
+    },
+    {
+      uri: "ui-kit://guides/maintainer-readiness",
+      title: "Maintainer readiness",
+      summary: "Package boundaries, local validation, preview, release, and readiness notes for maintainers.",
+      body: markdownToText(docsMaintainerReadiness),
+      sourcePaths: ["docs/maintainer-readiness.md", "package.json", "RELEASING.md", "scripts/verify-ui-kit.mjs", "playwright.config.mjs"],
+      aliases: ["maintainer readiness", "readiness", "local validation", "release readiness"],
+      priority: 98,
+    },
+    {
+      uri: "ui-kit://guides/documentation-maintenance",
+      title: "Documentation maintenance",
+      summary: "Update matrix for docs, examples, specs, package exports, and generated MCP resources.",
+      body: markdownToText(docsMaintenance),
+      sourcePaths: ["docs/documentation-maintenance.md", "scripts/generate-mcp.mjs"],
+      aliases: ["documentation maintenance", "docs maintenance", "update matrix"],
+      priority: 89,
+    },
+    {
+      uri: "ui-kit://guides/contributor-agreement-automation",
+      title: "Contributor agreement automation",
+      summary: "Incursa Contributor Agreement action, storage, signing phrase, required secret, and required status check.",
+      body: markdownToText(docsContributorAgreementAutomation),
+      sourcePaths: ["docs/contributor-agreement-automation.md", ".github/workflows/contributor-agreement.yml", "CONTRIBUTOR-AGREEMENT.md"],
+      aliases: ["cla", "contributor agreement", "contributor agreement automation"],
+      priority: 88,
     },
   ];
 
@@ -1136,6 +1206,13 @@ function buildMcpCatalog({ repoRoot: customRepoRoot = repoRoot } = {}) {
     "LLMS.txt",
     "AI-AGENT-INSTRUCTIONS.md",
     "CHANGELOG.md",
+    toPosixPath(path.join("docs", "README.md")),
+    toPosixPath(path.join("docs", "getting-started.md")),
+    toPosixPath(path.join("docs", "component-catalog.md")),
+    toPosixPath(path.join("docs", "style-control.md")),
+    toPosixPath(path.join("docs", "maintainer-readiness.md")),
+    toPosixPath(path.join("docs", "documentation-maintenance.md")),
+    toPosixPath(path.join("docs", "contributor-agreement-automation.md")),
     "reference.html",
     "forms-and-validation.html",
     "data-grid-advanced.html",
@@ -1229,6 +1306,7 @@ function buildMcpCatalog({ repoRoot: customRepoRoot = repoRoot } = {}) {
     fileResources,
     sourcePaths: {
       README: "README.md",
+      DOCS: toPosixPath(path.join("docs", "README.md")),
       LLMS: "LLMS.txt",
       AI: "AI-AGENT-INSTRUCTIONS.md",
       CHANGELOG: "CHANGELOG.md",
@@ -1274,7 +1352,7 @@ function main() {
   writeMcpArtifacts();
 }
 
-if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
+if (process.argv[1] && path.basename(process.argv[1]) === "generate-mcp.mjs") {
   main();
 }
 

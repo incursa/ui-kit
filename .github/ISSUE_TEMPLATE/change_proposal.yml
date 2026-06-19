@@ -1,0 +1,42 @@
+name: Change proposal
+description: Propose a component, style, package, docs, or workflow change.
+title: "[Proposal]: "
+labels:
+  - enhancement
+body:
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Surface
+      options:
+        - CSS class surface
+        - Controlled styles or tokens
+        - JS helper
+        - Web Components
+        - Icons
+        - Documentation
+        - Examples
+        - Specs or verification
+        - Package/release workflow
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: Describe the reusable problem this should solve.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Include the public API, selector, token, attribute, or doc page if known.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Note whether existing `inc-*` classes, native HTML, or the current Web Component layer already cover the case.
+

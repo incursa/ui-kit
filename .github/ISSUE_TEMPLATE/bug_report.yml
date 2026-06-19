@@ -1,0 +1,52 @@
+name: Bug report
+description: Report a reproducible problem in the UI kit package, examples, docs, or generated manifests.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Do not include secrets, private code, private screenshots, or vulnerability details.
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      description: The `@incursa/ui-kit` version or commit you tested.
+      placeholder: "1.9.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Surface
+      options:
+        - Compiled CSS
+        - SCSS source
+        - JS helper
+        - Web Components
+        - Icons
+        - Examples or docs
+        - MCP manifests or worker
+        - Package/release workflow
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Provide the smallest public repro or public markup snippet.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+

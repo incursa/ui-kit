@@ -10,6 +10,15 @@
 
 This folder contains a distilled, reusable UI kit for data-heavy business applications. The goal is to keep the recurring visual patterns that define the UI language and expose them consistently through the [`inc-*`](reference.html) class surface. The CSS classes remain the canonical public API; the optional Web Component layer adds a browser-native entrypoint without replacing the existing class-based usage model. The Web Component layer also ships a companion stylesheet entrypoint so the default look is one import away.
 
+## Documentation
+
+- Consumer documentation starts at [`docs/README.md`](docs/README.md).
+- Use [`docs/getting-started.md`](docs/getting-started.md) to choose compiled CSS, SCSS, the JS helper, Web Components, or icons.
+- Use [`docs/component-catalog.md`](docs/component-catalog.md) to find component families, examples, specs, and source modules without duplicating stale API tables.
+- Use [`docs/style-control.md`](docs/style-control.md) before overriding fonts, colors, density, or Bootstrap-facing tokens.
+- Use [`docs/maintainer-readiness.md`](docs/maintainer-readiness.md) for package boundaries, local validation, preview, release, and readiness notes.
+- Use [`docs/documentation-maintenance.md`](docs/documentation-maintenance.md) when changing docs, examples, specs, package exports, or generated MCP resources.
+
 ## Live Examples
 
 > Open the hosted examples and component reference: [https://incursa.github.io/ui-kit](https://incursa.github.io/ui-kit)
@@ -331,7 +340,7 @@ There are three supported ways to use it.
 
 Incursa components use semantic icon names instead of Lucide component names. The default renderer maps names such as `info`, `help`, `success`, `warning`, `error`, `upload`, `document`, `download`, `settings`, and `external-link` to bundled Lucide SVGs.
 
-Use `data-inc-icon="warning"` in CSS-first markup loaded with `dist/inc-design-language.js`, or use component attributes such as `<inc-alert tone="warning">` and `<inc-button icon="download">Download</inc-button>` in the Web Component layer. Decorative package icons are rendered with `aria-hidden="true"`; icon-only controls still need an accessible label.
+Use [`data-inc-icon="warning"`](src/inc-design-language.js) in CSS-first markup loaded with [`dist/inc-design-language.js`](dist/inc-design-language.js), or use component attributes such as [`<inc-alert tone="warning">`](reference.html) and [`<inc-button icon="download">Download</inc-button>`](reference.html) in the Web Component layer. Decorative package icons are rendered with `aria-hidden="true"`; icon-only controls still need an accessible label.
 
 Consumers can replace the global renderer without depending on Lucide names:
 
@@ -349,7 +358,7 @@ Practical recommendation for a .NET Razor Pages or MVC app:
 - Add [`dist/inc-design-language.js`](dist/inc-design-language.js) if you want the optional [`inc-*`](reference.html) menu/tab/collapse helper behavior or the bundled theme switcher helper.
 - Add the same-package `./web-components` entrypoint when you want declarative custom elements for the supported v1 component families. Pair it with `./web-components/style.css` for the default look.
 - Use the native `<details>` and `<dialog>` patterns when you want less JavaScript.
-- Use `<inc-sparkline>` for compact trend evidence beside surrounding metric text. It accepts `values="5120,5400,5310"` for static pages or a `points` property with `{ x, y }` objects for timestamped data.
+- Use [`<inc-sparkline>`](reference.html) for compact trend evidence beside surrounding metric text. It accepts `values="5120,5400,5310"` for static pages or a `points` property with `{ x, y }` objects for timestamped data.
 - Use the SCSS source path only if you want this package to become part of your app's own asset build and theme pipeline.
 
 ## GitHub repository
@@ -360,7 +369,7 @@ This repository is set up for:
 - GitHub Pages showcase deployment from `main` via [`.github/workflows/pages.yml`](.github/workflows/pages.yml)
 - Cloudflare Worker MCP deployment from `main` via [`.github/workflows/mcp-worker.yml`](.github/workflows/mcp-worker.yml)
 - npm Trusted Publishing on `v*` tag pushes via [`.github/workflows/npm-publish.yml`](.github/workflows/npm-publish.yml)
-- Public release hygiene through `LICENSE`, [`CHANGELOG.md`](CHANGELOG.md), [`CONTRIBUTING.md`](CONTRIBUTING.md), and [`RELEASING.md`](RELEASING.md)
+- Public release hygiene through `LICENSE`, `NOTICE`, [`CHANGELOG.md`](CHANGELOG.md), [`CONTRIBUTING.md`](CONTRIBUTING.md), [`SECURITY.md`](SECURITY.md), [`SUPPORT.md`](SUPPORT.md), and [`RELEASING.md`](RELEASING.md)
 - Brand assets in [`assets/brand/`](assets/brand) so README and future docs do not depend on external image hosting
 
 ## Release flow
@@ -407,7 +416,7 @@ The repository also ships a deterministic Cloudflare Worker that exposes the UI 
 - `GET /mcp` serves a small HTML index for browsing the generated manifest.
 - `GET /mcp/resource/*` serves a human-readable resource page for inspection.
 - The Worker also tolerates a leading path prefix from a load balancer and keeps the rendered links under the configured `MCP_PATH_PREFIX` value.
-- Build-time manifests live under `dist/mcp/` and are regenerated from the repo docs, examples, specs, and package metadata.
+- Build-time manifests live under [`dist/mcp/`](dist/mcp) and are regenerated from the repo docs, examples, specs, and package metadata.
 - The Worker does not call an LLM, crawl the web, or depend on a database.
 
 The local workflow is:
@@ -435,4 +444,4 @@ To deploy the Worker:
 npm run deploy:mcp
 ```
 
-The Cloudflare deploy workflow uses `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets and deploys the bundled Worker from `dist/mcp/worker.mjs`.
+The Cloudflare deploy workflow uses `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets and deploys the bundled Worker from [`dist/mcp/worker.mjs`](dist/mcp/worker.mjs).

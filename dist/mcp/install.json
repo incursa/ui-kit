@@ -2,7 +2,7 @@
   "title": "Install",
   "summary": "Install guidance for compiled CSS, SCSS, JS helper, and web-components entrypoints.",
   "packageName": "@incursa/ui-kit",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "installCommands": {
     "npm": "npm install @incursa/ui-kit",
     "pnpm": "pnpm add @incursa/ui-kit",

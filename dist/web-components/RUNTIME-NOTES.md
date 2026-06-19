@@ -6,31 +6,31 @@ This folder ships the optional `./web-components` entrypoint for the UI kit.
 
 The runtime defines the approved v1 host family set:
 
-- layouts and shells: `inc-app-shell`, `inc-page`, `inc-page-header`, `inc-section`, `inc-card`, `inc-summary-overview`, `inc-summary-block`, `inc-footer-bar`
-- navigation: `inc-navbar`, `inc-tabs`, `inc-user-menu`
-- forms and inputs: `inc-field`, `inc-input-group`, `inc-choice-group`, `inc-readonly-field`, `inc-validation-summary`
-- feedback and status: `inc-state-panel`, `inc-live-region`, `inc-auto-refresh`, `inc-theme-switcher`, `inc-badge`, `inc-spinner`
-- actions and detail shells: `inc-button`, `inc-button-group`, `inc-button-toolbar`, `inc-close-button`, `inc-alert`, `inc-empty-state`
-- collections: `inc-list-group`, `inc-key-value-grid`, `inc-key-value`
-- data visualization: `inc-sparkline`
-- overlays: `inc-disclosure`, `inc-dialog`, `inc-drawer`
+- layouts and shells: [`inc-app-shell`](../../reference.html), [`inc-page`](../../reference.html), [`inc-page-header`](../../reference.html), [`inc-section`](../../reference.html), [`inc-card`](../../reference.html), [`inc-summary-overview`](../../reference.html), [`inc-summary-block`](../../reference.html), [`inc-footer-bar`](../../reference.html)
+- navigation: [`inc-navbar`](../../reference.html), [`inc-tabs`](../../reference.html), [`inc-user-menu`](../../reference.html)
+- forms and inputs: [`inc-field`](../../reference.html), [`inc-input-group`](../../reference.html), [`inc-choice-group`](../../reference.html), [`inc-readonly-field`](../../reference.html), [`inc-validation-summary`](../../reference.html)
+- feedback and status: [`inc-state-panel`](../../reference.html), [`inc-live-region`](../../reference.html), [`inc-auto-refresh`](../../reference.html), [`inc-theme-switcher`](../../reference.html), [`inc-badge`](../../reference.html), [`inc-spinner`](../../reference.html)
+- actions and detail shells: [`inc-button`](../../reference.html), [`inc-button-group`](../../reference.html), [`inc-button-toolbar`](../../reference.html), [`inc-close-button`](../../reference.html), [`inc-alert`](../../reference.html), [`inc-empty-state`](../../reference.html)
+- collections: [`inc-list-group`](../../reference.html), [`inc-key-value-grid`](../../reference.html), [`inc-key-value`](../../reference.html)
+- data visualization: [`inc-sparkline`](../../reference.html)
+- overlays: [`inc-disclosure`](../../reference.html), [`inc-dialog`](../../reference.html), [`inc-drawer`](../../reference.html)
 
 ## Contract shape
 
-- CSS-first is still canonical. Components reuse existing `inc-*` class contracts.
-- Badge and spinner hosts standardize the most common atomic status defaults while still reusing the same `inc-*` vocabulary, the action/detail hosts standardize repeated button, alert, and empty-state markup patterns, and the collection hosts standardize repeated list and key/value markup patterns.
+- CSS-first is still canonical. Components reuse existing [`inc-*`](../../reference.html) class contracts.
+- Badge and spinner hosts standardize the most common atomic status defaults while still reusing the same [`inc-*`](../../reference.html) vocabulary, the action/detail hosts standardize repeated button, alert, and empty-state markup patterns, and the collection hosts standardize repeated list and key/value markup patterns.
 - Package consumers should pair `@incursa/ui-kit/web-components` with `@incursa/ui-kit/web-components/style.css` when they want the default look out of the box.
 - v1 stays light DOM first so current style selectors keep working.
 - Native primitives are used for disclosure/menu/dialog behavior where practical.
-- `index.js` is a thin bootstrap that registers family modules and the promoted action/detail and collection hosts:
-  - `components/layout.js`
-  - `components/navigation.js`
-  - `components/forms.js`
-  - `components/feedback.js`
-  - `components/actions.js`
-  - `components/collections.js`
-  - `components/visualizations.js`
-  - `components/overlays.js`
+- [`index.js`](index.js) is a thin bootstrap that registers family modules and the promoted action/detail and collection hosts:
+  - [`components/layout.js`](components/layout.js)
+  - [`components/navigation.js`](components/navigation.js)
+  - [`components/forms.js`](components/forms.js)
+  - [`components/feedback.js`](components/feedback.js)
+  - [`components/actions.js`](components/actions.js)
+  - [`components/collections.js`](components/collections.js)
+  - [`components/visualizations.js`](components/visualizations.js)
+  - [`components/overlays.js`](components/overlays.js)
 - Public registration API is idempotent:
   - `window.IncWebComponents.defineAll()`
   - `window.IncWebComponents.registerIncWebComponents()`

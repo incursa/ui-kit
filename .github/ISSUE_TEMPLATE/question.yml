@@ -1,0 +1,28 @@
+name: Question
+description: Ask a usage or documentation question.
+title: "[Question]: "
+labels:
+  - question
+body:
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Surface
+      options:
+        - Installing the package
+        - Choosing CSS, SCSS, JS helper, or Web Components
+        - Components or patterns
+        - Controlled styles or tokens
+        - Examples
+        - Release or upgrade
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: Keep private code, credentials, and customer data out of the issue.
+    validations:
+      required: true
+
