@@ -14,6 +14,7 @@ The source repository owns these pages. The mirrored copy in `incursa-docs` is g
 - `docs/component-catalog.md`: find the maintained component, class, example, and Web Component sources.
 - `docs/style-control.md`: understand the controlled style and token layers.
 - `docs/maintainer-readiness.md`: operate the package, validation, preview, release, and readiness flow.
+- `docs/conformance.md`: use the reusable shell suites and interpret exact tested compatibility evidence.
 - `docs/documentation-maintenance.md`: keep docs, examples, specs, generated MCP resources, and package exports aligned.
 - `docs/contributor-agreement-automation.md`: operate the Incursa Contributor Agreement check and required status.
 

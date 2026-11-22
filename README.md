@@ -26,6 +26,7 @@ This repository packages a reusable UI kit for data-heavy business applications.
 - Use [`docs/component-catalog.md`](docs/component-catalog.md) to find component families, examples, specs, and source modules without duplicating stale API tables.
 - Use [`docs/style-control.md`](docs/style-control.md) before overriding fonts, colors, density, or Bootstrap-facing tokens.
 - Use [`docs/maintainer-readiness.md`](docs/maintainer-readiness.md) for package boundaries, local validation, preview, release, and readiness notes.
+- Use [`docs/conformance.md`](docs/conformance.md) for reusable semantic, interaction, accessibility, visual, and shell conformance checks.
 - Use [`docs/documentation-maintenance.md`](docs/documentation-maintenance.md) when changing docs, examples, specs, package exports, or generated MCP resources.
 - These Markdown files are source-authored here and mirrored into `incursa-docs`; update this repository, not the mirrored output.
 

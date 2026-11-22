@@ -1,6 +1,6 @@
 {
   "name": "@incursa/ui-kit",
-  "version": "1.9.0",
+  "version": "1.10.0-pf-m3.3.0",
   "private": false,
   "description": "CSS-first UI kit for data-heavy business applications, with optional JS helpers and Web Components.",
   "keywords": [
@@ -38,6 +38,13 @@
     "./icons": {
       "default": "./dist/icons/index.js"
     },
+    "./conformance/shell": {
+      "default": "./conformance/shell.mjs"
+    },
+    "./conformance/playwright": {
+      "default": "./conformance/playwright.mjs"
+    },
+    "./conformance/manifest": "./conformance/ui-kit.json",
     "./web-components/style.css": "./dist/web-components/style.css",
     "./dist/inc-design-language.css": "./dist/inc-design-language.css",
     "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",
@@ -49,6 +56,7 @@
   "files": [
     "dist",
     "src",
+    "conformance",
     "README.md",
     "LLMS.txt",
     "AI-AGENT-INSTRUCTIONS.md",
@@ -66,6 +74,7 @@
     "docs:check": "node scripts/linkify-markdown-docs.mjs --check",
     "test:browser:install": "playwright install chromium",
     "test:browser": "playwright test",
+    "test:conformance": "playwright test tests/browser/conformance.spec.mjs",
     "test:mcp": "node --test tests/mcp/transport.test.mjs tests/mcp/search.test.mjs tests/mcp/installation.test.mjs tests/mcp/markup.test.mjs tests/mcp/freshness.test.mjs",
     "smoke": "node scripts/verify-ui-kit.mjs",
     "verify": "npm run docs:check && npm run smoke && npm run build && npm run test:mcp && npm pack --dry-run",
@@ -83,7 +92,20 @@
     "d3-shape": "^3.2.0",
     "lucide": "^1.17.0"
   },
+  "peerDependencies": {
+    "@axe-core/playwright": "^4.11.0",
+    "@playwright/test": "^1.58.2"
+  },
+  "peerDependenciesMeta": {
+    "@axe-core/playwright": {
+      "optional": true
+    },
+    "@playwright/test": {
+      "optional": true
+    }
+  },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "@playwright/test": "^1.58.2",
     "bootstrap": "^5.3.3",

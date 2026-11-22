@@ -13643,7 +13643,7 @@ textarea.form-control-lg, textarea.inc-form__control--lg {
 }
 .inc-footer-bar__meta {
   font-size: 0.75rem;
-  color: var(--inc-text-muted);
+  color: var(--inc-text-primary);
 }
 
 .inc-breadcrumb {
