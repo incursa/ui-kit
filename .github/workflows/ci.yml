@@ -6,6 +6,9 @@ on:
       - main
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     # Playwright 1.58 does not provide Chromium dependencies for Ubuntu 26.04.

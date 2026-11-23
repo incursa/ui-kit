@@ -6797,6 +6797,110 @@ var require_dist = __commonJS({
   }
 });
 
+// node_modules/content-type/index.js
+var require_content_type = __commonJS({
+  "node_modules/content-type/index.js"(exports) {
+    "use strict";
+    var PARAM_REGEXP = /; *([!#$%&'*+.^_`|~0-9A-Za-z-]+) *= *("(?:[\u000b\u0020\u0021\u0023-\u005b\u005d-\u007e\u0080-\u00ff]|\\[\u000b\u0020-\u00ff])*"|[!#$%&'*+.^_`|~0-9A-Za-z-]+) */g;
+    var TEXT_REGEXP = /^[\u000b\u0020-\u007e\u0080-\u00ff]+$/;
+    var TOKEN_REGEXP = /^[!#$%&'*+.^_`|~0-9A-Za-z-]+$/;
+    var QESC_REGEXP = /\\([\u000b\u0020-\u00ff])/g;
+    var QUOTE_REGEXP = /([\\"])/g;
+    var TYPE_REGEXP = /^[!#$%&'*+.^_`|~0-9A-Za-z-]+\/[!#$%&'*+.^_`|~0-9A-Za-z-]+$/;
+    exports.format = format;
+    exports.parse = parse3;
+    function format(obj) {
+      if (!obj || typeof obj !== "object") {
+        throw new TypeError("argument obj is required");
+      }
+      var parameters = obj.parameters;
+      var type = obj.type;
+      if (!type || !TYPE_REGEXP.test(type)) {
+        throw new TypeError("invalid type");
+      }
+      var string3 = type;
+      if (parameters && typeof parameters === "object") {
+        var param;
+        var params = Object.keys(parameters).sort();
+        for (var i = 0; i < params.length; i++) {
+          param = params[i];
+          if (!TOKEN_REGEXP.test(param)) {
+            throw new TypeError("invalid parameter name");
+          }
+          string3 += "; " + param + "=" + qstring(parameters[param]);
+        }
+      }
+      return string3;
+    }
+    function parse3(string3) {
+      if (!string3) {
+        throw new TypeError("argument string is required");
+      }
+      var header = typeof string3 === "object" ? getcontenttype(string3) : string3;
+      if (typeof header !== "string") {
+        throw new TypeError("argument string is required to be a string");
+      }
+      var index = header.indexOf(";");
+      var type = index !== -1 ? header.slice(0, index).trim() : header.trim();
+      if (!TYPE_REGEXP.test(type)) {
+        throw new TypeError("invalid media type");
+      }
+      var obj = new ContentType(type.toLowerCase());
+      if (index !== -1) {
+        var key;
+        var match;
+        var value;
+        PARAM_REGEXP.lastIndex = index;
+        while (match = PARAM_REGEXP.exec(header)) {
+          if (match.index !== index) {
+            throw new TypeError("invalid parameter format");
+          }
+          index += match[0].length;
+          key = match[1].toLowerCase();
+          value = match[2];
+          if (value.charCodeAt(0) === 34) {
+            value = value.slice(1, -1);
+            if (value.indexOf("\\") !== -1) {
+              value = value.replace(QESC_REGEXP, "$1");
+            }
+          }
+          obj.parameters[key] = value;
+        }
+        if (index !== header.length) {
+          throw new TypeError("invalid parameter format");
+        }
+      }
+      return obj;
+    }
+    function getcontenttype(obj) {
+      var header;
+      if (typeof obj.getHeader === "function") {
+        header = obj.getHeader("content-type");
+      } else if (typeof obj.headers === "object") {
+        header = obj.headers && obj.headers["content-type"];
+      }
+      if (typeof header !== "string") {
+        throw new TypeError("content-type header is missing from object");
+      }
+      return header;
+    }
+    function qstring(val) {
+      var str = String(val);
+      if (TOKEN_REGEXP.test(str)) {
+        return str;
+      }
+      if (str.length > 0 && !TEXT_REGEXP.test(str)) {
+        throw new TypeError("invalid parameter value");
+      }
+      return '"' + str.replace(QUOTE_REGEXP, "\\$1") + '"';
+    }
+    function ContentType(type) {
+      this.parameters = /* @__PURE__ */ Object.create(null);
+      this.type = type;
+    }
+  }
+});
+
 // node_modules/zod/v3/helpers/util.js
 var util;
 (function(util2) {
@@ -16283,16 +16387,32 @@ function normalizeObjectSchema(schema) {
   }
   return void 0;
 }
+function getDotPath(path) {
+  if (path.length === 0) {
+    return "object root";
+  }
+  return path.reduce((acc, seg, index) => {
+    if (index === 0) {
+      return String(seg);
+    }
+    if (typeof seg === "number") {
+      return `${acc}[${seg}]`;
+    }
+    return `${acc}.${seg}`;
+  }, "");
+}
 function getParseErrorMessage(error2) {
   if (error2 && typeof error2 === "object") {
+    if ("issues" in error2 && Array.isArray(error2.issues) && error2.issues.length > 0) {
+      return error2.issues.map((i) => {
+        if (!i.path?.length) {
+          return i.message;
+        }
+        return `${i.message} at ${getDotPath(i.path)}`;
+      }).join("\n");
+    }
     if ("message" in error2 && typeof error2.message === "string") {
       return error2.message;
-    }
-    if ("issues" in error2 && Array.isArray(error2.issues) && error2.issues.length > 0) {
-      const firstIssue = error2.issues[0];
-      if (firstIssue && typeof firstIssue === "object" && "message" in firstIssue) {
-        return String(firstIssue.message);
-      }
     }
     try {
       return JSON.stringify(error2);
@@ -20640,6 +20760,9 @@ var Protocol = class {
       this.setRequestHandler(GetTaskPayloadRequestSchema, async (request, extra) => {
         const handleTaskResult = async () => {
           const taskId = request.params.taskId;
+          if (!await this._taskStore.getTask(taskId, extra.sessionId)) {
+            throw new McpError(ErrorCode.InvalidParams, `Task not found: ${taskId}`);
+          }
           if (this._taskMessageQueue) {
             let queuedMessage;
             while (queuedMessage = await this._taskMessageQueue.dequeue(taskId, extra.sessionId)) {
@@ -20670,12 +20793,12 @@ var Protocol = class {
             throw new McpError(ErrorCode.InvalidParams, `Task not found: ${taskId}`);
           }
           if (!isTerminal(task.status)) {
-            await this._waitForTaskUpdate(taskId, extra.signal);
+            await this._waitForTaskUpdate(taskId, extra.signal, extra.sessionId);
             return await handleTaskResult();
           }
           if (isTerminal(task.status)) {
             const result = await this._taskStore.getTaskResult(taskId, extra.sessionId);
-            this._clearTaskQueue(taskId);
+            this._clearTaskQueue(taskId, extra.sessionId);
             return {
               ...result,
               _meta: {
@@ -20712,7 +20835,7 @@ var Protocol = class {
             throw new McpError(ErrorCode.InvalidParams, `Cannot cancel task in terminal status: ${task.status}`);
           }
           await this._taskStore.updateTaskStatus(request.params.taskId, "cancelled", "Client cancelled task execution.", extra.sessionId);
-          this._clearTaskQueue(request.params.taskId);
+          this._clearTaskQueue(request.params.taskId, extra.sessionId);
           const cancelledTask = await this._taskStore.getTask(request.params.taskId, extra.sessionId);
           if (!cancelledTask) {
             throw new McpError(ErrorCode.InvalidParams, `Task not found after cancellation: ${request.params.taskId}`);
@@ -20840,6 +20963,19 @@ var Protocol = class {
     const handler = this._requestHandlers.get(request.method) ?? this.fallbackRequestHandler;
     const capturedTransport = this._transport;
     const relatedTaskId = request.params?._meta?.[RELATED_TASK_META_KEY]?.taskId;
+    const sessionId = capturedTransport?.sessionId;
+    const store = this._taskStore;
+    let relatedTaskFound = true;
+    let relatedTaskLookup;
+    if (relatedTaskId && store && this._taskMessageQueue && sessionId !== void 0) {
+      relatedTaskFound = false;
+      relatedTaskLookup = (async () => {
+        if (!await store.getTask(relatedTaskId, sessionId)) {
+          throw new McpError(ErrorCode.InvalidParams, `Task not found: ${relatedTaskId}`);
+        }
+        relatedTaskFound = true;
+      })();
+    }
     if (handler === void 0) {
       const errorResponse = {
         jsonrpc: "2.0",
@@ -20849,7 +20985,10 @@ var Protocol = class {
           message: "Method not found"
         }
       };
-      if (relatedTaskId && this._taskMessageQueue) {
+      if (relatedTaskId && relatedTaskLookup) {
+        const queuedError = { type: "error", message: errorResponse, timestamp: Date.now() };
+        relatedTaskLookup.then(() => this._enqueueTaskMessage(relatedTaskId, queuedError, sessionId), () => capturedTransport?.send(errorResponse)).catch((error2) => this._onerror(new Error(`Failed to send an error response: ${error2}`)));
+      } else if (relatedTaskId && this._taskMessageQueue) {
         this._enqueueTaskMessage(relatedTaskId, {
           type: "error",
           message: errorResponse,
@@ -20900,7 +21039,10 @@ var Protocol = class {
       closeSSEStream: extra?.closeSSEStream,
       closeStandaloneSSEStream: extra?.closeStandaloneSSEStream
     };
-    Promise.resolve().then(() => {
+    (relatedTaskLookup ?? Promise.resolve()).then(() => {
+      if (relatedTaskLookup && abortController.signal.aborted) {
+        throw new McpError(ErrorCode.ConnectionClosed, "Request was cancelled");
+      }
       if (taskCreationParams) {
         this.assertTaskHandlerCapability(request.method);
       }
@@ -20935,7 +21077,7 @@ var Protocol = class {
           ...error2["data"] !== void 0 && { data: error2["data"] }
         }
       };
-      if (relatedTaskId && this._taskMessageQueue) {
+      if (relatedTaskId && this._taskMessageQueue && relatedTaskFound) {
         await this._enqueueTaskMessage(relatedTaskId, {
           type: "error",
           message: errorResponse,
@@ -21415,7 +21557,7 @@ var Protocol = class {
       throw new Error("Cannot enqueue task message: taskStore and taskMessageQueue are not configured");
     }
     const maxQueueSize = this._options?.maxTaskQueueSize;
-    await this._taskMessageQueue.enqueue(taskId, message, sessionId, maxQueueSize);
+    await this._taskMessageQueue.enqueue(taskId, message, sessionId ?? this._transport?.sessionId, maxQueueSize);
   }
   /**
    * Clears the message queue for a task and rejects any pending request resolvers.
@@ -21444,12 +21586,13 @@ var Protocol = class {
    * Uses polling to check for updates at the task's configured poll interval.
    * @param taskId The task ID to wait for
    * @param signal Abort signal to cancel the wait
+   * @param sessionId Session of the request that waits, passed to the task store
    * @returns Promise that resolves when an update occurs or rejects if aborted
    */
-  async _waitForTaskUpdate(taskId, signal) {
+  async _waitForTaskUpdate(taskId, signal, sessionId) {
     let interval = this._options?.defaultTaskPollInterval ?? 1e3;
     try {
-      const task = await this._taskStore?.getTask(taskId);
+      const task = await this._taskStore?.getTask(taskId, sessionId);
       if (task?.pollInterval) {
         interval = task.pollInterval;
       }
@@ -21935,16 +22078,7 @@ var Server = class extends Protocol {
     if (!methodSchema) {
       throw new Error("Schema is missing a method literal");
     }
-    let methodValue;
-    if (isZ4Schema(methodSchema)) {
-      const v4Schema = methodSchema;
-      const v4Def = v4Schema._zod?.def;
-      methodValue = v4Def?.value ?? v4Schema.value;
-    } else {
-      const v3Schema = methodSchema;
-      const legacyDef = v3Schema._def;
-      methodValue = legacyDef?.value ?? v3Schema.value;
-    }
+    const methodValue = getLiteralValue(methodSchema);
     if (typeof methodValue !== "string") {
       throw new Error("Schema method literal must be a string");
     }
@@ -22337,7 +22471,7 @@ var UriTemplate = class _UriTemplate {
   }
   getNames(expr) {
     const operator = this.getOperator(expr);
-    return expr.slice(operator.length).split(",").map((name) => name.replace("*", "").trim()).filter((name) => name.length > 0);
+    return expr.slice(operator.length).split(",").map((name) => name.replaceAll("*", "").trim()).filter((name) => name.length > 0);
   }
   encodeValue(value, operator) {
     _UriTemplate.validateLength(value, MAX_VARIABLE_LENGTH, "Variable value");
@@ -22474,7 +22608,7 @@ var UriTemplate = class _UriTemplate {
     for (let i = 0; i < names.length; i++) {
       const { name, exploded } = names[i];
       const value = match[i + 1];
-      const cleanName = name.replace("*", "");
+      const cleanName = name.replaceAll("*", "");
       if (exploded && value.includes(",")) {
         result[cleanName] = value.split(",");
       } else {
@@ -22559,6 +22693,42 @@ var ExperimentalMcpServerTasks = class {
 };
 
 // node_modules/@modelcontextprotocol/sdk/dist/esm/server/mcp.js
+function toolInputElementCount(value, max) {
+  let count = 0;
+  const stack = [value];
+  while (stack.length > 0) {
+    const node = stack.pop();
+    if (node === null || typeof node !== "object")
+      continue;
+    if (Array.isArray(node)) {
+      for (const child of node) {
+        if (++count > max)
+          return count;
+        if (child !== null && typeof child === "object")
+          stack.push(child);
+      }
+    } else {
+      for (const key in node) {
+        if (!Object.prototype.hasOwnProperty.call(node, key))
+          continue;
+        if (++count > max)
+          return count;
+        const child = node[key];
+        if (child !== null && typeof child === "object")
+          stack.push(child);
+      }
+    }
+  }
+  return count;
+}
+function resolveMaxToolInputElements(value) {
+  if (value === void 0 || value === Infinity)
+    return void 0;
+  if (typeof value !== "number" || Number.isNaN(value) || value < 1) {
+    throw new RangeError(`maxToolInputElements must be a number of at least 1, or Infinity, got ${String(value)}`);
+  }
+  return value;
+}
 var McpServer = class {
   constructor(serverInfo, options) {
     this._registeredResources = {};
@@ -22570,6 +22740,16 @@ var McpServer = class {
     this._resourceHandlersInitialized = false;
     this._promptHandlersInitialized = false;
     this.server = new Server(serverInfo, options);
+    this._maxToolInputElements = resolveMaxToolInputElements(options?.maxToolInputElements);
+    if (options?.capabilities?.tools) {
+      this.setToolRequestHandlers();
+    }
+    if (options?.capabilities?.resources) {
+      this.setResourceRequestHandlers();
+    }
+    if (options?.capabilities?.prompts) {
+      this.setPromptRequestHandlers();
+    }
   }
   /**
    * Access experimental features.
@@ -22700,12 +22880,15 @@ var McpServer = class {
    * Validates tool input arguments against the tool's input schema.
    */
   async validateToolInput(tool, args, toolName) {
+    if (this._maxToolInputElements !== void 0 && toolInputElementCount(args, this._maxToolInputElements) > this._maxToolInputElements) {
+      throw new McpError(ErrorCode.InvalidParams, `Invalid arguments for tool ${toolName}: arguments contain more than the maximum of ${this._maxToolInputElements} elements`);
+    }
     if (!tool.inputSchema) {
       return void 0;
     }
     const inputObj = normalizeObjectSchema(tool.inputSchema);
     const schemaToParse = inputObj ?? tool.inputSchema;
-    const parseResult = await safeParseAsync2(schemaToParse, args);
+    const parseResult = await safeParseAsync2(schemaToParse, args ?? {});
     if (!parseResult.success) {
       const error2 = "error" in parseResult ? parseResult.error : "Unknown error";
       const errorMessage = getParseErrorMessage(error2);
@@ -22943,7 +23126,7 @@ var McpServer = class {
       }
       if (prompt.argsSchema) {
         const argsObj = normalizeObjectSchema(prompt.argsSchema);
-        const parseResult = await safeParseAsync2(argsObj, request.params.arguments);
+        const parseResult = await safeParseAsync2(argsObj, request.params.arguments ?? {});
         if (!parseResult.success) {
           const error2 = "error" in parseResult ? parseResult.error : "Unknown error";
           const errorMessage = getParseErrorMessage(error2);
@@ -23374,6 +23557,85 @@ var EMPTY_COMPLETION_RESULT = {
   }
 };
 
+// node_modules/@modelcontextprotocol/sdk/dist/esm/shared/mediaType.js
+var import_content_type = __toESM(require_content_type(), 1);
+function mediaTypeEssence(header) {
+  if (!header) {
+    return void 0;
+  }
+  try {
+    return import_content_type.default.parse(header).type;
+  } catch {
+    const essence = (header.split(";", 1)[0] ?? "").trim().toLowerCase();
+    if (essence === "" || header.slice(essence.length).includes(",")) {
+      return void 0;
+    }
+    return essence;
+  }
+}
+function isJsonContentType(header) {
+  if (header === "application/json") {
+    return true;
+  }
+  return mediaTypeEssence(header) === "application/json";
+}
+
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/requestBody.js
+var DEFAULT_MAX_REQUEST_BODY_SIZE = 4 * 1024 * 1024;
+var MAX_BATCH_SIZE = 100;
+function requestBodyTooLargeMessage(maxBytes) {
+  return `Payload Too Large: Request body must not exceed ${maxBytes} bytes`;
+}
+function resolveMaxRequestBodySize(value) {
+  if (value === void 0) {
+    return DEFAULT_MAX_REQUEST_BODY_SIZE;
+  }
+  if (typeof value !== "number" || !Number.isFinite(value) || value <= 0) {
+    throw new RangeError(`maxRequestBodySize must be a positive number of bytes, got ${String(value)}`);
+  }
+  return value;
+}
+async function readRequestBody(request, maxBytes = DEFAULT_MAX_REQUEST_BODY_SIZE) {
+  if (Number(request.headers.get("content-length")) > maxBytes) {
+    return { tooLarge: true };
+  }
+  if (request.body === null) {
+    return { tooLarge: false, text: "" };
+  }
+  const reader = request.body.getReader();
+  const decoder = new TextDecoder();
+  let received = 0;
+  let text = "";
+  try {
+    for (; ; ) {
+      const { done, value } = await reader.read();
+      if (done) {
+        break;
+      }
+      received += value.byteLength;
+      if (received > maxBytes) {
+        return { tooLarge: true };
+      }
+      text += decoder.decode(value, { stream: true });
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  return { tooLarge: false, text: text + decoder.decode() };
+}
+
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/sseKeepAlive.js
+var DEFAULT_SSE_KEEP_ALIVE_MS = 15e3;
+var MAX_TIMER_DELAY_MS = 2 ** 31 - 1;
+function armSseKeepAlive(intervalMs, onTick) {
+  if (!Number.isFinite(intervalMs) || intervalMs < 1) {
+    return void 0;
+  }
+  const timer = setInterval(onTick, Math.min(intervalMs, MAX_TIMER_DELAY_MS));
+  timer.unref?.();
+  return timer;
+}
+
 // node_modules/@modelcontextprotocol/sdk/dist/esm/server/webStandardStreamableHttp.js
 var WebStandardStreamableHTTPServerTransport = class {
   constructor(options = {}) {
@@ -23381,10 +23643,12 @@ var WebStandardStreamableHTTPServerTransport = class {
     this._hasHandledRequest = false;
     this._streamMapping = /* @__PURE__ */ new Map();
     this._requestToStreamMapping = /* @__PURE__ */ new Map();
+    this._resumableStreams = /* @__PURE__ */ new Set();
     this._requestResponseMap = /* @__PURE__ */ new Map();
     this._initialized = false;
     this._enableJsonResponse = false;
     this._standaloneSseStreamId = "_GET_stream";
+    this._closed = false;
     this.sessionIdGenerator = options.sessionIdGenerator;
     this._enableJsonResponse = options.enableJsonResponse ?? false;
     this._eventStore = options.eventStore;
@@ -23394,6 +23658,28 @@ var WebStandardStreamableHTTPServerTransport = class {
     this._allowedOrigins = options.allowedOrigins;
     this._enableDnsRebindingProtection = options.enableDnsRebindingProtection ?? false;
     this._retryInterval = options.retryInterval;
+    this._keepAliveMs = options.keepAliveMs ?? DEFAULT_SSE_KEEP_ALIVE_MS;
+    this._maxRequestBodySize = resolveMaxRequestBodySize(options.maxRequestBodySize);
+  }
+  /**
+   * Arms a keep-alive interval for an SSE stream that periodically writes an SSE
+   * comment frame so intermediaries and idle timeouts don't kill the connection.
+   * The returned timer is owned by the stream it was armed for: the stream's
+   * cancel/cleanup callbacks must clear it. The interval clears itself if a
+   * write fails (stream already closed/cancelled).
+   */
+  startKeepAlive(controller, encoder) {
+    if (this._closed)
+      return void 0;
+    const timer = armSseKeepAlive(this._keepAliveMs, () => {
+      try {
+        controller.enqueue(encoder.encode(": keepalive\n\n"));
+      } catch {
+        if (timer !== void 0)
+          clearInterval(timer);
+      }
+    });
+    return timer;
   }
   /**
    * Starts the transport. This is required by the Transport interface but is a no-op
@@ -23456,6 +23742,9 @@ var WebStandardStreamableHTTPServerTransport = class {
    * Returns a Response object (Web Standard)
    */
   async handleRequest(req, options) {
+    if (this._closed) {
+      return this.createJsonErrorResponse(404, -32001, "Session not found");
+    }
     if (!this.sessionIdGenerator && this._hasHandledRequest) {
       throw new Error("Stateless transport cannot be reused across requests. Create a new transport per request.");
     }
@@ -23500,6 +23789,7 @@ data:
 `;
     }
     controller.enqueue(encoder.encode(primingEvent));
+    this._resumableStreams.add(streamId);
   }
   /**
    * Handles GET requests for SSE stream
@@ -23530,18 +23820,25 @@ data:
     }
     const encoder = new TextEncoder();
     let streamController;
+    let keepAliveTimer = void 0;
     const readable = new ReadableStream({
       start: (controller) => {
         streamController = controller;
       },
       cancel: () => {
-        this._streamMapping.delete(this._standaloneSseStreamId);
+        if (keepAliveTimer !== void 0) {
+          clearInterval(keepAliveTimer);
+        }
+        if (this._streamMapping.get(this._standaloneSseStreamId)?.controller === streamController) {
+          this._streamMapping.delete(this._standaloneSseStreamId);
+        }
       }
     });
     const headers = {
       "Content-Type": "text/event-stream",
       "Cache-Control": "no-cache, no-transform",
-      Connection: "keep-alive"
+      Connection: "keep-alive",
+      "X-Accel-Buffering": "no"
     };
     if (this.sessionId !== void 0) {
       headers["mcp-session-id"] = this.sessionId;
@@ -23550,6 +23847,9 @@ data:
       controller: streamController,
       encoder,
       cleanup: () => {
+        if (keepAliveTimer !== void 0) {
+          clearInterval(keepAliveTimer);
+        }
         this._streamMapping.delete(this._standaloneSseStreamId);
         try {
           streamController.close();
@@ -23557,6 +23857,7 @@ data:
         }
       }
     });
+    keepAliveTimer = this.startKeepAlive(streamController, encoder);
     return new Response(readable, { headers });
   }
   /**
@@ -23584,21 +23885,33 @@ data:
       const headers = {
         "Content-Type": "text/event-stream",
         "Cache-Control": "no-cache, no-transform",
-        Connection: "keep-alive"
+        Connection: "keep-alive",
+        "X-Accel-Buffering": "no"
       };
       if (this.sessionId !== void 0) {
         headers["mcp-session-id"] = this.sessionId;
       }
       const encoder = new TextEncoder();
       let streamController;
+      let keepAliveTimer = void 0;
+      let replayedStreamId = void 0;
+      let cancelled = false;
       const readable = new ReadableStream({
         start: (controller) => {
           streamController = controller;
         },
         cancel: () => {
+          cancelled = true;
+          if (keepAliveTimer !== void 0) {
+            clearInterval(keepAliveTimer);
+          }
+          if (replayedStreamId !== void 0 && this._streamMapping.get(replayedStreamId)?.controller === streamController) {
+            this._streamMapping.delete(replayedStreamId);
+          }
         }
       });
-      const replayedStreamId = await this._eventStore.replayEventsAfter(lastEventId, {
+      const replayedEventIds = /* @__PURE__ */ new Set();
+      replayedStreamId = await this._eventStore.replayEventsAfter(lastEventId, {
         send: async (eventId, message) => {
           const success2 = this.writeSSEEvent(streamController, encoder, message, eventId);
           if (!success2) {
@@ -23607,13 +23920,27 @@ data:
               streamController.close();
             } catch {
             }
+          } else {
+            replayedEventIds.add(eventId);
           }
         }
       });
+      if (this._closed || cancelled) {
+        try {
+          streamController.close();
+        } catch {
+        }
+        return this.createJsonErrorResponse(404, -32001, "Session not found");
+      }
+      this._streamMapping.get(replayedStreamId)?.cleanup();
       this._streamMapping.set(replayedStreamId, {
         controller: streamController,
         encoder,
+        replayedEventIds,
         cleanup: () => {
+          if (keepAliveTimer !== void 0) {
+            clearInterval(keepAliveTimer);
+          }
           this._streamMapping.delete(replayedStreamId);
           try {
             streamController.close();
@@ -23621,6 +23948,8 @@ data:
           }
         }
       });
+      this._resumableStreams.add(replayedStreamId);
+      keepAliveTimer = this.startKeepAlive(streamController, encoder);
       return new Response(readable, { headers });
     } catch (error2) {
       this.onerror?.(error2);
@@ -23679,7 +24008,7 @@ data:
         return this.createJsonErrorResponse(406, -32e3, "Not Acceptable: Client must accept both application/json and text/event-stream");
       }
       const ct = req.headers.get("content-type");
-      if (!ct || !ct.includes("application/json")) {
+      if (!isJsonContentType(ct)) {
         this.onerror?.(new Error("Unsupported Media Type: Content-Type must be application/json"));
         return this.createJsonErrorResponse(415, -32e3, "Unsupported Media Type: Content-Type must be application/json");
       }
@@ -23692,11 +24021,21 @@ data:
         rawMessage = options.parsedBody;
       } else {
         try {
-          rawMessage = await req.json();
+          const body = await readRequestBody(req, this._maxRequestBodySize);
+          if (body.tooLarge) {
+            const message = requestBodyTooLargeMessage(this._maxRequestBodySize);
+            this.onerror?.(new Error(message));
+            return this.createJsonErrorResponse(413, -32e3, message);
+          }
+          rawMessage = JSON.parse(body.text);
         } catch {
           this.onerror?.(new Error("Parse error: Invalid JSON"));
           return this.createJsonErrorResponse(400, -32700, "Parse error: Invalid JSON");
         }
+      }
+      if (Array.isArray(rawMessage) && rawMessage.length > MAX_BATCH_SIZE) {
+        this.onerror?.(new Error(`Invalid Request: Batch must not exceed ${MAX_BATCH_SIZE} messages`));
+        return this.createJsonErrorResponse(400, -32600, `Invalid Request: Batch must not exceed ${MAX_BATCH_SIZE} messages`);
       }
       let messages;
       try {
@@ -23708,6 +24047,9 @@ data:
       } catch {
         this.onerror?.(new Error("Parse error: Invalid JSON-RPC message"));
         return this.createJsonErrorResponse(400, -32700, "Parse error: Invalid JSON-RPC message");
+      }
+      if (this._closed) {
+        return this.createJsonErrorResponse(404, -32001, "Session not found");
       }
       const isInitializationRequest = messages.some(isInitializeRequest);
       if (isInitializationRequest) {
@@ -23734,6 +24076,9 @@ data:
         if (protocolError) {
           return protocolError;
         }
+      }
+      if (this._closed) {
+        return this.createJsonErrorResponse(404, -32001, "Session not found");
       }
       const hasRequests = messages.some(isJSONRPCRequest);
       if (!hasRequests) {
@@ -23765,18 +24110,25 @@ data:
       }
       const encoder = new TextEncoder();
       let streamController;
+      let keepAliveTimer = void 0;
       const readable = new ReadableStream({
         start: (controller) => {
           streamController = controller;
         },
         cancel: () => {
-          this._streamMapping.delete(streamId);
+          if (keepAliveTimer !== void 0) {
+            clearInterval(keepAliveTimer);
+          }
+          if (this._streamMapping.get(streamId)?.controller === streamController) {
+            this._streamMapping.delete(streamId);
+          }
         }
       });
       const headers = {
         "Content-Type": "text/event-stream",
-        "Cache-Control": "no-cache",
-        Connection: "keep-alive"
+        "Cache-Control": "no-cache, no-transform",
+        Connection: "keep-alive",
+        "X-Accel-Buffering": "no"
       };
       if (this.sessionId !== void 0) {
         headers["mcp-session-id"] = this.sessionId;
@@ -23787,6 +24139,9 @@ data:
             controller: streamController,
             encoder,
             cleanup: () => {
+              if (keepAliveTimer !== void 0) {
+                clearInterval(keepAliveTimer);
+              }
               this._streamMapping.delete(streamId);
               try {
                 streamController.close();
@@ -23797,19 +24152,33 @@ data:
           this._requestToStreamMapping.set(message.id, streamId);
         }
       }
-      await this.writePrimingEvent(streamController, encoder, streamId, clientProtocolVersion);
-      for (const message of messages) {
-        let closeSSEStream;
-        let closeStandaloneSSEStream;
-        if (isJSONRPCRequest(message) && this._eventStore && clientProtocolVersion >= "2025-11-25") {
-          closeSSEStream = () => {
-            this.closeSSEStream(message.id);
-          };
-          closeStandaloneSSEStream = () => {
-            this.closeStandaloneSSEStream();
-          };
+      try {
+        await this.writePrimingEvent(streamController, encoder, streamId, clientProtocolVersion);
+        for (const message of messages) {
+          let closeSSEStream;
+          let closeStandaloneSSEStream;
+          if (isJSONRPCRequest(message) && this._eventStore && clientProtocolVersion >= "2025-11-25") {
+            closeSSEStream = () => {
+              this.closeSSEStream(message.id);
+            };
+            closeStandaloneSSEStream = () => {
+              this.closeStandaloneSSEStream();
+            };
+          }
+          this.onmessage?.(message, { authInfo: options?.authInfo, requestInfo, closeSSEStream, closeStandaloneSSEStream });
         }
-        this.onmessage?.(message, { authInfo: options?.authInfo, requestInfo, closeSSEStream, closeStandaloneSSEStream });
+      } catch (error2) {
+        this._streamMapping.get(streamId)?.cleanup();
+        this._resumableStreams.delete(streamId);
+        for (const message of messages) {
+          if (isJSONRPCRequest(message)) {
+            this._requestToStreamMapping.delete(message.id);
+          }
+        }
+        throw error2;
+      }
+      if (this._streamMapping.get(streamId)?.controller === streamController) {
+        keepAliveTimer = this.startKeepAlive(streamController, encoder);
       }
       return new Response(readable, { status: 200, headers });
     } catch (error2) {
@@ -23829,9 +24198,12 @@ data:
     if (protocolError) {
       return protocolError;
     }
-    await Promise.resolve(this._onsessionclosed?.(this.sessionId));
-    await this.close();
-    return new Response(null, { status: 200 });
+    try {
+      await Promise.resolve(this._onsessionclosed?.(this.sessionId));
+      return new Response(null, { status: 200 });
+    } finally {
+      await this.close();
+    }
   }
   /**
    * Validates session ID for non-initialization requests.
@@ -23878,11 +24250,16 @@ data:
     return void 0;
   }
   async close() {
+    if (this._closed) {
+      return;
+    }
+    this._closed = true;
     this._streamMapping.forEach(({ cleanup }) => {
       cleanup();
     });
     this._streamMapping.clear();
     this._requestResponseMap.clear();
+    this._resumableStreams.clear();
     this.onclose?.();
   }
   /**
@@ -23926,7 +24303,7 @@ data:
       if (standaloneSse === void 0) {
         return;
       }
-      if (standaloneSse.controller && standaloneSse.encoder) {
+      if (standaloneSse.controller && standaloneSse.encoder && (eventId === void 0 || !standaloneSse.replayedEventIds?.has(eventId))) {
         this.writeSSEEvent(standaloneSse.controller, standaloneSse.encoder, message, eventId);
       }
       return;
@@ -23935,13 +24312,19 @@ data:
     if (!streamId) {
       throw new Error(`No connection established for request ID: ${String(requestId)}`);
     }
-    const stream = this._streamMapping.get(streamId);
-    if (!this._enableJsonResponse && stream?.controller && stream?.encoder) {
+    let stream = this._streamMapping.get(streamId);
+    if (!this._enableJsonResponse) {
       let eventId;
       if (this._eventStore) {
         eventId = await this._eventStore.storeEvent(streamId, message);
+        stream = this._streamMapping.get(streamId);
       }
-      this.writeSSEEvent(stream.controller, stream.encoder, message, eventId);
+      if (stream?.controller && stream?.encoder && (eventId === void 0 || !stream.replayedEventIds?.has(eventId))) {
+        const written = this.writeSSEEvent(stream.controller, stream.encoder, message, eventId);
+        if (written && eventId !== void 0) {
+          this._resumableStreams.add(streamId);
+        }
+      }
     }
     if (isJSONRPCResultResponse(message) || isJSONRPCErrorResponse(message)) {
       this._requestResponseMap.set(requestId, message);
@@ -23949,6 +24332,25 @@ data:
       const allResponsesReady = relatedIds.every((id) => this._requestResponseMap.has(id));
       if (allResponsesReady) {
         if (!stream) {
+          if (this._closed) {
+            for (const id of relatedIds) {
+              this._requestResponseMap.delete(id);
+              this._requestToStreamMapping.delete(id);
+            }
+            return;
+          }
+          if (!this._enableJsonResponse && this._eventStore && this._resumableStreams.has(streamId)) {
+            for (const id of relatedIds) {
+              this._requestResponseMap.delete(id);
+              this._requestToStreamMapping.delete(id);
+            }
+            this._resumableStreams.delete(streamId);
+            return;
+          }
+          for (const id of relatedIds) {
+            this._requestResponseMap.delete(id);
+            this._requestToStreamMapping.delete(id);
+          }
           throw new Error(`No connection established for request ID: ${String(requestId)}`);
         }
         if (this._enableJsonResponse && stream.resolveJson) {
@@ -23971,6 +24373,7 @@ data:
           this._requestResponseMap.delete(id);
           this._requestToStreamMapping.delete(id);
         }
+        this._resumableStreams.delete(streamId);
       }
     }
   }
@@ -25969,7 +26372,7 @@ var resources_default = {
       kind: "file",
       searchKind: "guide",
       summary: "Raw curated file content for package.json.",
-      body: '{\n "name": "@incursa/ui-kit",\n "version": "1.10.0-pf-m3.3.0",\n "private": false,\n "description": "CSS-first UI kit for data-heavy business applications, with optional JS helpers and Web Components.",\n "keywords": [\n "ui-kit",\n "design-system",\n "css",\n "scss",\n "web-components",\n "bootstrap",\n "b2b",\n "admin-ui",\n "razor-pages"\n ],\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "bugs": {\n "url": "https://github.com/incursa/ui-kit/issues"\n },\n "repository": {\n "type": "git",\n "url": "git+https://github.com/incursa/ui-kit.git"\n },\n "license": "Apache-2.0",\n "author": "Samuel McAravey",\n "type": "commonjs",\n "exports": {\n ".": {\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "default": "./dist/inc-design-language.js"\n },\n "./web-components": {\n "style": "./dist/web-components/style.css",\n "default": "./dist/web-components/index.js"\n },\n "./icons": {\n "default": "./dist/icons/index.js"\n },\n "./conformance/shell": {\n "default": "./conformance/shell.mjs"\n },\n "./conformance/playwright": {\n "default": "./conformance/playwright.mjs"\n },\n "./conformance/manifest": "./conformance/ui-kit.json",\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "main": "./dist/inc-design-language.js",\n "files": [\n "dist",\n "src",\n "conformance",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "scripts": {\n "build:css": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.css --style=expanded",\n "build:css:min": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.min.css --style=compressed",\n "build:icons": "node scripts/build-icons.mjs",\n "build:js": "esbuild src/inc-design-language.js --bundle --format=iife --platform=browser --outfile=dist/inc-design-language.js",\n "build:wc": "node scripts/build-web-components.mjs",\n "build:mcp:manifests": "node scripts/generate-mcp.mjs",\n "build:mcp": "node scripts/build-mcp.mjs",\n "build": "npm run build:icons && npm run build:css && npm run build:css:min && npm run build:js && npm run build:wc && npm run build:mcp",\n "docs:check": "node scripts/linkify-markdown-docs.mjs --check",\n "test:browser:install": "playwright install chromium",\n "test:browser": "playwright test",\n "test:conformance": "playwright test tests/browser/conformance.spec.mjs",\n "test:mcp": "node --test tests/mcp/transport.test.mjs tests/mcp/search.test.mjs tests/mcp/installation.test.mjs tests/mcp/markup.test.mjs tests/mcp/freshness.test.mjs",\n "smoke": "node scripts/verify-ui-kit.mjs",\n "verify": "npm run docs:check && npm run smoke && npm run build && npm run test:mcp && npm pack --dry-run",\n "deploy:mcp": "npm run build:mcp && wrangler deploy --config wrangler.toml",\n "preversion": "npm run verify",\n "release:patch": "node scripts/assert-changelog-version.mjs patch && npm version patch",\n "release:minor": "node scripts/assert-changelog-version.mjs minor && npm version minor",\n "release:major": "node scripts/assert-changelog-version.mjs major && npm version major",\n "pack:tarball": "npm pack",\n "package": "npm run build && npm run smoke && npm run pack:tarball"\n },\n "dependencies": {\n "d3-array": "^3.2.4",\n "d3-scale": "^4.0.2",\n "d3-shape": "^3.2.0",\n "lucide": "^1.17.0"\n },\n "peerDependencies": {\n "@axe-core/playwright": "^4.11.0",\n "@playwright/test": "^1.58.2"\n },\n "peerDependenciesMeta": {\n "@axe-core/playwright": {\n "optional": true\n },\n "@playwright/test": {\n "optional": true\n }\n },\n "devDependencies": {\n "@axe-core/playwright": "^4.11.0",\n "@modelcontextprotocol/sdk": "^1.29.0",\n "@playwright/test": "^1.58.2",\n "bootstrap": "^5.3.3",\n "esbuild": "^0.27.4",\n "linkedom": "^0.18.12",\n "sass": "^1.98.0",\n "wrangler": "^4.79.0",\n "zod": "^4.3.6"\n },\n "overrides": {\n "picomatch": "4.0.4"\n },\n "publishConfig": {\n "access": "public"\n },\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss"\n}',
+      body: '{\n "name": "@incursa/ui-kit",\n "version": "1.10.0-pf-m3.3.0",\n "private": false,\n "description": "CSS-first UI kit for data-heavy business applications, with optional JS helpers and Web Components.",\n "keywords": [\n "ui-kit",\n "design-system",\n "css",\n "scss",\n "web-components",\n "bootstrap",\n "b2b",\n "admin-ui",\n "razor-pages"\n ],\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "bugs": {\n "url": "https://github.com/incursa/ui-kit/issues"\n },\n "repository": {\n "type": "git",\n "url": "git+https://github.com/incursa/ui-kit.git"\n },\n "license": "Apache-2.0",\n "author": "Samuel McAravey",\n "type": "commonjs",\n "exports": {\n ".": {\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "default": "./dist/inc-design-language.js"\n },\n "./web-components": {\n "style": "./dist/web-components/style.css",\n "default": "./dist/web-components/index.js"\n },\n "./icons": {\n "default": "./dist/icons/index.js"\n },\n "./conformance/shell": {\n "default": "./conformance/shell.mjs"\n },\n "./conformance/playwright": {\n "default": "./conformance/playwright.mjs"\n },\n "./conformance/manifest": "./conformance/ui-kit.json",\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "main": "./dist/inc-design-language.js",\n "files": [\n "dist",\n "src",\n "conformance",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "scripts": {\n "build:css": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.css --style=expanded",\n "build:css:min": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.min.css --style=compressed",\n "build:icons": "node scripts/build-icons.mjs",\n "build:js": "esbuild src/inc-design-language.js --bundle --format=iife --platform=browser --outfile=dist/inc-design-language.js",\n "build:wc": "node scripts/build-web-components.mjs",\n "build:mcp:manifests": "node scripts/generate-mcp.mjs",\n "build:mcp": "node scripts/build-mcp.mjs",\n "build": "npm run build:icons && npm run build:css && npm run build:css:min && npm run build:js && npm run build:wc && npm run build:mcp",\n "docs:check": "node scripts/linkify-markdown-docs.mjs --check",\n "test:browser:install": "playwright install chromium",\n "test:browser": "playwright test",\n "test:conformance": "playwright test tests/browser/conformance.spec.mjs",\n "test:mcp": "node --test tests/mcp/transport.test.mjs tests/mcp/search.test.mjs tests/mcp/installation.test.mjs tests/mcp/markup.test.mjs tests/mcp/freshness.test.mjs",\n "smoke": "node scripts/verify-ui-kit.mjs",\n "verify": "npm run docs:check && npm run smoke && npm run build && npm run test:mcp && npm pack --dry-run",\n "deploy:mcp": "npm run build:mcp && wrangler deploy --config wrangler.toml",\n "preversion": "npm run verify",\n "release:patch": "node scripts/assert-changelog-version.mjs patch && npm version patch",\n "release:minor": "node scripts/assert-changelog-version.mjs minor && npm version minor",\n "release:major": "node scripts/assert-changelog-version.mjs major && npm version major",\n "pack:tarball": "npm pack",\n "package": "npm run build && npm run smoke && npm run pack:tarball"\n },\n "dependencies": {\n "d3-array": "^3.2.4",\n "d3-scale": "^4.0.2",\n "d3-shape": "^3.2.0",\n "lucide": "^1.17.0"\n },\n "peerDependencies": {\n "@axe-core/playwright": "^4.11.0",\n "@playwright/test": "^1.58.2"\n },\n "peerDependenciesMeta": {\n "@axe-core/playwright": {\n "optional": true\n },\n "@playwright/test": {\n "optional": true\n }\n },\n "devDependencies": {\n "@axe-core/playwright": "^4.11.0",\n "@modelcontextprotocol/sdk": "^1.32.2",\n "@playwright/test": "^1.58.2",\n "bootstrap": "^5.3.3",\n "esbuild": "^0.27.4",\n "linkedom": "^0.18.12",\n "sass": "^1.98.0",\n "wrangler": "^4.79.0",\n "zod": "^4.3.6"\n },\n "overrides": {\n "picomatch": "4.0.4"\n },\n "publishConfig": {\n "access": "public"\n },\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss"\n}',
       sourcePaths: [
         "package.json"
       ],
@@ -25982,7 +26385,7 @@ var resources_default = {
       group: "files",
       priority: 20,
       includeInSearch: false,
-      searchText: 'package.json\nRaw curated file content for package.json.\n{\n "name": "@incursa/ui-kit",\n "version": "1.10.0-pf-m3.3.0",\n "private": false,\n "description": "CSS-first UI kit for data-heavy business applications, with optional JS helpers and Web Components.",\n "keywords": [\n "ui-kit",\n "design-system",\n "css",\n "scss",\n "web-components",\n "bootstrap",\n "b2b",\n "admin-ui",\n "razor-pages"\n ],\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "bugs": {\n "url": "https://github.com/incursa/ui-kit/issues"\n },\n "repository": {\n "type": "git",\n "url": "git+https://github.com/incursa/ui-kit.git"\n },\n "license": "Apache-2.0",\n "author": "Samuel McAravey",\n "type": "commonjs",\n "exports": {\n ".": {\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "default": "./dist/inc-design-language.js"\n },\n "./web-components": {\n "style": "./dist/web-components/style.css",\n "default": "./dist/web-components/index.js"\n },\n "./icons": {\n "default": "./dist/icons/index.js"\n },\n "./conformance/shell": {\n "default": "./conformance/shell.mjs"\n },\n "./conformance/playwright": {\n "default": "./conformance/playwright.mjs"\n },\n "./conformance/manifest": "./conformance/ui-kit.json",\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "main": "./dist/inc-design-language.js",\n "files": [\n "dist",\n "src",\n "conformance",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "scripts": {\n "build:css": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.css --style=expanded",\n "build:css:min": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.min.css --style=compressed",\n "build:icons": "node scripts/build-icons.mjs",\n "build:js": "esbuild src/inc-design-language.js --bundle --format=iife --platform=browser --outfile=dist/inc-design-language.js",\n "build:wc": "node scripts/build-web-components.mjs",\n "build:mcp:manifests": "node scripts/generate-mcp.mjs",\n "build:mcp": "node scripts/build-mcp.mjs",\n "build": "npm run build:icons && npm run build:css && npm run build:css:min && npm run build:js && npm run build:wc && npm run build:mcp",\n "docs:check": "node scripts/linkify-markdown-docs.mjs --check",\n "test:browser:install": "playwright install chromium",\n "test:browser": "playwright test",\n "test:conformance": "playwright test tests/browser/conformance.spec.mjs",\n "test:mcp": "node --test tests/mcp/transport.test.mjs tests/mcp/search.test.mjs tests/mcp/installation.test.mjs tests/mcp/markup.test.mjs tests/mcp/freshness.test.mjs",\n "smoke": "node scripts/verify-ui-kit.mjs",\n "verify": "npm run docs:check && npm run smoke && npm run build && npm run test:mcp && npm pack --dry-run",\n "deploy:mcp": "npm run build:mcp && wrangler deploy --config wrangler.toml",\n "preversion": "npm run verify",\n "release:patch": "node scripts/assert-changelog-version.mjs patch && npm version patch",\n "release:minor": "node scripts/assert-changelog-version.mjs minor && npm version minor",\n "release:major": "node scripts/assert-changelog-version.mjs major && npm version major",\n "pack:tarball": "npm pack",\n "package": "npm run build && npm run smoke && npm run pack:tarball"\n },\n "dependencies": {\n "d3-array": "^3.2.4",\n "d3-scale": "^4.0.2",\n "d3-shape": "^3.2.0",\n "lucide": "^1.17.0"\n },\n "peerDependencies": {\n "@axe-core/playwright": "^4.11.0",\n "@playwright/test": "^1.58.2"\n },\n "peerDependenciesMeta": {\n "@axe-core/playwright": {\n "optional": true\n },\n "@playwright/test": {\n "optional": true\n }\n },\n "devDependencies": {\n "@axe-core/playwright": "^4.11.0",\n "@modelcontextprotocol/sdk": "^1.29.0",\n "@playwright/test": "^1.58.2",\n "bootstrap": "^5.3.3",\n "esbuild": "^0.27.4",\n "linkedom": "^0.18.12",\n "sass": "^1.98.0",\n "wrangler": "^4.79.0",\n "zod": "^4.3.6"\n },\n "overrides": {\n "picomatch": "4.0.4"\n },\n "publishConfig": {\n "access": "public"\n },\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss"\n}\n\npackage.json\npackage-json\npackage.json'
+      searchText: 'package.json\nRaw curated file content for package.json.\n{\n "name": "@incursa/ui-kit",\n "version": "1.10.0-pf-m3.3.0",\n "private": false,\n "description": "CSS-first UI kit for data-heavy business applications, with optional JS helpers and Web Components.",\n "keywords": [\n "ui-kit",\n "design-system",\n "css",\n "scss",\n "web-components",\n "bootstrap",\n "b2b",\n "admin-ui",\n "razor-pages"\n ],\n "homepage": "https://github.com/incursa/ui-kit#readme",\n "bugs": {\n "url": "https://github.com/incursa/ui-kit/issues"\n },\n "repository": {\n "type": "git",\n "url": "git+https://github.com/incursa/ui-kit.git"\n },\n "license": "Apache-2.0",\n "author": "Samuel McAravey",\n "type": "commonjs",\n "exports": {\n ".": {\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss",\n "default": "./dist/inc-design-language.js"\n },\n "./web-components": {\n "style": "./dist/web-components/style.css",\n "default": "./dist/web-components/index.js"\n },\n "./icons": {\n "default": "./dist/icons/index.js"\n },\n "./conformance/shell": {\n "default": "./conformance/shell.mjs"\n },\n "./conformance/playwright": {\n "default": "./conformance/playwright.mjs"\n },\n "./conformance/manifest": "./conformance/ui-kit.json",\n "./web-components/style.css": "./dist/web-components/style.css",\n "./dist/inc-design-language.css": "./dist/inc-design-language.css",\n "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",\n "./src/inc-design-language.scss": "./src/inc-design-language.scss",\n "./src/_inc-theme.scss": "./src/_inc-theme.scss",\n "./src/_inc-tokens.scss": "./src/_inc-tokens.scss"\n },\n "main": "./dist/inc-design-language.js",\n "files": [\n "dist",\n "src",\n "conformance",\n "README.md",\n "LLMS.txt",\n "AI-AGENT-INSTRUCTIONS.md",\n "NOTICE"\n ],\n "scripts": {\n "build:css": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.css --style=expanded",\n "build:css:min": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.min.css --style=compressed",\n "build:icons": "node scripts/build-icons.mjs",\n "build:js": "esbuild src/inc-design-language.js --bundle --format=iife --platform=browser --outfile=dist/inc-design-language.js",\n "build:wc": "node scripts/build-web-components.mjs",\n "build:mcp:manifests": "node scripts/generate-mcp.mjs",\n "build:mcp": "node scripts/build-mcp.mjs",\n "build": "npm run build:icons && npm run build:css && npm run build:css:min && npm run build:js && npm run build:wc && npm run build:mcp",\n "docs:check": "node scripts/linkify-markdown-docs.mjs --check",\n "test:browser:install": "playwright install chromium",\n "test:browser": "playwright test",\n "test:conformance": "playwright test tests/browser/conformance.spec.mjs",\n "test:mcp": "node --test tests/mcp/transport.test.mjs tests/mcp/search.test.mjs tests/mcp/installation.test.mjs tests/mcp/markup.test.mjs tests/mcp/freshness.test.mjs",\n "smoke": "node scripts/verify-ui-kit.mjs",\n "verify": "npm run docs:check && npm run smoke && npm run build && npm run test:mcp && npm pack --dry-run",\n "deploy:mcp": "npm run build:mcp && wrangler deploy --config wrangler.toml",\n "preversion": "npm run verify",\n "release:patch": "node scripts/assert-changelog-version.mjs patch && npm version patch",\n "release:minor": "node scripts/assert-changelog-version.mjs minor && npm version minor",\n "release:major": "node scripts/assert-changelog-version.mjs major && npm version major",\n "pack:tarball": "npm pack",\n "package": "npm run build && npm run smoke && npm run pack:tarball"\n },\n "dependencies": {\n "d3-array": "^3.2.4",\n "d3-scale": "^4.0.2",\n "d3-shape": "^3.2.0",\n "lucide": "^1.17.0"\n },\n "peerDependencies": {\n "@axe-core/playwright": "^4.11.0",\n "@playwright/test": "^1.58.2"\n },\n "peerDependenciesMeta": {\n "@axe-core/playwright": {\n "optional": true\n },\n "@playwright/test": {\n "optional": true\n }\n },\n "devDependencies": {\n "@axe-core/playwright": "^4.11.0",\n "@modelcontextprotocol/sdk": "^1.32.2",\n "@playwright/test": "^1.58.2",\n "bootstrap": "^5.3.3",\n "esbuild": "^0.27.4",\n "linkedom": "^0.18.12",\n "sass": "^1.98.0",\n "wrangler": "^4.79.0",\n "zod": "^4.3.6"\n },\n "overrides": {\n "picomatch": "4.0.4"\n },\n "publishConfig": {\n "access": "public"\n },\n "style": "./dist/inc-design-language.css",\n "sass": "./src/inc-design-language.scss"\n}\n\npackage.json\npackage-json\npackage.json'
     },
     {
       uri: "ui-kit://file/src/inc-design-language.scss",
@@ -60489,8 +60892,8 @@ async function fetch(request, env) {
           }
         });
       }
-    } catch (error2) {
-      return new Response(String(error2 instanceof Error ? error2.message : error2), {
+    } catch {
+      return new Response("Resource not found", {
         status: 404,
         headers: {
           "content-type": "text/plain; charset=utf-8"
@@ -60512,4 +60915,13 @@ export {
   worker_default as default,
   fetch
 };
+/*! Bundled license information:
+
+content-type/index.js:
+  (*!
+   * content-type
+   * Copyright(c) 2015 Douglas Christopher Wilson
+   * MIT Licensed
+   *)
+*/
 //# sourceMappingURL=worker.mjs.map
