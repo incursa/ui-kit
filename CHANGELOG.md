@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Added a canonical machine-readable token document with generated Sass and token-only CSS package entrypoints.
+- Added deterministic token drift validation while preserving all 92 existing public Sass token names and values.
+- Converted shared layout styling to logical inline properties and added inherited right-to-left shell conformance coverage.
+
 ## 1.9.0
 
 - Added the D3-backed inc-sparkline Web Component for compact line, area, and bar trend evidence in dense metric and table surfaces.

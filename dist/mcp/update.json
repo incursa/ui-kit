@@ -16,7 +16,7 @@
     "Review the changelog and regenerated MCP manifests after each upgrade.",
     "Verify that the compiled CSS, JS helper, and web-components entrypoints still match the package contract."
   ],
-  "latestReleaseNotes": "- Added the D3-backed inc-sparkline Web Component for compact line, area, and bar trend evidence in dense metric and table surfaces.\n- Added sparkline parsing/path helpers, D3 runtime dependencies, CSS custom properties, parts, examples, and ProtocolLab-oriented benchmark history documentation.\n- Expanded browser coverage, smoke checks, generated package assets, and MCP manifests for the new sparkline surface.",
+  "latestReleaseNotes": "- Added a canonical machine-readable token document with generated Sass and token-only CSS package entrypoints.\n- Added deterministic token drift validation while preserving all 92 existing public Sass token names and values.\n- Converted shared layout styling to logical inline properties and added inherited right-to-left shell conformance coverage.",
   "relatedUris": [
     "ui-kit://release-notes/latest",
     "ui-kit://package-metadata"

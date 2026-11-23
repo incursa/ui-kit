@@ -10,7 +10,8 @@ Repository brand assets live under [`assets/brand/`](assets/brand). Prefer those
 - Prefer [`web-components.html`](web-components.html) and the same-package [`./web-components`](./web-components) entrypoint when you are building new UI from plain HTML/JS and the capability exists in the approved v1 component set.
 - Prefer [`dist/inc-design-language.css`](dist/inc-design-language.css) with raw HTML plus [`inc-*`](reference.html) classes when the markup already exists, the family is CSS-only, or you only need styling.
 - Use native `<button>`, `<input>`, `<details>`, and `<dialog>` before adding helper wiring or custom elements.
-- Drop into `src/*` or token files only when the public surface cannot express the needed layout or behavior.
+- Change shared values in [`tokens/incursa.tokens.json`](tokens/incursa.tokens.json); generated Sass and CSS token files must not be edited directly.
+- Drop into other `src/*` files only when the public surface cannot express the needed layout or behavior.
 
 ## Fast path
 
@@ -66,10 +67,11 @@ Repository brand assets live under [`assets/brand/`](assets/brand). Prefer those
 
 ## Customization order
 
-1. Change fonts and colors in [`src/_inc-theme.scss`](src/_inc-theme.scss).
-2. Use [`src/_inc-tokens.scss`](src/_inc-tokens.scss) only for deeper token or Bootstrap-level tuning.
-3. Rebuild the CSS.
-4. Only add new component rules after checking whether an existing [`inc-*`](reference.html) block already fits.
+1. Change shared fonts, colors, spacing, radius, shadow, and density in [`tokens/incursa.tokens.json`](tokens/incursa.tokens.json).
+2. Run `npm run build:tokens` and commit the generated artifacts.
+3. Use [`src/_inc-tokens.scss`](src/_inc-tokens.scss) only for hand-authored Bootstrap or component-composition wiring.
+4. Rebuild the CSS.
+5. Only add new component rules after checking whether an existing [`inc-*`](reference.html) block already fits.
 
 ## Packaging
 

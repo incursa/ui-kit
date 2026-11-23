@@ -27,11 +27,15 @@ This specification covers the theme-facing token file, the deeper token file, th
 
 The kit already exposes a token layer in source, so the specification should describe the stable named values rather than restate the compiled CSS output.
 
-## REQ-UIK-TOK-0001 Keep the theme-facing token file canonical for brand-facing values
-`src/_inc-theme.scss` MUST remain the canonical source for brand-facing font and color tokens.
+## REQ-UIK-TOK-0001 Keep the machine-readable token document canonical
+`tokens/incursa.tokens.json` MUST remain the canonical source for shared brand,
+semantic, and composition token values. Generated Sass and CSS token artifacts
+MUST remain reproducible from that document.
 
 Trace:
 - Code Refs:
+  - `tokens/incursa.tokens.json`
+  - `scripts/build-tokens.mjs`
   - `src/_inc-theme.scss`
   - `package.json`
   - [`src/inc-design-language.scss`](../../../reference.html)
@@ -75,11 +79,16 @@ Trace:
 - Verified By:
   - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
 
-## REQ-UIK-TOK-0005 Keep the deeper token file canonical for composition values
-`src/_inc-tokens.scss` MUST remain the canonical source for spacing, radius, shadow, z-index, shell, and Bootstrap override tokens.
+## REQ-UIK-TOK-0005 Separate generated values from hand-authored composition wiring
+`src/_inc-composition-tokens.scss` MUST be generated from the canonical token
+document for spacing, radius, shadow, density, z-index, and shell values.
+`src/_inc-tokens.scss` MUST remain the hand-authored authority for Bootstrap
+mapping and component-composition wiring.
 
 Trace:
 - Code Refs:
+  - `tokens/incursa.tokens.json`
+  - `src/_inc-composition-tokens.scss`
   - `src/_inc-tokens.scss`
   - `package.json`
   - [`src/inc-design-language.scss`](../../../reference.html)
@@ -98,6 +107,21 @@ Trace:
   - [`src/inc-design-language.scss`](../../../reference.html)
 - Verified By:
   - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
+
+## REQ-UIK-TOK-0010 Publish machine-readable and CSS token entrypoints
+The package MUST publish the canonical token document through `./tokens` and a
+generated CSS custom-property surface through `./tokens.css`. Alias references
+MUST resolve to existing tokens and generated outputs MUST be rejected when
+they are stale.
+
+Trace:
+- Code Refs:
+  - `tokens/incursa.tokens.json`
+  - `dist/incursa-tokens.css`
+  - `scripts/build-tokens.mjs`
+  - `package.json`
+- Verified By:
+  - `npm run check:tokens`
 
 ## REQ-UIK-TOK-0007 Map public tokens onto Bootstrap variables
 The token layer MUST map the public token layer onto Bootstrap variables instead of hard-coding a second visual system.

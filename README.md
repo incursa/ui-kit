@@ -101,10 +101,12 @@ Licensed under Apache 2.0.
 
 - [`assets/brand/`](assets/brand)
   Repository brand assets for GitHub, docs, and future package-site usage.
+- [`tokens/incursa.tokens.json`](tokens/incursa.tokens.json)
+  Canonical machine-readable brand, semantic, and composition token document.
 - [`src/_inc-tokens.scss`](src/_inc-tokens.scss)
-  Bootstrap-facing theme tokens and override variables.
+  Hand-authored Bootstrap-facing mapping and composition variables.
 - [`src/_inc-theme.scss`](src/_inc-theme.scss)
-  Dedicated brand-facing variables for fonts, palette, semantic surfaces, and text colors.
+  Generated Sass variables for fonts, palette, semantic surfaces, and text colors.
 - [`src/inc-design-language.scss`](src/inc-design-language.scss)
   Main source entrypoint for the [`inc-*`](reference.html) class surface.
 - [`dist/inc-design-language.css`](dist/inc-design-language.css)
@@ -416,8 +418,8 @@ If you want to keep editing it:
 1. Install Bootstrap 5.3 and Sass in the consuming project.
 2. Copy the [`src/`](src) folder.
 3. Import [`src/inc-design-language.scss`](src/inc-design-language.scss).
-4. Edit [`src/_inc-theme.scss`](src/_inc-theme.scss) for the fonts and colors you want.
-5. Use [`src/_inc-tokens.scss`](src/_inc-tokens.scss) only when you need deeper spacing, radius, shadow, or Bootstrap-level tuning.
+4. Edit [`tokens/incursa.tokens.json`](tokens/incursa.tokens.json) for shared fonts, colors, spacing, radius, shadow, or density, then run `npm run build:tokens`.
+5. Use [`src/_inc-tokens.scss`](src/_inc-tokens.scss) only when you need hand-authored Bootstrap or component-composition wiring.
 
 Example:
 

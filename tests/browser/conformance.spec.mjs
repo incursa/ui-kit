@@ -20,3 +20,26 @@ test("canonical shell passes automated WCAG checks", async ({ page }) => {
 test("canonical native account menu preserves keyboard operation and focus", async ({ page }) => {
     await expectShellInteraction(page, expect);
 });
+
+test("canonical shell maps logical layout to right-to-left direction", async ({ page }) => {
+    const geometryFor = async (direction) => page.evaluate((dir) => {
+        document.documentElement.dir = dir;
+        const menu = document.querySelector("details.inc-native-menu");
+        const panel = document.querySelector(".inc-native-menu__panel");
+        menu.open = true;
+        const menuRect = menu.getBoundingClientRect();
+        const panelRect = panel.getBoundingClientRect();
+        return {
+            menuLeft: menuRect.left,
+            menuRight: menuRect.right,
+            panelLeft: panelRect.left,
+            panelRight: panelRect.right,
+        };
+    }, direction);
+
+    const ltr = await geometryFor("ltr");
+    const rtl = await geometryFor("rtl");
+
+    expect(Math.abs(ltr.panelRight - ltr.menuRight)).toBeLessThan(1);
+    expect(Math.abs(rtl.panelLeft - rtl.menuLeft)).toBeLessThan(1);
+});

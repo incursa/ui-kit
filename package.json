@@ -45,6 +45,8 @@
       "default": "./conformance/playwright.mjs"
     },
     "./conformance/manifest": "./conformance/ui-kit.json",
+    "./tokens": "./tokens/incursa.tokens.json",
+    "./tokens.css": "./dist/incursa-tokens.css",
     "./web-components/style.css": "./dist/web-components/style.css",
     "./dist/inc-design-language.css": "./dist/inc-design-language.css",
     "./dist/inc-design-language.min.css": "./dist/inc-design-language.min.css",
@@ -56,6 +58,7 @@
   "files": [
     "dist",
     "src",
+    "tokens",
     "conformance",
     "README.md",
     "LLMS.txt",
@@ -63,6 +66,8 @@
     "NOTICE"
   ],
   "scripts": {
+    "build:tokens": "node scripts/build-tokens.mjs",
+    "check:tokens": "node scripts/build-tokens.mjs --check",
     "build:css": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.css --style=expanded",
     "build:css:min": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import src/inc-design-language.scss dist/inc-design-language.min.css --style=compressed",
     "build:icons": "node scripts/build-icons.mjs",
@@ -70,14 +75,14 @@
     "build:wc": "node scripts/build-web-components.mjs",
     "build:mcp:manifests": "node scripts/generate-mcp.mjs",
     "build:mcp": "node scripts/build-mcp.mjs",
-    "build": "npm run build:icons && npm run build:css && npm run build:css:min && npm run build:js && npm run build:wc && npm run build:mcp",
+    "build": "npm run build:tokens && npm run build:icons && npm run build:css && npm run build:css:min && npm run build:js && npm run build:wc && npm run build:mcp",
     "docs:check": "node scripts/linkify-markdown-docs.mjs --check",
     "test:browser:install": "playwright install chromium",
     "test:browser": "playwright test",
     "test:conformance": "playwright test tests/browser/conformance.spec.mjs",
     "test:mcp": "node --test tests/mcp/transport.test.mjs tests/mcp/search.test.mjs tests/mcp/installation.test.mjs tests/mcp/markup.test.mjs tests/mcp/freshness.test.mjs",
     "smoke": "node scripts/verify-ui-kit.mjs",
-    "verify": "npm run docs:check && npm run smoke && npm run build && npm run test:mcp && npm pack --dry-run",
+    "verify": "npm run docs:check && npm run check:tokens && npm run smoke && npm run build && npm run test:mcp && npm pack --dry-run",
     "deploy:mcp": "npm run build:mcp && wrangler deploy --config wrangler.toml",
     "preversion": "npm run verify",
     "release:patch": "node scripts/assert-changelog-version.mjs patch && npm version patch",

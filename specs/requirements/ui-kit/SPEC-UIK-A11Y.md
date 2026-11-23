@@ -103,3 +103,16 @@ Trace:
     - `data-grid-advanced.html`
   - Verified By:
     - [`VER-UIK-0001`](../../verification/ui-kit/VER-UIK-0001.md)
+
+## REQ-UIK-A11Y-0007 Support inherited bidirectional layout
+Shared layout and component surfaces MUST honor an inherited `dir` value and
+use logical inline/block properties unless a public utility explicitly promises
+physical left or right alignment. Direction-sensitive motion and imagery MUST
+provide an RTL mapping without requiring separate component class names.
+
+Trace:
+  - Code Refs:
+    - [`src/inc-design-language.scss`](../../../reference.html)
+    - `tests/browser/conformance.spec.mjs`
+  - Verified By:
+    - `npm run test:conformance`

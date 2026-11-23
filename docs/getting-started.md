@@ -25,6 +25,8 @@ npm install ./incursa-ui-kit-x.y.z.tgz
 | --- | --- |
 | Existing HTML needs the Incursa look | [`dist/inc-design-language.css`](../reference.html) |
 | Existing HTML needs tabs, menus, collapses, auto-refresh, theme switching, or dialog launch hooks | [`dist/inc-design-language.js`](../reference.html) with the CSS |
+| Tooling needs canonical machine-readable design values | `@incursa/ui-kit/tokens` |
+| Existing CSS needs only generated Incursa custom properties | `@incursa/ui-kit/tokens.css` |
 | A consumer app wants to tune fonts, colors, density, or Bootstrap defaults at build time | [`src/inc-design-language.scss`](../reference.html) |
 | Plain HTML/JavaScript wants declarative custom elements for supported families | `@incursa/ui-kit/web-components` with `@incursa/ui-kit/web-components/style.css` |
 | A consumer needs semantic icons without coupling to Lucide names | `@incursa/ui-kit/icons` |
@@ -48,6 +50,13 @@ Optional Web Components:
 ```js
 import "@incursa/ui-kit/web-components/style.css";
 import "@incursa/ui-kit/web-components";
+```
+
+Machine-readable tokens and token-only CSS:
+
+```js
+import tokens from "@incursa/ui-kit/tokens" with { type: "json" };
+import "@incursa/ui-kit/tokens.css";
 ```
 
 SCSS source:

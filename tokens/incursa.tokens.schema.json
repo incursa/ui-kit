@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://incursa.com/schemas/ui-kit/tokens/v1.json",
+  "title": "Incursa UI Kit token document",
+  "type": "object",
+  "required": ["name", "version"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" }
+  },
+  "patternProperties": {
+    "^(?!\\$schema$|name$|version$).+$": { "$ref": "#/$defs/tokenOrGroup" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "extensions": {
+      "type": "object",
+      "properties": {
+        "incursa": {
+          "type": "object",
+          "properties": {
+            "output": { "enum": ["theme", "composition"] },
+            "name": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+            "prefix": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "token": {
+      "type": "object",
+      "required": ["$value"],
+      "properties": {
+        "$value": { "type": ["string", "number"] },
+        "$type": { "type": "string" },
+        "$description": { "type": "string" },
+        "$extensions": { "$ref": "#/$defs/extensions" }
+      },
+      "additionalProperties": false
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "$type": { "type": "string" },
+        "$description": { "type": "string" },
+        "$extensions": { "$ref": "#/$defs/extensions" }
+      },
+      "patternProperties": {
+        "^(?!\\$type$|\\$description$|\\$extensions$).+$": { "$ref": "#/$defs/tokenOrGroup" }
+      },
+      "additionalProperties": false
+    },
+    "tokenOrGroup": {
+      "oneOf": [
+        { "$ref": "#/$defs/token" },
+        { "$ref": "#/$defs/group" }
+      ]
+    }
+  }
+}

@@ -14,7 +14,7 @@ Use the package when a consuming app needs:
 
 - the canonical [`inc-*`](../reference.html) CSS class surface;
 - compiled CSS that already includes the Bootstrap layer;
-- source SCSS for controlled theme and token customization;
+- machine-readable tokens plus source SCSS for controlled customization;
 - optional vanilla JavaScript helpers for stateful primitives;
 - optional same-package Web Components for supported browser-native families;
 - generated MCP resources for tool and agent consumers.
@@ -26,7 +26,8 @@ Do not put product-specific report styles, customer-specific layouts, private as
 | Boundary | Maintained files | Notes |
 | --- | --- | --- |
 | Public package metadata | [`package.json`](../package.json), [`package-lock.json`](../package-lock.json) | Defines npm identity, exports, package files, runtime dependencies, scripts, and publish access. |
-| CSS-first design language | [`src/inc-design-language.scss`](../src/inc-design-language.scss), [`src/_inc-theme.scss`](../src/_inc-theme.scss), [`src/_inc-tokens.scss`](../src/_inc-tokens.scss), [`reference.html`](../reference.html) | This remains the canonical public surface. |
+| Token contract | `tokens/incursa.tokens.json`, `scripts/build-tokens.mjs`, generated [`src/_inc-theme.scss`](../src/_inc-theme.scss), `dist/incursa-tokens.css` | One machine-readable value authority with reproducible Sass and CSS outputs. |
+| CSS-first design language | [`src/inc-design-language.scss`](../src/inc-design-language.scss), [`src/_inc-tokens.scss`](../src/_inc-tokens.scss), [`reference.html`](../reference.html) | This remains the canonical component/class surface and Bootstrap composition layer. |
 | Optional helper runtime | [`src/inc-design-language.js`](../src/inc-design-language.js), [`dist/inc-design-language.js`](../dist/inc-design-language.js) | Owns menus, tabs, collapses, dialog launch hooks, auto-refresh, and theme controls. |
 | Optional Web Components | [`src/web-components/`](../src/web-components), [`web-components.html`](../web-components.html), [`dist/web-components/`](../dist/web-components) | Additive browser-native entrypoint over the same design language. |
 | Icons | [`src/icons/`](../src/icons), [`dist/icons/`](../dist/icons) | Exposes semantic Incursa icon names with a default Lucide-backed renderer. |

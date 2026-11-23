@@ -2,6 +2,7 @@
 @import "bootstrap/scss/bootstrap";
 
 :root {
+    --inc-safe-area-inline-end: env(safe-area-inset-right, 0px);
     --inc-surface-primary: var(--bs-body-bg);
     --inc-surface-secondary: var(--bs-secondary-bg);
     --inc-surface-muted: var(--bs-tertiary-bg);
@@ -41,6 +42,10 @@
     --inc-shadow-rgb: var(--bs-black-rgb);
     --inc-surface-panel-shadow: 0 0.0625rem 0.125rem rgba(var(--inc-shadow-rgb), 0.05), 0 0.5rem 1.5rem rgba(var(--inc-shadow-rgb), 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.58);
     --inc-surface-panel-shadow-raised: 0 0.125rem 0.25rem rgba(var(--inc-shadow-rgb), 0.06), 0 0.875rem 2rem rgba(var(--inc-shadow-rgb), 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.62);
+}
+
+:root[dir="rtl"] {
+    --inc-safe-area-inline-end: env(safe-area-inset-left, 0px);
 }
 
 [data-bs-theme="dark"] {
@@ -636,14 +641,14 @@
             position: relative;
 
             &:not(:last-child) {
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
+                border-start-end-radius: 0;
+                border-end-end-radius: 0;
             }
 
             &:not(:first-child) {
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
-                margin-left: -1px;
+                border-start-start-radius: 0;
+                border-end-start-radius: 0;
+                margin-inline-start: -1px;
             }
         }
     }
@@ -1021,7 +1026,7 @@
         .inc-input-group {
             .inc-form__control,
             .inc-form__select {
-                margin-right: 0;
+                margin-inline-end: 0;
             }
         }
 
@@ -1263,7 +1268,7 @@
     position: absolute;
     z-index: $inc-z-index-dropdown;
     min-width: 10rem;
-    right: 0;
+    inset-inline-end: 0;
     top: 100%;
     transform: none;
     will-change: transform;
@@ -1273,8 +1278,8 @@
 @media (max-width: 768px) {
     .inc-dropdown-menu-actions {
         min-width: auto;
-        right: auto;
-        left: 0;
+        inset-inline-end: auto;
+        inset-inline-start: 0;
     }
 }
 
@@ -1660,7 +1665,7 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        margin-left: auto;
+        margin-inline-start: auto;
     }
 
     &--card {
@@ -1671,8 +1676,8 @@
         box-shadow: var(--inc-surface-panel-shadow);
 
         .inc-header-body__header {
-            border-top-left-radius: var(--bs-border-radius);
-            border-top-right-radius: var(--bs-border-radius);
+            border-start-start-radius: var(--bs-border-radius);
+            border-start-end-radius: var(--bs-border-radius);
             background-color: var(--inc-surface-panel-cap);
         }
     }
@@ -1800,11 +1805,11 @@
         font-size: $font-size-sm;
         color: var(--inc-text-muted);
         font-weight: $font-weight-medium;
-        text-align: left;
+        text-align: start;
 
         &--with-action {
             .inc-summary-block__header-action {
-                margin-left: auto;
+                margin-inline-start: auto;
             }
         }
     }
@@ -1931,7 +1936,7 @@
         flex: 0 0 17rem;
         max-width: 17rem;
         background-color: var(--inc-surface-secondary);
-        border-right: 1px solid var(--inc-border-subtle);
+        border-inline-end: 1px solid var(--inc-border-subtle);
         padding: 1rem;
     }
 
@@ -1962,7 +1967,7 @@
 
         &__sidebar {
             max-width: none;
-            border-right: 0;
+            border-inline-end: 0;
             border-bottom: 1px solid var(--inc-border-subtle);
         }
 
@@ -2127,7 +2132,7 @@
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        margin-left: auto;
+        margin-inline-start: auto;
     }
 
     &--expand-sm {
@@ -2408,7 +2413,7 @@
     }
 
     &__origin {
-        text-align: right;
+        text-align: end;
     }
 }
 
@@ -2471,13 +2476,13 @@
     .inc-tabs-nav {
         display: flex;
         list-style: none;
-        padding-left: 0;
+        padding-inline-start: 0;
         margin-bottom: 0;
         position: relative;
         z-index: 1;
 
         > li + li {
-            margin-left: 0.125rem;
+            margin-inline-start: 0.125rem;
         }
 
         > li > .inc-tab {
@@ -2487,8 +2492,8 @@
             padding: 1rem;
             font: inherit;
             color: var(--inc-text-secondary);
-            border-top-left-radius: $inc-radius-panel;
-            border-top-right-radius: $inc-radius-panel;
+            border-start-start-radius: $inc-radius-panel;
+            border-start-end-radius: $inc-radius-panel;
             background: linear-gradient(180deg, rgba(var(--inc-surface-secondary-rgb), 0.96), rgba(var(--inc-surface-secondary-rgb), 0.82));
             height: 2.5rem;
             text-decoration: none;
@@ -2532,8 +2537,8 @@
         border: 1px solid var(--inc-border-subtle);
         padding: 1.5rem;
         border-radius: $inc-radius-panel;
-        border-top-left-radius: 0;
-        border-top-right-radius: $inc-radius-panel;
+        border-start-start-radius: 0;
+        border-start-end-radius: $inc-radius-panel;
         margin-top: -1px;
         box-shadow: 0 0.125rem 0.25rem rgba(var(--inc-shadow-rgb), 0.06), 0 0.875rem 2rem rgba(var(--inc-shadow-rgb), 0.06);
     }
@@ -2545,11 +2550,11 @@
     .inc-tabs-nav {
         display: flex;
         list-style: none;
-        padding-left: 0;
+        padding-inline-start: 0;
         margin-bottom: -1px;
 
         > li + li {
-            margin-left: 2rem;
+            margin-inline-start: 2rem;
         }
 
         > li > .inc-tab {
@@ -2684,7 +2689,7 @@ details.inc-disclosure {
         flex: 0 0 auto;
         width: 0.65rem;
         height: 0.65rem;
-        border-right: 2px solid currentColor;
+        border-inline-end: 2px solid currentColor;
         border-bottom: 2px solid currentColor;
         transform: rotate(45deg) translateY(-0.15rem);
         transition: transform 0.18s ease;
@@ -2782,8 +2787,8 @@ details.inc-native-menu.inc-native-menu--navbar {
         flex: 0 0 auto;
         width: 0.55rem;
         height: 0.55rem;
-        margin-left: auto;
-        border-right: 2px solid currentColor;
+        margin-inline-start: auto;
+        border-inline-end: 2px solid currentColor;
         border-bottom: 2px solid currentColor;
         transform: rotate(45deg) translateY(-0.15rem);
         transition: transform 0.18s ease;
@@ -2840,7 +2845,7 @@ details.inc-native-menu[open] > .inc-native-menu__summary {
 .inc-native-menu__panel {
     position: absolute;
     top: calc(100% + 0.5rem);
-    right: 0;
+    inset-inline-end: 0;
     min-width: 14rem;
     padding: 0.375rem 0;
     border: 1px solid var(--inc-border-subtle);
@@ -2859,8 +2864,7 @@ details.inc-native-menu.inc-native-menu--block > .inc-native-menu__summary {
 }
 
 details.inc-native-menu.inc-native-menu--block > .inc-native-menu__panel {
-    left: 0;
-    right: 0;
+    inset-inline: 0;
     min-width: 0;
 }
 
@@ -2942,7 +2946,7 @@ details.inc-native-menu.inc-native-menu--block > .inc-native-menu__panel {
     border: 0;
     background: transparent;
     color: var(--inc-text-primary);
-    text-align: left;
+    text-align: start;
     cursor: pointer;
 
     &::before,
@@ -3057,7 +3061,7 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__surface {
     border-radius: 0;
     display: flex;
     flex-direction: column;
-    border-right: 0;
+    border-inline-end: 0;
 }
 
 .inc-native-dialog__header {
@@ -3166,7 +3170,7 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
 
 .inc-auto-refresh {
     position: fixed;
-    right: max(1rem, env(safe-area-inset-right, 0px) + 1rem);
+    inset-inline-end: max(1rem, var(--inc-safe-area-inline-end) + 1rem);
     bottom: max(1rem, env(safe-area-inset-bottom, 0px) + 1rem);
     z-index: $inc-z-index-alerts - 1;
     display: inline-flex;
@@ -3187,7 +3191,7 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
 
     &--inline {
         position: static;
-        right: auto;
+        inset-inline-end: auto;
         bottom: auto;
         z-index: auto;
         vertical-align: middle;
@@ -3683,12 +3687,12 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
         overflow: hidden;
 
         th {
-            text-align: left;
+            text-align: start;
             background-color: var(--bs-primary);
             color: $inc-text-inverse;
             border-color: var(--bs-primary);
             font-weight: 600;
-            border-right: 1px solid rgba(var(--inc-text-inverse-rgb), 0.2);
+            border-inline-end: 1px solid rgba(var(--inc-text-inverse-rgb), 0.2);
             font-size: 1rem;
             line-height: 1.5;
 
@@ -3705,44 +3709,44 @@ dialog.inc-native-dialog.inc-native-dialog--drawer .inc-native-dialog__body {
     }
 
     thead tr:first-child th:first-child {
-        border-top-left-radius: $inc-radius-panel;
+        border-start-start-radius: $inc-radius-panel;
     }
 
     thead tr:first-child th:last-child {
-        border-top-right-radius: $inc-radius-panel;
-        border-right: none;
+        border-start-end-radius: $inc-radius-panel;
+        border-inline-end: none;
     }
 
     tbody,
     tfoot {
         td,
         th {
-            border-right: 1px solid var(--inc-border-default);
+            border-inline-end: 1px solid var(--inc-border-default);
             vertical-align: middle;
 
             &:last-child {
-                border-right: none;
+                border-inline-end: none;
             }
         }
     }
 
     tbody:last-child tr:last-child td:first-child {
-        border-bottom-left-radius: $inc-radius-panel;
+        border-end-start-radius: $inc-radius-panel;
     }
 
     tbody:last-child tr:last-child td:last-child {
-        border-bottom-right-radius: $inc-radius-panel;
+        border-end-end-radius: $inc-radius-panel;
     }
 
     tfoot:last-child tr:last-child {
         td:first-child,
         th:first-child {
-            border-bottom-left-radius: $inc-radius-panel;
+            border-end-start-radius: $inc-radius-panel;
         }
 
         td:last-child,
         th:last-child {
-            border-bottom-right-radius: $inc-radius-panel;
+            border-end-end-radius: $inc-radius-panel;
         }
     }
 
@@ -4459,7 +4463,7 @@ body.inc-modal-open {
 }
 
 .inc-offcanvas-start {
-    left: 0;
+    inset-inline-start: 0;
     transform: translateX(-100%);
 
     &.is-open {
@@ -4468,7 +4472,7 @@ body.inc-modal-open {
 }
 
 .inc-offcanvas-end {
-    right: 0;
+    inset-inline-end: 0;
     transform: translateX(100%);
 
     &.is-open {
@@ -4478,8 +4482,7 @@ body.inc-modal-open {
 
 .inc-offcanvas-top,
 .inc-offcanvas-bottom {
-    left: 0;
-    right: 0;
+    inset-inline: 0;
     height: min(24rem, 85vh);
 }
 
@@ -4626,7 +4629,7 @@ body.inc-offcanvas-open {
         gap: 0.5rem;
         padding: 1rem 1.125rem;
         border: 1px solid var(--bs-danger-border-subtle);
-        border-left: 0.25rem solid var(--bs-danger-text-emphasis);
+        border-inline-start: 0.25rem solid var(--bs-danger-text-emphasis);
         border-radius: $inc-radius-md;
         background: linear-gradient(180deg, rgba(var(--bs-danger-rgb), 0.14), rgba(var(--bs-danger-rgb), 0.1));
         box-shadow: var(--inc-surface-panel-shadow);
@@ -4641,7 +4644,7 @@ body.inc-offcanvas-open {
 
         &-list {
             margin: 0;
-            padding-left: 1rem;
+            padding-inline-start: 1rem;
             font-size: 0.8125rem;
             color: var(--inc-text-primary);
         }
@@ -5015,7 +5018,7 @@ body.inc-offcanvas-open {
         margin: -0.5rem 0 0 -0.5rem;
         border-radius: 999px;
         border: 0.125rem solid currentColor;
-        border-right-color: transparent;
+        border-inline-end-color: transparent;
         animation: inc-loading-spin 0.8s linear infinite;
     }
 }
@@ -5245,7 +5248,7 @@ body.inc-offcanvas-open {
     &__header {
         &--sticky {
             position: sticky;
-            left: 0;
+            inset-inline-start: 0;
             z-index: 1;
         }
     }
@@ -5480,7 +5483,7 @@ body.inc-offcanvas-open {
     gap: 1rem;
     height: 100%;
     padding: 1.25rem;
-    border-left: 1px solid var(--inc-border-subtle);
+    border-inline-start: 1px solid var(--inc-border-subtle);
     background: var(--inc-surface-primary);
     box-shadow: -1rem 0 2rem rgba(var(--inc-surface-strong-rgb), 0.08);
 
@@ -5549,4 +5552,31 @@ body.inc-offcanvas-open {
         font-size: 0.8125rem;
         color: var(--inc-text-muted);
     }
+}
+
+// Direction-sensitive behavior that cannot be expressed by logical properties
+// alone. The same public classes work under inherited `dir="rtl"`.
+.inc-alert__progress:dir(rtl) {
+    transform-origin: right center;
+}
+
+.inc-form__select--micro:dir(rtl) {
+    background-position: left $inc-control-density-micro-select-arrow-inset-inline-end center;
+}
+
+.inc-offcanvas-start:dir(rtl) {
+    transform: translateX(100%);
+}
+
+.inc-offcanvas-end:dir(rtl) {
+    transform: translateX(-100%);
+}
+
+.inc-offcanvas-start.is-open:dir(rtl),
+.inc-offcanvas-end.is-open:dir(rtl) {
+    transform: translateX(0);
+}
+
+.inc-drawer:dir(rtl) {
+    box-shadow: 1rem 0 2rem rgba(var(--inc-surface-strong-rgb), 0.08);
 }
