@@ -8,7 +8,9 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Playwright 1.58 does not provide Chromium dependencies for Ubuntu 26.04.
+    # Pin the supported LTS runner so conformance installation is deterministic.
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout
