@@ -134,7 +134,9 @@ The package is built around three shipped artifacts:
 
 The CSS files are built from the SCSS source and are the primary public payload.
 
-The JS file is copied from source and should remain byte-for-byte identical between `src/` and `dist/`.
+The JS file is bundled from source with esbuild. Source and distributable behavior
+must remain aligned through the smoke and browser suites; byte-for-byte identity
+is neither expected nor used as evidence.
 
 Packaging rules:
 

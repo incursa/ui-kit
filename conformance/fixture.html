@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UI Kit shell conformance fixture</title>
+    <link rel="stylesheet" href="../dist/inc-design-language.css">
+</head>
+<body>
+    <a class="inc-skip-link" href="#main-content">Skip to main content</a>
+    <div class="inc-app-shell">
+        <header class="inc-app-shell__header">
+            <nav class="inc-navbar inc-navbar--app" aria-label="Primary navigation">
+                <div class="container-fluid">
+                    <a class="inc-navbar__brand" href="/">Proof product</a>
+                    <div class="inc-navbar__collapse">
+                        <div class="inc-navbar__nav">
+                            <a class="inc-nav-link active" href="/" aria-current="page">Home</a>
+                        </div>
+                        <div class="inc-navbar__utilities">
+                            <details class="inc-native-menu inc-native-menu--navbar">
+                                <summary class="inc-native-menu__summary">Account</summary>
+                                <div class="inc-native-menu__panel">
+                                    <form method="post" action="/auth/logout" data-inc-shell-logout>
+                                        <input type="hidden" name="__RequestVerificationToken" value="fixture">
+                                        <button class="inc-native-menu__item" type="submit">Sign out of Proof product</button>
+                                    </form>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="inc-app-shell__body">
+            <div class="inc-app-shell__main">
+                <main id="main-content" class="inc-app-shell__content" tabindex="-1">
+                    <section class="inc-page-header">
+                        <div class="inc-page-header__title"><h1 class="inc-heading inc-heading--h1">Conformance</h1></div>
+                    </section>
+                </main>
+            </div>
+        </div>
+        <footer class="inc-app-shell__footer inc-footer-bar">
+            <div class="inc-footer-bar__meta">
+                <span data-inc-shell-version>1.0.0</span>
+                <span data-inc-shell-revision>fixture-revision</span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

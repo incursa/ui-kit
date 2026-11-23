@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "authority": "@incursa/ui-kit",
+  "uiKitVersion": "1.10.0-pf-m3.3.0",
+  "releaseStatus": "local-unreleased-pf-m3.3-baseline",
+  "sourceBaselineRevision": "68e2ad425cdd4d13a4fec6fce218177edeeac47d",
+  "contractMajor": 1,
+  "entrypoints": {
+    "css": "./dist/inc-design-language.css",
+    "runtime": "./dist/inc-design-language.js",
+    "webComponents": "./web-components",
+    "icons": "./icons",
+    "shellConformance": "./conformance/shell",
+    "playwrightConformance": "./conformance/playwright"
+  },
+  "automatedEvidence": {
+    "semantic": "tests/browser/conformance.spec.mjs",
+    "interaction": "tests/browser/conformance.spec.mjs",
+    "accessibility": "tests/browser/conformance.spec.mjs",
+    "boundedVisual": "consumer-owned baselines via expectBoundedVisual",
+    "applicationShell": "tests/browser/conformance.spec.mjs"
+  },
+  "testedBrowsers": [
+    {
+      "engine": "chromium",
+      "runner": "@playwright/test 1.58.2",
+      "browserVersion": "145.0.7632.6",
+      "playwrightRevision": "chromium-1208",
+      "executionPlatform": "Darwin arm64",
+      "scope": "automated repository conformance only"
+    }
+  ],
+  "supportedBrowserMatrix": null,
+  "supportedAssistiveTechnologyMatrix": null,
+  "manualEvidenceRetentionOwner": null,
+  "boundedOwnerDecisions": [
+    "supported browser and assistive-technology matrix",
+    "manual accessibility evidence-retention owner"
+  ]
+}

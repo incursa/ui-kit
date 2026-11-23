@@ -6,9 +6,14 @@ on:
       - main
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Playwright 1.58 does not provide Chromium dependencies for Ubuntu 26.04.
+    # Pin the supported LTS runner so conformance installation is deterministic.
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout
@@ -25,3 +30,9 @@ jobs:
 
       - name: Verify package
         run: npm run verify
+
+      - name: Install conformance browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run reusable shell conformance
+        run: npm run test:conformance

@@ -835,8 +835,8 @@ export async function fetch(request: Request, env?: WorkerEnv): Promise<Response
           },
         });
       }
-    } catch (error) {
-      return new Response(String(error instanceof Error ? error.message : error), {
+    } catch {
+      return new Response("Resource not found", {
         status: 404,
         headers: {
           "content-type": "text/plain; charset=utf-8",
