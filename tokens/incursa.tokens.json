@@ -1,0 +1,182 @@
+{
+  "$schema": "./incursa.tokens.schema.json",
+  "name": "Incursa UI Kit tokens",
+  "version": "1.0.0",
+  "color": {
+    "$type": "color",
+    "white": {
+      "$value": "#ffffff",
+      "$description": "Canonical white.",
+      "$extensions": { "incursa": { "output": "theme", "name": "inc-white" } }
+    },
+    "ink": {
+      "$extensions": { "incursa": { "output": "theme", "prefix": "inc-ink-" } },
+      "50": { "$value": "#fdfdfd" },
+      "100": { "$value": "#f6f6f6" },
+      "150": { "$value": "#f1f1f1" },
+      "200": { "$value": "#dbdcdc" },
+      "300": { "$value": "#c4c4c5" },
+      "400": { "$value": "#949596" },
+      "500": { "$value": "#656668" },
+      "600": { "$value": "#525355" },
+      "700": { "$value": "#363639" },
+      "800": { "$value": "#2e2f32" },
+      "900": { "$value": "#121316" }
+    },
+    "brand": {
+      "$extensions": { "incursa": { "output": "theme", "prefix": "inc-brand-" } },
+      "50": { "$value": "#eef1ff" },
+      "100": { "$value": "#dfe5ff" },
+      "200": { "$value": "#b9c5ff" },
+      "300": { "$value": "#8798ee" },
+      "700": { "$value": "#4459c6" },
+      "800": { "$value": "#3748a4" },
+      "900": { "$value": "#2b397f" }
+    },
+    "blue": {
+      "$extensions": { "incursa": { "output": "theme", "prefix": "inc-blue-" } },
+      "50": { "$value": "#e9ecfe" },
+      "700": { "$value": "#2544f1" },
+      "800": { "$value": "#1a30ab" },
+      "900": { "$value": "#111f6c" }
+    },
+    "accent": {
+      "$extensions": { "incursa": { "output": "theme", "prefix": "inc-accent-" } },
+      "50": { "$value": "#fffef0" },
+      "100": { "$value": "#fffbdc" },
+      "500": { "$value": "#fff06c" },
+      "700": { "$value": "#d9cc5c" }
+    },
+    "success": {
+      "$extensions": { "incursa": { "output": "theme", "prefix": "inc-success-" } },
+      "50": { "$value": "#e6fbef" },
+      "100": { "$value": "#96efbd" },
+      "700": { "$value": "#009743" },
+      "800": { "$value": "#00833a" }
+    },
+    "warning": {
+      "$extensions": { "incursa": { "output": "theme", "prefix": "inc-warning-" } },
+      "50": { "$value": "#fff4d4" },
+      "100": { "$value": "#ffc94a" },
+      "700": { "$value": "#c88a00" },
+      "800": { "$value": "#a87000" }
+    },
+    "danger": {
+      "$extensions": { "incursa": { "output": "theme", "prefix": "inc-danger-" } },
+      "50": { "$value": "#fff0f1" },
+      "100": { "$value": "#ffb2bb" },
+      "700": { "$value": "#d11a2a" },
+      "800": { "$value": "#b01524" }
+    },
+    "surface": {
+      "$extensions": { "incursa": { "output": "theme", "prefix": "inc-surface-" } },
+      "primary": { "$value": "{color.white}" },
+      "secondary": { "$value": "{color.ink.100}" },
+      "muted": { "$value": "{color.ink.150}" },
+      "highlight": { "$value": "{color.brand.50}" },
+      "strong": { "$value": "#2a3142" }
+    },
+    "border": {
+      "$extensions": { "incursa": { "output": "theme", "prefix": "inc-border-" } },
+      "subtle": { "$value": "{color.ink.200}" },
+      "default": { "$value": "{color.ink.300}" },
+      "strong": { "$value": "{color.ink.400}" }
+    },
+    "text": {
+      "$extensions": { "incursa": { "output": "theme", "prefix": "inc-text-" } },
+      "primary": { "$value": "{color.ink.900}" },
+      "secondary": { "$value": "{color.ink.500}" },
+      "muted": { "$value": "{color.ink.400}" },
+      "inverse": { "$value": "{color.white}" },
+      "link": { "$value": "{color.blue.800}" },
+      "link-hover": { "$value": "{color.blue.900}" }
+    },
+    "secondary-fill": {
+      "$value": "#3a4358",
+      "$extensions": { "incursa": { "output": "theme", "name": "inc-secondary-fill" } }
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "$extensions": { "incursa": { "output": "theme", "prefix": "inc-font-family-" } },
+      "sans": { "$value": "\"IBM Plex Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif" },
+      "mono": { "$value": "\"IBM Plex Mono\", SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace" }
+    },
+    "size": {
+      "base": {
+        "$type": "dimension",
+        "$value": "0.875rem",
+        "$extensions": { "incursa": { "output": "theme", "name": "inc-font-size-base" } }
+      }
+    },
+    "line-height": {
+      "base": {
+        "$type": "number",
+        "$value": 1.5,
+        "$extensions": { "incursa": { "output": "theme", "name": "inc-line-height-base" } }
+      }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "$extensions": { "incursa": { "output": "theme", "prefix": "inc-" } },
+      "heading-weight": { "$value": 600 },
+      "button-weight": { "$value": 600 }
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "$extensions": { "incursa": { "output": "composition", "prefix": "inc-space-" } },
+    "1": { "$value": "0.25rem" },
+    "2": { "$value": "0.5rem" },
+    "3": { "$value": "1rem" },
+    "4": { "$value": "1.5rem" },
+    "5": { "$value": "2rem" },
+    "6": { "$value": "2.5rem" }
+  },
+  "radius": {
+    "$type": "dimension",
+    "$extensions": { "incursa": { "output": "composition", "prefix": "inc-radius-" } },
+    "xs": { "$value": "0.125rem" },
+    "sm": { "$value": "0.25rem" },
+    "md": { "$value": "0.5rem" },
+    "panel": { "$value": "{radius.sm}" },
+    "pill": { "$value": "5.625rem" }
+  },
+  "control-density": {
+    "$extensions": { "incursa": { "output": "composition", "prefix": "inc-control-density-" } },
+    "micro-padding-block": { "$type": "dimension", "$value": "0.15rem" },
+    "micro-padding-inline": { "$type": "dimension", "$value": "0.4rem" },
+    "micro-select-padding-inline-start": { "$type": "dimension", "$value": "0.75rem" },
+    "micro-select-arrow-inset-inline-end": { "$type": "dimension", "$value": "0.3rem" },
+    "micro-font-size": { "$type": "dimension", "$value": "0.7rem" },
+    "micro-line-height": { "$type": "number", "$value": 1.2 },
+    "micro-min-height": { "$type": "dimension", "$value": "1.5rem" },
+    "micro-border-radius": { "$type": "dimension", "$value": "0.15rem" },
+    "micro-select-arrow-width": { "$type": "dimension", "$value": "8px" },
+    "micro-select-arrow-height": { "$type": "dimension", "$value": "6px" }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "$extensions": { "incursa": { "output": "composition", "prefix": "inc-shadow-" } },
+    "xs": { "$value": "1.5px 1.5px 3px 0 rgba(0, 0, 0, 0.12)" },
+    "sm": { "$value": "0 1px 4px 0 rgba(18, 19, 22, 0.1)" },
+    "md": { "$value": "4px 4px 8px 0 rgba(172, 172, 172, 0.12)" },
+    "lg": { "$value": "0 8px 32px 0 rgba(172, 172, 172, 0.16)" }
+  },
+  "z-index": {
+    "$type": "number",
+    "$extensions": { "incursa": { "output": "composition", "prefix": "inc-z-index-" } },
+    "content": { "$value": 1 },
+    "dropdown": { "$value": 1040 },
+    "alerts": { "$value": 1050 },
+    "modal-backdrop": { "$value": 1059 },
+    "modal": { "$value": 1060 }
+  },
+  "layout": {
+    "$type": "dimension",
+    "$extensions": { "incursa": { "output": "composition" } },
+    "footer-height": { "$value": "3rem", "$extensions": { "incursa": { "name": "inc-footer-height" } } },
+    "shell-max-width": { "$value": "87.5rem", "$extensions": { "incursa": { "name": "inc-shell-max-width" } } }
+  }
+}

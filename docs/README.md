@@ -27,7 +27,7 @@ The source repository owns these pages. The mirrored copy in `incursa-docs` is g
 | Full-page examples | `demo.html`, `work-queue.html`, `record-detail.html`, `native-patterns.html`, `forms-and-validation.html`, `data-grid-advanced.html`, `states.html`, `overlay-workflows.html` |
 | Web Component landing page | `web-components.html` |
 | Web Component source | `src/web-components/` |
-| Token and theme source | `src/_inc-theme.scss`, `src/_inc-tokens.scss`, [`src/inc-design-language.scss`](../reference.html) |
+| Token and theme source | `tokens/incursa.tokens.json`, `scripts/build-tokens.mjs`, generated `src/_inc-theme.scss`, `src/_inc-tokens.scss`, [`src/inc-design-language.scss`](../reference.html) |
 | Public requirements | `specs/requirements/ui-kit/_index.md` |
 | Verification baseline | `specs/verification/ui-kit/_index.md` |
 | Maintainer readiness | `docs/maintainer-readiness.md`, `RELEASING.md`, `scripts/verify-ui-kit.mjs`, `playwright.config.mjs` |
