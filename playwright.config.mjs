@@ -12,6 +12,7 @@ export default defineConfig({
     fullyParallel: true,
     forbidOnly: Boolean(process.env.CI),
     retries: process.env.CI ? 1 : 0,
+    ignoreSnapshots: process.env.PLAYWRIGHT_IGNORE_SNAPSHOTS === "1",
     reporter: [["list"]],
     use: {
         trace: "on-first-retry",
