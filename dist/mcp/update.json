@@ -2,7 +2,7 @@
   "title": "Update",
   "summary": "Package-manager update commands and release-review guidance.",
   "packageName": "@incursa/ui-kit",
-  "version": "1.10.0-pf-m3.3.0",
+  "version": "1.10.0-pf-m3.3.1",
   "commands": {
     "npm": "npm install @incursa/ui-kit@latest",
     "pnpm": "pnpm up @incursa/ui-kit",

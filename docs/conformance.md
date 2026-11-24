@@ -13,7 +13,7 @@ ship a second stylesheet, browser runtime, icon set, or accessibility model.
 
 | UI Kit | Source revision | Browser automation | Semantic, interaction, automated accessibility, bounded visual, shell |
 | --- | --- | --- | --- |
-| `1.10.0-pf-m3.3.0` (local, unreleased) | baseline revision `68e2ad425cdd4d13a4fec6fce218177edeeac47d` plus this worktree | Playwright `1.58.2`, Chromium `145.0.7632.6` (`1208`), Darwin arm64 | `conformance/` and `tests/browser/conformance.spec.mjs` |
+| `1.10.0-pf-m3.3.1` (non-production artifact only) | `730e8a064dcd5c84c13b33487071ea5323e2d4e9` generic payload baseline; exact packaging commit in the companion evidence record | Playwright `1.58.2`, Chromium `145.0.7632.6` (`1208`), Darwin arm64 | `conformance/` and `tests/browser/conformance.spec.mjs` |
 
 This is a tested automation tuple, not a supported-browser claim. Adapter
 repositories publish their own exact UI Kit, adapter, framework/runtime, and
@@ -31,6 +31,16 @@ manifest and lockfile.
   compatible `@playwright/test` and `@axe-core/playwright` peer packages.
 - `@incursa/ui-kit/conformance/manifest` records exact package, revision,
   entrypoint, and automation evidence metadata.
+- `evidence/package-candidates/1.10.0-pf-m3.3.1.json` records the exact source
+  commit, tarball SHA-256 and npm SHA-512 integrity, package dimensions, and
+  generated-asset digests. The integrity record is intentionally outside the
+  tarball because an archive cannot embed its own final digest without a
+  self-reference cycle.
+
+The prerelease is not published. The repository has only a public npm publish
+workflow, so deterministic consumers restore the exact CI-retained tarball and
+verify its recorded integrity. `npm run test:package-identity` fails if the same
+version produces different bytes or generated assets.
 
 Automated checks do not replace keyboard-only, 200% zoom/reflow,
 forced-colors, reduced-motion, error-recovery, or screen-reader review.

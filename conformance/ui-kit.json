@@ -1,9 +1,27 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "authority": "@incursa/ui-kit",
-  "uiKitVersion": "1.10.0-pf-m3.3.0",
-  "releaseStatus": "local-unreleased-pf-m3.3-baseline",
-  "sourceBaselineRevision": "68e2ad425cdd4d13a4fec6fce218177edeeac47d",
+  "uiKitVersion": "1.10.0-pf-m3.3.1",
+  "releaseStatus": "non-production-prerelease-artifact-only",
+  "published": false,
+  "sourceBaselineRevision": "730e8a064dcd5c84c13b33487071ea5323e2d4e9",
+  "packageEvidence": {
+    "contract": "incursa.ui-kit.package-evidence.v1",
+    "repositoryPath": "evidence/package-candidates/1.10.0-pf-m3.3.1.json",
+    "integrityScope": "companion record outside the tarball to avoid self-referential package integrity",
+    "retention": "GitHub Actions CI artifact and exact local handoff tarball",
+    "publicRegistryPublication": false
+  },
+  "generatedAssets": {
+    "dist/inc-design-language.css": "bf063567e01931d3e43a60923d7db62c1eaa09566a95d2540de1dc495bbbc476",
+    "dist/inc-design-language.min.css": "0337fd371a9a7a3cfc88a445feaf3c652ee39b502a5bceaa1b660764f8ddaf12",
+    "dist/inc-design-language.js": "19c5f48501dab35eed74206fd792f5bc9a6839856e8f86374149b3dcfebc50db",
+    "dist/incursa-tokens.css": "d2df64ba1691893c038cfbe4f533c8340e5aa4c8adc77134b500bf702736e8b4",
+    "dist/icons/index.js": "22ab181603de12d06083bd93d21837c923ad18aeaa941b9b424d00b585660a9a",
+    "dist/web-components/index.js": "9ad3c9bcf600c70cf107b32d4e8f9d0a7e02b2234aafe5c6a4954147e11d3673",
+    "dist/web-components/style.css": "c31b272dbef9120b436d10cd1de5007994de20dfa00a51132a12fc901432e73b",
+    "tokens/incursa.tokens.json": "47b9ac8ec6be6164a87acf9138d93e0fc6d9595a85d76490f0514c64c47e691b"
+  },
   "contractMajor": 1,
   "entrypoints": {
     "css": "./dist/inc-design-language.css",

@@ -25,6 +25,9 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Pin candidate pack toolchain
+        run: npm install --global npm@11.6.2
+
       - name: Install dependencies
         run: npm ci
 
@@ -36,3 +39,14 @@ jobs:
 
       - name: Run reusable shell conformance
         run: npm run test:conformance
+
+      - name: Produce immutable non-production candidate
+        run: npm run package:candidate
+
+      - name: Retain exact non-production candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-kit-1.10.0-pf-m3.3.1-${{ github.sha }}
+          path: .artifacts/ui-kit-candidate/
+          if-no-files-found: error
+          retention-days: 90
