@@ -11,6 +11,7 @@ import {
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { gunzipSync } from "node:zlib";
 import { fileURLToPath } from "node:url";
 
 const repoRoot = fileURLToPath(new URL("..", import.meta.url));
@@ -73,6 +74,13 @@ if (!evidencePath || path.isAbsolute(evidencePath) || evidencePath.split(/[\\/]/
     throw new Error("conformance/ui-kit.json must name a safe repository-relative package evidence path.");
 }
 
+const absoluteEvidencePath = path.join(repoRoot, evidencePath);
+const expectedEvidence = check && existsSync(absoluteEvidencePath) ? readJson(evidencePath) : undefined;
+
+if (record && process.platform !== "linux") {
+    throw new Error("Canonical package evidence must be recorded on the pinned Linux CI pack platform.");
+}
+
 if (manifest.uiKitVersion !== packageJson.version) {
     throw new Error(`Conformance version ${manifest.uiKitVersion} does not match package version ${packageJson.version}.`);
 }
@@ -118,6 +126,7 @@ try {
     const tarballBytes = readFileSync(tarballPath);
     const packageSha256 = sha("sha256", tarballBytes);
     const packageIntegrity = sri("sha512", tarballBytes);
+    const tarPayloadSha256 = sha("sha256", gunzipSync(tarballBytes));
 
     if (packResult.integrity !== packageIntegrity) {
         throw new Error("npm-reported integrity does not match the independently calculated tarball integrity.");
@@ -129,12 +138,14 @@ try {
         packageVersion: packageJson.version,
         releaseStatus: manifest.releaseStatus,
         published: false,
-        sourceCommit: record ? sourceCommit : undefined,
+        sourceCommit: record ? sourceCommit : expectedEvidence?.sourceCommit,
         sourceBaselineRevision: manifest.sourceBaselineRevision,
+        canonicalPlatform: record ? process.platform : expectedEvidence?.canonicalPlatform,
         tarball: packResult.filename,
         packageSha256,
         packageIntegrity,
         npmShasum: packResult.shasum,
+        tarPayloadSha256,
         packageSize: packResult.size,
         unpackedSize: packResult.unpackedSize,
         fileCount: packResult.entryCount,
@@ -148,7 +159,6 @@ try {
     };
 
     if (record) {
-        const absoluteEvidencePath = path.join(repoRoot, evidencePath);
         mkdirSync(path.dirname(absoluteEvidencePath), { recursive: true });
         writeFileSync(absoluteEvidencePath, `${JSON.stringify(candidate, null, 2)}\n`);
         console.log(`Recorded immutable package evidence at ${evidencePath}.`);
@@ -157,12 +167,17 @@ try {
             throw new Error(`Package evidence is missing: ${evidencePath}`);
         }
 
-        const expected = readJson(evidencePath);
+        const expected = expectedEvidence;
         assertCommit(expected.sourceCommit, "sourceCommit");
         if (git(["merge-base", "--is-ancestor", manifest.sourceBaselineRevision, expected.sourceCommit]).status !== 0) {
             throw new Error("The recorded source commit must descend from the declared generic payload baseline.");
         }
-        const actual = { ...candidate, sourceCommit: expected.sourceCommit };
+        const actual = { ...candidate };
+        if (process.platform !== expected.canonicalPlatform) {
+            for (const key of ["packageSha256", "packageIntegrity", "npmShasum", "packageSize"]) {
+                actual[key] = expected[key];
+            }
+        }
         if (JSON.stringify(actual) !== JSON.stringify(expected)) {
             const mismatches = Object.keys(actual)
                 .filter((key) => JSON.stringify(actual[key]) !== JSON.stringify(expected[key]))
@@ -180,7 +195,7 @@ try {
         const outputDir = path.resolve(repoRoot, outputDirValue);
         mkdirSync(outputDir, { recursive: true });
         copyFileSync(tarballPath, path.join(outputDir, packResult.filename));
-        copyFileSync(path.join(repoRoot, evidencePath), path.join(outputDir, "compatibility.json"));
+        writeFileSync(path.join(outputDir, "compatibility.json"), `${JSON.stringify(candidate, null, 2)}\n`);
         writeFileSync(path.join(outputDir, "SHA256SUMS"), `${packageSha256}  ${packResult.filename}\n`);
         console.log(`Wrote deterministic handoff files to ${path.relative(repoRoot, outputDir)}.`);
     }
