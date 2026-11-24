@@ -164,9 +164,13 @@ try {
         }
         const actual = { ...candidate, sourceCommit: expected.sourceCommit };
         if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+            const mismatches = Object.keys(actual)
+                .filter((key) => JSON.stringify(actual[key]) !== JSON.stringify(expected[key]))
+                .map((key) => `${key}: expected ${JSON.stringify(expected[key])}, received ${JSON.stringify(actual[key])}`)
+                .join("\n");
             throw new Error(
                 `Package identity drift detected for ${packageJson.name}@${packageJson.version}. ` +
-                "Assign changed contents a new version and record new evidence.",
+                `Assign changed contents a new version and record new evidence.\n${mismatches}`,
             );
         }
         console.log(`Verified immutable package identity ${packageJson.name}@${packageJson.version} (${packageSha256}).`);
