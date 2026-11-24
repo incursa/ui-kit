@@ -54,6 +54,21 @@ if (npmVersionResult.status !== 0 || npmVersion !== expectedNpmVersion) {
     throw new Error(`Expected npm ${expectedNpmVersion} for deterministic packing, found ${npmVersion || "unknown"}.`);
 }
 
+const git = (gitArgs) => spawnSync("git", gitArgs, { cwd: repoRoot, encoding: "utf8" });
+const assertCommit = (commit, label) => {
+    if (!/^[0-9a-f]{40}$/.test(commit ?? "") || git(["cat-file", "-e", `${commit}^{commit}`]).status !== 0) {
+        throw new Error(`${label} must identify a fetched full Git commit.`);
+    }
+};
+
+assertCommit(manifest.sourceBaselineRevision, "sourceBaselineRevision");
+if (record) {
+    assertCommit(sourceCommit, "sourceCommit");
+    if (git(["merge-base", "--is-ancestor", manifest.sourceBaselineRevision, sourceCommit]).status !== 0) {
+        throw new Error("The recorded source commit must descend from the declared generic payload baseline.");
+    }
+}
+
 if (!evidencePath || path.isAbsolute(evidencePath) || evidencePath.split(/[\\/]/).includes("..")) {
     throw new Error("conformance/ui-kit.json must name a safe repository-relative package evidence path.");
 }
@@ -143,6 +158,10 @@ try {
         }
 
         const expected = readJson(evidencePath);
+        assertCommit(expected.sourceCommit, "sourceCommit");
+        if (git(["merge-base", "--is-ancestor", manifest.sourceBaselineRevision, expected.sourceCommit]).status !== 0) {
+            throw new Error("The recorded source commit must descend from the declared generic payload baseline.");
+        }
         const actual = { ...candidate, sourceCommit: expected.sourceCommit };
         if (JSON.stringify(actual) !== JSON.stringify(expected)) {
             throw new Error(
