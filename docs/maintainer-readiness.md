@@ -159,6 +159,19 @@ npm run verify
 git diff --check
 ```
 
+For an artifact-only non-production candidate whose evidence record already
+exists, produce the exact retained handoff with:
+
+```bash
+npm run package:candidate
+```
+
+The command rebuilds the package, rejects version-to-content drift, and writes
+the tarball, compatibility record, and `SHA256SUMS` under the ignored
+`.artifacts/ui-kit-candidate/` directory. CI uploads the same files as a retained
+artifact. This repository has no authorized private npm feed; do not tag or use
+the public npm publish workflow for an artifact-only candidate.
+
 Versioning expectations:
 
 - `patch`: fixes, polish, non-breaking docs, examples, CSS, JS, or generated MCP updates.
@@ -177,6 +190,7 @@ npm run build
 npm run smoke
 npm run test:mcp
 npm run test:browser
+npm run test:package-identity
 npm pack --dry-run
 git diff --check
 ```

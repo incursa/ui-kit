@@ -67,3 +67,11 @@ npm publish
 ```
 
 Because `publishConfig.access` is set to `public`, the scoped package publishes publicly as `@incursa/ui-kit`.
+
+## Non-production artifact-only candidates
+
+Do not tag an artifact-only prerelease: every `v*` tag invokes the public npm
+publish workflow. When no authorized private npm-compatible feed exists, use
+`npm run package:candidate` and retain its exact tarball, compatibility record,
+and `SHA256SUMS` as the CI artifact. Consumers install that tarball by file path
+and verify the recorded SHA-256 or npm SHA-512 integrity before use.

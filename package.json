@@ -1,6 +1,6 @@
 {
   "name": "@incursa/ui-kit",
-  "version": "1.10.0-pf-m3.3.0",
+  "version": "1.10.0-pf-m3.3.1",
   "private": false,
   "description": "CSS-first UI kit for data-heavy business applications, with optional JS helpers and Web Components.",
   "keywords": [
@@ -24,6 +24,7 @@
   },
   "license": "Apache-2.0",
   "author": "Samuel McAravey",
+  "packageManager": "npm@11.6.2",
   "type": "commonjs",
   "exports": {
     ".": {
@@ -80,15 +81,17 @@
     "test:browser:install": "playwright install chromium",
     "test:browser": "playwright test",
     "test:conformance": "playwright test tests/browser/conformance.spec.mjs",
+    "test:package-identity": "node scripts/package-candidate.mjs --check",
     "test:mcp": "node --test tests/mcp/transport.test.mjs tests/mcp/search.test.mjs tests/mcp/installation.test.mjs tests/mcp/markup.test.mjs tests/mcp/freshness.test.mjs",
     "smoke": "node scripts/verify-ui-kit.mjs",
-    "verify": "npm run docs:check && npm run check:tokens && npm run smoke && npm run build && npm run test:mcp && npm pack --dry-run",
+    "verify": "npm run docs:check && npm run check:tokens && npm run smoke && npm run build && npm run test:mcp && npm run test:package-identity && npm pack --dry-run",
     "deploy:mcp": "npm run build:mcp && wrangler deploy --config wrangler.toml",
     "preversion": "npm run verify",
     "release:patch": "node scripts/assert-changelog-version.mjs patch && npm version patch",
     "release:minor": "node scripts/assert-changelog-version.mjs minor && npm version minor",
     "release:major": "node scripts/assert-changelog-version.mjs major && npm version major",
     "pack:tarball": "npm pack",
+    "package:candidate": "npm run build && npm run smoke && node scripts/package-candidate.mjs --check --output-dir .artifacts/ui-kit-candidate",
     "package": "npm run build && npm run smoke && npm run pack:tarball"
   },
   "dependencies": {

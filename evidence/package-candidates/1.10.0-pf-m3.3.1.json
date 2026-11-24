@@ -1,0 +1,34 @@
+{
+  "contract": "incursa.ui-kit.package-evidence.v1",
+  "package": "@incursa/ui-kit",
+  "packageVersion": "1.10.0-pf-m3.3.1",
+  "releaseStatus": "non-production-prerelease-artifact-only",
+  "published": false,
+  "sourceCommit": "1deda3a1cdaa8e630f18554538c10371caae0532",
+  "sourceBaselineRevision": "730e8a064dcd5c84c13b33487071ea5323e2d4e9",
+  "canonicalPlatform": "linux",
+  "tarball": "incursa-ui-kit-1.10.0-pf-m3.3.1.tgz",
+  "packageSha256": "8d619ed1e80e1820ee95b7e02aa6af799020ce4759ee112c410c9f4c4ffe469c",
+  "packageIntegrity": "sha512-6HofOs29ho2VTZZLALMG12R9I77P6aN+gNlX78ay3C7MMdlOsRHzNUdecZR2raptIPXYjaaWk4B7LNM3CTnkyw==",
+  "npmShasum": "fe15630c249faecc6435dc82054a06b652fe5c49",
+  "tarPayloadSha256": "cc97abe3a2ef8c3d57720f3a110170d16fc798202f4b1933c381afb1c9646cc2",
+  "packageSize": 2605861,
+  "unpackedSize": 16863087,
+  "fileCount": 132,
+  "generatedAssets": {
+    "dist/icons/index.js": "22ab181603de12d06083bd93d21837c923ad18aeaa941b9b424d00b585660a9a",
+    "dist/inc-design-language.css": "bf063567e01931d3e43a60923d7db62c1eaa09566a95d2540de1dc495bbbc476",
+    "dist/inc-design-language.js": "19c5f48501dab35eed74206fd792f5bc9a6839856e8f86374149b3dcfebc50db",
+    "dist/inc-design-language.min.css": "0337fd371a9a7a3cfc88a445feaf3c652ee39b502a5bceaa1b660764f8ddaf12",
+    "dist/incursa-tokens.css": "d2df64ba1691893c038cfbe4f533c8340e5aa4c8adc77134b500bf702736e8b4",
+    "dist/web-components/index.js": "9ad3c9bcf600c70cf107b32d4e8f9d0a7e02b2234aafe5c6a4954147e11d3673",
+    "dist/web-components/style.css": "c31b272dbef9120b436d10cd1de5007994de20dfa00a51132a12fc901432e73b",
+    "tokens/incursa.tokens.json": "47b9ac8ec6be6164a87acf9138d93e0fc6d9595a85d76490f0514c64c47e691b"
+  },
+  "deterministicRestore": "npm install ./incursa-ui-kit-1.10.0-pf-m3.3.1.tgz",
+  "retention": {
+    "workflow": ".github/workflows/ci.yml",
+    "artifactName": "ui-kit-1.10.0-pf-m3.3.1-<source-commit>",
+    "publicRegistryPublication": false
+  }
+}
